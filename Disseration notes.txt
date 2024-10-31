@@ -42,3 +42,10 @@ but still geometrically accurate to the original mesh as quickly as possible.
 
 - What alogirthim has the best trade off of detail to performance
 - What algorithms works best with terrain.
+
+Ethics
+- Low risk project
+No humans particpants
+stastical analysis of computer algorithims
+extremely low chance that any results could be used to harm anyone
+most major concern is small use of eletricity and internet generating greenhouse effects
