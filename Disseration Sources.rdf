@@ -30,8 +30,8 @@
                 </rdf:li>
             </rdf:Seq>
         </bib:authors>
-        <dcterms:isReferencedBy rdf:resource="#item_154"/>
-        <link:link rdf:resource="#item_148"/>
+        <dcterms:isReferencedBy rdf:resource="#item_65"/>
+        <link:link rdf:resource="#item_66"/>
         <dc:subject>
             <z:AutomaticTag>
                <rdf:value>Blender (Computer file)</rdf:value>
@@ -64,11 +64,11 @@
         <dcterms:dateSubmitted>2024-10-29 14:38:40</dcterms:dateSubmitted>
         <dc:identifier>ISBN 978-1-59327-510-5</dc:identifier>
     </bib:Book>
-    <bib:Memo rdf:about="#item_154">
+    <bib:Memo rdf:about="#item_65">
         <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Good information on what retopology is&lt;/p&gt;
 &lt;/div&gt;</rdf:value>
     </bib:Memo>
-    <z:Attachment rdf:about="#item_148">
+    <z:Attachment rdf:about="#item_66">
         <z:itemType>attachment</z:itemType>
         <dc:title>ProQuest Ebook Snapshot</dc:title>
         <dc:identifier>
@@ -77,7 +77,7 @@
             </dcterms:URI>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 14:38:42</dcterms:dateSubmitted>
-        <z:linkMode>1</z:linkMode>
+        <z:linkMode>3</z:linkMode>
         <link:type>text/html</link:type>
     </z:Attachment>
     <bib:Article rdf:about="https://www.proquest.com/docview/2756784194/abstract/9FEE61E753B8429BPQ/1">
@@ -112,8 +112,21 @@
                 </rdf:li>
             </rdf:Seq>
         </bib:authors>
-        <dcterms:isReferencedBy rdf:resource="#item_153"/>
-        <link:link rdf:resource="#item_150"/>
+        <dcterms:isReferencedBy rdf:resource="#item_68"/>
+        <link:link rdf:resource="#item_69"/>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Finite element method</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Approximation</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Finite element analysis</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
         <dc:subject>
            <z:AutomaticTag><rdf:value>3D modelling</rdf:value></z:AutomaticTag>
         </dc:subject>
@@ -122,9 +135,6 @@
         </dc:subject>
         <dc:subject>
            <z:AutomaticTag><rdf:value>Accuracy</rdf:value></z:AutomaticTag>
-        </dc:subject>
-        <dc:subject>
-           <z:AutomaticTag><rdf:value>Approximation</rdf:value></z:AutomaticTag>
         </dc:subject>
         <dc:subject>
            <z:AutomaticTag><rdf:value>Architecture</rdf:value></z:AutomaticTag>
@@ -157,16 +167,6 @@
         </dc:subject>
         <dc:subject>
            <z:AutomaticTag><rdf:value>FEA</rdf:value></z:AutomaticTag>
-        </dc:subject>
-        <dc:subject>
-            <z:AutomaticTag>
-               <rdf:value>Finite element analysis</rdf:value>
-            </z:AutomaticTag>
-        </dc:subject>
-        <dc:subject>
-            <z:AutomaticTag>
-               <rdf:value>Finite element method</rdf:value>
-            </z:AutomaticTag>
         </dc:subject>
         <dc:subject>
            <z:AutomaticTag><rdf:value>Heritage</rdf:value></z:AutomaticTag>
@@ -213,16 +213,17 @@
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 14:45:18</dcterms:dateSubmitted>
         <dc:rights>© 2022 by the authors.  Licensee MDPI, Basel, Switzerland. This article is an open access article distributed under the terms and conditions of the Creative Commons Attribution (CC BY) license (https://creativecommons.org/licenses/by/4.0/).  Notwithstanding the ProQuest Terms and Conditions, you may use this content in accordance with the terms of the License.</dc:rights>
-        <dc:description>Num Pages: 9593
+        <dc:description>Number: 24
+Num Pages: 9593
 Place: Basel, Switzerland
 Publisher: MDPI AG</dc:description>
         <bib:pages>9593</bib:pages>
     </bib:Article>
-    <bib:Memo rdf:about="#item_153">
+    <bib:Memo rdf:about="#item_68">
         <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;this paper talks about aging simulation of cultural heritage objects/buildings and explores retopology and triangular simplification algorithms &amp;nbsp;to simplify a 3d scan of the object&lt;/p&gt;
 &lt;/div&gt;</rdf:value>
     </bib:Memo>
-    <z:Attachment rdf:about="#item_150">
+    <z:Attachment rdf:about="#item_69">
         <z:itemType>attachment</z:itemType>
         <dc:title>Full Text PDF</dc:title>
         <dc:identifier>
@@ -231,7 +232,7 @@ Publisher: MDPI AG</dc:description>
             </dcterms:URI>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 14:45:18</dcterms:dateSubmitted>
-        <z:linkMode>1</z:linkMode>
+        <z:linkMode>3</z:linkMode>
         <link:type>application/pdf</link:type>
     </z:Attachment>
     <rdf:Description rdf:about="urn:isbn:978-3-319-30301-7">
@@ -297,7 +298,7 @@ Publisher: MDPI AG</dc:description>
                 </rdf:li>
             </rdf:Seq>
         </bib:editors>
-        <dcterms:isReferencedBy rdf:resource="#item_152"/>
+        <dcterms:isReferencedBy rdf:resource="#item_71"/>
         <dc:title>Comparative Study of Mesh Simplification Algorithms</dc:title>
         <dcterms:abstract>Many applications in the field of computer graphics are becoming more complex and require more accurate simplification of the surface meshes. This need is due to reasons of rendering speed, the capacity the backup and the transmission speed 3D models over networks. We presented four basic methods for simplifying meshes that are proposed in recent years. The result obtained by the implementation of these methods will be the subject of a comparative study. This study aims to evaluate these methods in terms of preserving the topology and speed.</dcterms:abstract>
         <dc:date>2016</dc:date>
@@ -305,7 +306,7 @@ Publisher: MDPI AG</dc:description>
         <z:libraryCatalog>Springer Link</z:libraryCatalog>
         <bib:pages>287-295</bib:pages>
     </rdf:Description>
-    <bib:Memo rdf:about="#item_152">
+    <bib:Memo rdf:about="#item_71">
         <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Need to speak to the library about access&lt;/p&gt;
 &lt;/div&gt;</rdf:value>
     </bib:Memo>
@@ -323,8 +324,8 @@ Publisher: MDPI AG</dc:description>
                 </rdf:li>
             </rdf:Seq>
         </bib:authors>
-        <dcterms:isReferencedBy rdf:resource="#item_157"/>
-        <link:link rdf:resource="#item_155"/>
+        <dcterms:isReferencedBy rdf:resource="#item_73"/>
+        <link:link rdf:resource="#item_74"/>
         <dc:title>Methods for polygonal mesh simplication</dc:title>
         <dc:date>January, 2002</dc:date>
         <dc:identifier>
@@ -334,11 +335,11 @@ Publisher: MDPI AG</dc:description>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 15:07:09</dcterms:dateSubmitted>
     </bib:Document>
-    <bib:Memo rdf:about="#item_157">
+    <bib:Memo rdf:about="#item_73">
         <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;outlines methods for approximation quality - how accurate the simplified mesh is compared to the original&lt;/p&gt;
 &lt;/div&gt;</rdf:value>
     </bib:Memo>
-    <z:Attachment rdf:about="#item_155">
+    <z:Attachment rdf:about="#item_74">
         <z:itemType>attachment</z:itemType>
         <dc:title>content.pdf</dc:title>
         <dc:identifier>
@@ -347,7 +348,7 @@ Publisher: MDPI AG</dc:description>
             </dcterms:URI>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 15:07:09</dcterms:dateSubmitted>
-        <z:linkMode>1</z:linkMode>
+        <z:linkMode>3</z:linkMode>
         <link:type>application/pdf</link:type>
     </z:Attachment>
     <bib:Article rdf:about="https://dl.acm.org/doi/10.1145/2843947">
@@ -369,7 +370,7 @@ Publisher: MDPI AG</dc:description>
                 </rdf:li>
             </rdf:Seq>
         </bib:authors>
-        <dcterms:isReferencedBy rdf:resource="#item_159"/>
+        <dcterms:isReferencedBy rdf:resource="#item_76"/>
         <dc:title>Displacement Mapping as a Metric Tool for Optimizing Mesh Models Originated by 3D Digitization</dc:title>
         <dcterms:abstract>In the past 20 years, several methods have been proposed for re-coding 3D models with a low-spatial-frequency 3D representation plus a high-frequency 2D map for recovering the details. This approach has been explored with different kinds of mapping (bump, normal, relief, parallax, displacement), which have been shown to be effective in dramatically reducing model size while still maintaining a good visual appearance. For this reason, these approaches are widely applied in those situations where the rendering time constraints are critical (e.g., real-time rendering of complex models for gaming). However, the significant difference between the original detailed 3D model and the re-coded version has made it impossible to consider the latter as a metrically satisfying substitute for the former. The purpose of this article is to propose a re-coding method based on displaced subdivision surfaces that makes it possible to adapt the re-coded 3D representation to the metrological limitations of the 3D capturing technique used for generating the original mesh. In this way, it is possible to keep the geometric incoherency between the re-coded and the acquired mesh below the threshold determined by the natural capturing technology uncertainty. The resulting re-coded model can be therefore considered as close to the physical object/scenario, as the original acquired mesh, with a great advantage in terms of 3D representation size, UV parametrization, topological coherence, and scalability. The method has been tested on three cultural heritage objects with different complexity: a damaged wooden painting by Leonardo da Vinci (a nearly 2.5D shape), a Roman stone head sculpture (full 3D shape with simple topology), and a full body bronze sculpture by Donatello (full 3D shape with complex topology), demonstrating the coherency between the re-coded models and the originals, with a model size compression depending on the topological complexity that may reach a level of better than 1:25.</dcterms:abstract>
         <dc:date>2016-05-20</dc:date>
@@ -381,6 +382,7 @@ Publisher: MDPI AG</dc:description>
             </dcterms:URI>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 15:24:21</dcterms:dateSubmitted>
+        <dc:description>Number: 2</dc:description>
         <bib:pages>1-23</bib:pages>
     </bib:Article>
     <bib:Journal rdf:about="urn:issn:1556-4673,%201556-4711">
@@ -391,7 +393,7 @@ Publisher: MDPI AG</dc:description>
         <dcterms:alternative>J. Comput. Cult. Herit.</dcterms:alternative>
         <dc:identifier>ISSN 1556-4673, 1556-4711</dc:identifier>
     </bib:Journal>
-    <bib:Memo rdf:about="#item_159">
+    <bib:Memo rdf:about="#item_76">
         <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;More methods for comparing simplified model to original&lt;/p&gt;
 &lt;p&gt;Interesting simplification methods outlined&lt;/p&gt;
 &lt;/div&gt;</rdf:value>
@@ -427,7 +429,7 @@ Publisher: MDPI AG</dc:description>
                 </rdf:li>
             </rdf:Seq>
         </bib:authors>
-        <dcterms:isReferencedBy rdf:resource="#item_161"/>
+        <dcterms:isReferencedBy rdf:resource="#item_78"/>
         <dc:title>Instant field-aligned meshes</dc:title>
         <dcterms:abstract>We present a novel approach to remesh a surface into an isotropic triangular or quad-dominant mesh using a unified local smoothing operator that optimizes both the edge orientations and vertex positions in the output mesh. Our algorithm produces meshes with high isotropy while naturally aligning and snapping edges to sharp features. The method is simple to implement and parallelize, and it can process a variety of input surface representations, such as point clouds, range scans and triangle meshes. Our full pipeline executes instantly (less than a second) on meshes with hundreds of thousands of faces, enabling new types of interactive workflows. Since our algorithm avoids any global optimization, and its key steps scale linearly with input size, we are able to process extremely large meshes and point clouds, with sizes exceeding several hundred million elements. To demonstrate the robustness and effectiveness of our method, we apply it to hundreds of models of varying complexity and provide our cross-platform reference implementation in the supplemental material.</dcterms:abstract>
         <dc:date>2015-11-04</dc:date>
@@ -439,6 +441,7 @@ Publisher: MDPI AG</dc:description>
             </dcterms:URI>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 15:29:28</dcterms:dateSubmitted>
+        <dc:description>Number: 6</dc:description>
         <bib:pages>1-15</bib:pages>
     </bib:Article>
     <bib:Journal rdf:about="urn:issn:0730-0301,%201557-7368">
@@ -449,7 +452,7 @@ Publisher: MDPI AG</dc:description>
         <dcterms:alternative>ACM Trans. Graph.</dcterms:alternative>
         <dc:identifier>ISSN 0730-0301, 1557-7368</dc:identifier>
     </bib:Journal>
-    <bib:Memo rdf:about="#item_161">
+    <bib:Memo rdf:about="#item_78">
         <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Details a very performant algorithm to simplify meshes&lt;/p&gt;
 &lt;/div&gt;</rdf:value>
     </bib:Memo>
@@ -482,8 +485,8 @@ Publisher: MDPI AG</dc:description>
                 </rdf:li>
             </rdf:Seq>
         </bib:editors>
-        <dcterms:isReferencedBy rdf:resource="#item_164"/>
-        <link:link rdf:resource="#item_162"/>
+        <dcterms:isReferencedBy rdf:resource="#item_80"/>
+        <link:link rdf:resource="#item_81"/>
         <dc:title>High-performance simplification of triangular surfaces using a GPU</dc:title>
         <dcterms:abstract>Due to advances in high-performance computing technologies, computer graphics techniques—especially those related to mesh simplification—have been noticeably improved. These techniques, which have a strong impact on many applications, such as geometric modeling and visualization, have been well studied for more than two decades. Recent advances in GPUs have led to significant improvements in terms of speed and interactivity. In this paper, we present a mesh simplification algorithm that benefits from the parallel framework provided by recent GPUs. We customize the halfedge data structure for adaption with the dynamic memory restrictions of CUDA. The proposed algorithm is fully parallelized by employing a lock-free skip priority queue and a set of disjoint regions of the mesh. The proposed technique accelerates the simplification process while preserving the topological properties of the mesh. Some results and comparisons are provided to verify the efficiency of the proposed algorithm.</dcterms:abstract>
         <dc:date>2021-8-5</dc:date>
@@ -495,6 +498,7 @@ Publisher: MDPI AG</dc:description>
             </dcterms:URI>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 15:40:29</dcterms:dateSubmitted>
+        <dc:description>Number: 8</dc:description>
         <bib:pages>e0255832</bib:pages>
     </bib:Article>
     <bib:Journal rdf:about="urn:issn:1932-6203">
@@ -505,12 +509,12 @@ Publisher: MDPI AG</dc:description>
         <dcterms:alternative>PLoS ONE</dcterms:alternative>
         <dc:identifier>ISSN 1932-6203</dc:identifier>
     </bib:Journal>
-    <bib:Memo rdf:about="#item_164">
+    <bib:Memo rdf:about="#item_80">
         <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Edge contraction on the GPU&lt;/p&gt;
 &lt;p&gt;&lt;/p&gt;
 &lt;/div&gt;</rdf:value>
     </bib:Memo>
-    <z:Attachment rdf:about="#item_162">
+    <z:Attachment rdf:about="#item_81">
         <z:itemType>attachment</z:itemType>
         <dc:title>Mousa and Hussein - 2021 - High-performance simplification of triangular surf.pdf</dc:title>
         <dc:identifier>
@@ -519,7 +523,7 @@ Publisher: MDPI AG</dc:description>
             </dcterms:URI>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 15:40:27</dcterms:dateSubmitted>
-        <z:linkMode>1</z:linkMode>
+        <z:linkMode>3</z:linkMode>
         <link:type>application/pdf</link:type>
     </z:Attachment>
     <bib:Article rdf:about="https://www.proquest.com/docview/2918055268/abstract/55C4489877454FB4PQ/1">
@@ -541,8 +545,13 @@ Publisher: MDPI AG</dc:description>
                 </rdf:li>
             </rdf:Seq>
         </bib:authors>
-        <dcterms:isReferencedBy rdf:resource="#item_167"/>
-        <link:link rdf:resource="#item_166"/>
+        <dcterms:isReferencedBy rdf:resource="#item_83"/>
+        <link:link rdf:resource="#item_84"/>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Finite element method</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
         <dc:subject>
            <z:AutomaticTag><rdf:value>Algorithms</rdf:value></z:AutomaticTag>
         </dc:subject>
@@ -552,11 +561,6 @@ Publisher: MDPI AG</dc:description>
         <dc:subject>
             <z:AutomaticTag>
                <rdf:value>Data parallelism</rdf:value>
-            </z:AutomaticTag>
-        </dc:subject>
-        <dc:subject>
-            <z:AutomaticTag>
-               <rdf:value>Finite element method</rdf:value>
             </z:AutomaticTag>
         </dc:subject>
         <dc:subject>
@@ -595,7 +599,8 @@ Publisher: MDPI AG</dc:description>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 15:43:07</dcterms:dateSubmitted>
         <dc:rights>© Springer-Verlag Berlin Heidelberg 2014.</dc:rights>
-        <dc:description>Num Pages: 235-244
+        <dc:description>Number: 2
+Num Pages: 235-244
 Place: Heidelberg, Netherlands
 Publisher: Springer Nature B.V.</dc:description>
         <bib:pages>235-244</bib:pages>
@@ -607,12 +612,12 @@ Publisher: Springer Nature B.V.</dc:description>
         <prism:number>2</prism:number>
         <dc:identifier>ISSN 01782789</dc:identifier>
     </bib:Journal>
-    <bib:Memo rdf:about="#item_167">
+    <bib:Memo rdf:about="#item_83">
         <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Similar to High-perforamnce simplification of triangular surfaces using a gpu, but uses OpenCL instead of CUDA and uses edge collapses instead of edge contraction&lt;/p&gt;
 &lt;p&gt;Several methods for comparing results to the original/other results.&lt;/p&gt;
 &lt;/div&gt;</rdf:value>
     </bib:Memo>
-    <z:Attachment rdf:about="#item_166">
+    <z:Attachment rdf:about="#item_84">
         <z:itemType>attachment</z:itemType>
         <dc:title>Full Text PDF</dc:title>
         <dc:identifier>
@@ -621,7 +626,7 @@ Publisher: Springer Nature B.V.</dc:description>
             </dcterms:URI>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 15:43:08</dcterms:dateSubmitted>
-        <z:linkMode>1</z:linkMode>
+        <z:linkMode>3</z:linkMode>
         <link:type>application/pdf</link:type>
     </z:Attachment>
     <bib:Article rdf:about="https://www.proquest.com/docview/1442631574/abstract/CF3716F398F94964PQ/1">
@@ -655,8 +660,11 @@ Publisher: Springer Nature B.V.</dc:description>
                 </rdf:li>
             </rdf:Seq>
         </bib:authors>
-        <dcterms:isReferencedBy rdf:resource="#item_170"/>
-        <link:link rdf:resource="#item_169"/>
+        <dcterms:isReferencedBy rdf:resource="#item_86"/>
+        <link:link rdf:resource="#item_87"/>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Triangle mesh</rdf:value></z:AutomaticTag>
+        </dc:subject>
         <dc:subject>
             <z:AutomaticTag>
                <rdf:value>Mesh Simplification</rdf:value>
@@ -664,9 +672,6 @@ Publisher: Springer Nature B.V.</dc:description>
         </dc:subject>
         <dc:subject>
            <z:AutomaticTag><rdf:value>Object model</rdf:value></z:AutomaticTag>
-        </dc:subject>
-        <dc:subject>
-           <z:AutomaticTag><rdf:value>Triangle mesh</rdf:value></z:AutomaticTag>
         </dc:subject>
         <dc:subject>
            <z:AutomaticTag><rdf:value>Triangular Mesh</rdf:value></z:AutomaticTag>
@@ -703,11 +708,11 @@ Publisher: Trans Tech Publications Ltd.</dc:description>
         <dc:identifier>DOI 10.4028/www.scientific.net/AMM.271-272.1410</dc:identifier>
         <dc:identifier>ISSN 16609336</dc:identifier>
     </bib:Journal>
-    <bib:Memo rdf:about="#item_170">
-        <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Not actually a great result but may be useful as &amp;nbsp;contextual review source - a stepping stone towards newer algorithims&lt;/p&gt;
+    <bib:Memo rdf:about="#item_86">
+        <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Not actually a great result but may be useful as &amp;nbsp;contextual review source - a stepping stone towards newer algorithms&lt;/p&gt;
 &lt;/div&gt;</rdf:value>
     </bib:Memo>
-    <z:Attachment rdf:about="#item_169">
+    <z:Attachment rdf:about="#item_87">
         <z:itemType>attachment</z:itemType>
         <dc:title>Full Text PDF</dc:title>
         <dc:identifier>
@@ -716,7 +721,7 @@ Publisher: Trans Tech Publications Ltd.</dc:description>
             </dcterms:URI>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 15:47:33</dcterms:dateSubmitted>
-        <z:linkMode>1</z:linkMode>
+        <z:linkMode>3</z:linkMode>
         <link:type>application/pdf</link:type>
     </z:Attachment>
     <bib:Article rdf:about="https://www.proquest.com/docview/234906835/abstract/46B768EDE96F4884PQ/1">
@@ -750,19 +755,19 @@ Publisher: Trans Tech Publications Ltd.</dc:description>
                 </rdf:li>
             </rdf:Seq>
         </bib:authors>
-        <dcterms:isReferencedBy rdf:resource="#item_173"/>
-        <link:link rdf:resource="#item_172"/>
+        <dcterms:isReferencedBy rdf:resource="#item_89"/>
+        <link:link rdf:resource="#item_90"/>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Finite element method</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
         <dc:subject>
            <z:AutomaticTag><rdf:value>Algorithms</rdf:value></z:AutomaticTag>
         </dc:subject>
         <dc:subject>
             <z:AutomaticTag>
                <rdf:value>Finite element analysis</rdf:value>
-            </z:AutomaticTag>
-        </dc:subject>
-        <dc:subject>
-            <z:AutomaticTag>
-               <rdf:value>Finite element method</rdf:value>
             </z:AutomaticTag>
         </dc:subject>
         <dc:subject>
@@ -788,7 +793,8 @@ Publisher: Trans Tech Publications Ltd.</dc:description>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 15:50:34</dcterms:dateSubmitted>
         <dc:rights>Copyright Professional Engineering Publishing Ltd Nov 2009</dc:rights>
-        <dc:description>Num Pages: 10
+        <dc:description>Number: C11
+Num Pages: 10
 Place: London, United States
 Publisher: SAGE PUBLICATIONS, INC.</dc:description>
         <bib:pages>2627-2636</bib:pages>
@@ -799,12 +805,12 @@ Publisher: SAGE PUBLICATIONS, INC.</dc:description>
         <prism:number>C11</prism:number>
         <dc:identifier>ISSN 09544062</dc:identifier>
     </bib:Journal>
-    <bib:Memo rdf:about="#item_173">
+    <bib:Memo rdf:about="#item_89">
         <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Another good stepping stone source, results look pretty good too&lt;/p&gt;
 &lt;p&gt;another source for geometric error of result compared to the original&lt;/p&gt;
 &lt;/div&gt;</rdf:value>
     </bib:Memo>
-    <z:Attachment rdf:about="#item_172">
+    <z:Attachment rdf:about="#item_90">
         <z:itemType>attachment</z:itemType>
         <dc:title>Full Text PDF</dc:title>
         <dc:identifier>
@@ -813,7 +819,7 @@ Publisher: SAGE PUBLICATIONS, INC.</dc:description>
             </dcterms:URI>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 15:50:34</dcterms:dateSubmitted>
-        <z:linkMode>1</z:linkMode>
+        <z:linkMode>3</z:linkMode>
         <link:type>application/pdf</link:type>
     </z:Attachment>
     <bib:Article rdf:about="https://www.sciencedirect.com/science/article/pii/S0925772199000309">
@@ -835,9 +841,9 @@ Publisher: SAGE PUBLICATIONS, INC.</dc:description>
                 </rdf:li>
             </rdf:Seq>
         </bib:authors>
-        <dcterms:isReferencedBy rdf:resource="#item_177"/>
-        <link:link rdf:resource="#item_175"/>
-        <link:link rdf:resource="#item_176"/>
+        <dcterms:isReferencedBy rdf:resource="#item_92"/>
+        <link:link rdf:resource="#item_93"/>
+        <link:link rdf:resource="#item_94"/>
         <dc:subject>
             <z:AutomaticTag>
                <rdf:value>Anisotropic mesh generation</rdf:value>
@@ -871,6 +877,7 @@ Publisher: SAGE PUBLICATIONS, INC.</dc:description>
             </dcterms:URI>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 15:53:19</dcterms:dateSubmitted>
+        <dc:description>Number: 1</dc:description>
         <bib:pages>49-65</bib:pages>
     </bib:Article>
     <bib:Journal rdf:about="urn:issn:0925-7721">
@@ -881,12 +888,12 @@ Publisher: SAGE PUBLICATIONS, INC.</dc:description>
         <dcterms:alternative>Computational Geometry</dcterms:alternative>
         <dc:identifier>ISSN 0925-7721</dc:identifier>
     </bib:Journal>
-    <bib:Memo rdf:about="#item_177">
+    <bib:Memo rdf:about="#item_92">
         <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Good for historical building blocks&lt;/p&gt;
 &lt;p&gt;Results are quite good looking for 1999&lt;/p&gt;
 &lt;/div&gt;</rdf:value>
     </bib:Memo>
-    <z:Attachment rdf:about="#item_175">
+    <z:Attachment rdf:about="#item_93">
         <z:itemType>attachment</z:itemType>
         <dc:title>ScienceDirect Snapshot</dc:title>
         <dc:identifier>
@@ -895,10 +902,10 @@ Publisher: SAGE PUBLICATIONS, INC.</dc:description>
             </dcterms:URI>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 15:53:24</dcterms:dateSubmitted>
-        <z:linkMode>1</z:linkMode>
+        <z:linkMode>3</z:linkMode>
         <link:type>text/html</link:type>
     </z:Attachment>
-    <z:Attachment rdf:about="#item_176">
+    <z:Attachment rdf:about="#item_94">
         <z:itemType>attachment</z:itemType>
         <dc:title>Submitted Version</dc:title>
         <dc:identifier>
@@ -907,7 +914,70 @@ Publisher: SAGE PUBLICATIONS, INC.</dc:description>
             </dcterms:URI>
         </dc:identifier>
         <dcterms:dateSubmitted>2024-10-29 15:53:28</dcterms:dateSubmitted>
-        <z:linkMode>1</z:linkMode>
+        <z:linkMode>3</z:linkMode>
         <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.sciencedirect.com/science/article/pii/S0007850607605071">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0007-8506"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Sartori</foaf:surname>
+                        <foaf:givenName>S.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zhang</foaf:surname>
+                        <foaf:givenName>G. X.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_96"/>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Compensation</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Geometric modeling</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Machine</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Geometric Error Measurement and Compensation of Machines</dc:title>
+        <dcterms:abstract>Methods for geometric error measurement are classified in direct and self-calibration, according to the use of calibrated or uncalibrated standard and to the strategy for the generation of information about errors. A vectorial equation for geometric error description is presented, which is independent from the machine structure. The evaluation of measurement effectiveness is discussed and error compensation methods and strategies are examined. The reasons why software compensation techniques are applied at production level to CMM and not to machine tools are discussed. Some topics for implementation are proposed.</dcterms:abstract>
+        <dc:date>1995-01-01</dc:date>
+        <z:libraryCatalog>ScienceDirect</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.sciencedirect.com/science/article/pii/S0007850607605071</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-11-05 13:16:18</dcterms:dateSubmitted>
+        <bib:pages>599-609</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0007-8506">
+        <prism:volume>44</prism:volume>
+        <dc:title>CIRP Annals</dc:title>
+        <dc:identifier>DOI 10.1016/S0007-8506(07)60507-1</dc:identifier>
+        <prism:number>2</prism:number>
+        <dcterms:alternative>CIRP Annals</dcterms:alternative>
+        <dc:identifier>ISSN 0007-8506</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_96">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>ScienceDirect Snapshot</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.sciencedirect.com/science/article/abs/pii/S0007850607605071</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-11-05 13:16:23</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>text/html</link:type>
     </z:Attachment>
 </rdf:RDF>
