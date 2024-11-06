@@ -36,6 +36,8 @@ Simplication methods
 Measure methods
 - approximation error (Geometric distance using Eavg metric derived from Hausdorff distance)
 - metrological deviation
+- Hausdorff distance
+- Geometric Deviation
 
 The purpose here to take a high ploy generated mesh and to create a lower poly count,
 but still geometrically accurate to the original mesh as quickly as possible.
