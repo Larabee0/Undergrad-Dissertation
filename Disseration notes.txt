@@ -51,3 +51,29 @@ No humans particpants
 stastical analysis of computer algorithims
 extremely low chance that any results could be used to harm anyone
 most major concern is small use of eletricity and internet generating greenhouse effects
+
+
+# Paper terms
+Title: A comparison of two GPU triangular mesh simplification algorithims on generated convex terrain mesh.
+
+Which GPU triangular mesh simplification algorithim, A or B, is able to minimise execution time and maximise geometric quality to an runtime generated convex terrain mesh?
+
+- which is the fastest?
+- which has the highest quality? (lowest geometric error)
+
+
+Hypotheses
+- Algorithm A runs faster than algorithim B
+	(Execution time is being measured)
+	> null, they execute in the same time
+	> false, algorithim B is faster
+	
+- Algorithm B produces a lower geometric error than algorithim A.
+	(Geometric error is being measured)
+	> null, they have the same error
+	> false, algorithim A produces better results
+
+Statistical tests: Likely a T-test on for both
+
+From those two tests it should be possible to draw a conclusion on
+if alogirthim's A speed advantage is worth the quality cost or the other way around.
