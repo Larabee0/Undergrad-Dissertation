@@ -63,17 +63,31 @@ Which GPU triangular mesh simplification algorithim, A or B, is able to minimise
 
 
 Hypotheses
-- Algorithm A runs faster than algorithim B
+- 1. Algorithm A runs faster than algorithim B
 	(Execution time is being measured)
 	> null, they execute in the same time
 	> false, algorithim B is faster
 	
-- Algorithm B produces a lower geometric error than algorithim A.
+- 2. Algorithm B produces a lower geometric error than algorithim A.
 	(Geometric error is being measured)
 	> null, they have the same error
 	> false, algorithim A produces better results
 
-Statistical tests: Likely a T-test on for both
+Statistical tests: Likely a T-test on for both comparing the mean execution and mean geometric error
 
 From those two tests it should be possible to draw a conclusion on
 if alogirthim's A speed advantage is worth the quality cost or the other way around.
+
+Data format example for one planet seed.
+
+Algorithm     planet seed | Simplication Rate |   Execution time    | Geometric Error  | 
+Algorithm A    1349123 	  |        45%		  |        20ms		    |       50%		   | 
+Algorithm B    1349123    |		   45%        |        30ms  		|    	40%		   | 
+
+Simplication rate, the % of geometry reducion - 100k Mesh being reduced by 45% to 45k
+Each algorithim gets tested on the same seed then a new planet is generated to create a new test group
+
+Should the same seed be tested multiple times to create an average? what is the run to run variance.
+The time compexlity of doing this would be almost irrelevant
+
+Depending on effect size, number of runs needs to be between 32 for a big effect (Geometric error) and 802 for a small effect (like execution time)
