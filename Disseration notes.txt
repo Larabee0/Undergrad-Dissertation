@@ -8,7 +8,7 @@ Discipline: Computer graphics
 
 Fields: Algorithms, real-time mesh generation, real-time mesh optimisation 
 
-problem domainL real-time mesh optimisation
+problem domain real-time mesh optimisation
 
 problem retopogly of a generated mesh for reduced polygon count
 
@@ -56,7 +56,7 @@ most major concern is small use of eletricity and internet generating greenhouse
 # Paper terms
 Title: A comparison of two GPU triangular mesh simplification algorithims on generated convex terrain mesh.
 
-Which GPU triangular mesh simplification algorithim, A or B, is able to minimise execution time and maximise geometric quality to an runtime generated convex terrain mesh?
+Which GPU triangular mesh simplification algorithim, A or B, is able to minimise execution time and maximise geometric quality to a runtime generated convex terrain mesh?
 
 - which is the fastest?
 - which has the highest quality? (lowest geometric error)
