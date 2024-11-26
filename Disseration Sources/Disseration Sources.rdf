@@ -1,0 +1,1567 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:z="http://www.zotero.org/namespaces/export#"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:vcard="http://nwalsh.com/rdf/vCard#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:bib="http://purl.org/net/biblio#"
+ xmlns:dcterms="http://purl.org/dc/terms/"
+ xmlns:link="http://purl.org/rss/1.0/modules/link/"
+ xmlns:prism="http://prismstandard.org/namespaces/1.2/basic/">
+    <bib:Book rdf:about="urn:isbn:978-1-59327-510-5">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                        <vcard:locality>San Francisco, UNITED STATES</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>No Starch Press, Incorporated</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Simonds</foaf:surname>
+                        <foaf:givenName>Ben</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_98"/>
+        <link:link rdf:resource="#item_99"/>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Blender (Computer file)</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Computer animation.</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Computer graphics.</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Three-dimensional display systems.</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Blender Master Class: A Hands-On Guide to Modeling, Sculpting, Materials, and Rendering</dc:title>
+        <dc:date>2012</dc:date>
+        <z:shortTitle>Blender Master Class</z:shortTitle>
+        <z:libraryCatalog>ProQuest Ebook Central</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>http://ebookcentral.proquest.com/lib/falmouth-ebooks/detail.action?docID=1142865</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-29 14:38:40</dcterms:dateSubmitted>
+        <dc:identifier>ISBN 978-1-59327-510-5</dc:identifier>
+    </bib:Book>
+    <bib:Memo rdf:about="#item_98">
+        <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Good information on what retopology is&lt;/p&gt;
+&lt;/div&gt;</rdf:value>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_99">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/99/reader.html"/>
+        <dc:title>ProQuest Ebook Snapshot</dc:title>
+        <dcterms:dateSubmitted>2024-10-29 14:38:42</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>text/html</link:type>
+        <dc:description>https://ebookcentral.proquest.com/lib/falmouth-ebooks/reader.action?docID=1142865</dc:description>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.proquest.com/docview/2756784194/abstract/9FEE61E753B8429BPQ/1">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>22</prism:volume>
+                <dc:title>Sensors</dc:title>
+                <dc:identifier>DOI 10.3390/s22249593</dc:identifier>
+                <prism:number>24</prism:number>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Barsanti</foaf:surname>
+                        <foaf:givenName>Sara Gonizzi</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Guagliano</foaf:surname>
+                        <foaf:givenName>Mario</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Rossi</foaf:surname>
+                        <foaf:givenName>Adriana</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_101"/>
+        <link:link rdf:resource="#item_102"/>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Finite element method</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Approximation</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Finite element analysis</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>3D modelling</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>3D survey</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Accuracy</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Architecture</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>B spline functions</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Construction</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>convergence analysis</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Cultural heritage</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Cultural resources</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Documentation</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>FEA</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Heritage</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Historic artifacts</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Mechanical properties</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>NURBS</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Representations</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>retopology</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Software</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Structural analysis</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Workflow</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:title>3D Reality-Based Survey and Retopology for Structural Analysis of Cultural Heritage</dc:title>
+        <dcterms:abstract>Cultural heritage’s structural changes and damages can influence the mechanical behaviour of artefacts and buildings. The use of finite element methods (FEM) for mechanical analysis is largely used in modelling stress behaviour. The workflow involves the use of CAD 3D models and the use of non-uniform rational B-spline (NURBS) surfaces. For cultural heritage objects, altered by the time elapsed since their creation, the representation created with the CAD model may introduce an extreme level of approximation, leading to wrong simulation results. The focus of this work is to present an alternative method intending to generate the most accurate 3D representation of a real artefact from highly accurate 3D reality-based models, simplifying the original models to make them suitable for finite element analysis (FEA) software. The approach proposed, and tested on three different case studies, was based on the intelligent use of retopology procedures to create a simplified model to be converted to a mathematical one made by NURBS surfaces, which is also suitable for being processed by volumetric meshes typically embedded in standard FEM packages. This allowed us to obtain FEA results that were closer to the actual mechanical behaviour of the analysed heritage asset.</dcterms:abstract>
+        <dc:date>2022</dc:date>
+        <z:language>English</z:language>
+        <z:libraryCatalog>ProQuest</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.proquest.com/docview/2756784194/abstract/9FEE61E753B8429BPQ/1</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-29 14:45:18</dcterms:dateSubmitted>
+        <dc:rights>© 2022 by the authors.  Licensee MDPI, Basel, Switzerland. This article is an open access article distributed under the terms and conditions of the Creative Commons Attribution (CC BY) license (https://creativecommons.org/licenses/by/4.0/).  Notwithstanding the ProQuest Terms and Conditions, you may use this content in accordance with the terms of the License.</dc:rights>
+        <dc:description>Number: 24
+Num Pages: 9593
+Place: Basel, Switzerland
+Publisher: MDPI AG</dc:description>
+        <bib:pages>9593</bib:pages>
+    </bib:Article>
+    <bib:Memo rdf:about="#item_101">
+        <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;this paper talks about aging simulation of cultural heritage objects/buildings and explores retopology and triangular simplification algorithms &amp;nbsp;to simplify a 3d scan of the object&lt;/p&gt;
+&lt;p&gt;This compares simplified to original by measuring the distance between vertices on the high res model to the nearest point on the simplified model.&lt;/p&gt;
+&lt;/div&gt;</rdf:value>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_102">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/102/Barsanti et al. - 2022 - 3D Reality-Based Survey and Retopology for Structu.pdf"/>
+        <dc:title>Full Text PDF</dc:title>
+        <dcterms:dateSubmitted>2024-10-29 14:45:18</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>application/pdf</link:type>
+        <dc:description>https://media.proquest.com/media/hms/PFT/1/oj7NQ?cit%3Aauth=Sara+Gonizzi+Barsanti%3BGuagliano%2C+Mario%3BRossi%2C+Adriana&amp;cit%3Atitle=3D+Reality-Based+Survey+and+Retopology+for+Structural+Analysis+of+Cultural+Heritage&amp;cit%3Apub=Sensors&amp;cit%3Avol=22&amp;cit%3Aiss=24&amp;cit%3Apg=9593&amp;cit%3Adate=2022&amp;ic=true&amp;cit%3Aprod=ProQuest&amp;_a=ChgyMDI0MTAyOTE0Mzk0NDAwMjoxODQxNTMSBTkzMTgwGgpPTkVfU0VBUkNIIg44Ni4xNzcuMTg3LjI0OCoHMjAzMjMzMzIKMjc1Njc4NDE5NDoNRG9jdW1lbnRJbWFnZUIBMFIGT25saW5lWgJGVGIDUEZUagoyMDIyLzAxLzAxcgoyMDIyLzEyLzMxegCCATNQLTEwMDcwNjctMTU4OTQtUEVSUEVUVUFMLTEwMDAwMjU1LzEwMDAwMTU1LTQ5MTg3NjSSAQZPbmxpbmXKAW9Nb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTMwLjAuMC4wIFNhZmFyaS81MzcuMzbSARJTY2hvbGFybHkgSm91cm5hbHOaAgdQcmVQYWlkqgIrT1M6RU1TLU1lZGlhTGlua3NTZXJ2aWNlLWdldE1lZGlhVXJsRm9ySXRlbcoCD0FydGljbGV8RmVhdHVyZdICAVnyAgD6AgFZggMDV2ViigMcQ0lEOjIwMjQxMDI5MTQzOTQ0MDAyOjUwMDgyNg%3D%3D&amp;_s=HOZ6EIh%2BA2OUgg4p016Kpkj8byI%3D</dc:description>
+    </z:Attachment>
+    <rdf:Description rdf:about="urn:isbn:978-3-319-30301-7">
+        <z:itemType>conferencePaper</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:identifier>ISBN 978-3-319-30301-7</dc:identifier>
+                <dc:title>Proceedings of the Mediterranean Conference on Information &amp; Communication Technologies 2015</dc:title>
+                <dc:identifier>DOI 10.1007/978-3-319-30301-7_30</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Cham</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Springer International Publishing</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Taime</foaf:surname>
+                        <foaf:givenName>Abderazzak</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Saaidi</foaf:surname>
+                        <foaf:givenName>Abderrahim</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Satori</foaf:surname>
+                        <foaf:givenName>Khalid</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>El Oualkadi</foaf:surname>
+                        <foaf:givenName>Ahmed</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Choubani</foaf:surname>
+                        <foaf:givenName>Fethi</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>El Moussati</foaf:surname>
+                        <foaf:givenName>Ali</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dcterms:isReferencedBy rdf:resource="#item_104"/>
+        <dc:title>Comparative Study of Mesh Simplification Algorithms</dc:title>
+        <dcterms:abstract>Many applications in the field of computer graphics are becoming more complex and require more accurate simplification of the surface meshes. This need is due to reasons of rendering speed, the capacity the backup and the transmission speed 3D models over networks. We presented four basic methods for simplifying meshes that are proposed in recent years. The result obtained by the implementation of these methods will be the subject of a comparative study. This study aims to evaluate these methods in terms of preserving the topology and speed.</dcterms:abstract>
+        <dc:date>2016</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>Springer Link</z:libraryCatalog>
+        <bib:pages>287-295</bib:pages>
+    </rdf:Description>
+    <bib:Memo rdf:about="#item_104">
+        <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Need to speak to the library about access&lt;/p&gt;
+&lt;/div&gt;</rdf:value>
+    </bib:Memo>
+    <bib:Document rdf:about="https://naos-be.zcu.cz/server/api/core/bitstreams/76283893-f8fe-4029-9623-db852ab58410/content">
+        <z:itemType>webpage</z:itemType>
+        <dcterms:isPartOf>
+           <z:Website></z:Website>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Martin Franc</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_106"/>
+        <link:link rdf:resource="#item_107"/>
+        <dc:title>Methods for polygonal mesh simplication</dc:title>
+        <dc:date>January, 2002</dc:date>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://naos-be.zcu.cz/server/api/core/bitstreams/76283893-f8fe-4029-9623-db852ab58410/content</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-29 15:07:09</dcterms:dateSubmitted>
+    </bib:Document>
+    <bib:Memo rdf:about="#item_106">
+        <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;outlines methods for approximation quality - how accurate the simplified mesh is compared to the original&lt;/p&gt;
+&lt;/div&gt;</rdf:value>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_107">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/107/content.pdf"/>
+        <dc:title>content.pdf</dc:title>
+        <dcterms:dateSubmitted>2024-10-29 15:07:09</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>application/pdf</link:type>
+        <dc:description>https://naos-be.zcu.cz/server/api/core/bitstreams/76283893-f8fe-4029-9623-db852ab58410/content</dc:description>
+    </z:Attachment>
+    <bib:Article rdf:about="https://dl.acm.org/doi/10.1145/2843947">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1556-4673,%201556-4711"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Guidi</foaf:surname>
+                        <foaf:givenName>Gabriele</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Angheleddu</foaf:surname>
+                        <foaf:givenName>Davide</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_109"/>
+        <dc:title>Displacement Mapping as a Metric Tool for Optimizing Mesh Models Originated by 3D Digitization</dc:title>
+        <dcterms:abstract>In the past 20 years, several methods have been proposed for re-coding 3D models with a low-spatial-frequency 3D representation plus a high-frequency 2D map for recovering the details. This approach has been explored with different kinds of mapping (bump, normal, relief, parallax, displacement), which have been shown to be effective in dramatically reducing model size while still maintaining a good visual appearance. For this reason, these approaches are widely applied in those situations where the rendering time constraints are critical (e.g., real-time rendering of complex models for gaming). However, the significant difference between the original detailed 3D model and the re-coded version has made it impossible to consider the latter as a metrically satisfying substitute for the former. The purpose of this article is to propose a re-coding method based on displaced subdivision surfaces that makes it possible to adapt the re-coded 3D representation to the metrological limitations of the 3D capturing technique used for generating the original mesh. In this way, it is possible to keep the geometric incoherency between the re-coded and the acquired mesh below the threshold determined by the natural capturing technology uncertainty. The resulting re-coded model can be therefore considered as close to the physical object/scenario, as the original acquired mesh, with a great advantage in terms of 3D representation size, UV parametrization, topological coherence, and scalability. The method has been tested on three cultural heritage objects with different complexity: a damaged wooden painting by Leonardo da Vinci (a nearly 2.5D shape), a Roman stone head sculpture (full 3D shape with simple topology), and a full body bronze sculpture by Donatello (full 3D shape with complex topology), demonstrating the coherency between the re-coded models and the originals, with a model size compression depending on the topological complexity that may reach a level of better than 1:25.</dcterms:abstract>
+        <dc:date>2016-05-20</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://dl.acm.org/doi/10.1145/2843947</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-29 15:24:21</dcterms:dateSubmitted>
+        <dc:description>Number: 2</dc:description>
+        <bib:pages>1-23</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1556-4673,%201556-4711">
+        <prism:volume>9</prism:volume>
+        <dc:title>Journal on Computing and Cultural Heritage</dc:title>
+        <dc:identifier>DOI 10.1145/2843947</dc:identifier>
+        <prism:number>2</prism:number>
+        <dcterms:alternative>J. Comput. Cult. Herit.</dcterms:alternative>
+        <dc:identifier>ISSN 1556-4673, 1556-4711</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_109">
+        <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;More methods for comparing simplified model to original, similar to 3D Reality-based survey and retopology for structural analysis of cultural heritage&lt;/p&gt;
+&lt;p&gt;Interesting simplification methods outlined&lt;/p&gt;
+&lt;/div&gt;</rdf:value>
+    </bib:Memo>
+    <bib:Article rdf:about="https://dl.acm.org/doi/10.1145/2816795.2818078">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0730-0301,%201557-7368"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Jakob</foaf:surname>
+                        <foaf:givenName>Wenzel</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Tarini</foaf:surname>
+                        <foaf:givenName>Marco</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Panozzo</foaf:surname>
+                        <foaf:givenName>Daniele</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Sorkine-Hornung</foaf:surname>
+                        <foaf:givenName>Olga</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_111"/>
+        <dc:title>Instant field-aligned meshes</dc:title>
+        <dcterms:abstract>We present a novel approach to remesh a surface into an isotropic triangular or quad-dominant mesh using a unified local smoothing operator that optimizes both the edge orientations and vertex positions in the output mesh. Our algorithm produces meshes with high isotropy while naturally aligning and snapping edges to sharp features. The method is simple to implement and parallelize, and it can process a variety of input surface representations, such as point clouds, range scans and triangle meshes. Our full pipeline executes instantly (less than a second) on meshes with hundreds of thousands of faces, enabling new types of interactive workflows. Since our algorithm avoids any global optimization, and its key steps scale linearly with input size, we are able to process extremely large meshes and point clouds, with sizes exceeding several hundred million elements. To demonstrate the robustness and effectiveness of our method, we apply it to hundreds of models of varying complexity and provide our cross-platform reference implementation in the supplemental material.</dcterms:abstract>
+        <dc:date>2015-11-04</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://dl.acm.org/doi/10.1145/2816795.2818078</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-29 15:29:28</dcterms:dateSubmitted>
+        <dc:description>Number: 6</dc:description>
+        <bib:pages>1-15</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0730-0301,%201557-7368">
+        <prism:volume>34</prism:volume>
+        <dc:title>ACM Transactions on Graphics</dc:title>
+        <dc:identifier>DOI 10.1145/2816795.2818078</dc:identifier>
+        <prism:number>6</prism:number>
+        <dcterms:alternative>ACM Trans. Graph.</dcterms:alternative>
+        <dc:identifier>ISSN 0730-0301, 1557-7368</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_111">
+        <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Details a very performant algorithm to simplify meshes&lt;/p&gt;
+&lt;/div&gt;</rdf:value>
+    </bib:Memo>
+    <bib:Article rdf:about="https://dx.plos.org/10.1371/journal.pone.0255832">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1932-6203"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Mousa</foaf:surname>
+                        <foaf:givenName>Mohamed H.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hussein</foaf:surname>
+                        <foaf:givenName>Mohamed K.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Ashraf</foaf:surname>
+                        <foaf:givenName>M. Usman</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dcterms:isReferencedBy rdf:resource="#item_113"/>
+        <link:link rdf:resource="#item_114"/>
+        <dc:title>High-performance simplification of triangular surfaces using a GPU</dc:title>
+        <dcterms:abstract>Due to advances in high-performance computing technologies, computer graphics techniques—especially those related to mesh simplification—have been noticeably improved. These techniques, which have a strong impact on many applications, such as geometric modeling and visualization, have been well studied for more than two decades. Recent advances in GPUs have led to significant improvements in terms of speed and interactivity. In this paper, we present a mesh simplification algorithm that benefits from the parallel framework provided by recent GPUs. We customize the halfedge data structure for adaption with the dynamic memory restrictions of CUDA. The proposed algorithm is fully parallelized by employing a lock-free skip priority queue and a set of disjoint regions of the mesh. The proposed technique accelerates the simplification process while preserving the topological properties of the mesh. Some results and comparisons are provided to verify the efficiency of the proposed algorithm.</dcterms:abstract>
+        <dc:date>2021-8-5</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://dx.plos.org/10.1371/journal.pone.0255832</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-29 15:40:29</dcterms:dateSubmitted>
+        <dc:description>Number: 8</dc:description>
+        <bib:pages>e0255832</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1932-6203">
+        <prism:volume>16</prism:volume>
+        <dc:title>PLOS ONE</dc:title>
+        <dc:identifier>DOI 10.1371/journal.pone.0255832</dc:identifier>
+        <prism:number>8</prism:number>
+        <dcterms:alternative>PLoS ONE</dcterms:alternative>
+        <dc:identifier>ISSN 1932-6203</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_113">
+        <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Edge contraction on the GPU&lt;/p&gt;
+&lt;p&gt;Uses geometric deviation for comparison&lt;/p&gt;
+&lt;/div&gt;</rdf:value>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_114">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/114/Mousa and Hussein - 2021 - High-performance simplification of triangular surf.pdf"/>
+        <dc:title>Mousa and Hussein - 2021 - High-performance simplification of triangular surf.pdf</dc:title>
+        <dcterms:dateSubmitted>2024-10-29 15:40:27</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>application/pdf</link:type>
+        <dc:description>https://pmc.ncbi.nlm.nih.gov/articles/PMC8341488/pdf/pone.0255832.pdf</dc:description>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.proquest.com/docview/2918055268/abstract/55C4489877454FB4PQ/1">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:01782789"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Papageorgiou</foaf:surname>
+                        <foaf:givenName>Alexandros</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Platis</foaf:surname>
+                        <foaf:givenName>Nikos</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_116"/>
+        <link:link rdf:resource="#item_117"/>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Finite element method</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Algorithms</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Arrays</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Data parallelism</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Graphics processing unit</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Iterative methods</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Medical Subject Headings</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Mesh</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Simplification</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Triangle mesh</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Triangular mesh simplification on the GPU</dc:title>
+        <dcterms:abstract>We present a simplification algorithm for triangular meshes, implemented on the GPU. The algorithm performs edge collapses on manifold triangular meshes driven by a quadric error metric. It uses data parallelism as provided by OpenCL and has no sequential segments in its main iterative structure in order to fully exploit the processing power of the GPU. Our implementation produces results faster than a corresponding sequential implementation and the resulting models are of comparable quality.</dcterms:abstract>
+        <dc:date>Feb 2015</dc:date>
+        <z:language>English</z:language>
+        <z:libraryCatalog>ProQuest</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.proquest.com/docview/2918055268/abstract/55C4489877454FB4PQ/1</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-29 15:43:07</dcterms:dateSubmitted>
+        <dc:rights>© Springer-Verlag Berlin Heidelberg 2014.</dc:rights>
+        <dc:description>Number: 2
+Num Pages: 235-244
+Place: Heidelberg, Netherlands
+Publisher: Springer Nature B.V.</dc:description>
+        <bib:pages>235-244</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:01782789">
+        <prism:volume>31</prism:volume>
+        <dc:title>The Visual Computer</dc:title>
+        <dc:identifier>DOI 10.1007/s00371-014-1039-x</dc:identifier>
+        <prism:number>2</prism:number>
+        <dc:identifier>ISSN 01782789</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_116">
+        <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Similar to High-performance simplification of triangular surfaces using a gpu, but uses OpenCL instead of CUDA and uses edge collapses instead of edge contraction&lt;/p&gt;
+&lt;p&gt;Several methods for comparing results to the original/other results.&lt;/p&gt;
+&lt;/div&gt;</rdf:value>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_117">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/117/Papageorgiou and Platis - 2015 - Triangular mesh simplification on the GPU.pdf"/>
+        <dc:title>Full Text PDF</dc:title>
+        <dcterms:dateSubmitted>2024-10-29 15:43:08</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>application/pdf</link:type>
+        <dc:description>https://media.proquest.com/media/hms/PFT/1/q90AX?cit%3Aauth=Papageorgiou%2C+Alexandros%3BPlatis%2C+Nikos&amp;cit%3Atitle=Triangular+mesh+simplification+on+the+GPU&amp;cit%3Apub=The+Visual+Computer&amp;cit%3Avol=31&amp;cit%3Aiss=2&amp;cit%3Apg=235&amp;cit%3Adate=Feb+2015&amp;ic=true&amp;cit%3Aprod=ProQuest+Central&amp;_a=ChgyMDI0MTAyOTE0Mzk0NDAwMjoxODQxNTMSBTkzMTgwGgpPTkVfU0VBUkNIIg44Ni4xNzcuMTg3LjI0OCoHMjA0MzczNzIKMjkxODA1NTI2ODoNRG9jdW1lbnRJbWFnZUIBMFIGT25saW5lWgJGVGIDUEZUagoyMDE1LzAyLzAxcgoyMDE1LzAyLzI4egCCASpQLTEwMDc4NTItMTU4OTQtUEVSUEVUVUFMLTEwMDAwMjU1LTU3NjQyMDKSAQZPbmxpbmXKAW9Nb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTMwLjAuMC4wIFNhZmFyaS81MzcuMzbSARJTY2hvbGFybHkgSm91cm5hbHOaAgdQcmVQYWlkqgIrT1M6RU1TLU1lZGlhTGlua3NTZXJ2aWNlLWdldE1lZGlhVXJsRm9ySXRlbcoCD0FydGljbGV8RmVhdHVyZdICAVnyAgD6AgFOggMDV2ViigMcQ0lEOjIwMjQxMDI5MTQzOTQ0MDAyOjUwMDgyNg%3D%3D&amp;_s=9KBdomGCvq7CRNFwpoTmN2NghpA%3D</dc:description>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.proquest.com/docview/1442631574/abstract/CF3716F398F94964PQ/1">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:16609336"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Wang</foaf:surname>
+                        <foaf:givenName>Yang Ping</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Dang</foaf:surname>
+                        <foaf:givenName>Jian Wu</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Yang</foaf:surname>
+                        <foaf:givenName>Jin Yu</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Wang</foaf:surname>
+                        <foaf:givenName>Song</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_119"/>
+        <link:link rdf:resource="#item_120"/>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Triangle mesh</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Mesh Simplification</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Object model</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Triangular Mesh</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Virtual image</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Virtual Modeling</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Research on Triangular Mesh Simplification Algorithm of Virtual Object Model</dc:title>
+        <dcterms:abstract>To improve the model quality of mesh simplification, reduce the model deformation and the lost of the detail characteristics with multiple folding, the paper represents a triangular mesh simplification algorithm based on edge-surface folding. The algorithm introduces curvature characteristics of model vertexes into the weight calculation of effective points, and introduces weight of triangular facets at the same time. The facets with the smallest weight adjacent the candidate edge is shrunk. The experiment results show that the algorithm has provided a higher quality of model simplification and effectively kept the graphic features.</dcterms:abstract>
+        <dc:date>Dec 2012</dc:date>
+        <z:language>English</z:language>
+        <z:libraryCatalog>ProQuest</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.proquest.com/docview/1442631574/abstract/CF3716F398F94964PQ/1</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-29 15:47:33</dcterms:dateSubmitted>
+        <dc:rights>Copyright Trans Tech Publications Ltd. Dec 2012</dc:rights>
+        <dc:description>ISBN: 9783037855782
+Num Pages: 1410
+Place: Zurich, Switzerland
+Publisher: Trans Tech Publications Ltd.</dc:description>
+        <bib:pages>1410</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:16609336">
+        <prism:volume>271-272</prism:volume>
+        <dc:title>Applied Mechanics and Materials</dc:title>
+        <dc:identifier>DOI 10.4028/www.scientific.net/AMM.271-272.1410</dc:identifier>
+        <dc:identifier>ISSN 16609336</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_119">
+        <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Not actually a great result but may be useful as &amp;nbsp;contextual review source - a stepping stone towards newer algorithims&lt;/p&gt;
+&lt;/div&gt;</rdf:value>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_120">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/120/Wang et al. - 2012 - Research on Triangular Mesh Simplification Algorit.pdf"/>
+        <dc:title>Full Text PDF</dc:title>
+        <dcterms:dateSubmitted>2024-10-29 15:47:33</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>application/pdf</link:type>
+        <dc:description>https://media.proquest.com/media/hms/OBJ/aO1qU?cit%3Aauth=Wang%2C+Yang+Ping%3BDang%2C+Jian+Wu%3BYang%2C+Jin+Yu%3BWang%2C+Song&amp;cit%3Atitle=Research+on+Triangular+Mesh+Simplification+Algorithm+of+Virtual+Object+Model&amp;cit%3Apub=Applied+Mechanics+and+Materials&amp;cit%3Avol=271-272&amp;cit%3Aiss=&amp;cit%3Apg=1410&amp;cit%3Adate=Dec+2012&amp;ic=true&amp;cit%3Aprod=ProQuest+Central&amp;_a=ChgyMDI0MTAyOTE0Mzk0NDAwMjoxODQxNTMSBTkzMTgwGgpPTkVfU0VBUkNIIg44Ni4xNzcuMTg3LjI0OCoHMjAyOTE3NzIKMTQ0MjYzMTU3NDoNRG9jdW1lbnRJbWFnZUIBMFIGT25saW5lWgJGVGIDUEZUagoyMDEyLzEyLzAxcgoyMDEyLzEyLzMxegCCASpQLTEwMDc4NTEtMTU4OTQtUEVSUEVUVUFMLTEwMDAwMjU1LTU3NjE3MTGSAQZPbmxpbmXKAW9Nb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTMwLjAuMC4wIFNhZmFyaS81MzcuMzbSARJTY2hvbGFybHkgSm91cm5hbHOaAgdQcmVQYWlkqgIrT1M6RU1TLU1lZGlhTGlua3NTZXJ2aWNlLWdldE1lZGlhVXJsRm9ySXRlbcoCD0FydGljbGV8RmVhdHVyZdICAVnyAgD6AgFOggMDV2ViigMcQ0lEOjIwMjQxMDI5MTQzOTQ0MDAyOjUwMDgyNg%3D%3D&amp;_s=iDQ6251XvP13BLoWBWPP2C8FZ98%3D</dc:description>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.proquest.com/docview/234906835/abstract/46B768EDE96F4884PQ/1">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:09544062"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zhang</foaf:surname>
+                        <foaf:givenName>Y.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Wang</foaf:surname>
+                        <foaf:givenName>H.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zhou</foaf:surname>
+                        <foaf:givenName>H.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Li</foaf:surname>
+                        <foaf:givenName>J.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_122"/>
+        <link:link rdf:resource="#item_123"/>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Finite element method</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Algorithms</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Finite element analysis</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Linear equations</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Optimization</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Polygon mesh</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Finite triangular surface mesh simplification with geometrical feature recognition</dc:title>
+        <dcterms:abstract>The quantity and quality of the mesh elements are both significant factors for guaranteeing computational precision in the finite-element method (FEM). In most mesh simplification algorithms, the geometric error was thought to be the most important issue. However, the mesh quality was rarely taken into consideration. In this article, a finite triangular surface mesh simplification algorithm is proposed, in which the vertex dispersion is introduced to represent the local geometrical feature, and then either edge collapse or face collapse is carried out consequently. The aspect of the newly created face is taken into account and the position of the newly created vertex is obtained by solving an over-determined system of linear equations with respect to the aspect ratios of the newly created faces; thereupon the simplified mesh quality is improved. To obtain a further simplification and to reduce the errors in the succeeding FEM analysis, surface fitting is adopted on the surfaces with large curvature. Simplification cases had been performed in comparison with the quadric error metric method, and the results show that the definition of the local mesh density is more reasonable for the FEM analysis with the same simplification ratio while the present simplification algorithm is employed. Moreover, the mesh quality can be greatly improved on the surface with large curvature. A set of FEM numerical experiments of polymer injection moulding simulation had also been performed to determine the effect of the presented simplification algorithm on the FEM analysis. The numerical results show that the error of the injection pressure can be limited within 4 per cent, while the simplification percentage reaches 75 per cent. [PUBLICATION ABSTRACT]</dcterms:abstract>
+        <dc:date>Nov 2009</dc:date>
+        <z:language>English</z:language>
+        <z:libraryCatalog>ProQuest</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.proquest.com/docview/234906835/abstract/46B768EDE96F4884PQ/1</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-29 15:50:34</dcterms:dateSubmitted>
+        <dc:rights>Copyright Professional Engineering Publishing Ltd Nov 2009</dc:rights>
+        <dc:description>Number: C11
+Num Pages: 10
+Place: London, United States
+Publisher: SAGE PUBLICATIONS, INC.</dc:description>
+        <bib:pages>2627-2636</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:09544062">
+        <prism:volume>223</prism:volume>
+        <dc:title>Proceedings of the Institution of Mechanical Engineers: Journal of Mechanical Engineering Science, Part C</dc:title>
+        <prism:number>C11</prism:number>
+        <dc:identifier>ISSN 09544062</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_122">
+        <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Another good stepping stone source, results look pretty good too&lt;/p&gt;
+&lt;p&gt;another source for geometric error of result compared to the original&lt;/p&gt;
+&lt;/div&gt;</rdf:value>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_123">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/123/Zhang et al. - 2009 - Finite triangular surface mesh simplification with.pdf"/>
+        <dc:title>Full Text PDF</dc:title>
+        <dcterms:dateSubmitted>2024-10-29 15:50:34</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>application/pdf</link:type>
+        <dc:description>https://media.proquest.com/media/hms/OBJ/vJdpT?cit%3Aauth=Zhang%2C+Y%3BWang%2C+H%3BZhou%2C+H%3BLi%2C+J&amp;cit%3Atitle=Finite+triangular+surface+mesh+simplification+with+geometrical+feature+recognition&amp;cit%3Apub=Proceedings+of+the+Institution+of+Mechanical+Engineers&amp;cit%3Avol=223&amp;cit%3Aiss=C11&amp;cit%3Apg=2627&amp;cit%3Adate=Nov+2009&amp;ic=true&amp;cit%3Aprod=ProQuest+Central&amp;_a=ChgyMDI0MTAyOTE0Mzk0NDAwMjoxODQxNTMSBTkzMTgwGgpPTkVfU0VBUkNIIg44Ni4xNzcuMTg3LjI0OCoFMzYxNjcyCTIzNDkwNjgzNToNRG9jdW1lbnRJbWFnZUIBMFIGT25saW5lWgJGVGIDUEZUagoyMDA5LzExLzAxcgoyMDA5LzExLzMwegCCASpQLTEwMDAyODMtMTU4OTQtUEVSUEVUVUFMLTEwMDAwMjU1LTQ5MTg2NzeSAQZPbmxpbmXKAW9Nb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTMwLjAuMC4wIFNhZmFyaS81MzcuMzbSARJTY2hvbGFybHkgSm91cm5hbHOaAgdQcmVQYWlkqgIrT1M6RU1TLU1lZGlhTGlua3NTZXJ2aWNlLWdldE1lZGlhVXJsRm9ySXRlbcoCB0ZlYXR1cmXSAgFZ8gIA%2BgIBToIDA1dlYooDHENJRDoyMDI0MTAyOTE0Mzk0NDAwMjo1MDA4MjY%3D&amp;_s=PVfYsSJ2WvvLwZW5Alxk9UC471E%3D</dc:description>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.sciencedirect.com/science/article/pii/S0925772199000309">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0925-7721"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Heckbert</foaf:surname>
+                        <foaf:givenName>Paul S.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Garland</foaf:surname>
+                        <foaf:givenName>Michael</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_125"/>
+        <link:link rdf:resource="#item_126"/>
+        <link:link rdf:resource="#item_127"/>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Anisotropic mesh generation</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Approximation theory</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Curvature</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Quadric error metric</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Triangle aspect ratio</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Optimal triangulation and quadric-based surface simplification</dc:title>
+        <dcterms:abstract>Many algorithms for reducing the number of triangles in a surface model have been proposed, but to date there has been little theoretical analysis of the approximations they produce. Previously we described an algorithm that simplifies polygonal models using a quadric error metric. This method is fast and produces high quality approximations in practice. Here we provide some theory to explain why the algorithm works as well as it does. Using methods from differential geometry and approximation theory, we show that in the limit as triangle area goes to zero on a differentiable surface, the quadric error is directly related to surface curvature. Also, in this limit, a triangulation that minimizes the quadric error metric achieves the optimal triangle aspect ratio in that it minimizes the L2 geometric error. This work represents a new theoretical approach for the analysis of simplification algorithms.</dcterms:abstract>
+        <dc:date>1999-11-30</dc:date>
+        <z:libraryCatalog>ScienceDirect</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.sciencedirect.com/science/article/pii/S0925772199000309</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-29 15:53:19</dcterms:dateSubmitted>
+        <dc:description>Number: 1</dc:description>
+        <bib:pages>49-65</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0925-7721">
+        <prism:volume>14</prism:volume>
+        <dc:title>Computational Geometry</dc:title>
+        <dc:identifier>DOI 10.1016/S0925-7721(99)00030-9</dc:identifier>
+        <prism:number>1</prism:number>
+        <dcterms:alternative>Computational Geometry</dcterms:alternative>
+        <dc:identifier>ISSN 0925-7721</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_125">
+        <rdf:value>&lt;div data-schema-version=&quot;8&quot;&gt;&lt;p&gt;Good for historical building blocks&lt;/p&gt;
+&lt;p&gt;Results are quite good looking for 1999&lt;/p&gt;
+&lt;/div&gt;</rdf:value>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_126">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/126/S0925772199000309.html"/>
+        <dc:title>ScienceDirect Snapshot</dc:title>
+        <dcterms:dateSubmitted>2024-10-29 15:53:24</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>text/html</link:type>
+        <dc:description>https://www.sciencedirect.com/science/article/pii/S0925772199000309</dc:description>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_127">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/127/Heckbert and Garland - 1999 - Optimal triangulation and quadric-based surface si.pdf"/>
+        <dc:title>Submitted Version</dc:title>
+        <dcterms:dateSubmitted>2024-10-29 15:53:28</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>application/pdf</link:type>
+        <dc:description>https://www.cs.cmu.edu/~ph/qtheory.pdf</dc:description>
+    </z:Attachment>
+    <rdf:Description rdf:about="urn:isbn:978-0-89871-390-9">
+        <z:itemType>conferencePaper</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dcterms:isPartOf>
+                   <bib:Series><dc:title>SODA '97</dc:title></bib:Series>
+                </dcterms:isPartOf>
+                <dc:identifier>ISBN 978-0-89871-390-9</dc:identifier>
+                <dc:title>Proceedings of the eighth annual ACM-SIAM symposium on Discrete algorithms</dc:title>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>USA</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Society for Industrial and Applied Mathematics</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Agarwal</foaf:surname>
+                        <foaf:givenName>Pankaj K.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Desikan</foaf:surname>
+                        <foaf:givenName>Pavan K.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_129"/>
+        <dc:title>An efficient algorithm for terrain simplification</dc:title>
+        <dc:date>January 5, 1997</dc:date>
+        <z:libraryCatalog>ACM Digital Library</z:libraryCatalog>
+        <dcterms:dateSubmitted>2024-11-06</dcterms:dateSubmitted>
+        <bib:pages>139–147</bib:pages>
+    </rdf:Description>
+    <z:Attachment rdf:about="#item_129">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/129/Agarwal and Desikan - 1997 - An efficient algorithm for terrain simplification.pdf"/>
+        <dc:title>Full Text PDF</dc:title>
+        <dcterms:dateSubmitted>2024-11-06 09:23:07</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>application/pdf</link:type>
+        <dc:description>https://dl.acm.org/doi/pdf/10.5555/314161.314199</dc:description>
+    </z:Attachment>
+    <rdf:Description rdf:about="urn:isbn:978-1-59593-628-8">
+        <z:itemType>conferencePaper</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:identifier>ISBN 978-1-59593-628-8</dc:identifier>
+                <dc:title>Proceedings of the 2007 symposium on Interactive 3D graphics and games</dc:title>
+                <dc:identifier>DOI 10.1145/1230100.1230128</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Seattle Washington</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>ACM</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>DeCoro</foaf:surname>
+                        <foaf:givenName>Christopher</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Tatarchuk</foaf:surname>
+                        <foaf:givenName>Natalya</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_131"/>
+        <dc:title>Real-time mesh simplification using the GPU</dc:title>
+        <dcterms:abstract>Recent advances in real-time rendering have allowed the GPU implementation of traditionally CPU-restricted algorithms, often with performance increases of an order of magnitude or greater. Such gains are achieved by leveraging the large-scale parallelism of the GPU towards applications that are well-suited for these streaming architectures. By contrast, mesh simpliﬁcation has traditionally been viewed as a non-interactive process not readily amenable to GPU acceleration. We demonstrate how it becomes practical for real-time use through our method, and that the use of the GPU even for ofﬂine simpliﬁcation leads to signiﬁcant increases in performance. Our approach for mesh decimation adopts a vertexclustering method to the GPU by taking advantage of a new addition to the rendering pipeline - the geometry shader stage. We present a novel general-purpose data structure designed for streaming architectures called the probabilistic octree, which allows for much of the ﬂexibility of ofﬂine implementations, including sparse encoding and variable level-of-detail. We demonstrate successful use of this data structure in our GPU implementation of mesh simpliﬁcation. We can generate adaptive levels of detail by applying non-linear warping functions to the cluster map in order to improve resulting simpliﬁcation quality. Our GPU-accelerated approach enables simultaneous construction of multiple levels of detail and outof-core simpliﬁcation of extremely large polygonal meshes.</dcterms:abstract>
+        <dc:date>2007-04-30</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://dl.acm.org/doi/10.1145/1230100.1230128</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-11-20 12:46:27</dcterms:dateSubmitted>
+        <bib:pages>161-166</bib:pages>
+        <bib:presentedAt>
+            <bib:Conference>
+                <dc:title>I3D07: Symposium on Interactive 3D Graphics and Games 2007</dc:title>
+            </bib:Conference>
+        </bib:presentedAt>
+    </rdf:Description>
+    <z:Attachment rdf:about="#item_131">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/131/DeCoro and Tatarchuk - 2007 - Real-time mesh simplification using the GPU.pdf"/>
+        <dc:title>DeCoro and Tatarchuk - 2007 - Real-time mesh simplification using the GPU.pdf</dc:title>
+        <dcterms:dateSubmitted>2024-11-20 12:46:25</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>application/pdf</link:type>
+        <dc:description>https://gfx.cs.princeton.edu/pubs/DeCoro_2007_RMS/real_time_simplification.pdf</dc:description>
+    </z:Attachment>
+    <rdf:Description rdf:about="urn:isbn:978-1-4503-6401-0">
+        <z:itemType>conferencePaper</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:identifier>ISBN 978-1-4503-6401-0</dc:identifier>
+                <dc:title>Proceedings of Computer Graphics International 2018</dc:title>
+                <dc:identifier>DOI 10.1145/3208159.3208195</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Bintan Island Indonesia</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>ACM</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Koh</foaf:surname>
+                        <foaf:givenName>Naimin</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zhang</foaf:surname>
+                        <foaf:givenName>Wenjing</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zheng</foaf:surname>
+                        <foaf:givenName>Jianmin</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Cai</foaf:surname>
+                        <foaf:givenName>Yiyu</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_133"/>
+        <dc:title>GPU-based Multiple-Choice Scheme for Mesh Simplification</dc:title>
+        <dcterms:abstract>This paper presents a novel GPU-based parallel algorithm to simplify triangular meshes. Existing GPU based methods usually produce simplified meshes with lower quality. This is generally because they put more emphasis on parallelism than mesh quality. After a thorough analysis of the existing methods, we propose a GPU based multiple-choice mechanism, which combines multiple-choice decimation and GPU-based parallel simplification, to balance the mesh quality and computational speed. As a result, our algorithm improves the quality of the simplified meshes and also achieves high speed-up provided by GPU. The experiments and the comparison with the prior art confirm the performance of the proposed algorithm.</dcterms:abstract>
+        <dc:date>2018-06-11</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://dl.acm.org/doi/10.1145/3208159.3208195</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-11-20 12:48:54</dcterms:dateSubmitted>
+        <bib:pages>195-200</bib:pages>
+        <bib:presentedAt>
+            <bib:Conference>
+               <dc:title>CGI 2018: Computer Graphics International 2018</dc:title>
+            </bib:Conference>
+        </bib:presentedAt>
+    </rdf:Description>
+    <z:Attachment rdf:about="#item_133">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/133/Koh et al. - 2018 - GPU-based Multiple-Choice Scheme for Mesh Simplifi.pdf"/>
+        <dc:title>Koh et al. - 2018 - GPU-based Multiple-Choice Scheme for Mesh Simplifi.pdf</dc:title>
+        <dcterms:dateSubmitted>2024-11-20 12:48:52</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>application/pdf</link:type>
+        <dc:description>https://dr.ntu.edu.sg/bitstream/10356/144946/2/GPU%20based%20multiople%20choice%20scheme%20for%20mesh%20simplification.pdf</dc:description>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.proquest.com/docview/2917892398/abstract/9F096AB078FB4964PQ/1">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>32</prism:volume>
+                <dc:title>The Visual Computer</dc:title>
+                <dc:identifier>DOI 10.1007/s00371-016-1242-z</dc:identifier>
+                <prism:number>6-8</prism:number>
+                <dc:identifier>ISSN 01782789</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Lee</foaf:surname>
+                        <foaf:givenName>Hyunho</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Kyung</foaf:surname>
+                        <foaf:givenName>Min-Ho</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_135"/>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Finite element method</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Algorithms</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Simplification</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Triangle mesh</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Data structures</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Parallel algorithm</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Topology</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Parallel mesh simplification using embedded tree collapsing</dc:title>
+        <dcterms:abstract>We present a novel parallel algorithm for mesh simplification that can reduce an input triangle mesh with highly improved performance. To take full advantage of the GPU comprising many computing cores, we enable collapsing of connected edges to be processed at one time by breaking data dependency in the update of the mesh data structure. Our solution is a lazy update method, which temporarily stores edge update information in a table and then updates the mesh data with it in the next step. Thanks to the lazy update method, we can more freely choose a large number of edges in the form of small trees for collapsing. The constructed trees are split to satisfy an error constraint, prevent normal flipping, and preserve the mesh topology. In experiments performed on several test models of various scales, we found that our algorithm consistently outperformed the prior GPU algorithm of Papageorgiou and Platis (Vis Comput 31(2):235–244, 2015) by a factor of 10 or higher.</dcterms:abstract>
+        <dc:date>Jun 2016</dc:date>
+        <z:language>English</z:language>
+        <z:libraryCatalog>ProQuest</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.proquest.com/docview/2917892398/abstract/9F096AB078FB4964PQ/1</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-11-20 12:59:46</dcterms:dateSubmitted>
+        <dc:rights>© Springer-Verlag Berlin Heidelberg 2016.</dc:rights>
+        <dc:description>Number: 6-8
+Num Pages: 967-976
+Place: Heidelberg, Netherlands
+Publisher: Springer Nature B.V.</dc:description>
+        <bib:pages>967-976</bib:pages>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_135">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/135/Lee and Kyung - 2016 - Parallel mesh simplification using embedded tree c.pdf"/>
+        <dc:title>Full Text PDF</dc:title>
+        <dcterms:dateSubmitted>2024-11-20 12:59:46</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>application/pdf</link:type>
+        <dc:description>https://media.proquest.com/media/hms/PFT/1/Paj9X?cit%3Aauth=Lee%2C+Hyunho%3BKyung%2C+Min-Ho&amp;cit%3Atitle=Parallel+mesh+simplification+using+embedded+tree+collapsing&amp;cit%3Apub=The+Visual+Computer&amp;cit%3Avol=32&amp;cit%3Aiss=6-8&amp;cit%3Apg=967&amp;cit%3Adate=Jun+2016&amp;ic=true&amp;cit%3Aprod=ProQuest+Central&amp;_a=ChgyMDI0MTEyMDEyNDcwNTA4MTo4OTk1MTQSBTkzMTgwGgpPTkVfU0VBUkNIIg44Ni4xNzcuMTg3LjI0OCoHMjA0MzczNzIKMjkxNzg5MjM5ODoNRG9jdW1lbnRJbWFnZUIBMFIGT25saW5lWgJGVGIDUEZUagoyMDE2LzA2LzAxcgoyMDE2LzA2LzMwegCCASpQLTEwMDc4NTItMTU4OTQtUEVSUEVUVUFMLTEwMDAwMjU1LTU3NjQyMDKSAQZPbmxpbmXKAW9Nb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTMxLjAuMC4wIFNhZmFyaS81MzcuMzbSARJTY2hvbGFybHkgSm91cm5hbHOaAgdQcmVQYWlkqgIrT1M6RU1TLU1lZGlhTGlua3NTZXJ2aWNlLWdldE1lZGlhVXJsRm9ySXRlbcoCD0FydGljbGV8RmVhdHVyZdICAVnyAgD6AgFOggMDV2ViigMcQ0lEOjIwMjQxMTIwMTI0NzA1MDgxOjk0NTUwNA%3D%3D&amp;_s=axBzy3K%2FdW%2B%2Fnx8oiAUhbhsJaTI%3D</dc:description>
+    </z:Attachment>
+    <bib:Article rdf:about="#item_136">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Journal></bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Garland</foaf:surname>
+                        <foaf:givenName>Michael</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Heckbert</foaf:surname>
+                        <foaf:givenName>Paul S</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_137"/>
+        <dc:title>Surface Simplification Using Quadric Error Metrics</dc:title>
+        <dcterms:abstract>Many applications in computer graphics require complex, highly detailed models. However, the level of detail actually necessary may vary considerably. To control processing time, it is often desirable to use approximations in place of excessively detailed models. We have developed a surface simpliﬁcation algorithm which can rapidly produce high quality approximations of polygonal models. The algorithm uses iterative contractions of vertex pairs to simplify models and maintains surface error approximations using quadric matrices. By contracting arbitrary vertex pairs (not just edges), our algorithm is able to join unconnected regions of models. This can facilitate much better approximations, both visually and with respect to geometric error. In order to allow topological joining, our system also supports non-manifold surface models.</dcterms:abstract>
+        <z:language>en</z:language>
+        <z:libraryCatalog>Zotero</z:libraryCatalog>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_137">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/137/Garland and Heckbert - Surface Simplification Using Quadric Error Metrics.pdf"/>
+        <dc:title>Garland and Heckbert - Surface Simplification Using Quadric Error Metrics.pdf</dc:title>
+        <dcterms:dateSubmitted>2024-11-20 13:06:50</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>application/pdf</link:type>
+        <dc:description>https://www.cs.cmu.edu/~./garland/Papers/quadrics.pdf</dc:description>
+    </z:Attachment>
+    <rdf:Description rdf:about="https://ieeexplore.ieee.org/document/7025948/?arnumber=7025948">
+        <z:itemType>conferencePaper</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>2014 IEEE International Conference on Image Processing (ICIP)</dc:title>
+                <dc:identifier>DOI 10.1109/ICIP.2014.7025948</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Peyrot</foaf:surname>
+                        <foaf:givenName>Jean-Luc</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Payan</foaf:surname>
+                        <foaf:givenName>Frédéric</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Antonini</foaf:surname>
+                        <foaf:givenName>Marc</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_139"/>
+        <link:link rdf:resource="#item_140"/>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>GPU</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Three-dimensional displays</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Topology</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Axles</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Feature extraction</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>feature-preserving</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Manifolds</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Mesh simplification</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>meshing</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Poisson disk sampling</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Robustness</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Shape</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Aliasing-free simplification of surface meshes</dc:title>
+        <dcterms:abstract>We propose in this paper a robust simplification technique, which preserves geometric features such as sharp edges or corners from original surfaces. To achieve this goal, our simplification process relies on a detection tool that enables to preserve the sharp features during the three subsequent steps: a Poisson disk sampling that intelligently reduces the number of vertices of the initial mesh; the meshing of the samples that aligns the edges along the feature lines; and a constrained relaxation step that improves the shape of the triangles of our final simplified mesh. Experimental results show that our method always produces valid meshes without aliasing artifacts, and without giving up the shape fidelity and quality of the mesh elements.</dcterms:abstract>
+        <dc:date>2014-10</dc:date>
+        <z:libraryCatalog>IEEE Xplore</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://ieeexplore.ieee.org/document/7025948/?arnumber=7025948</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-11-20 13:09:00</dcterms:dateSubmitted>
+        <dc:description>ISSN: 2381-8549</dc:description>
+        <bib:pages>4677-4681</bib:pages>
+        <bib:presentedAt>
+            <bib:Conference>
+                <dc:title>2014 IEEE International Conference on Image Processing (ICIP)</dc:title>
+            </bib:Conference>
+        </bib:presentedAt>
+    </rdf:Description>
+    <z:Attachment rdf:about="#item_139">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/139/Peyrot et al. - 2014 - Aliasing-free simplification of surface meshes.pdf"/>
+        <dc:title>Full Text PDF</dc:title>
+        <dcterms:dateSubmitted>2024-11-20 13:09:12</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>application/pdf</link:type>
+        <dc:description>https://ieeexplore.ieee.org/stampPDF/getPDF.jsp?tp=&amp;arnumber=7025948&amp;ref=</dc:description>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_140">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/140/7025948.html"/>
+        <dc:title>IEEE Xplore Abstract Record</dc:title>
+        <dcterms:dateSubmitted>2024-11-20 13:09:07</dcterms:dateSubmitted>
+        <z:linkMode>2</z:linkMode>
+        <link:type>text/html</link:type>
+        <dc:description>https://ieeexplore.ieee.org/document/7025948/?arnumber=7025948</dc:description>
+    </z:Attachment>
+    <rdf:Description rdf:about="urn:isbn:978-3-642-33573-0">
+        <z:itemType>conferencePaper</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:identifier>ISBN 978-3-642-33573-0</dc:identifier>
+                <dc:title>Proceedings of the 21st International Meshing Roundtable</dc:title>
+                <dc:identifier>DOI 10.1007/978-3-642-33573-0_28</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Berlin, Heidelberg</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Springer</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Shontz</foaf:surname>
+                        <foaf:givenName>Suzanne M.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Nistor</foaf:surname>
+                        <foaf:givenName>Dragos M.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Jiao</foaf:surname>
+                        <foaf:givenName>Xiangmin</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Weill</foaf:surname>
+                        <foaf:givenName>Jean-Christophe</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dc:title>CPU-GPU Algorithms for Triangular Surface Mesh Simplification</dc:title>
+        <dcterms:abstract>Mesh simplification and mesh compression are important processes in computer graphics and scientific computing, as such contexts allow for a mesh which takes up less memory than the original mesh. Current simplification and compression algorithms do not take advantage of both the central processing unit (CPU) and the graphics processing unit (GPU). We propose three simplification algorithms, one of which runs on the CPU and two of which run on the GPU. We combine these algorithms into two CPU-GPU algorithms for mesh simplification. Our CPU-GPU algorithms are the naïve marking algorithm and the inverse reduction algorithm. Experimental results show that when the algorithms take advantage of both the CPU and the GPU, there is a decrease in running time for simplification compared to performing all of the computation on the CPU. The marking algorithm provides higher simplification rates than the inverse reduction algorithm, whereas the inverse reduction algorithm has a lower running time than the marking algorithm.</dcterms:abstract>
+        <dc:date>2013</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>Springer Link</z:libraryCatalog>
+        <bib:pages>475-492</bib:pages>
+    </rdf:Description>
+    <rdf:Description rdf:about="https://ieeexplore.ieee.org/document/5136501/?arnumber=5136501">
+        <z:itemType>conferencePaper</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>2009 IEEE 17th Signal Processing and Communications Applications Conference</dc:title>
+                <dc:identifier>DOI 10.1109/SIU.2009.5136501</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Yirci</foaf:surname>
+                        <foaf:givenName>Murat</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Ulusoy</foaf:surname>
+                        <foaf:givenName>Ilkay</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_144"/>
+        <link:link rdf:resource="#item_143"/>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Computational geometry</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Computed tomography</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Computer graphics</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Costs</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Libraries</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Magnetic resonance</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Magnetic resonance imaging</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Solid modeling</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Testing</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Visualization</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:title>A comparative study on polygonal mesh simplification algorithms</dc:title>
+        <dcterms:abstract>Polygonal meshes are a common way of representing three dimensional surface models in many different areas of computer graphics and geometry processing. However, with the evolution of the technology, polygonal models are becoming more and more complex. As the complexity of the models increase, the visual approximation to the real world objects get better but there is a trade-off between the cost of processing these models and better visual approximation. In order to reduce this cost, the number of polygons in a model can be reduced by mesh simplification algorithms. These algorithms are widely used such that nearly all of the popular mesh editing libraries include at least one of them. In this work, polygonal simplification algorithms that are embedded in open source libraries: CGAL, VTK and OpenMesh are compared with the Metro geometric error measuring tool. By this way we try to supply a guidance for developers for publicly available mesh libraries in order to implement polygonal mesh simplification.</dcterms:abstract>
+        <dc:date>2009-04</dc:date>
+        <z:libraryCatalog>IEEE Xplore</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://ieeexplore.ieee.org/document/5136501/?arnumber=5136501</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-11-26 12:41:47</dcterms:dateSubmitted>
+        <dc:description>ISSN: 2165-0608</dc:description>
+        <bib:pages>736-739</bib:pages>
+        <bib:presentedAt>
+            <bib:Conference>
+                <dc:title>2009 IEEE 17th Signal Processing and Communications Applications Conference</dc:title>
+            </bib:Conference>
+        </bib:presentedAt>
+    </rdf:Description>
+    <z:Attachment rdf:about="#item_144">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/144/Yirci and Ulusoy - 2009 - A comparative study on polygonal mesh simplificati.pdf"/>
+        <dc:title>Full Text PDF</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://ieeexplore.ieee.org/stampPDF/getPDF.jsp?tp=&amp;arnumber=5136501&amp;ref=</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-11-26 12:41:55</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_143">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/143/5136501.html"/>
+        <dc:title>IEEE Xplore Abstract Record</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://ieeexplore.ieee.org/document/5136501/?arnumber=5136501</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-11-26 12:41:54</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>text/html</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-8659.2006.00935.x">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1467-8659"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Matias van Kaick</foaf:surname>
+                        <foaf:givenName>Oliver</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Pedrini</foaf:surname>
+                        <foaf:givenName>Hélio</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_146"/>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>decimation metric</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>half-edge collapse</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>I.3.5 Computer Graphics Geometric algorithms</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>languages and systems</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>levels-of-detail</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>triangle mesh simplification</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:title>A Comparative Evaluation of Metrics for Fast Mesh Simplification</dc:title>
+        <dcterms:abstract>Triangle mesh simplification is of great interest in a variety of knowledge domains, since it allows manipulation and visualization of large models, and it is the starting point for the design of many multiresolution representations. A crucial point in the structure of a simplification method is the definition of an appropriate metric for guiding the decimation process, with the purpose of generating low error approximations at different levels of resolution. This paper proposes two new alternative metrics for mesh simplification, with the aim of producing high-quality results with reduced execution time and memory usage, and being simple to implement. A set of different established metrics is also described and a comparative evaluation of these metrics against the two new metrics is performed. A single implementation is used in the experiments, in order to enable the evaluation of these metrics independently from other simplification aspects. Results obtained from the simplification of a number of models, using the different metrics, are compared.</dcterms:abstract>
+        <dc:date>2006</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>Wiley Online Library</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-8659.2006.00935.x</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-11-26 12:41:57</dcterms:dateSubmitted>
+        <dc:description>_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1467-8659.2006.00935.x</dc:description>
+        <bib:pages>197-210</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1467-8659">
+        <prism:volume>25</prism:volume>
+        <dc:title>Computer Graphics Forum</dc:title>
+        <dc:identifier>DOI 10.1111/j.1467-8659.2006.00935.x</dc:identifier>
+        <prism:number>2</prism:number>
+        <dc:identifier>ISSN 1467-8659</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_146">
+        <z:itemType>attachment</z:itemType>
+        <rdf:resource rdf:resource="files/146/10.1111j.1467-8659.2006.00935.html"/>
+        <dc:title>Snapshot</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://onlinelibrary.wiley.com/doi/10.1111%2Fj.1467-8659.2006.00935.x</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-11-26 12:42:07</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>text/html</link:type>
+    </z:Attachment>
+</rdf:RDF>
