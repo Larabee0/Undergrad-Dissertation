@@ -91,3 +91,6 @@ Should the same seed be tested multiple times to create an average? what is the 
 The time compexlity of doing this would be almost irrelevant
 
 Depending on effect size, number of runs needs to be between 32 for a big effect (Geometric error) and 802 for a small effect (like execution time)
+
+Algorithm A = Parallel mesh simplification using embedded tree collapsing (Embedded Tree Collapse) - 2016
+Algorithm B = High-performance simplification of triangular surfaces using a GPU (GPU Half Edge) - 2021
