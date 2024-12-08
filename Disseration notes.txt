@@ -94,3 +94,14 @@ Depending on effect size, number of runs needs to be between 32 for a big effect
 
 Algorithm A = Parallel mesh simplification using embedded tree collapsing (Embedded Tree Collapse) - 2016
 Algorithm B = High-performance simplification of triangular surfaces using a GPU (GPU Half Edge) - 2021
+
+check list
+
+A - mostly done
+B - not started
+C - done done
+D - talked about but not done as B is not started
+E - Not started, should be done by friday?
+F - Draft 4 started, still unreferenced and not fully flesh out
+G - Draft 4 started, still unreferenced and not fully flesh out
+H - Not started, should be done by friday?
