@@ -32,3 +32,8 @@ but as geometrically "accurate" as possible to the original as quickly possible.
 - nothing focused on real-time terrain generation in games
 ### Refined research question
 Out of a given set of triangular simplification algoirthims, which has the best balance of execution time to geometric accuracy for real-time terrain generation?
+
+# Computing Artefact
+The computing artefact using my comp305 project. This is a C# Vulkan ECS graphics engine which generates convex planetry terrain meshes based off a number of settings and a seed.
+In this proposal I am adding to it the features needed to measure the Simplication algorthims I have selected.
+For comp302's submission I am adding the calculation of Geometric Devation. All content written for comp302 will be inside the comp302 folder (Comp-302-2202796\SDL-Vulkan-CS\Comp302)
