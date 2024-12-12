@@ -6,6 +6,7 @@ using Vortice.Vulkan;
 using SDL_Vulkan_CS.Artifact.Generator;
 using System;
 using System.Threading.Tasks;
+using SDL_Vulkan_CS.Comp302;
 
 namespace SDL_Vulkan_CS.Artifact
 {
@@ -42,6 +43,8 @@ namespace SDL_Vulkan_CS.Artifact
 
             Console.WriteLine("Shape loaded");
             //TestComputeShader();
+
+            Authoring.Run();
         }
 
         private static void TestComputeShader()
@@ -59,7 +62,7 @@ namespace SDL_Vulkan_CS.Artifact
             var lit = new Material("white_shader.vert", "white_shader.frag", typeof(SimplePushConstantData));
 
             SubdividePlanet(shape);
-
+            Mesh.Meshes.Add(new Mesh(shape[0]));
             var now = DateTime.Now;
             GeneratePlanet(shape);
             var delta = DateTime.Now - now;

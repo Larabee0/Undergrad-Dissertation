@@ -1,9 +1,11 @@
 ﻿using Assimp;
+using SDL_Vulkan_CS.Comp302;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,7 +41,15 @@ namespace SDL_Vulkan_CS.VulkanBackend
 
         public Vertex[] Vertices
         {
-            get => _vertices;
+            get
+            {
+                if (_vertexBuffer != null && _vertices == null)
+                {
+                    CopyVertexBufferBack();
+                }
+                return _vertices;
+            }
+
             set
             {
                 _vertices = value;
@@ -49,7 +59,15 @@ namespace SDL_Vulkan_CS.VulkanBackend
 
         public uint[] Indices
         {
-            get => _indices;
+            get
+            {
+                if(_indexBuffer != null && _indices == null)
+                {
+                    CopyIndexBufferBack();
+                }
+                return _indices;
+            }
+
             set
             {
                 _indices = value;
@@ -57,6 +75,35 @@ namespace SDL_Vulkan_CS.VulkanBackend
             }
         }
 
+
+        private Vector3[] _faceNormals;
+
+        private Vector3UInt[] _faces;
+
+        public Vector3[] FaceNormals
+        {
+            get
+            {
+                if(_faceNormals == null)
+                {
+                    ComputeFaceNormals();
+                }
+                return _faceNormals;
+            }
+        }
+
+        public Vector3UInt[] Faces 
+        {
+            get
+            {
+                if(_faces == null)
+                {
+                    CrunchIndicesToFaces();
+                }
+
+                return _faces;
+            }
+        }
 
         private readonly GraphicsDevice _device;
 
@@ -75,6 +122,8 @@ namespace SDL_Vulkan_CS.VulkanBackend
         public bool AnyBuffersAllocated => _vertexBuffer != null || _indexBuffer != null;
         public bool AllBuffersAllocated => _vertexBuffer != null && _indexBuffer != null;
 
+
+        public Bounds Bounds => throw new NotImplementedException("Type Bounds not implemented!");
 
         public CsharpVulkanBuffer VertexBuffer
         {
@@ -129,6 +178,18 @@ namespace SDL_Vulkan_CS.VulkanBackend
             Indices = indices;
             _hasIndexBuffer = true;
             _stagedMesh = useStagingBuffers;
+        }
+
+        public Mesh(Mesh mesh)
+        {
+            _device = mesh._device;
+            Vertices = (Vertex[])mesh.Vertices.Clone();
+            if (mesh.HasIndexBuffer)
+            {
+                _hasIndexBuffer = true;
+                Indices = (uint[])mesh.Indices.Clone();
+            }
+            _stagedMesh = mesh._stagedMesh;
         }
 
         /// <summary>
@@ -455,11 +516,25 @@ namespace SDL_Vulkan_CS.VulkanBackend
         {
             if (_vertices == null && _vertexBuffer != null)
             {
-
                 var stagingBuffer = new CsharpVulkanBuffer(_device, (uint)Vertex.SizeInBytes, (uint)_vertexCount, VkBufferUsageFlags.TransferDst, true);
                 _device.CopyBuffer(_vertexBuffer.VkBuffer, stagingBuffer.VkBuffer,  (uint)_vertexBuffer.BufferSize);
                 _vertices = new Vertex[_vertexCount];
                 fixed (void* data = &_vertices[0])
+                {
+                    stagingBuffer.ReadFromBuffer(data);
+                }
+                stagingBuffer.Dispose();
+            }
+        }
+
+        public unsafe void CopyIndexBufferBack()
+        {
+            if (_indices == null && _indexBuffer != null)
+            {
+                var stagingBuffer = new CsharpVulkanBuffer(_device, sizeof(uint), (uint)_indicesCount, VkBufferUsageFlags.TransferDst, true);
+                _device.CopyBuffer(_indexBuffer.VkBuffer, stagingBuffer.VkBuffer, (uint)_indexBuffer.BufferSize);
+                _indices = new uint[_indicesCount];
+                fixed (void* data = &_indices[0])
                 {
                     stagingBuffer.ReadFromBuffer(data);
                 }
@@ -541,5 +616,51 @@ namespace SDL_Vulkan_CS.VulkanBackend
             //var delta = DateTime.Now - now;
             //Console.WriteLine(string.Format("Recalculate normals: {0}ms", delta.TotalMilliseconds));
         }
+
+
+        public void RecalculateBounds()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ComputeFaceNormals()
+        {
+            _faceNormals = new Vector3[Faces.Length];
+
+            for (int i = 0; i < Faces.Length; i++)
+            {
+                _faceNormals[i] = ComputeFaceNormal(i);
+            }
+        }
+
+        private Vector3 ComputeFaceNormal(int f)
+        {
+            return Vector3.Normalize(ComputeRawFaceNormal(f));
+        }
+
+        private Vector3 ComputeRawFaceNormal(int f)
+        {
+            return Vector3.Cross(GetVertex(f, 1) - GetVertex(f, 0), GetVertex(f, 2) - GetVertex(f, 0));
+        }
+
+        Vector3 GetVertex(int f, int v)
+        {
+            return Vertices[Faces[f][v]].Position;
+        }
+
+
+        private unsafe void CrunchIndicesToFaces()
+        {
+            fixed (void* pIndices = Indices)
+            {
+                //Vector3UInt* pFaces = (Vector3UInt*)pIndices;
+                _faces = new Vector3UInt[IndexCount / 3];
+                fixed (void* pFaces = _faces)
+                {
+                    NativeMemory.Copy(pIndices, pFaces, (uint)(IndexCount * sizeof(uint)));
+                }
+            }
+        }
+
     }
 }

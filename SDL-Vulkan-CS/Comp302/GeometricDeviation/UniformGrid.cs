@@ -1,0 +1,573 @@
+﻿using System;
+using SDL_Vulkan_CS.VulkanBackend;
+using System.Numerics;
+
+namespace SDL_Vulkan_CS.Comp302
+{
+    public class UniformGrid
+    {
+        private float m_rSize;
+
+        // Cells array
+        private Cell3D[][][] m_pCell;
+
+        // Min cell coordinates
+        private Vector3 m_pMin;
+
+        // Cells number in the 3 dimensions
+        private Vector3UInt m_pCellNum;
+
+        // Faces tested number
+        private int _FacesTested;
+
+        // Nearest Neighbors
+        private Neighborhood neighbors;
+
+        private Vertex[] mv;
+        private Vector3UInt[] mf;
+        private Vector3[] mfn;
+        private float[] mp; // Mesh face planes
+
+        static Cell3D pCell;
+
+        public UniformGrid(Mesh m, Bounds bbox, float dim)
+        {
+            int i, j, k, l;
+            mv = m.Vertices;
+            mf = m.Faces;
+            mfn = m.FaceNormals;
+            mp = new float[mf.Length];
+            for (i = 0; i < mp.Length; i++)
+            {
+                mp[i] = Vector3.Dot(-mfn[i], mv[mf[i][0]].Position);
+            }
+
+
+            m_pMin = bbox.Min;
+            m_rSize = dim;
+
+            m_pCellNum = new((uint)(bbox.Size.Length() / m_rSize + 1.0f));
+
+            m_pCell = new Cell3D[m_pCellNum[0]][][];
+
+            for (i = 0; i < m_pCellNum[0]; i++)
+            {
+                m_pCell[i] = new Cell3D[m_pCellNum[1]][];
+                for (j = 0; j < m_pCellNum[1]; j++)
+                {
+                    m_pCell[i][j] = new Cell3D[m_pCellNum[2]];
+                    //for (k = 0; k < m_pCellNum[2]; k++) m_pCell[i][j][k] = null;
+                }
+            }
+
+            for (i = 0; i < mv.Length; i++)
+            {
+                //////////////////////////////////////////////////////
+                // Compute cell position
+                var v = mv[i].Position;
+                j = (int)((v.X - m_pMin.X) / m_rSize);
+                k = (int)((v.Y - m_pMin.Y) / m_rSize);
+                l = (int)((v.Z - m_pMin.Z) / m_rSize);
+                /////////////////////////////////////////////////////
+                // Register point
+                AddOnePoint(i, j, k, l);
+            }
+
+            SetFaces();
+
+            _FacesTested = 0;
+            neighbors = null;
+        }
+
+        public void SetFaces()
+        {
+            int x1, x2, y1, y2, z1, z2, xx, yy, zz;
+            uint a, b, c;
+            int i;
+            char s;
+            Vector3 p = default;
+
+            /////////////////////////////////////
+            // Begin to work with vertices
+            for (i = 0; i < mf.Length; i++)
+            {
+                /////////////////////////////////////////
+                // Set vertices index
+                a = mf[i][0];
+                b = mf[i][1];
+                c = mf[i][2];
+                //////////////////////////////////////////////////////
+                // Compute cell position
+                var v = mv[a].Position;
+                x1 = x2 = (int)((v.X - m_pMin.X) / m_rSize);
+                y1 = y2 = (int)((v.Y - m_pMin.Y) / m_rSize);
+                z1 = z2 = (int)((v.Z - m_pMin.Z) / m_rSize);
+                //////////////////////////////////////////////////////
+                // Compute cell position
+                v = mv[b].Position;
+                xx = (int)((v.X - m_pMin.X) / m_rSize);
+                yy = (int)((v.Y - m_pMin.Y) / m_rSize);
+                zz = (int)((v.Z - m_pMin.Z) / m_rSize);
+                // Check for x
+                if (xx < x1) x1 = xx;
+                else
+                if (xx > x2) x2 = xx;
+                // Check for y
+                if (yy < y1) y1 = yy;
+                else
+                if (yy > y2) y2 = yy;
+                // Check for z
+                if (zz < z1) z1 = zz;
+                else
+                if (zz > z2) z2 = zz;
+                //////////////////////////////////////////////////////
+                // Compute cell position
+                v = mv[c].Position;
+                xx = (int)((v.X - m_pMin.X) / m_rSize);
+                yy = (int)((v.Y - m_pMin.Y) / m_rSize);
+                zz = (int)((v.Z - m_pMin.Z) / m_rSize);
+                // Check for x
+                if (xx < x1) x1 = xx;
+                else if (xx > x2) x2 = xx;
+                // Check for y
+                if (yy < y1) y1 = yy;
+                else if (yy > y2) y2 = yy;
+                // Check for z
+                if (zz < z1) z1 = zz;
+                else if (zz > z2) z2 = zz;
+                /////////////////////////////////////////////////////:
+                // Compute intersection Plane-Cube
+                for (xx = x1; xx <= x2; xx++)
+                {
+                    for (yy = y1; yy <= y2; yy++)
+                    {
+                        for (zz = z1; zz <= z2; zz++)
+                        {
+                            ////////////////////////////////////////
+                            p.X = m_pMin.X + xx * m_rSize;
+                            p.Y = m_pMin.Y + yy * m_rSize;
+                            p.Z = m_pMin.Z + zz * m_rSize;
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0) s = (char)1;
+                            else s = (char)2;
+                            //////////////////////////////////
+                            p.X += m_rSize;
+                            if (s == 1)
+                            {
+                                if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
+                                { AddOneFace(i, xx, yy, zz); continue; }
+                            }
+                            else
+                            {
+                                if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
+                                { AddOneFace(i, xx, yy, zz); continue; }
+                            }
+                            //////////////////////////////////
+                            p.Z += m_rSize;
+                            if (s == 1)
+                            {
+                                if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
+                                { AddOneFace(i, xx, yy, zz); continue; }
+                            }
+                            else
+                            {
+                                if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
+                                { AddOneFace(i, xx, yy, zz); continue; }
+                            }
+                            //////////////////////////////////
+                            p.X -= m_rSize;
+                            if (s == 1)
+                            {
+                                if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
+                                { AddOneFace(i, xx, yy, zz); continue; }
+                            }
+                            else
+                            {
+                                if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
+                                { AddOneFace(i, xx, yy, zz); continue; }
+                            }
+                            //////////////////////////////////
+                            p.Y += m_rSize;
+                            p.Z -= m_rSize;
+                            if (s == 1)
+                            {
+                                if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
+                                { AddOneFace(i, xx, yy, zz); continue; }
+                            }
+                            else
+                            {
+                                if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
+                                { AddOneFace(i, xx, yy, zz); continue; }
+                            }
+                            //////////////////////////////////
+                            p.X += m_rSize;
+                            if (s == 1)
+                            {
+                                if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
+                                { AddOneFace(i, xx, yy, zz); continue; }
+                            }
+                            else
+                            {
+                                if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
+                                { AddOneFace(i, xx, yy, zz); continue; }
+                            }
+                            //////////////////////////////////
+                            p.Z += m_rSize;
+                            if (s == 1)
+                            {
+                                if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
+                                { AddOneFace(i, xx, yy, zz); continue; }
+                            }
+                            else
+                            {
+                                if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
+                                { AddOneFace(i, xx, yy, zz); continue; }
+                            }
+                            //////////////////////////////////
+                            p.Y -= m_rSize;
+                            if (s == 1)
+                            {
+                                if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
+                                { AddOneFace(i, xx, yy, zz); continue; }
+                            }
+                            else
+                            {
+                                if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
+                                { AddOneFace(i, xx, yy, zz); continue; }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        float DistancePoint2Plane(Vector3 v, Vector3 n, float h)
+        {
+
+            return Vector3.Dot(v, n) + h;
+        }
+
+        private void AddOneFace(int n, int x, int y, int z)
+        {
+            //////////////////////////////////////////////////////
+            // Is there an existing registered point
+            if (m_pCell[x][y][z] == null)
+            {
+                m_pCell[x][y][z] = new Cell3D()
+                {
+                    v = -1,
+                    f = n
+                };
+            }
+            else
+            {
+                pCell = m_pCell[x][y][z];
+                while ((pCell.f != -1) && (pCell.next != null))
+                    pCell = pCell.next;
+                if (pCell.f == -1) pCell.f = n;
+                else
+                {
+                    pCell.next = new Cell3D()
+                    {
+                        v = -1,
+                        f = n
+                    };
+                }
+            }
+        }
+        private int Clamp(int x, uint max)
+        {
+            return ((x < 0) ? 0 : (x >= max) ? ((int)max - 1) : x);
+        }
+
+        public Neighborhood NearestNeighbors(Vector3 point)
+        {
+            float d;
+            int i, j, k, n;
+            int xx, yy, zz;
+            int ia, ib, ja, jb, ka, kb;
+
+            //////////////////////////////////////////////////////
+            // Compute cell position
+            xx = (int)((point.X - m_pMin.X) / m_rSize);
+            yy = (int)((point.Y - m_pMin.Y) / m_rSize);
+            zz = (int)((point.Z - m_pMin.Z) / m_rSize);
+
+            n = 0;
+
+            //delete neighbors;
+            //neighbors = 0;
+            neighbors = new Neighborhood();
+
+            //////////////////////////////////////////////////////////
+            // Check for point
+            //////////////////////////////////////////////////////////
+            do
+            {
+                n++;
+
+                ia = Clamp(xx - n, m_pCellNum[0]);
+                ib = Clamp(xx + n, m_pCellNum[0]);
+                ja = Clamp(yy - n, m_pCellNum[1]);
+                jb = Clamp(yy + n, m_pCellNum[1]);
+                ka = Clamp(zz - n, m_pCellNum[2]);
+                kb = Clamp(zz + n, m_pCellNum[2]);
+
+                for (i = ia; i <= ib; i++)
+                {
+                    for (j = ja; j <= jb; j++)
+                    {
+                        for (k = ka; k <= kb; k++)
+                        {
+                            if (m_pCell[i][j][k] == null) continue;
+                            pCell = m_pCell[i][j][k];
+                            do
+                            {
+                                /////////////////////////////////////////////
+                                // compute euclidian distance
+                                // between current sampled point &
+                                // current reference mesh point
+                                if (pCell.v != -1)
+                                {
+                                    var v = mv[pCell.v].Position;
+                                    d = (point - v).Length();
+                                    if (d <= neighbors.Distance())
+                                    {
+                                        if (d == neighbors.Distance())
+                                        {
+                                            neighbors.AddVertex(v, pCell.v);
+                                        }
+                                        else
+                                        {
+                                            neighbors.NewVertex(d, v, pCell.v);
+                                            if (d == 0) return (neighbors);
+                                        }
+                                    }
+                                }
+
+                                /////////////////////////////////////////////
+                                // compute euclidian distance
+                                // between current sampled point &
+                                // current reference mesh point
+                                if (pCell.f != -1)
+                                {
+                                    DistancePoint2Face(point, pCell.f);
+                                    if (neighbors.Distance() == 0) return (neighbors);
+                                }
+
+                                pCell = pCell.next;
+
+                            }
+                            while (pCell != null);
+                        }
+                    }
+                }
+            }
+            while (neighbors.Distance() > (n * m_rSize));
+
+            return (neighbors);
+        }
+
+        private float Area2D(Vector2 a, Vector2 b, Vector2 c)
+        {
+            return (b.X - a.X) * (c.Y - a.Y) -
+                        (c.X - a.X) * (b.Y - a.Y);
+        }
+
+        private unsafe void DistancePoint2Face(Vector3 p, int f)
+        {
+
+            int i, j, k = 0;
+            float d, l = 0, m, n;
+            Vector2 aa = default, bb = default, cc = default, pp = default;
+            Vector3 u, v;
+
+
+            // Save Current Face Vertices Indices
+            uint a = mf[f][0];
+            uint b = mf[f][1];
+            uint c = mf[f][2];
+
+            var va = mv[a].Position;
+            var vb = mv[b].Position;
+            var vc = mv[c].Position;
+
+            if ((p - va).Length() == 0) return;
+            if ((p - vb).Length() == 0) return;
+            if ((p - vc).Length() == 0) return;
+
+            _FacesTested++;
+
+            /////////////////////////////////////////////
+            // Distance Point To Plane
+            /////////////////////////////////////////////
+            d = DistancePoint2Plane(p, mfn[f], mp[f]);
+            // If Distance < Error
+            if (MathF.Abs(d) < neighbors.Distance())
+            {
+                float* pMfn = stackalloc[] { mfn[f].X, mfn[f].Y, mfn[f].Z };
+                // Find largest component
+                for (i = 0; i < 3; i++)
+                {
+                    m = MathF.Abs(pMfn[i]); // Current Component
+                    if (m > l)              // Biggest component
+                    {
+                        l = m;      // Save value
+                        k = i;      // Save component indice
+                    }
+                }
+                // Projected Point on plane
+                u = p - mfn[f] * d;
+                // project out coordinate "k"
+                j = 0;
+
+                float* pmva = stackalloc[] {va.X, va.Y, va.Z };
+                float* pmvb = stackalloc[] {vb.X, vb.Y, vb.Z };
+                float* pmvc = stackalloc[] {vc.X, vc.Y, vc.Z };
+                float* pu = stackalloc[] { u.X, u.Y, u.Z };
+                float* paa = stackalloc[] { aa.X, aa.Y };
+                float* pbb = stackalloc[] { bb.X, bb.Y };
+                float* pcc = stackalloc[] { cc.X, cc.Y };
+                float* ppp = stackalloc[] { pp.X, pp.Y };
+                for (i = 0; i < 3; i++) if (i != k)
+                {
+                    paa[j] = pmva[i];
+                    pbb[j] = pmvb[i];
+                    pcc[j] = pmvc[i];
+                    ppp[j] = pu[i];
+                    j++;
+                }
+
+                aa.X = paa[0]; aa.Y = paa[1];
+
+                bb.X = pbb[0]; bb.Y = pbb[1];
+
+                cc.X = pcc[0]; cc.Y = pcc[1];
+                pp.X = ppp[0]; pp.Y = ppp[1];
+
+                // compute areas
+                l = Area2D(pp, aa, bb);
+                m = Area2D(pp, bb, cc);
+                n = Area2D(pp, cc, aa);
+                // Test if projected point is in face
+                if (((l > 0) && (m > 0) && (n > 0)) || ((l < 0) && (m < 0) && (n < 0)))
+                {
+
+                    v = Vector3.Normalize(vb - va);
+
+                    // both ^ corss or dot
+                    l = Vector3.Cross(v, u - va).Length() / Vector3.Cross(v, vc - va).Length();
+
+                    if (l > 1) l = 1;
+                    if (l < 0) l = 0;
+
+
+                    v = Vector3.Lerp(va, vc, l);
+
+                    m = (u - v).Length() / (Vector3.Lerp(vb, vc, l) - v).Length();
+
+                    d = MathF.Abs(d);
+                    if (!((l < 0) || (l > 1) || (m < 0) || (m > 1)))
+                    {
+                        if (d == neighbors.Distance())
+                            neighbors.AddFace(u, f, l, m);
+                        else neighbors.NewFace(d, u, f, l, m);
+                        // if distance = 0 -> quit
+                        if (d == 0) return;
+                    }
+                }
+            }
+
+            /////////////////////////////////////////////
+            // Distance Point To Edge
+            /////////////////////////////////////////////
+            u = p - va;
+            v = vb - va;
+            l = v.Length();
+            // ^ cross or dot
+            d = Vector3.Cross(v, u).Length() / l;
+            if (d < neighbors.Distance())
+            {
+
+                // | dot or cross
+                m = Vector3.Dot(u, v) / l;
+                if ((m > 0.0f) && (m < l))
+                {
+                    m /= l;
+                    v = Vector3.Lerp(va, vb, m);
+                    if (d == neighbors.Distance())
+                        neighbors.AddEdge(v, f, 0, m);
+                    else neighbors.NewEdge(d, v, f, 0, m);
+                    // if distance = 0 -> quit
+                    if (d == 0) return;
+                }
+            }
+
+            u = p - vb;
+            v = vc - vb;
+            l = v.Length();
+            // ^ cross or dot
+            d = Vector3.Cross(v, u).Length() / l;
+            if (d < neighbors.Distance())
+            {
+                // | dot or cross
+                m = Vector3.Dot(u, v) / l;
+
+                if ((m > 0.0f) && (m < l))
+                {
+                    m /= l;
+                    v = Vector3.Lerp(vb, vc, m);
+                    if (d == neighbors.Distance())
+                        neighbors.AddEdge(v, f, 1, m);
+                    else neighbors.NewEdge(d, v, f, 1, m);
+                    // if distance = 0 -> quit
+                    if (d == 0) return;
+                }
+            }
+
+            u = p - vc;
+            v = va - vc;
+            l = v.Length();
+            // ^ is dot or cross
+            d = Vector3.Cross(v, u).Length() / l;
+            if (d < neighbors.Distance())
+            {
+                // | dot or cross
+                m = Vector3.Dot(u, v) / l;
+                if ((m > 0.0f) && (m < l))
+                {
+                    m /= l;
+                    v = Vector3.Lerp(vc, va, m);
+                    if (d == neighbors.Distance())
+                        neighbors.AddEdge(v, f, 2, m);
+                    else neighbors.NewEdge(d, v, f, 2, m);
+                    // if distance = 0 -> quit
+                    if (d == 0) return;
+                }
+            }
+        }
+
+        public int FacesTestedNumber() { return _FacesTested; }
+
+        private void AddOnePoint(int n, int x, int y, int z)
+        {
+            if (m_pCell[x][y][z] == null)
+            {
+                m_pCell[x][y][z] = new Cell3D()
+                {
+                    v = n,
+                    f = -1
+                };
+            }
+            else
+            {
+                pCell = m_pCell[x][y][z];
+                while (pCell.next != null) pCell = pCell.next;
+                pCell.next = new Cell3D()
+                {
+                    v = n,
+                    f = -1
+                };
+            }
+        }
+    }
+}
