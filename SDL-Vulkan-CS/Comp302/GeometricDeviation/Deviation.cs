@@ -148,19 +148,19 @@ namespace SDL_Vulkan_CS.Comp302
             for (int i = 0; i < mavn; i++)
             {
                 // Normalize deviation values
-                colours[i] = Deviation2Color(dev[i] / dev_bound);
+                ma.Vertices[i].Elevation = (dev[i]*1) / dev_bound;
+                //colours[i] = Deviation2Color(dev[i] / dev_bound);
             }
 
-            throw new NotImplementedException("No vertex colours supported!");
-            // ma._mesh.SetColors(colours);
+             ma.FlushVertexBuffer();
         }
 
         private static Vector3 Deviation2Color(float d)
         {
             if (d < 0) return new Vector3(0, 0, 0);
-            else if (d < 0.25) return new Vector3(0, d * 4.0f, 1);
-            else if (d < 0.50) return new Vector3(0, 1, 1 - (d - 0.25f) * 4.0f);
-            else if (d < 0.75) return new Vector3((d - 0.5f) * 4.0f, 1, 0);
+            else if (d < 0.25f) return new Vector3(0, d * 4.0f, 1);
+            else if (d < 0.50f) return new Vector3(0, 1, 1 - (d - 0.25f) * 4.0f);
+            else if (d < 0.75f) return new Vector3((d - 0.5f) * 4.0f, 1, 0);
             else if (d < 1) return new Vector3(1, 1.0f - (d - 0.75f) * 4.0f, 0);
             return new Vector3(1, 0, 0);
         }

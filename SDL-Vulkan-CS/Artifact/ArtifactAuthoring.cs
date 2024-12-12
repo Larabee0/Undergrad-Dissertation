@@ -27,7 +27,7 @@ namespace SDL_Vulkan_CS.Artifact
             ClipFar = 100f
         };
 
-        private readonly bool useComputeShaderForGeneration = true;
+        private readonly bool useComputeShaderForGeneration = false;
         private readonly bool useComputeShaderForNormals = true;
         private readonly int subdivisons = 7;
 
@@ -59,10 +59,10 @@ namespace SDL_Vulkan_CS.Artifact
         {
             var shape = Mesh.LoadModelFromFile(GraphicsDevice.Instance, Mesh.GetMeshInDefaultPath("Comp305-Shape-Split.obj"));
 
-            var lit = new Material("white_shader.vert", "white_shader.frag", typeof(SimplePushConstantData));
+            var lit = new Material("devation_heat.vert", "devation_heat.frag", typeof(SimplePushConstantData));
 
-            SubdividePlanet(shape);
             Mesh.Meshes.Add(new Mesh(shape[0]));
+            SubdividePlanet(shape);
             var now = DateTime.Now;
             GeneratePlanet(shape);
             var delta = DateTime.Now - now;
@@ -86,17 +86,17 @@ namespace SDL_Vulkan_CS.Artifact
             {
                 Console.WriteLine(string.Format("Parallel CPU Normal recalculation: {0}ms", delta.TotalMilliseconds));
             }
-            
 
-            for (int i = 0; i < shape.Length; i++)
+            for (int i = 0; i < 1; i++)
             {
-                var mesh = shape[i];
-                var shapeEntity = entityManager.CreateEntity();
-                entityManager.AddComponent(shapeEntity, new Translation() { Value = new(0, 0, 0) });
-                entityManager.AddComponent(shapeEntity, new Scale() { Value = new(3f, 3f, 3f) });
-                entityManager.AddComponent(shapeEntity, new MeshIndex() { Value = Mesh.GetIndexOfMesh(mesh) });
-                entityManager.AddComponent(shapeEntity, new MaterialIndex() { Value = Material.GetIndexOfMaterial(lit) });
+                CreateEntity(entityManager, shape[i], lit,new(0));
             }
+
+            //Subdivider.Subdivide(Mesh.Meshes[^1], 1, false);
+            //Subdivider.SimpliftySubdivisionMainThread(Mesh.Meshes[^1]);
+            //GeneratePlanet([Mesh.Meshes[^1]]);
+            Mesh.Meshes[^1].RecalculateNormals();
+            CreateEntity(entityManager, Mesh.Meshes[^1], lit, new(0,0.11f,-1));
 
             int vertexCount = 0;
             int indexCount = 0;
@@ -116,6 +116,15 @@ namespace SDL_Vulkan_CS.Artifact
 
             Console.WriteLine(string.Format("All Meshes           | Vertices: {0} | Total Indices: {1}", vertexCount, indexCount));
             Console.WriteLine(string.Format("Heaviest Single Mesh | Vertices: {0} |Total Indices: {1}", heavyVertexCount, heavyIndexCount));
+        }
+
+        private static void CreateEntity(EntityManager entityManager, Mesh mesh, Material lit, Vector3 position)
+        {
+            var shapeEntity = entityManager.CreateEntity();
+            entityManager.AddComponent(shapeEntity, new Translation() { Value = position });
+            entityManager.AddComponent(shapeEntity, new Scale() { Value = new(3f, 3f, 3f) });
+            entityManager.AddComponent(shapeEntity, new MeshIndex() { Value = Mesh.GetIndexOfMesh(mesh) });
+            entityManager.AddComponent(shapeEntity, new MaterialIndex() { Value = Material.GetIndexOfMaterial(lit) });
         }
 
         private void RecalucatioNormals(Mesh[] shape)

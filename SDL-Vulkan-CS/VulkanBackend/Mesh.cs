@@ -78,7 +78,7 @@ namespace SDL_Vulkan_CS.VulkanBackend
 
         private Vector3[] _faceNormals;
 
-        private Vector3UInt[] _faces;
+        private Vector3Int[] _faces;
 
         public Vector3[] FaceNormals
         {
@@ -92,7 +92,7 @@ namespace SDL_Vulkan_CS.VulkanBackend
             }
         }
 
-        public Vector3UInt[] Faces 
+        public Vector3Int[] Faces 
         {
             get
             {
@@ -113,6 +113,8 @@ namespace SDL_Vulkan_CS.VulkanBackend
         private int _vertexCount = 0;
         private int _indicesCount = 0;
 
+        private Bounds _bounds;
+
         public int VertexCount => _vertexCount;
         public int IndexCount => _indicesCount;
 
@@ -123,7 +125,7 @@ namespace SDL_Vulkan_CS.VulkanBackend
         public bool AllBuffersAllocated => _vertexBuffer != null && _indexBuffer != null;
 
 
-        public Bounds Bounds => throw new NotImplementedException("Type Bounds not implemented!");
+        public Bounds Bounds => _bounds;
 
         public CsharpVulkanBuffer VertexBuffer
         {
@@ -351,7 +353,7 @@ namespace SDL_Vulkan_CS.VulkanBackend
                     stagingBuffer.WriteToBuffer(data);
                 }
 
-                _indexBuffer ??= new CsharpVulkanBuffer(_device, sizeof(uint), (uint)_indices.Length, VkBufferUsageFlags.TransferDst | VkBufferUsageFlags.IndexBuffer | VkBufferUsageFlags.StorageBuffer, false);
+                _indexBuffer ??= new CsharpVulkanBuffer(_device, sizeof(uint), (uint)_indices.Length, VkBufferUsageFlags.TransferDst | VkBufferUsageFlags.TransferSrc | VkBufferUsageFlags.IndexBuffer | VkBufferUsageFlags.StorageBuffer, false);
                 _device.CopyBuffer(stagingBuffer.VkBuffer, _indexBuffer.VkBuffer, indexBufferSize);
                 stagingBuffer.Dispose();
             }
@@ -620,7 +622,11 @@ namespace SDL_Vulkan_CS.VulkanBackend
 
         public void RecalculateBounds()
         {
-            throw new NotImplementedException();
+            _bounds = new(Vector3.Zero, Vector3.Zero);
+            for (int i = 0; i < Vertices.Length; i++)
+            {
+                _bounds.Encapsulate(Vertices[i].Position);
+            }
         }
 
         public void ComputeFaceNormals()
@@ -651,14 +657,10 @@ namespace SDL_Vulkan_CS.VulkanBackend
 
         private unsafe void CrunchIndicesToFaces()
         {
-            fixed (void* pIndices = Indices)
+            _faces = new Vector3Int[IndexCount / 3];
+            for (int i = 0, j = 0; i < IndexCount; i+=3, j++)
             {
-                //Vector3UInt* pFaces = (Vector3UInt*)pIndices;
-                _faces = new Vector3UInt[IndexCount / 3];
-                fixed (void* pFaces = _faces)
-                {
-                    NativeMemory.Copy(pIndices, pFaces, (uint)(IndexCount * sizeof(uint)));
-                }
+                Faces[j] = new((int)Indices[i], (int)Indices[i + 1], (int)Indices[i + 2]);
             }
         }
 

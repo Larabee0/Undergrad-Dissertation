@@ -15,7 +15,7 @@ namespace SDL_Vulkan_CS.Comp302
         private Vector3 m_pMin;
 
         // Cells number in the 3 dimensions
-        private Vector3UInt m_pCellNum;
+        private Vector3Int m_pCellNum;
 
         // Faces tested number
         private int _FacesTested;
@@ -24,7 +24,7 @@ namespace SDL_Vulkan_CS.Comp302
         private Neighborhood neighbors;
 
         private Vertex[] mv;
-        private Vector3UInt[] mf;
+        private Vector3Int[] mf;
         private Vector3[] mfn;
         private float[] mp; // Mesh face planes
 
@@ -43,10 +43,10 @@ namespace SDL_Vulkan_CS.Comp302
             }
 
 
-            m_pMin = bbox.Min;
+            m_pMin = new(bbox.Min.X, bbox.Min.Y, bbox.Min.Z);
             m_rSize = dim;
 
-            m_pCellNum = new((uint)(bbox.Size.Length() / m_rSize + 1.0f));
+            m_pCellNum = new((int)(bbox.Size.Length() / m_rSize + 1.0f));
 
             m_pCell = new Cell3D[m_pCellNum[0]][][];
 
@@ -64,10 +64,9 @@ namespace SDL_Vulkan_CS.Comp302
             {
                 //////////////////////////////////////////////////////
                 // Compute cell position
-                var v = mv[i].Position;
-                j = (int)((v.X - m_pMin.X) / m_rSize);
-                k = (int)((v.Y - m_pMin.Y) / m_rSize);
-                l = (int)((v.Z - m_pMin.Z) / m_rSize);
+                j = (int)((mv[i].Position.X - m_pMin.X) / m_rSize);
+                k = (int)((mv[i].Position.Y - m_pMin.Y) / m_rSize);
+                l = (int)((mv[i].Position.Z - m_pMin.Z) / m_rSize);
                 /////////////////////////////////////////////////////
                 // Register point
                 AddOnePoint(i, j, k, l);
@@ -82,8 +81,7 @@ namespace SDL_Vulkan_CS.Comp302
         public void SetFaces()
         {
             int x1, x2, y1, y2, z1, z2, xx, yy, zz;
-            uint a, b, c;
-            int i;
+            int a, b, c, i;
             char s;
             Vector3 p = default;
 
@@ -98,16 +96,14 @@ namespace SDL_Vulkan_CS.Comp302
                 c = mf[i][2];
                 //////////////////////////////////////////////////////
                 // Compute cell position
-                var v = mv[a].Position;
-                x1 = x2 = (int)((v.X - m_pMin.X) / m_rSize);
-                y1 = y2 = (int)((v.Y - m_pMin.Y) / m_rSize);
-                z1 = z2 = (int)((v.Z - m_pMin.Z) / m_rSize);
+                x1 = x2 = (int)((mv[a].Position.X - m_pMin.X) / m_rSize);
+                y1 = y2 = (int)((mv[a].Position.Y - m_pMin.Y) / m_rSize);
+                z1 = z2 = (int)((mv[a].Position.Z - m_pMin.Z) / m_rSize);
                 //////////////////////////////////////////////////////
                 // Compute cell position
-                v = mv[b].Position;
-                xx = (int)((v.X - m_pMin.X) / m_rSize);
-                yy = (int)((v.Y - m_pMin.Y) / m_rSize);
-                zz = (int)((v.Z - m_pMin.Z) / m_rSize);
+                xx = (int)((mv[b].Position.X - m_pMin.X) / m_rSize);
+                yy = (int)((mv[b].Position.Y - m_pMin.Y) / m_rSize);
+                zz = (int)((mv[b].Position.Z - m_pMin.Z) / m_rSize);
                 // Check for x
                 if (xx < x1) x1 = xx;
                 else
@@ -122,10 +118,9 @@ namespace SDL_Vulkan_CS.Comp302
                 if (zz > z2) z2 = zz;
                 //////////////////////////////////////////////////////
                 // Compute cell position
-                v = mv[c].Position;
-                xx = (int)((v.X - m_pMin.X) / m_rSize);
-                yy = (int)((v.Y - m_pMin.Y) / m_rSize);
-                zz = (int)((v.Z - m_pMin.Z) / m_rSize);
+                xx = (int)((mv[c].Position.X - m_pMin.X) / m_rSize);
+                yy = (int)((mv[c].Position.Y - m_pMin.Y) / m_rSize);
+                zz = (int)((mv[c].Position.Z - m_pMin.Z) / m_rSize);
                 // Check for x
                 if (xx < x1) x1 = xx;
                 else if (xx > x2) x2 = xx;
@@ -274,9 +269,9 @@ namespace SDL_Vulkan_CS.Comp302
                 }
             }
         }
-        private int Clamp(int x, uint max)
+        private int Clamp(int x, int max)
         {
-            return ((x < 0) ? 0 : (x >= max) ? ((int)max - 1) : x);
+            return ((x < 0) ? 0 : (x >= max) ? (max - 1) : x);
         }
 
         public Neighborhood NearestNeighbors(Vector3 point)
@@ -328,17 +323,16 @@ namespace SDL_Vulkan_CS.Comp302
                                 // current reference mesh point
                                 if (pCell.v != -1)
                                 {
-                                    var v = mv[pCell.v].Position;
-                                    d = (point - v).Length();
+                                    d = (point - mv[pCell.v].Position).Length();
                                     if (d <= neighbors.Distance())
                                     {
                                         if (d == neighbors.Distance())
                                         {
-                                            neighbors.AddVertex(v, pCell.v);
+                                            neighbors.AddVertex(mv[pCell.v].Position, pCell.v);
                                         }
                                         else
                                         {
-                                            neighbors.NewVertex(d, v, pCell.v);
+                                            neighbors.NewVertex(d, mv[pCell.v].Position, pCell.v);
                                             if (d == 0) return (neighbors);
                                         }
                                     }
@@ -383,17 +377,14 @@ namespace SDL_Vulkan_CS.Comp302
 
 
             // Save Current Face Vertices Indices
-            uint a = mf[f][0];
-            uint b = mf[f][1];
-            uint c = mf[f][2];
+            int a = mf[f][0];
+            int b = mf[f][1];
+            int c = mf[f][2];
 
-            var va = mv[a].Position;
-            var vb = mv[b].Position;
-            var vc = mv[c].Position;
 
-            if ((p - va).Length() == 0) return;
-            if ((p - vb).Length() == 0) return;
-            if ((p - vc).Length() == 0) return;
+            if ((p - mv[a].Position).Length() == 0) return;
+            if ((p - mv[b].Position).Length() == 0) return;
+            if ((p - mv[c].Position).Length() == 0) return;
 
             _FacesTested++;
 
@@ -420,22 +411,22 @@ namespace SDL_Vulkan_CS.Comp302
                 // project out coordinate "k"
                 j = 0;
 
-                float* pmva = stackalloc[] {va.X, va.Y, va.Z };
-                float* pmvb = stackalloc[] {vb.X, vb.Y, vb.Z };
-                float* pmvc = stackalloc[] {vc.X, vc.Y, vc.Z };
+                float* pmva = stackalloc[] { mv[a].Position.X, mv[a].Position.Y, mv[a].Position.Z };
+                float* pmvb = stackalloc[] { mv[b].Position.X, mv[b].Position.Y, mv[b].Position.Z };
+                float* pmvc = stackalloc[] { mv[c].Position.X, mv[c].Position.Y, mv[c].Position.Z };
                 float* pu = stackalloc[] { u.X, u.Y, u.Z };
                 float* paa = stackalloc[] { aa.X, aa.Y };
                 float* pbb = stackalloc[] { bb.X, bb.Y };
                 float* pcc = stackalloc[] { cc.X, cc.Y };
                 float* ppp = stackalloc[] { pp.X, pp.Y };
                 for (i = 0; i < 3; i++) if (i != k)
-                {
-                    paa[j] = pmva[i];
-                    pbb[j] = pmvb[i];
-                    pcc[j] = pmvc[i];
-                    ppp[j] = pu[i];
-                    j++;
-                }
+                    {
+                        paa[j] = pmva[i];
+                        pbb[j] = pmvb[i];
+                        pcc[j] = pmvc[i];
+                        ppp[j] = pu[i];
+                        j++;
+                    }
 
                 aa.X = paa[0]; aa.Y = paa[1];
 
@@ -452,18 +443,18 @@ namespace SDL_Vulkan_CS.Comp302
                 if (((l > 0) && (m > 0) && (n > 0)) || ((l < 0) && (m < 0) && (n < 0)))
                 {
 
-                    v = Vector3.Normalize(vb - va);
+                    v = Vector3.Normalize(mv[b].Position - mv[a].Position);
 
                     // both ^ corss or dot
-                    l = Vector3.Cross(v, u - va).Length() / Vector3.Cross(v, vc - va).Length();
+                    l = Vector3.Cross(v, (u - mv[a].Position)).Length() / Vector3.Cross(v, (mv[c].Position - mv[a].Position)).Length();
 
                     if (l > 1) l = 1;
                     if (l < 0) l = 0;
 
 
-                    v = Vector3.Lerp(va, vc, l);
+                    v = Vector3.Lerp(mv[a].Position, mv[c].Position, l);
 
-                    m = (u - v).Length() / (Vector3.Lerp(vb, vc, l) - v).Length();
+                    m = (u - v).Length() / (Vector3.Lerp(mv[b].Position, mv[c].Position, l) - v).Length();
 
                     d = MathF.Abs(d);
                     if (!((l < 0) || (l > 1) || (m < 0) || (m > 1)))
@@ -480,8 +471,8 @@ namespace SDL_Vulkan_CS.Comp302
             /////////////////////////////////////////////
             // Distance Point To Edge
             /////////////////////////////////////////////
-            u = p - va;
-            v = vb - va;
+            u = p - mv[a].Position;
+            v = mv[b].Position - mv[a].Position;
             l = v.Length();
             // ^ cross or dot
             d = Vector3.Cross(v, u).Length() / l;
@@ -493,7 +484,7 @@ namespace SDL_Vulkan_CS.Comp302
                 if ((m > 0.0f) && (m < l))
                 {
                     m /= l;
-                    v = Vector3.Lerp(va, vb, m);
+                    v = Vector3.Lerp(mv[a].Position, mv[b].Position, m);
                     if (d == neighbors.Distance())
                         neighbors.AddEdge(v, f, 0, m);
                     else neighbors.NewEdge(d, v, f, 0, m);
@@ -502,8 +493,8 @@ namespace SDL_Vulkan_CS.Comp302
                 }
             }
 
-            u = p - vb;
-            v = vc - vb;
+            u = p - mv[b].Position;
+            v = mv[c].Position - mv[b].Position;
             l = v.Length();
             // ^ cross or dot
             d = Vector3.Cross(v, u).Length() / l;
@@ -515,7 +506,7 @@ namespace SDL_Vulkan_CS.Comp302
                 if ((m > 0.0f) && (m < l))
                 {
                     m /= l;
-                    v = Vector3.Lerp(vb, vc, m);
+                    v = Vector3.Lerp(mv[b].Position, mv[c].Position, m);
                     if (d == neighbors.Distance())
                         neighbors.AddEdge(v, f, 1, m);
                     else neighbors.NewEdge(d, v, f, 1, m);
@@ -524,8 +515,8 @@ namespace SDL_Vulkan_CS.Comp302
                 }
             }
 
-            u = p - vc;
-            v = va - vc;
+            u = p - mv[c].Position;
+            v = mv[a].Position - mv[c].Position;
             l = v.Length();
             // ^ is dot or cross
             d = Vector3.Cross(v, u).Length() / l;
@@ -536,7 +527,7 @@ namespace SDL_Vulkan_CS.Comp302
                 if ((m > 0.0f) && (m < l))
                 {
                     m /= l;
-                    v = Vector3.Lerp(vc, va, m);
+                    v = Vector3.Lerp(mv[c].Position, mv[a].Position, m);
                     if (d == neighbors.Distance())
                         neighbors.AddEdge(v, f, 2, m);
                     else neighbors.NewEdge(d, v, f, 2, m);
