@@ -1,5 +1,10 @@
 ﻿namespace SDL_Vulkan_CS.Comp302
 {
+    /// <summary>
+    /// C++ Source: https://meshdev.sourceforge.net/
+    /// LICENSE GNU General Public License
+    /// Translated to C# by William Vickers Hastings
+    /// </summary>
     public class Sample
     {
         private int height;
