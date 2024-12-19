@@ -15,7 +15,7 @@ namespace SDL_Vulkan_CS.Comp302
         {
             //LoadTestScene(World.DefaultWorld.EntityManager);
             var devationCal = new Deviation();
-            devationCal.Initialization(Mesh.Meshes[0], Mesh.Meshes[^1],0,0.25f);
+            devationCal.Initialization(Mesh.Meshes[0], Mesh.Meshes[^1]);
             devationCal.Compute();
         }
 
