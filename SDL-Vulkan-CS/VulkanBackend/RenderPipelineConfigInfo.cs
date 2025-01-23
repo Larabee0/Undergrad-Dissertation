@@ -71,7 +71,7 @@ namespace SDL_Vulkan_CS
                     rasterizerDiscardEnable = false,
                     polygonMode = VkPolygonMode.Fill,
                     lineWidth = 1,
-                    cullMode = VkCullModeFlags.None,
+                    cullMode = VkCullModeFlags.Front,
                     frontFace = VkFrontFace.Clockwise,
                     depthBiasEnable = false,
                     depthBiasConstantFactor = 0,
@@ -108,7 +108,7 @@ namespace SDL_Vulkan_CS
                     sType = VkStructureType.PipelineDepthStencilStateCreateInfo,
                     depthTestEnable = true,
                     depthWriteEnable = true,
-                    depthCompareOp = VkCompareOp.Less,
+                    depthCompareOp = VkCompareOp.GreaterOrEqual,
                     depthBoundsTestEnable = false,
                     minDepthBounds = 0.0f,
                     maxDepthBounds = 1.0f,
@@ -129,7 +129,7 @@ namespace SDL_Vulkan_CS
         public static RenderPipelineConfigInfo DefaultPipelineConfigInfo(VkRenderPass renderPass, VkPipelineLayout pipelineLayout)
         {
             var pipelineConfigInfo = DefaultPipelineConfigInfo();
-
+            //EnableAlphaBlending(ref pipelineConfigInfo);
             pipelineConfigInfo.renderPass = renderPass;
             pipelineConfigInfo.pipelineLayout = pipelineLayout;
 

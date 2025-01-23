@@ -22,18 +22,21 @@ namespace SDL_Vulkan_CS
         {
             _cameraMotion = new EntityQuery(entityManager)
                 .WithAll(typeof(Translation), typeof(Rotation), typeof(Camera))
+                .WithNone(typeof(Prefab))
                 .Build();
 
             _cameraQueryPerspective = new EntityQuery(entityManager)
                 .WithAll(typeof(CameraPerspective), typeof(Camera), typeof(LocalToWorld))
+                .WithNone(typeof(Prefab))
                 .Build();
             _cameraQueryOrthographic = new EntityQuery(entityManager)
                 .WithAll(typeof(CameraOrthographic), typeof(Camera), typeof(LocalToWorld))
+                .WithNone(typeof(Prefab))
                 .Build();
             _cameraInitQuery = new EntityQuery(entityManager)
                 .WithAll(typeof(LocalToWorld))
                 .WithAny(typeof(CameraOrthographic), typeof(CameraPerspective))
-                .WithNone(typeof(Camera))
+                .WithNone(typeof(Camera), typeof(Prefab))
                 .Build();
         }
 
@@ -161,6 +164,7 @@ namespace SDL_Vulkan_CS
         {
             if (Matrix4x4.Decompose(transform, out _, out Quaternion rotation, out Vector3 translation))
             {
+                
                 return Matrix4x4.CreateLookTo(
                     translation,
                     Vector3.Transform(new(0, 0, 1), rotation),
@@ -220,7 +224,12 @@ namespace SDL_Vulkan_CS
                 moveDir += movement.X * right;
                 moveDir += movement.Y * up;
 
-                float speed = InputManager.Instance.shiftDown ? moveSpeed * 2 : moveSpeed;
+                bool slow = InputManager.Instance.ctrlDown;
+                bool fast = InputManager.Instance.shiftDown;
+                bool extraFast = InputManager.Instance.altDown;
+
+                float speed = slow ? moveSpeed * 0.25f : fast ? moveSpeed * 4f : extraFast ? moveSpeed * 8f : moveSpeed;
+
                 translation.Value += speed * Application.DeltaTime * Vector3.Normalize(moveDir);
                 entityManager.SetComponent(entity, translation);
             }

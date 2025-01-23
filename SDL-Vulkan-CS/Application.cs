@@ -19,6 +19,13 @@ namespace SDL_Vulkan_CS
 
         public static string ExecutingDirectory => AppDomain.CurrentDomain.BaseDirectory;
 
+
+        private static DateTime startTime;
+
+        public static double TimeSinceStartDouble => (DateTime.Now - startTime).TotalSeconds;
+
+        public static float TimeSinceStart=>(float)TimeSinceStartDouble;
+
         private DateTime currentTime;
         private static double deltaTime;
         public static double DeltaTimeDouble => deltaTime;
@@ -70,7 +77,7 @@ namespace SDL_Vulkan_CS
             _artifact = new ArtifactAuthoring();
 
             _mainWorld.OnCreate();
-
+            startTime = DateTime.Now;
         }
 
         /// <summary>
@@ -97,12 +104,19 @@ namespace SDL_Vulkan_CS
         /// </summary>
         private void Presentation()
         {
-            RendererFrameInfo frameInfo = _presenter.BeginPresent(DeltaTime);
-            if (frameInfo != RendererFrameInfo.Null)
+            if (Presenter.RENDER_V2)
             {
-                _mainWorld.PresentationSystemUpdate(frameInfo);
-                _presenter.EndPresent(frameInfo);
-                _mainWorld.PostPresentationSystemUpdate();
+                _presenter.PresentV2(DeltaTime);
+            }
+            else
+            {
+                RendererFrameInfo frameInfo = _presenter.BeginPresent(DeltaTime);
+                if (frameInfo != RendererFrameInfo.Null)
+                {
+                    _mainWorld.PresentFowardPassUpdate(frameInfo);
+                    _presenter.EndPresent(frameInfo);
+                    _mainWorld.PostPresentUpdate();
+                }
             }
         }
 

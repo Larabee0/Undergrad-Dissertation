@@ -11,15 +11,19 @@ namespace SDL_Vulkan_CS.VulkanBackend
         private readonly VkPipelineLayout _pipelineLayout;
         private readonly VkPipelineCache _pipelineCache;
         private readonly VkPipeline _computePipeline;
+        private readonly Type _pushConstantsType;
+
+        public VkPipeline ComputePipeline=>_computePipeline;
+        public VkPipelineLayout ComputePipelineLayout => _pipelineLayout;
 
         public VkDescriptorSet DescriptorSet;
 
-        public readonly DescriptorSetLayout _descriptorSetLayout;
+        private readonly DescriptorSetLayout _descriptorSetLayout;
 
-        private CsharpVulkanBuffer _shaderParameters;
+        private CsharpVulkanBuffer<ComputeShaderParameters> _shaderParameters;
 
         public DescriptorSetLayout DescriptorSetLayout => _descriptorSetLayout;
-        public CsharpVulkanBuffer ShaderParameters =>_shaderParameters;
+        public CsharpVulkanBuffer<ComputeShaderParameters> ShaderParameters =>_shaderParameters;
 
         public unsafe GenericComputePipeline(string computeShaderName, params DescriptorSetBinding[] bindings)
         {
@@ -57,6 +61,68 @@ namespace SDL_Vulkan_CS.VulkanBackend
             Vulkan.vkCreateComputePipeline(GraphicsDevice.Instance.Device, _pipelineCache, _computePipelineInfo, out _computePipeline);
         }
 
+        public unsafe GenericComputePipeline(string computeShaderName,Type pushConstantsType, params DescriptorSetBinding[] bindings)
+        {
+            if (!pushConstantsType.IsUnManaged())
+            {
+                throw new ArgumentException(string.Format("Push constantsType \"{0}\" is not an unmanaged type", pushConstantsType.Name));
+            }
+
+            int structSize = pushConstantsType.StructLayoutAttribute.Size;
+
+            if (structSize == 0)
+            {
+                throw new Exception(string.Format("Push constantsType \"{0}\" missing StructLayout attribute defining size", pushConstantsType.Name));
+            }
+
+            if(structSize  > 128)
+            {
+                throw new Exception(string.Format("Push constantsType \"{0}\" exceeds max push constant size of 128 bytes (is {1} bytes", pushConstantsType.Name,structSize));
+            }
+            _pushConstantsType = pushConstantsType;
+            VkPushConstantRange pushConstantRange = new()
+            {
+                stageFlags = VkShaderStageFlags.Compute,
+                offset = 0,
+                size = (uint)pushConstantsType.StructLayoutAttribute.Size
+            };
+
+            var shaderFilePath = Material.GetShaderFilePath(computeShaderName);
+            Vulkan.vkCreateShaderModule(GraphicsDevice.Instance.Device, File.ReadAllBytes(shaderFilePath), null, out _shaderModule);
+
+            _descriptorSetLayout = new DescriptorSetLayout.Builder(GraphicsDevice.Instance)
+                .AddBindings(bindings)
+                .Build();
+
+            var layout = _descriptorSetLayout.SetLayout;
+            VkPipelineLayoutCreateInfo calcuateNormalsLayoutCreateInfo = new()
+            {
+                setLayoutCount = 1,
+                pSetLayouts = &layout,
+                pushConstantRangeCount = 1,
+                pPushConstantRanges = &pushConstantRange,
+            };
+
+            Vulkan.vkCreatePipelineLayout(GraphicsDevice.Instance.Device, calcuateNormalsLayoutCreateInfo, null, out _pipelineLayout);
+            Vulkan.vkCreatePipelineCache(GraphicsDevice.Instance.Device, new VkPipelineCacheCreateInfo(), null, out _pipelineCache);
+
+            VkUtf8ReadOnlyString main = "main"u8;
+            VkPipelineShaderStageCreateInfo _computeShaderStageInfo = new()
+            {
+                stage = VkShaderStageFlags.Compute,
+                module = _shaderModule,
+                pName = main
+            };
+
+            VkComputePipelineCreateInfo _computePipelineInfo = new()
+            {
+                layout = _pipelineLayout,
+                stage = _computeShaderStageInfo
+            };
+
+            Vulkan.vkCreateComputePipeline(GraphicsDevice.Instance.Device, _pipelineCache, _computePipelineInfo, out _computePipeline);
+        }
+
         public unsafe void AllocateDescriptorSet(DescriptorPool descriptorPool)
         {
             fixed (VkDescriptorSet* pSet = &DescriptorSet)
@@ -68,7 +134,7 @@ namespace SDL_Vulkan_CS.VulkanBackend
         public unsafe void Prepare(uint mainBufferLength,uint mainBufferWidth = 1, uint mainBufferHeight = 1, uint mainBufferDepth = 1)
         {
             
-            _shaderParameters ??= new(GraphicsDevice.Instance, (uint)sizeof(ComputeShaderParameters), 1, VkBufferUsageFlags.UniformBuffer, true);
+            _shaderParameters ??= new(GraphicsDevice.Instance, 1, VkBufferUsageFlags.UniformBuffer, true);
 
             ComputeShaderParameters* compShaderParams = stackalloc ComputeShaderParameters[1];
 
@@ -87,6 +153,22 @@ namespace SDL_Vulkan_CS.VulkanBackend
         {
             Vulkan.vkCmdBindPipeline(commandBuffer, VkPipelineBindPoint.Compute, _computePipeline);
             Vulkan.vkCmdBindDescriptorSets(commandBuffer, VkPipelineBindPoint.Compute, _pipelineLayout, 0, DescriptorSet);
+
+            Vulkan.vkCmdDispatch(commandBuffer, groupCountX, groupCountY, groupCountZ);
+        }
+
+        public unsafe void Dispatch<T>(VkCommandBuffer commandBuffer,T pushConstants, uint groupCountX, uint groupCountY, uint groupCountZ) where T : unmanaged
+        {
+            Vulkan.vkCmdBindPipeline(commandBuffer, VkPipelineBindPoint.Compute, _computePipeline);
+            Vulkan.vkCmdBindDescriptorSets(commandBuffer, VkPipelineBindPoint.Compute, _pipelineLayout, 0, DescriptorSet);
+
+            Vulkan.vkCmdPushConstants(
+                commandBuffer,
+                _pipelineLayout,
+                VkShaderStageFlags.Compute,
+                0,
+                (uint)sizeof(T),
+                &pushConstants);
 
             Vulkan.vkCmdDispatch(commandBuffer, groupCountX, groupCountY, groupCountZ);
         }

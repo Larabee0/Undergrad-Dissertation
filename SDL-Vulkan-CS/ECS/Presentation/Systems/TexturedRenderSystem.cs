@@ -7,7 +7,7 @@ namespace SDL_Vulkan_CS.ECS.Presentation
     /// <summary>
     /// Relatively generic render system that will operate on all materials
     /// 
-    /// This expects all materials will have one texture and accept a push constant of <see cref="SimplePushConstantData"/>
+    /// This expects all materials will have one texture and accept a push constant of <see cref="ModelPushConstantData"/>
     /// for the model local to world matrix.
     /// </summary>
     public class TexturedRenderSystem : PresentationSystemBase
@@ -28,7 +28,7 @@ namespace SDL_Vulkan_CS.ECS.Presentation
         /// </summary>
         /// <param name="entityManager"></param>
         /// <param name="frameInfo"></param>
-        public unsafe override void OnPresent(EntityManager entityManager, RendererFrameInfo frameInfo)
+        public unsafe override void OnFowardPass(EntityManager entityManager, RendererFrameInfo frameInfo)
         {
             if (_renderQuery.HasEntities)
             {
@@ -62,9 +62,9 @@ namespace SDL_Vulkan_CS.ECS.Presentation
                     if (mat == null || mat != curMat)
                     {
                         mat = curMat;
-                        mat?.BindDescriptorSets(frameInfo);
+                        mat?.BindGlobalDescriptorSet(frameInfo);
                     }
-                    mat?.BindAndDraw(frameInfo, drawCall.MeshIndex, new SimplePushConstantData(drawCall.Ltw), drawCall.TextureIndex);
+                    mat?.BindAndDraw(frameInfo, drawCall.MeshIndex, new ModelPushConstantData(drawCall.Ltw), drawCall.TextureIndex);
                 }
             }
         }
