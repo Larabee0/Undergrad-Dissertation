@@ -1,6 +1,7 @@
 ﻿using System;
 using SDL_Vulkan_CS.VulkanBackend;
 using System.Numerics;
+using System.Threading.Tasks;
 
 namespace SDL_Vulkan_CS.Comp302
 {
@@ -57,11 +58,10 @@ namespace SDL_Vulkan_CS.Comp302
 
             for (i = 0; i < m_pCellNum[0]; i++)
             {
-                m_pCell[i] = new Cell3D[m_pCellNum[1]][];
+                var cell = m_pCell[i] = new Cell3D[m_pCellNum[1]][];
                 for (j = 0; j < m_pCellNum[1]; j++)
                 {
-                    m_pCell[i][j] = new Cell3D[m_pCellNum[2]];
-                    //for (k = 0; k < m_pCellNum[2]; k++) m_pCell[i][j][k] = null;
+                    cell[j] = new Cell3D[m_pCellNum[2]];
                 }
             }
 
@@ -85,164 +85,165 @@ namespace SDL_Vulkan_CS.Comp302
 
         public void SetFaces()
         {
-            int x1, x2, y1, y2, z1, z2, xx, yy, zz;
-            int a, b, c, i;
-            char s;
-            Vector3 p = default;
 
             /////////////////////////////////////
             // Begin to work with vertices
-            for (i = 0; i < mf.Length; i++)
+            for (int i = 0; i < mf.Length; i++)
             {
-                /////////////////////////////////////////
-                // Set vertices index
-                a = mf[i][0];
-                b = mf[i][1];
-                c = mf[i][2];
-                //////////////////////////////////////////////////////
-                // Compute cell position
-                x1 = x2 = (int)((mv[a].Position.X - m_pMin.X) / m_rSize);
-                y1 = y2 = (int)((mv[a].Position.Y - m_pMin.Y) / m_rSize);
-                z1 = z2 = (int)((mv[a].Position.Z - m_pMin.Z) / m_rSize);
-                //////////////////////////////////////////////////////
-                // Compute cell position
-                xx = (int)((mv[b].Position.X - m_pMin.X) / m_rSize);
-                yy = (int)((mv[b].Position.Y - m_pMin.Y) / m_rSize);
-                zz = (int)((mv[b].Position.Z - m_pMin.Z) / m_rSize);
-                // Check for x
-                if (xx < x1) x1 = xx;
-                else
-                if (xx > x2) x2 = xx;
-                // Check for y
-                if (yy < y1) y1 = yy;
-                else
-                if (yy > y2) y2 = yy;
-                // Check for z
-                if (zz < z1) z1 = zz;
-                else
-                if (zz > z2) z2 = zz;
-                //////////////////////////////////////////////////////
-                // Compute cell position
-                xx = (int)((mv[c].Position.X - m_pMin.X) / m_rSize);
-                yy = (int)((mv[c].Position.Y - m_pMin.Y) / m_rSize);
-                zz = (int)((mv[c].Position.Z - m_pMin.Z) / m_rSize);
-                // Check for x
-                if (xx < x1) x1 = xx;
-                else if (xx > x2) x2 = xx;
-                // Check for y
-                if (yy < y1) y1 = yy;
-                else if (yy > y2) y2 = yy;
-                // Check for z
-                if (zz < z1) z1 = zz;
-                else if (zz > z2) z2 = zz;
-                /////////////////////////////////////////////////////:
-                // Compute intersection Plane-Cube
-                for (xx = x1; xx <= x2; xx++)
+                SetFace(i);
+            }
+        }
+
+        private void SetFace(int i)
+        {
+            /////////////////////////////////////////
+            // Set vertices index
+            int a = mf[i][0];
+            int b = mf[i][1];
+            int c = mf[i][2];
+            //////////////////////////////////////////////////////
+            // Compute cell position
+            int x1, x2, y1, y2, z1, z2;
+            x1 = x2 = (int)((mv[a].Position.X - m_pMin.X) / m_rSize);
+            y1 = y2 = (int)((mv[a].Position.Y - m_pMin.Y) / m_rSize);
+            z1 = z2 = (int)((mv[a].Position.Z - m_pMin.Z) / m_rSize);
+            //////////////////////////////////////////////////////
+            // Compute cell position
+            ComputeCellPosition(b,ref x1,ref x2, ref y1, ref y2, ref z1, ref z2);
+            //////////////////////////////////////////////////////
+            // Compute cell position
+            ComputeCellPosition(c, ref x1, ref x2, ref y1, ref y2, ref z1, ref z2);
+            /////////////////////////////////////////////////////:
+            // Compute intersection Plane-Cube
+            ComputerIntersectionPlaneCube(i, x1, x2, y1, y2, z1, z2);
+        }
+
+        private void ComputeCellPosition(int vertex, ref int x1, ref int x2, ref int y1, ref int y2, ref int z1, ref int z2)
+        {
+            int xx = (int)((mv[vertex].Position.X - m_pMin.X) / m_rSize);
+            int yy = (int)((mv[vertex].Position.Y - m_pMin.Y) / m_rSize);
+            int zz = (int)((mv[vertex].Position.Z - m_pMin.Z) / m_rSize);
+            // Check for x
+            if (xx < x1) x1 = xx;
+            else if (xx > x2) x2 = xx;
+            // Check for y
+            if (yy < y1) y1 = yy;
+            else if (yy > y2) y2 = yy;
+            // Check for z
+            if (zz < z1) z1 = zz;
+            else if (zz > z2) z2 = zz;
+        }
+
+        private void ComputerIntersectionPlaneCube(int i, int x1, int x2, int y1, int y2, int z1, int z2)
+        {
+            for (int xx = x1; xx <= x2; xx++)
+            {
+                for (int yy = y1; yy <= y2; yy++)
                 {
-                    for (yy = y1; yy <= y2; yy++)
+                    for (int zz = z1; zz <= z2; zz++)
                     {
-                        for (zz = z1; zz <= z2; zz++)
+                        ////////////////////////////////////////
+                        Vector3 p = new()
                         {
-                            ////////////////////////////////////////
-                            p.X = m_pMin.X + xx * m_rSize;
-                            p.Y = m_pMin.Y + yy * m_rSize;
-                            p.Z = m_pMin.Z + zz * m_rSize;
-                            if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0) s = (char)1;
-                            else s = (char)2;
-                            //////////////////////////////////
-                            p.X += m_rSize;
-                            if (s == 1)
-                            {
-                                if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
-                                { AddOneFace(i, xx, yy, zz); continue; }
-                            }
-                            else
-                            {
-                                if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
-                                { AddOneFace(i, xx, yy, zz); continue; }
-                            }
-                            //////////////////////////////////
-                            p.Z += m_rSize;
-                            if (s == 1)
-                            {
-                                if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
-                                { AddOneFace(i, xx, yy, zz); continue; }
-                            }
-                            else
-                            {
-                                if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
-                                { AddOneFace(i, xx, yy, zz); continue; }
-                            }
-                            //////////////////////////////////
-                            p.X -= m_rSize;
-                            if (s == 1)
-                            {
-                                if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
-                                { AddOneFace(i, xx, yy, zz); continue; }
-                            }
-                            else
-                            {
-                                if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
-                                { AddOneFace(i, xx, yy, zz); continue; }
-                            }
-                            //////////////////////////////////
-                            p.Y += m_rSize;
-                            p.Z -= m_rSize;
-                            if (s == 1)
-                            {
-                                if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
-                                { AddOneFace(i, xx, yy, zz); continue; }
-                            }
-                            else
-                            {
-                                if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
-                                { AddOneFace(i, xx, yy, zz); continue; }
-                            }
-                            //////////////////////////////////
-                            p.X += m_rSize;
-                            if (s == 1)
-                            {
-                                if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
-                                { AddOneFace(i, xx, yy, zz); continue; }
-                            }
-                            else
-                            {
-                                if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
-                                { AddOneFace(i, xx, yy, zz); continue; }
-                            }
-                            //////////////////////////////////
-                            p.Z += m_rSize;
-                            if (s == 1)
-                            {
-                                if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
-                                { AddOneFace(i, xx, yy, zz); continue; }
-                            }
-                            else
-                            {
-                                if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
-                                { AddOneFace(i, xx, yy, zz); continue; }
-                            }
-                            //////////////////////////////////
-                            p.Y -= m_rSize;
-                            if (s == 1)
-                            {
-                                if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
-                                { AddOneFace(i, xx, yy, zz); continue; }
-                            }
-                            else
-                            {
-                                if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
-                                { AddOneFace(i, xx, yy, zz); continue; }
-                            }
+                            X = m_pMin.X + xx * m_rSize,
+                            Y = m_pMin.Y + yy * m_rSize,
+                            Z = m_pMin.Z + zz * m_rSize
+                        };
+                        char s;
+                        if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0) s = (char)1;
+                        else s = (char)2;
+                        //////////////////////////////////
+                        p.X += m_rSize;
+                        if (s == 1)
+                        {
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
+                            { AddOneFace(i, xx, yy, zz); continue; }
+                        }
+                        else
+                        {
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
+                            { AddOneFace(i, xx, yy, zz); continue; }
+                        }
+                        //////////////////////////////////
+                        p.Z += m_rSize;
+                        if (s == 1)
+                        {
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
+                            { AddOneFace(i, xx, yy, zz); continue; }
+                        }
+                        else
+                        {
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
+                            { AddOneFace(i, xx, yy, zz); continue; }
+                        }
+                        //////////////////////////////////
+                        p.X -= m_rSize;
+                        if (s == 1)
+                        {
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
+                            { AddOneFace(i, xx, yy, zz); continue; }
+                        }
+                        else
+                        {
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
+                            { AddOneFace(i, xx, yy, zz); continue; }
+                        }
+                        //////////////////////////////////
+                        p.Y += m_rSize;
+                        p.Z -= m_rSize;
+                        if (s == 1)
+                        {
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
+                            { AddOneFace(i, xx, yy, zz); continue; }
+                        }
+                        else
+                        {
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
+                            { AddOneFace(i, xx, yy, zz); continue; }
+                        }
+                        //////////////////////////////////
+                        p.X += m_rSize;
+                        if (s == 1)
+                        {
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
+                            { AddOneFace(i, xx, yy, zz); continue; }
+                        }
+                        else
+                        {
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
+                            { AddOneFace(i, xx, yy, zz); continue; }
+                        }
+                        //////////////////////////////////
+                        p.Z += m_rSize;
+                        if (s == 1)
+                        {
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
+                            { AddOneFace(i, xx, yy, zz); continue; }
+                        }
+                        else
+                        {
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
+                            { AddOneFace(i, xx, yy, zz); continue; }
+                        }
+                        //////////////////////////////////
+                        p.Y -= m_rSize;
+                        if (s == 1)
+                        {
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) >= 0)
+                            { AddOneFace(i, xx, yy, zz); continue; }
+                        }
+                        else
+                        {
+                            if (DistancePoint2Plane(p, mfn[i], mp[i]) < 0)
+                            { AddOneFace(i, xx, yy, zz); continue; }
                         }
                     }
                 }
             }
         }
 
-        float DistancePoint2Plane(Vector3 v, Vector3 n, float h)
+        private static float DistancePoint2Plane(Vector3 v, Vector3 n, float h)
         {
-
             return Vector3.Dot(v, n) + h;
         }
 

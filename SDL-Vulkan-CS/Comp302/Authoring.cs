@@ -13,10 +13,17 @@ namespace SDL_Vulkan_CS.Comp302
     {
         public static void Run()
         {
-            //LoadTestScene(World.DefaultWorld.EntityManager);
+            LoadTestScene(World.DefaultWorld.EntityManager);
             var devationCal = new Deviation();
-            devationCal.Initialization(Mesh.Meshes[0], Mesh.Meshes[^1]);
+            var now = DateTime.Now;
+            devationCal.Initialization(Mesh.Meshes[^1], Mesh.Meshes[^2]);
+            var delta = DateTime.Now - now;
+            Console.WriteLine(string.Format("Devation Init: {0}ms", delta.TotalMilliseconds));
+
+            now = DateTime.Now;
             devationCal.Compute();
+            delta = DateTime.Now - now;
+            Console.WriteLine(string.Format("Devation Compute: {0}ms", delta.TotalMilliseconds));
         }
 
 
@@ -24,6 +31,8 @@ namespace SDL_Vulkan_CS.Comp302
         {
             var cubeUvMesh = Mesh.LoadModelFromFile(GraphicsDevice.Instance, Mesh.GetMeshInDefaultPath("blender-cube.obj"));
             var flatVaseMesh = Mesh.LoadModelFromFile(GraphicsDevice.Instance, Mesh.GetMeshInDefaultPath("blender-sphere.obj"));
+
+            World.DefaultWorld.CreateSystem<TexturelessRenderSystem>();
 
             var lit = new Material("devation_heat.vert", "devation_heat.frag", typeof(SimplePushConstantData));
 
