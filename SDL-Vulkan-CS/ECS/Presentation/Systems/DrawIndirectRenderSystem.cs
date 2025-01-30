@@ -59,35 +59,35 @@ namespace SDL_Vulkan_CS.ECS.Presentation.Systems
 
             VkDrawIndexedIndirectCommand[] drawCmds = new VkDrawIndexedIndirectCommand[entities.Count];
 
-            float[] drawOld = new float[MAX_INDIRECT_COMMANDS];
-            fixed (float* pDrawCmds = &drawOld[0])
-            {
-                depthSampler.ReadFromBuffer(pDrawCmds);
-            }
-            bool anySample = false;
-            for (int i = 0; i < entities.Count; i++)
-            {
-                if(drawOld[i] != 0)
-                {
-                    anySample = true;
-                    break;
-                }
-            }
+            //float[] drawOld = new float[MAX_INDIRECT_COMMANDS];
+            //fixed (float* pDrawCmds = &drawOld[0])
+            //{
+            //    depthSampler.ReadFromBuffer(pDrawCmds);
+            //}
+            //bool anySample = false;
+            //for (int i = 0; i < entities.Count; i++)
+            //{
+            //    if(drawOld[i] != 0)
+            //    {
+            //        anySample = true;
+            //        break;
+            //    }
+            //}
 
-            Vector3 center = default;
-            float radius = float.MaxValue;
-            Vector4 aabb = default;
-
-            center.X = drawOld[0];
-            center.Y = drawOld[1];
-            center.Z = drawOld[2];
-            
-            radius = drawOld[3];
-
-            aabb.X = drawOld[4];
-            aabb.Y = drawOld[5];
-            aabb.Z = drawOld[6];
-            aabb.W = drawOld[7];
+            //Vector3 center = default;
+            //float radius = float.MaxValue;
+            //Vector4 aabb = default;
+            //
+            //center.X = drawOld[0];
+            //center.Y = drawOld[1];
+            //center.Z = drawOld[2];
+            //
+            //radius = drawOld[3];
+            //
+            //aabb.X = drawOld[4];
+            //aabb.Y = drawOld[5];
+            //aabb.Z = drawOld[6];
+            //aabb.W = drawOld[7];
 
             ObjectData[] drawObjectData = new ObjectData[entities.Count];
 

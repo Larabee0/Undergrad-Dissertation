@@ -211,7 +211,6 @@ namespace SDL_Vulkan_CS
             {
                 throw new InvalidOperationException("Can't call BeginFrame while frame already in progress");
             }
-            _swapChain.WaitResetRenderFence((uint)currentFrameIndex);
             var result = _swapChain.AcquireNextImage(out currentImageIndex);
 
             if (result == VkResult.ErrorOutOfDateKHR)

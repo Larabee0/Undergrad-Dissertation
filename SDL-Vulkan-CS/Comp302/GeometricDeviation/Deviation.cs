@@ -27,7 +27,7 @@ namespace SDL_Vulkan_CS.Comp302
         private float maxdev;
         private float vardev;
         private float meandev;
-        private float meddev;
+        //private float meddev;
         private float rmsdev;
         private float dev_bound;
 
@@ -35,10 +35,10 @@ namespace SDL_Vulkan_CS.Comp302
 
         private UniformGrid ug;
 
-        private float step;
-        private Vector3 sampleu, samplev; // Vectors for sampling
-        private Sample[] samples;
-        private int snum;
+        //private float step;
+        //private Vector3 sampleu, samplev; // Vectors for sampling
+        //private Sample[] samples;
+        //private int snum;
 
         public Deviation()
         {
@@ -61,16 +61,16 @@ namespace SDL_Vulkan_CS.Comp302
             ma.RecalculateBounds();
             bb = ma.Bounds;
 
-            if (SampleStep != 0)
-            {
-                step = bb.Size.Length() * SampleStep * 0.01f;
-                samples = new Sample[mafn];
-            }
-            else
-            {
-                step = 0;
-            }
-            snum = 0;
+            // if (SampleStep != 0)
+            // {
+            //     step = bb.Size.Length() * SampleStep * 0.01f;
+            //     samples = new Sample[mafn];
+            // }
+            // else
+            // {
+            //     step = 0;
+            // }
+            // snum = 0;
             mb.RecalculateBounds();
             bb = mb.Bounds;
 

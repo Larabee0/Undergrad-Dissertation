@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Numerics;
 using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.Marshalling;
 using Vortice.Vulkan;
 
 namespace SDL_Vulkan_CS.VulkanBackend
@@ -75,8 +74,6 @@ namespace SDL_Vulkan_CS.VulkanBackend
         private VkSemaphore[] _presentSemaphore;
         private VkSemaphore[] _renderSemaphore;
 
-        private VkSemaphore[] _imageAvailableSemaphores;
-        private VkSemaphore[] _renderFinishedSemaphores;
         //private VkFence[] _renderFence;
         private VkFence[] _inFlightFences;
         private VkFence[] _imagesInFlight;
@@ -751,20 +748,6 @@ namespace SDL_Vulkan_CS.VulkanBackend
             return _swapChainFrameBuffer[currentImageIndex];
         }
         
-        public unsafe void WaitResetRenderFence(uint index)
-        {
-
-            //VkFence renderFence = _renderFence[index];
-            //if (Vulkan.vkWaitForFences(_device.Device, 1, &renderFence, true, 1000000000) != VkResult.Success)
-            //{
-            //    throw new Exception("Wait to for fence");
-            //}
-            //if (Vulkan.vkResetFences(_device.Device, 1, &renderFence) != VkResult.Success)
-            //{
-            //    throw new Exception("Failed to reset fences");
-            //}
-        }
-
         public unsafe VkResult AcquireNextImage(out uint imageIndex)
         {
             VkFence fence = _inFlightFences[_currentFrame];
