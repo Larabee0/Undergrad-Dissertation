@@ -41,6 +41,14 @@ namespace SDL_Vulkan_CS
             };
         }
 
+        public static Vertex Lerp(Vertex a, Vertex b, float t)
+        {
+            return new Vertex()
+            {
+                Position = Vector3.Lerp(a.Position, b.Position, t),
+            };
+        }
+
         public static bool operator ==(Vertex left, Vertex right)
         {
             return left.Position == right.Position;

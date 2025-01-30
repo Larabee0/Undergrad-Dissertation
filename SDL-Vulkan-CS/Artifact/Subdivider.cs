@@ -1,233 +1,195 @@
 ﻿using SDL_Vulkan_CS.VulkanBackend;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SDL_Vulkan_CS.Artifact
 {
     public static class Subdivider
     {
-        public static void Subdivide(Mesh target, int subdivisons, bool simplify = true)
-        {
-            ////var now = DateTime.Now;
-            SubdivideMainThread(target,subdivisons);
-            //for (int i = 0; i < subdivisons; i++)
-            //{
-            //    Subdivide(target);
-            //}
-            //var delta = DateTime.Now - now;
-            //Console.WriteLine(string.Format("Subdivide: {0}ms", delta.TotalMilliseconds));
 
-            if (simplify)
+        private const int vertexWriteOffset = 3;
+        public static void Subdivide(Mesh mesh, int divisions)
+        {
+            uint curTris = (uint)mesh.IndexCount / 3;
+            uint vertexCountPerFace = GetVertsPerFace(divisions);
+            uint triCountPerFace = GetIndicesPerFace(divisions);
+            uint vertexCount = vertexCountPerFace * curTris;
+            uint triCount = triCountPerFace * curTris;
+
+            if (!ValidateDivisionsCount(vertexCount, triCount))
             {
-                //now = DateTime.Now;
-                SimpliftySubdivisionMainThread(target);
-                //delta = DateTime.Now - now;
-                //.WriteLine(string.Format("Simplify Mesh: {0}ms", delta.TotalMilliseconds));
+                return;
+            }
+
+            Vertex[] vertices = new Vertex[vertexCount];
+            uint[] indicies = new uint[triCount];
+            uint vertexOffset = 0;
+            uint indexOffset = 0;
+            for (int i = 0; i < mesh.IndexCount; i += 3)
+            {
+                vertices[vertexOffset] = mesh.Vertices[mesh.Indices[i + 0]];
+                vertices[vertexOffset + 1] = mesh.Vertices[mesh.Indices[i + 1]];
+                vertices[vertexOffset + 2] = mesh.Vertices[mesh.Indices[i + 2]];
+                indicies[indexOffset] = vertexOffset;
+                indicies[indexOffset + 1] = vertexOffset + 1;
+                indicies[indexOffset + 2] = vertexOffset + 2;
+
+                DivideFace(divisions, vertices, indicies, vertexOffset, indexOffset);
+
+                vertexOffset += vertexCountPerFace;
+                indexOffset += triCountPerFace;
+            }
+
+            mesh.Vertices = vertices;
+            mesh.Indices = indicies;
+            //SimpliftySubdivisionMainThread(mesh);
+            //mesh.RecalculateBounds();
+            //mesh.RecalculateNormals();
+            //Console.WriteLine("Vertex Count {0}", mesh.VertexCount);
+            //Console.WriteLine("Index Count {0}", mesh.IndexCount);
+        }
+
+        private unsafe static bool ValidateDivisionsCount(uint vertexCount, uint triCount)
+        {
+            if (sizeof(Vector3) * vertexCount > int.MaxValue)
+            {
+                Console.WriteLine("Cannot subdivide mesh, exceeds max vertices count");
+                return false;
+            }
+            if (sizeof(int) * triCount > int.MaxValue)
+            {
+                Console.WriteLine("Cannot subdivide mesh, exceeds max triangles count");
+                return false;
+            }
+
+            return true;
+        }
+
+        private static void DivideFace(int divisions, Vertex[] vertices, uint[] indices, uint vertexOffset, uint indexOffset)
+        {
+            int numDivisions = Math.Max(0, divisions);
+            uint writeOffset = vertexOffset + vertexWriteOffset;
+            uint[] vertexTriPairs =
+                [indices[indexOffset + 0],
+                indices[indexOffset + 1],
+                indices[indexOffset + 0],
+                indices[indexOffset + 2],
+                indices[indexOffset + 1],
+                indices[indexOffset + 2]];
+
+            Edge[] edges = new Edge[3];
+
+            for (int i = 0; i < vertexTriPairs.Length; i += 2)
+            {
+                Vertex startVertex = vertices[vertexTriPairs[i]];
+                Vertex endVertex = vertices[vertexTriPairs[i + 1]];
+
+                uint[] edgeVertexIndices = new uint[numDivisions + 2];
+                edgeVertexIndices[0] = vertexTriPairs[i];
+
+                for (int divisionIndex = 0; divisionIndex < numDivisions; divisionIndex++)
+                {
+                    float t = (divisionIndex + 1f) / (numDivisions + 1f);
+                    edgeVertexIndices[divisionIndex + 1] = writeOffset;
+                    vertices[writeOffset] = Vertex.Lerp(startVertex, endVertex, t);
+                    writeOffset++;
+                }
+                edgeVertexIndices[numDivisions + 1] = vertexTriPairs[i + 1];
+                int edgeIndex = i / 2;
+                edges[edgeIndex] = new Edge(edgeVertexIndices);
+            }
+
+            CreateFace(numDivisions, edges, vertices, writeOffset, indices, indexOffset);
+        }
+
+        private static void CreateFace(int divisions, Edge[] edges, Vertex[] vertices, uint nextVertex, uint[] indices, uint indexOffset)
+        {
+            int numPointsInEdge = edges[0].vertexIndices.Length;
+
+            uint[] vertexMap = new uint[GetVertsPerFace(divisions)];
+
+
+            vertexMap[0] = edges[0].vertexIndices[0]; // top of triangle
+            int mapWriteIndex = 1;
+            for (int i = 1; i < numPointsInEdge - 1; i++)
+            {
+                // Side A vertex
+                vertexMap[mapWriteIndex] = edges[0].vertexIndices[i];
+                mapWriteIndex++;
+
+                // Add vertices between sideA and sideB
+                Vertex sideAVertex = vertices[edges[0].vertexIndices[i]];
+                Vertex sideBVertex = vertices[edges[1].vertexIndices[i]];
+                int numInnerPoints = i - 1;
+                for (int j = 0; j < numInnerPoints; j++)
+                {
+                    float t = (j + 1f) / (numInnerPoints + 1f);
+                    vertexMap[mapWriteIndex] = nextVertex;
+                    mapWriteIndex++;
+                    vertices[nextVertex] = Vertex.Lerp(sideAVertex, sideBVertex, t);
+                    nextVertex++;
+                }
+
+                // Side B vertex
+                vertexMap[mapWriteIndex] = edges[1].vertexIndices[i];
+                mapWriteIndex++;
+            }
+
+            // Add bottom edge vertices
+            for (int i = 0; i < numPointsInEdge; i++, mapWriteIndex++)
+            {
+                vertexMap[mapWriteIndex] = edges[2].vertexIndices[i];
+            }
+
+            // Triangulate
+            int numRows = divisions + 1;
+            uint indicesWriteIndex = indexOffset;
+            for (int row = 0; row < numRows; row++)
+            {
+                // vertices down left edge follow quadratic sequence: 0, 1, 3, 6, 10, 15...
+                // the nth term can be calculated with: (n^2 - n)/2
+                int topVertex = ((row + 1) * (row + 1) - row - 1) / 2;
+                int bottomVertex = ((row + 2) * (row + 2) - row - 2) / 2;
+
+                int numTrianglesInRow = 1 + 2 * row;
+                for (int column = 0; column < numTrianglesInRow; column++)
+                {
+                    int v0, v1, v2;
+
+                    if (column % 2 == 0)
+                    {
+                        v0 = topVertex;
+                        v1 = bottomVertex + 1;
+                        v2 = bottomVertex;
+                        topVertex++;
+                        bottomVertex++;
+                    }
+                    else
+                    {
+                        v0 = topVertex;
+                        v1 = bottomVertex;
+                        v2 = topVertex - 1;
+                    }
+
+                    indices[indicesWriteIndex] = vertexMap[v0];
+                    indices[indicesWriteIndex + 1] = vertexMap[v2];
+                    indices[indicesWriteIndex + 2] = vertexMap[v1];
+                    indicesWriteIndex += 3;
+                }
             }
         }
 
-        public static void Subdivide(Mesh targetMesh)
+        public static uint GetVertsPerFace(int divisions)
         {
-            Vertex[] currentVertices = targetMesh.Vertices;
-            uint[] currentTriangles = targetMesh.Indices;
-            int currentTriCount = targetMesh.IndexCount;
-
-
-            int newVertexCount = targetMesh.IndexCount * 2;
-            int newTriCount = newVertexCount * 2;
-
-            Vertex[] newVertices = new Vertex[newVertexCount];
-            uint[] newTriangles = new uint[newTriCount];
-            ParallelOptions options = new()
-            {
-                MaxDegreeOfParallelism = 2
-            };
-            Parallel.For(0, currentTriCount / 3,options, (int i) =>
-            {
-                uint curIndex = (uint)i * 3;
-                uint vertexIndex = curIndex * 2;
-                uint triIndex = curIndex * 4;
-
-                uint triA = currentTriangles[curIndex];
-                uint triB = currentTriangles[curIndex + 1];
-                uint triC = currentTriangles[curIndex + 2];
-
-                Vertex vA = currentVertices[triA];
-                Vertex vB = currentVertices[triB];
-                Vertex vC = currentVertices[triC];
-
-                newVertices[vertexIndex] = vA;
-                newVertices[vertexIndex + 1] = vB;
-                newVertices[vertexIndex + 2] = vC;
-
-                newVertices[vertexIndex + 3] = Vertex.Average(vA, vB);
-                newVertices[vertexIndex + 4] = Vertex.Average(vB, vC);
-                newVertices[vertexIndex + 5] = Vertex.Average(vC, vA);
-
-
-                newTriangles[triIndex] = vertexIndex;
-                newTriangles[triIndex + 1] = vertexIndex + 3;
-                newTriangles[triIndex + 2] = vertexIndex + 5;
-
-                newTriangles[triIndex + 3] = vertexIndex + 3;
-                newTriangles[triIndex + 4] = vertexIndex + 1;
-                newTriangles[triIndex + 5] = vertexIndex + 4;
-
-                newTriangles[triIndex + 6] = vertexIndex + 5;
-                newTriangles[triIndex + 7] = vertexIndex + 4;
-                newTriangles[triIndex + 8] = vertexIndex + 2;
-
-                newTriangles[triIndex + 9] = vertexIndex + 3;
-                newTriangles[triIndex + 10] = vertexIndex + 4;
-                newTriangles[triIndex + 11] = vertexIndex + 5;
-            });
-
-            targetMesh.Vertices = newVertices;
-            targetMesh.Indices = newTriangles;
+            uint divisionsU = (uint)Math.Max(0, divisions);
+            return ((divisionsU + 3) * (divisionsU + 3) - (divisionsU + 3)) / 2;
         }
 
-        public static void SubdivideMainThread(Mesh targetMesh)
+        public static uint GetIndicesPerFace(int divisions)
         {
-            Vertex[] currentVertices = targetMesh.Vertices;
-            uint[] currentTriangles = targetMesh.Indices;
-            int currentTriCount = targetMesh.IndexCount;
-
-
-            int newVertexCount = targetMesh.IndexCount * 2;
-            int newTriCount = newVertexCount * 2;
-
-            Vertex[] newVertices = new Vertex[newVertexCount];
-            uint[] newTriangles = new uint[newTriCount];
-
-            for(int i = 0; i < currentTriCount / 3; i++)
-            {
-                uint curIndex = (uint)i * 3;
-                uint vertexIndex = curIndex * 2;
-                uint triIndex = curIndex * 4;
-
-                uint triA = currentTriangles[curIndex];
-                uint triB = currentTriangles[curIndex + 1];
-                uint triC = currentTriangles[curIndex + 2];
-
-                Vertex vA = currentVertices[triA];
-                Vertex vB = currentVertices[triB];
-                Vertex vC = currentVertices[triC];
-
-                newVertices[vertexIndex] = vA;
-                newVertices[vertexIndex + 1] = vB;
-                newVertices[vertexIndex + 2] = vC;
-
-                newVertices[vertexIndex + 3] = Vertex.Average(vA, vB);
-                newVertices[vertexIndex + 4] = Vertex.Average(vB, vC);
-                newVertices[vertexIndex + 5] = Vertex.Average(vC, vA);
-
-
-                newTriangles[triIndex] = vertexIndex;
-                newTriangles[triIndex + 1] = vertexIndex + 3;
-                newTriangles[triIndex + 2] = vertexIndex + 5;
-
-                newTriangles[triIndex + 3] = vertexIndex + 3;
-                newTriangles[triIndex + 4] = vertexIndex + 1;
-                newTriangles[triIndex + 5] = vertexIndex + 4;
-
-                newTriangles[triIndex + 6] = vertexIndex + 5;
-                newTriangles[triIndex + 7] = vertexIndex + 4;
-                newTriangles[triIndex + 8] = vertexIndex + 2;
-
-                newTriangles[triIndex + 9] = vertexIndex + 3;
-                newTriangles[triIndex + 10] = vertexIndex + 4;
-                newTriangles[triIndex + 11] = vertexIndex + 5;
-            };
-
-            targetMesh.Vertices = newVertices;
-            targetMesh.Indices = newTriangles;
-        }
-
-        public static void SubdivideMainThread(Mesh targetMesh, int subs)
-        {
-            int finalVertexCount = targetMesh.IndexCount * 2;
-            int finalTriCount = finalVertexCount * 2;
-
-            for (int i = 1; i < subs; i++)
-            {
-                finalVertexCount = finalTriCount * 2;
-                finalTriCount = finalVertexCount * 2;
-            }
-
-            Vertex[] currentVertices = new Vertex[finalVertexCount];// targetMesh.Vertices;
-            uint[] currentTriangles = new uint[finalTriCount];// targetMesh.Indices;
-
-            Vertex[] newVertices = new Vertex[finalVertexCount];
-            uint[] newTriangles = new uint[finalTriCount];
-
-            Array.Copy(targetMesh.Vertices, currentVertices, targetMesh.VertexCount);
-            Array.Copy(targetMesh.Indices, currentTriangles, targetMesh.IndexCount);
-
-            int currentTriCount = targetMesh.IndexCount;
-            for (int s = 0; s < subs; s++)
-            {
-                Fill(currentVertices, currentTriangles, newVertices, newTriangles, currentTriCount);
-                currentTriCount *= 4;
-                (currentVertices, newVertices) = (newVertices, currentVertices);
-                (currentTriangles, newTriangles) = (newTriangles, currentTriangles);
-            }
-
-            if (subs % 2 != 0)
-            {
-                newVertices = currentVertices;
-                newTriangles = currentTriangles;
-            }
-
-            targetMesh.Vertices = newVertices;
-            targetMesh.Indices = newTriangles;
-        }
-
-        private static void Fill(Vertex[] currentVertices, uint[] currentTriangles, Vertex[] newVertices, uint[] newTriangles, int currentTriCount)
-        {
-            for (int i = 0; i < currentTriCount / 3; i++)
-            {
-                uint curIndex = (uint)i * 3;
-                uint vertexIndex = curIndex * 2;
-                uint triIndex = curIndex * 4;
-
-                uint triA = currentTriangles[curIndex];
-                uint triB = currentTriangles[curIndex + 1];
-                uint triC = currentTriangles[curIndex + 2];
-
-                Vertex vA = currentVertices[triA];
-                Vertex vB = currentVertices[triB];
-                Vertex vC = currentVertices[triC];
-
-                newVertices[vertexIndex] = vA;
-                newVertices[vertexIndex + 1] = vB;
-                newVertices[vertexIndex + 2] = vC;
-
-                newVertices[vertexIndex + 3] = Vertex.Average(vA, vB);
-                newVertices[vertexIndex + 4] = Vertex.Average(vB, vC);
-                newVertices[vertexIndex + 5] = Vertex.Average(vC, vA);
-
-
-                newTriangles[triIndex] = vertexIndex;
-                newTriangles[triIndex + 1] = vertexIndex + 3;
-                newTriangles[triIndex + 2] = vertexIndex + 5;
-
-                newTriangles[triIndex + 3] = vertexIndex + 3;
-                newTriangles[triIndex + 4] = vertexIndex + 1;
-                newTriangles[triIndex + 5] = vertexIndex + 4;
-
-                newTriangles[triIndex + 6] = vertexIndex + 5;
-                newTriangles[triIndex + 7] = vertexIndex + 4;
-                newTriangles[triIndex + 8] = vertexIndex + 2;
-
-                newTriangles[triIndex + 9] = vertexIndex + 3;
-                newTriangles[triIndex + 10] = vertexIndex + 4;
-                newTriangles[triIndex + 11] = vertexIndex + 5;
-            }
+            uint divisionsU = (uint)Math.Max(0, divisions);
+            return (divisionsU + 1) * (divisionsU + 1) * 3;
         }
 
         public static void SimpliftySubdivisionMainThread(Mesh targetMesh)
@@ -303,39 +265,14 @@ namespace SDL_Vulkan_CS.Artifact
             }
         }
 
-        public static void SimpliftySubdivision(Mesh targetMesh)
+        public class Edge
         {
-            Vertex[] currentVertices = targetMesh.Vertices;
-            uint[] currentTriangles = targetMesh.Indices;
+            public uint[] vertexIndices;
 
-            int vertexCount = currentVertices.Length;
-            HashSet<Vertex> uniqueTriangles = new(currentVertices);
-            KeyValuePair<Vertex,uint>[] vertexTriPair = new KeyValuePair<Vertex, uint>[uniqueTriangles.Count];
-
-            ParallelOptions options = new()
+            public Edge(uint[] vertexIndices)
             {
-                MaxDegreeOfParallelism = 1
-            };
-
-
-            Parallel.ForEach(uniqueTriangles, options, (vertex, state, index) =>
-            {
-                vertexTriPair[index] = new(vertex, (uint)index);
-            });
-
-            Dictionary<Vertex, uint> uniqueVertices = new(vertexTriPair, new Vertex());
-
-            int reducedVertexCount = vertexTriPair.Length;
-
-            Parallel.For(0, currentTriangles.Length, options, (int i) =>
-            {
-                uint index = currentTriangles[i];
-                var vertex = currentVertices[index];
-                currentTriangles[i] = uniqueVertices[vertex];
-            });
-
-            targetMesh.Vertices = [.. uniqueTriangles];
-            targetMesh.Indices = currentTriangles;
+                this.vertexIndices = vertexIndices;
+            }
         }
     }
 }

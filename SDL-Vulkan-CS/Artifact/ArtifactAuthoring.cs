@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using SDL_Vulkan_CS.Artifact.Colour;
 using SDL_Vulkan_CS.ECS.Presentation.Systems;
 using SDL_Vulkan_CS.Comp302;
+using System.Diagnostics;
 
 namespace SDL_Vulkan_CS.Artifact
 {
@@ -30,7 +31,7 @@ namespace SDL_Vulkan_CS.Artifact
         };
 
         private readonly bool useComputeShaderForGeneration = true;
-        private readonly int subdivisons = 4;
+        private readonly int subdivisons = 200;
 
         private readonly bool generateIndirectMeshes = true;
 
@@ -342,29 +343,32 @@ namespace SDL_Vulkan_CS.Artifact
 
             Parallel.For(0, shape.Length,options, (i)=>{
             
-                Subdivider.Subdivide(shape[i], subdivisons, false);
+                Subdivider.Subdivide(shape[i], subdivisons);
             });
 
             var delta = DateTime.Now - now;
             Console.WriteLine(string.Format("Subdivide Mesh: {0}ms", delta.TotalMilliseconds));
 
-            now = DateTime.Now;
-            options = new()
-            {
-                MaxDegreeOfParallelism = 6
-            };
-
+            //now = DateTime.Now;
+            //options = new()
+            //{
+            //    MaxDegreeOfParallelism = 6
+            //};
+            //
             // for (int i = 0; i < shape.Length; i++)
             // {
             //     Subdivider.SimpliftySubdivisionMainThread(shape[i]);
             // }
-            Parallel.For(0, shape.Length,options, (i) => {
-            
-                Subdivider.SimpliftySubdivisionMainThread(shape[i]);
-            });
-
-            delta = DateTime.Now - now;
-            Console.WriteLine(string.Format("Simplify Mesh: {0}ms", delta.TotalMilliseconds));
+            //
+            //Parallel.For(0, shape.Length,options, (i) => {
+            //
+            //    int vertexCountPre = shape[i].VertexCount;
+            //    Subdivider.SimpliftySubdivisionMainThread(shape[i]);
+            //    Console.WriteLine(string.Format("Simplifying: {0}->{1}", vertexCountPre, shape[i].VertexCount));
+            //});
+            //
+            //delta = DateTime.Now - now;
+            //Console.WriteLine(string.Format("Simplify Mesh: {0}ms", delta.TotalMilliseconds));
         }
 
         private void GeneratePlanet(Entity planetRoot, ShapeGenerator generator)
