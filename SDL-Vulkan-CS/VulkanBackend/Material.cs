@@ -291,7 +291,7 @@ namespace SDL_Vulkan_CS.VulkanBackend
                 pipelineConfigInfo.BindingDescriptions = [];
             }
 
-            //pipelineConfigInfo.rasterizationInfo.polygonMode = VkPolygonMode.Line;
+            pipelineConfigInfo.rasterizationInfo.polygonMode = VkPolygonMode.Line;
             //pipelineConfigInfo.rasterizationInfo.lineWidth = 1;
             pipelineConfigInfo.rasterizationInfo.cullMode = VkCullModeFlags.Front;
 

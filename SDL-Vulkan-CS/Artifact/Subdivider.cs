@@ -43,11 +43,6 @@ namespace SDL_Vulkan_CS.Artifact
 
             mesh.Vertices = vertices;
             mesh.Indices = indicies;
-            //SimpliftySubdivisionMainThread(mesh);
-            //mesh.RecalculateBounds();
-            //mesh.RecalculateNormals();
-            //Console.WriteLine("Vertex Count {0}", mesh.VertexCount);
-            //Console.WriteLine("Index Count {0}", mesh.IndexCount);
         }
 
         private unsafe static bool ValidateDivisionsCount(uint vertexCount, uint triCount)

@@ -99,7 +99,7 @@ namespace SDL_Vulkan_CS.Comp302
             return true;
         }
 
-        private bool Statistics()
+        public bool Statistics()
         {
             int i;
             if (dev.Length == 0)
@@ -133,7 +133,7 @@ namespace SDL_Vulkan_CS.Comp302
         }
 
 
-        private void Deviation2Material()
+        public void Deviation2Material()
         {
             Vector3[] colours = new Vector3[mavn];
 

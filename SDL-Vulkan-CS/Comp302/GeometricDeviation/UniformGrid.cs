@@ -34,7 +34,7 @@ namespace SDL_Vulkan_CS.Comp302
         private Vector3[] mfn;
         private float[] mp; // Mesh face planes
 
-        static Cell3D pCell;
+        Cell3D pCell;
 
         public UniformGrid(Mesh m, Bounds bbox, float dim)
         {
