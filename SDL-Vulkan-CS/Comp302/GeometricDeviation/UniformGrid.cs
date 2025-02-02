@@ -1,7 +1,6 @@
 ﻿using System;
 using SDL_Vulkan_CS.VulkanBackend;
 using System.Numerics;
-using System.Threading.Tasks;
 
 namespace SDL_Vulkan_CS.Comp302
 {
@@ -12,10 +11,10 @@ namespace SDL_Vulkan_CS.Comp302
     /// </summary>
     public class UniformGrid
     {
-        private float m_rSize;
+        private readonly float m_rSize;
 
         // Cells array
-        private Cell3D[][][] m_pCell;
+        private readonly Cell3D[][][] m_pCell;
 
         // Min cell coordinates
         private Vector3 m_pMin;
@@ -29,10 +28,10 @@ namespace SDL_Vulkan_CS.Comp302
         // Nearest Neighbors
         private Neighborhood neighbors;
 
-        private Vertex[] mv;
-        private Vector3Int[] mf;
-        private Vector3[] mfn;
-        private float[] mp; // Mesh face planes
+        private readonly Vertex[] mv;
+        private readonly Vector3Int[] mf;
+        private readonly Vector3[] mfn;
+        private readonly float[] mp; // Mesh face planes
 
         Cell3D pCell;
 
@@ -275,9 +274,9 @@ namespace SDL_Vulkan_CS.Comp302
                 }
             }
         }
-        private int Clamp(int x, int max)
+        private static int Clamp(int x, int max)
         {
-            return ((x < 0) ? 0 : (x >= max) ? (max - 1) : x);
+            return (x < 0) ? 0 : (x >= max) ? (max - 1) : x;
         }
 
         public Neighborhood NearestNeighbors(Vector3 point)
@@ -367,7 +366,7 @@ namespace SDL_Vulkan_CS.Comp302
             return (neighbors);
         }
 
-        private float Area2D(Vector2 a, Vector2 b, Vector2 c)
+        private static float Area2D(Vector2 a, Vector2 b, Vector2 c)
         {
             return (b.X - a.X) * (c.Y - a.Y) -
                         (c.X - a.X) * (b.Y - a.Y);
@@ -384,13 +383,15 @@ namespace SDL_Vulkan_CS.Comp302
 
             // Save Current Face Vertices Indices
             int a = mf[f][0];
+            if ((p - mv[a].Position).LengthSquared() == 0) return;
+
             int b = mf[f][1];
+            if ((p - mv[b].Position).LengthSquared() == 0) return;
+
             int c = mf[f][2];
+            if ((p - mv[c].Position).LengthSquared() == 0) return;
 
 
-            if ((p - mv[a].Position).Length() == 0) return;
-            if ((p - mv[b].Position).Length() == 0) return;
-            if ((p - mv[c].Position).Length() == 0) return;
 
             _FacesTested++;
 
@@ -425,7 +426,9 @@ namespace SDL_Vulkan_CS.Comp302
                 float* pbb = stackalloc[] { bb.X, bb.Y };
                 float* pcc = stackalloc[] { cc.X, cc.Y };
                 float* ppp = stackalloc[] { pp.X, pp.Y };
-                for (i = 0; i < 3; i++) if (i != k)
+                for (i = 0; i < 3; i++) 
+                {
+                    if (i != k)
                     {
                         paa[j] = pmva[i];
                         pbb[j] = pmvb[i];
@@ -433,6 +436,7 @@ namespace SDL_Vulkan_CS.Comp302
                         ppp[j] = pu[i];
                         j++;
                     }
+                }
 
                 aa.X = paa[0]; aa.Y = paa[1];
 

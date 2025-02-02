@@ -84,6 +84,11 @@ namespace SDL_Vulkan_CS.Comp302
             return GeometricDeviation();
         }
 
+        public void CleanUp()
+        {
+            ug = null;
+        }
+
         private bool GeometricDeviation()
         {
             dev = new float[mavn];
@@ -123,11 +128,15 @@ namespace SDL_Vulkan_CS.Comp302
             rmsdev /= (float)dev.Length;
             rmsdev = MathF.Sqrt(rmsdev);
 
-            Console.WriteLine(string.Format("minDev {0}, maxDev {1}, meanDev {2}, varDev {3}, rmsDev {4}", mindev, maxdev, meandev, vardev, rmsdev));
             return true;
         }
 
-        private float Sqr(float x)
+        public string GetStatisticsString()
+        {
+            return(string.Format("minDev {0}, maxDev {1}, meanDev {2}, varDev {3}, rmsDev {4}", mindev, maxdev, meandev, vardev, rmsdev));
+        }
+
+        private static float Sqr(float x)
         {
             return x * x;
         }
@@ -135,8 +144,6 @@ namespace SDL_Vulkan_CS.Comp302
 
         public void Deviation2Material()
         {
-            Vector3[] colours = new Vector3[mavn];
-
             if (dev_bound <= 0)
             {
                 dev_bound = maxdev;
@@ -153,20 +160,8 @@ namespace SDL_Vulkan_CS.Comp302
             {
                 // Normalize deviation values
                 ma.Vertices[i].Elevation = (dev[i]*1) / dev_bound;
-                //colours[i] = Deviation2Color(dev[i] / dev_bound);
             }
-
-             ma.FlushVertexBuffer();
         }
 
-        private static Vector3 Deviation2Color(float d)
-        {
-            if (d < 0) return new Vector3(0, 0, 0);
-            else if (d < 0.25f) return new Vector3(0, d * 4.0f, 1);
-            else if (d < 0.50f) return new Vector3(0, 1, 1 - (d - 0.25f) * 4.0f);
-            else if (d < 0.75f) return new Vector3((d - 0.5f) * 4.0f, 1, 0);
-            else if (d < 1) return new Vector3(1, 1.0f - (d - 0.75f) * 4.0f, 0);
-            return new Vector3(1, 0, 0);
-        }
     }
 }

@@ -259,7 +259,7 @@ namespace SDL_Vulkan_CS
 
             Console.WriteLine(string.Format("Device count: {0}", devices.Length));
 
-            for (int i = 1; i < devices.Length; i++)
+            for (int i = devices.Length - 1; i >= 0; i--)
             {
                 var device = devices[i];
                 if (IsDeviceSuitable(device))

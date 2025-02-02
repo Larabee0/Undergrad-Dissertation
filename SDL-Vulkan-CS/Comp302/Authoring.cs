@@ -3,9 +3,6 @@ using SDL_Vulkan_CS.ECS;
 using SDL_Vulkan_CS.ECS.Presentation;
 using SDL_Vulkan_CS.VulkanBackend;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SDL_Vulkan_CS.Comp302
@@ -14,6 +11,12 @@ namespace SDL_Vulkan_CS.Comp302
     {
         private static readonly int subdivisionsA = 30;
         private static readonly int subdivisionsB = 60;
+
+        private static readonly bool parallelDevation = false;
+
+        private static int tileIterCount = 10;
+        private static readonly bool interAllTiles = true;
+
         public static void Run()
         {
             var lit = new Material("devation_heat.vert", "devation_heat.frag", typeof(SimplePushConstantData));
@@ -29,42 +32,67 @@ namespace SDL_Vulkan_CS.Comp302
             var aMeshes = GetMeshesFrom(World.DefaultWorld.EntityManager, a);
             var bMeshes = GetMeshesFrom(World.DefaultWorld.EntityManager, b);
 
-           
-
-            //Parallel.For(0, aMeshes.Length, (int i) =>
-            //{
-            //    devations[i] = new Deviation();
-            //
-            //    devations[i].Initialization(aMeshes[i], bMeshes[i]);
-            //    devations[i].Compute();
-            //});
-
-            for (int i = 0; i< aMeshes.Length; i++)
-            {
-                var devations = new Deviation();
+            var devations = new Deviation[aMeshes.Length];
             
-                devations.Initialization(aMeshes[i], bMeshes[i]);
-                devations.Compute();
-
-                for (int j = 0; j < bMeshes[i].VertexCount; j++)
-                {
-                    bMeshes[i].Vertices[j].Elevation = 0;
-                }
-
-                bMeshes[i].FlushVertexBuffer();
+            if(interAllTiles)
+            {
+                tileIterCount = aMeshes.Length;
             }
 
-            return;
-            var devationCal = new Deviation();
             var now = DateTime.Now;
-            devationCal.Initialization(Mesh.Meshes[^1], Mesh.Meshes[^2]);
-            var delta = DateTime.Now - now;
-            Console.WriteLine(string.Format("Devation Init: {0}ms", delta.TotalMilliseconds));
+            if (parallelDevation)
+            {
+                Parallel.For(0, tileIterCount, (int i) =>
+                {
+                    for (int j = 0; j < bMeshes[i].VertexCount; j++)
+                    {
+                        bMeshes[i].Vertices[j].Elevation = 0;
+                    }
 
-            now = DateTime.Now;
-            devationCal.Compute();
-            delta = DateTime.Now - now;
-            Console.WriteLine(string.Format("Devation Compute: {0}ms", delta.TotalMilliseconds));
+                    devations[i] = new Deviation();
+
+                    devations[i].Initialization(aMeshes[i], bMeshes[i]);
+                    devations[i].Compute();
+                    devations[i].CleanUp();
+
+                });
+            }
+            else
+            {
+                for (int i = 0; i < tileIterCount; i++)
+                {
+                    for (int j = 0; j < bMeshes[i].VertexCount; j++)
+                    {
+                        bMeshes[i].Vertices[j].Elevation = 0;
+                    }
+
+                    devations[i] = new Deviation();
+
+                    devations[i].Initialization(aMeshes[i], bMeshes[i]);
+                    devations[i].Compute();
+                    devations[i].CleanUp();
+                }
+            }
+
+            var delta = DateTime.Now - now;
+
+            for (int i = 0; i< tileIterCount; i++)
+            {
+                // var devations = new Deviation();
+                // 
+                // devations.Initialization(aMeshes[i], bMeshes[i]);
+                // devations.Compute();
+                // 
+                // for (int j = 0; j < bMeshes[i].VertexCount; j++)
+                // {
+                //     bMeshes[i].Vertices[j].Elevation = 0;
+                // }
+                Console.WriteLine(devations[i].GetStatisticsString());
+                aMeshes[i].FlushVertexBuffer();
+                bMeshes[i].FlushVertexBuffer();
+            }
+            Console.WriteLine(string.Format("Devation Calc: {0}ms", delta.TotalMilliseconds));
+            //Debugger.Break();
         }
 
         public static Mesh[] GetMeshesFrom(EntityManager entityManager,Entity hierarhcy)

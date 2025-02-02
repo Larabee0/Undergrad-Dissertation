@@ -36,11 +36,11 @@ namespace SDL_Vulkan_CS.Artifact
 
         public ArtifactAuthoring()
         {
-            World.DefaultWorld.CreateSystem<TransformPlanetsSystem>();
-            World.DefaultWorld.CreateSystem<ColouredRenderSystem>();
-            World.DefaultWorld.CreateSystem<DrawIndirectRenderSystem>();
-            World.DefaultWorld.CreateSystem<StarRenderSystem>();
-            World.DefaultWorld.CreateSystem<InteractionSystem>();
+            //World.DefaultWorld.CreateSystem<TransformPlanetsSystem>();
+            //World.DefaultWorld.CreateSystem<ColouredRenderSystem>();
+            //World.DefaultWorld.CreateSystem<DrawIndirectRenderSystem>();
+            //World.DefaultWorld.CreateSystem<StarRenderSystem>();
+            //World.DefaultWorld.CreateSystem<InteractionSystem>();
 
             EntityManager entityManager = World.DefaultWorld.EntityManager;
 
@@ -61,7 +61,7 @@ namespace SDL_Vulkan_CS.Artifact
             GeometryStats();
         }
 
-        private void CreateSinglePlanetTestScene(EntityManager entityManager, Entity prefabPlanet)
+        private static void CreateSinglePlanetTestScene(EntityManager entityManager, Entity prefabPlanet)
         {
             var aStar = entityManager.CreateEntity();
             entityManager.AddComponent(aStar, new Star()
@@ -86,7 +86,7 @@ namespace SDL_Vulkan_CS.Artifact
             aStar.AddChildren(entityManager, planetOrbiterA);
         }
 
-        private void CreateBigTestScene(EntityManager entityManager, Entity prefabPlanet)
+        private static void CreateBigTestScene(EntityManager entityManager, Entity prefabPlanet)
         {
             var aStar = entityManager.CreateEntity();
             entityManager.AddComponent(aStar, new Star()
@@ -255,7 +255,7 @@ namespace SDL_Vulkan_CS.Artifact
             return orbitalPlane;
         }
 
-        private Entity CreatePrefabPlanet(EntityManager entityManager)
+        private static Entity CreatePrefabPlanet(EntityManager entityManager)
         {
             var waveA = new Texture2d(GraphicsDevice.Instance, Texture2d.GetTextureInDefaultPath("Wave.jpg"));
             var waveC = new Texture2d(GraphicsDevice.Instance, Texture2d.GetTextureInDefaultPath("Wave A.png"));
@@ -503,7 +503,7 @@ namespace SDL_Vulkan_CS.Artifact
         /// Cube will have colours and vertices and nothing else.
         /// </summary>
         /// <returns></returns>
-        public Mesh Cube()
+        public static Mesh Cube()
         {
             Vertex[] vertices = [
 
