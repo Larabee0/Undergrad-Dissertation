@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "Planets\\Planets.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
