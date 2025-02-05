@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Assimp;
@@ -621,7 +622,6 @@ namespace VECS
                 }
             }
             CPUComputeShaderMethod();
-            //SimpleParallelFor();
 
             if (hadtoCopyBack)
             {
@@ -631,11 +631,6 @@ namespace VECS
 
         private void CPUComputeShaderMethod()
         {
-            //Parallel.For(0, _vertices.Length, (int i) =>
-            //{
-            //    _vertices[i].Normal = Vector3.Zero;
-            //});
-
             int[] normals = new int[_vertices.Length * 3];
             Array.Fill(normals, 0);
 
@@ -764,11 +759,11 @@ namespace VECS
         private unsafe void CrunchIndicesToFaces()
         {
             _faces = new Vector3Int[IndexCount / 3];
-            for (int i = 0, j = 0; i < IndexCount; i+=3, j++)
-            {
-                Faces[j] = new((int)Indices[i], (int)Indices[i + 1], (int)Indices[i + 2]);
-            }
-        }
+
+            fixed (void* pIndices = &Indices[0])
+            fixed (void* pFaces = &Faces[0])
+                NativeMemory.Copy(pIndices, pFaces, (nuint)(IndexCount * sizeof(uint)));
+        }  
 
     }
 }

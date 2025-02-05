@@ -77,7 +77,6 @@ namespace VECS
             {
                 allocationInfo.flags = VmaAllocationCreateFlags.HostAccessSequentialWrite | VmaAllocationCreateFlags.Mapped;
             }
-
             if (Vma.vmaCreateBuffer(_device.VmaAllocator, bufferInfo, allocationInfo, out VkBuffer, out _allocation) != VkResult.Success)
             {
                 throw new Exception("Failed to create vma buffer!");

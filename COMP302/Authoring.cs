@@ -12,8 +12,8 @@ namespace COMP302
 {
     public static class Authoring
     {
-        private static readonly int subdivisionsA = 230;
-        private static readonly int subdivisionsB = 360;
+        private static readonly int subdivisionsA = 30;
+        private static readonly int subdivisionsB = 60;
 
         private static readonly bool parallelDevation = true;
 
