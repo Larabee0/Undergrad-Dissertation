@@ -23,17 +23,17 @@ namespace COMP302
         private Vector3Int m_pCellNum;
 
         // Faces tested number
-        private int _FacesTested;
+        //private int _FacesTested;
 
         // Nearest Neighbors
-        private Neighborhood neighbors;
+        // private Neighborhood neighbors;
 
         private readonly Vertex[] mv;
         private readonly Vector3Int[] mf;
         private readonly Vector3[] mfn;
         private readonly float[] mp; // Mesh face planes
 
-        Cell3D pCell;
+        //Cell3D pCell;
 
         public UniformGrid(Mesh m, Bounds bbox, float dim)
         {
@@ -78,8 +78,8 @@ namespace COMP302
 
             SetFaces();
 
-            _FacesTested = 0;
-            neighbors = null;
+            //_FacesTested = 0;
+            // neighbors = null;
         }
 
         public void SetFaces()
@@ -260,7 +260,7 @@ namespace COMP302
             }
             else
             {
-                pCell = m_pCell[x][y][z];
+                Cell3D pCell = m_pCell[x][y][z];
                 while ((pCell.f != -1) && (pCell.next != null))
                     pCell = pCell.next;
                 if (pCell.f == -1) pCell.f = n;
@@ -282,21 +282,20 @@ namespace COMP302
         public Neighborhood NearestNeighbors(Vector3 point)
         {
             float d;
-            int i, j, k, n;
-            int xx, yy, zz;
+            int i, j, k;
             int ia, ib, ja, jb, ka, kb;
 
             //////////////////////////////////////////////////////
             // Compute cell position
-            xx = (int)((point.X - m_pMin.X) / m_rSize);
-            yy = (int)((point.Y - m_pMin.Y) / m_rSize);
-            zz = (int)((point.Z - m_pMin.Z) / m_rSize);
+            int xx = (int)((point.X - m_pMin.X) / m_rSize);
+            int yy = (int)((point.Y - m_pMin.Y) / m_rSize);
+            int zz = (int)((point.Z - m_pMin.Z) / m_rSize);
 
-            n = 0;
+            int n = 0;
 
             //delete neighbors;
             //neighbors = 0;
-            neighbors = new Neighborhood();
+            Neighborhood neighbors = new();
 
             //////////////////////////////////////////////////////////
             // Check for point
@@ -319,7 +318,7 @@ namespace COMP302
                         for (k = ka; k <= kb; k++)
                         {
                             if (m_pCell[i][j][k] == null) continue;
-                            pCell = m_pCell[i][j][k];
+                            Cell3D pCell = m_pCell[i][j][k];
                             do
                             {
                                 /////////////////////////////////////////////
@@ -349,7 +348,7 @@ namespace COMP302
                                 // current reference mesh point
                                 if (pCell.f != -1)
                                 {
-                                    DistancePoint2Face(point, pCell.f);
+                                    DistancePoint2Face(neighbors, point, pCell.f);
                                     if (neighbors.Distance() == 0) return (neighbors);
                                 }
 
@@ -372,7 +371,7 @@ namespace COMP302
                         (c.X - a.X) * (b.Y - a.Y);
         }
 
-        private unsafe void DistancePoint2Face(Vector3 p, int f)
+        private unsafe void DistancePoint2Face(Neighborhood neighbors, Vector3 p, int f)
         {
 
             int i, j, k = 0;
@@ -393,7 +392,7 @@ namespace COMP302
 
 
 
-            _FacesTested++;
+            //_FacesTested++;
 
             /////////////////////////////////////////////
             // Distance Point To Plane
@@ -547,7 +546,7 @@ namespace COMP302
             }
         }
 
-        public int FacesTestedNumber() { return _FacesTested; }
+        // public int FacesTestedNumber() { return _FacesTested; }
 
         private void AddOnePoint(int n, int x, int y, int z)
         {
@@ -561,7 +560,7 @@ namespace COMP302
             }
             else
             {
-                pCell = m_pCell[x][y][z];
+                Cell3D pCell = m_pCell[x][y][z];
                 while (pCell.next != null) pCell = pCell.next;
                 pCell.next = new Cell3D()
                 {

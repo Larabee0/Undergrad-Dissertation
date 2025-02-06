@@ -79,23 +79,34 @@ namespace COMP302
             return true;
         }
 
-        public bool Compute()
+        public bool Compute(bool parallel)
         {
-            return GeometricDeviation();
+            return GeometricDeviation(parallel);
         }
+
 
         public void CleanUp()
         {
             ug = null;
         }
 
-        private bool GeometricDeviation()
+        private bool GeometricDeviation(bool parallel)
         {
             dev = new float[mavn];
 
-            for (int i = 0; i < dev.Length; i++)
+            if (parallel)
             {
-                dev[i] = ug.NearestNeighbors(ma.Vertices[i].Position).Distance();
+                Parallel.For(0, dev.Length, (int i) =>
+                {
+                    dev[i] = ug.NearestNeighbors(ma.Vertices[i].Position).Distance();
+                });
+            }
+            else
+            {
+                for (int i = 0; i < dev.Length; i++)
+                {
+                    dev[i] = ug.NearestNeighbors(ma.Vertices[i].Position).Distance();
+                }
             }
 
             Statistics();
@@ -106,7 +117,6 @@ namespace COMP302
 
         public bool Statistics()
         {
-            int i;
             if (dev.Length == 0)
             {
                 return false;
@@ -119,7 +129,7 @@ namespace COMP302
             meandev = dev.Sum() / dev.Length;
             vardev = 0;
             rmsdev = 0;
-            for (i = 0; i < dev.Length; i++)
+            for (int i = 0; i < dev.Length; i++)
             {
                 rmsdev += dev[i] * dev[i];
                 vardev += Sqr(dev[i] - meandev);

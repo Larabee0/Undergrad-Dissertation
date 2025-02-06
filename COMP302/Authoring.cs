@@ -39,56 +39,34 @@ namespace COMP302
 
             var delta = DateTime.Now - now;
             Console.WriteLine(string.Format("Copy back time: {0}ms", delta.TotalMilliseconds));
-            var devations = new Deviation[aMeshes.Length];
             if(interAllTiles)
             {
                 tileIterCount = aMeshes.Length;
             }
             now = DateTime.Now;
-            if (parallelDevation)
+            string[] stats = new string[tileIterCount];
+            for (int i = 0; i < tileIterCount; i++)
             {
-                Parallel.For(0, tileIterCount, (int i) =>
+                for(int j = 0; j < bMeshes[i].Vertices.Length; j++)
                 {
-                    for (int j = 0; j < bMeshes[i].VertexCount; j++)
-                    {
-                        bMeshes[i].Vertices[j].Elevation = 0;
-                    }
-
-                    devations[i] = new Deviation();
-
-                    devations[i].Initialization(aMeshes[i], bMeshes[i]);
-                    devations[i].Compute();
-                    devations[i].CleanUp();
-
-                });
-            }
-            else
-            {
-                for (int i = 0; i < tileIterCount; i++)
-                {
-                    for (int j = 0; j < bMeshes[i].VertexCount; j++)
-                    {
-                        bMeshes[i].Vertices[j].Elevation = 0;
-                    }
-
-                    devations[i] = new Deviation();
-
-                    devations[i].Initialization(aMeshes[i], bMeshes[i]);
-                    devations[i].Compute();
-                    devations[i].CleanUp();
+                    bMeshes[i].Vertices[j].Elevation = 0;
                 }
+
+                var devation = new Deviation();
+
+                devation.Initialization(aMeshes[i], bMeshes[i]);
+                devation.Compute(parallelDevation);
+                stats[i] = devation.GetStatisticsString();
             }
 
             delta = DateTime.Now - now;
 
             for (int i = 0; i< tileIterCount; i++)
             {
-                Console.WriteLine(devations[i].GetStatisticsString());
+                Console.WriteLine(stats[i]);
                 aMeshes[i].FlushVertexBuffer();
                 bMeshes[i].FlushVertexBuffer();
             }
-            devations = null;
-            GC.Collect();
             Console.WriteLine(string.Format("Devation Calc: {0}ms", delta.TotalMilliseconds));
             //Debugger.Break();
         }
