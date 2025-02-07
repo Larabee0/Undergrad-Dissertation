@@ -35,5 +35,10 @@ namespace System.Numerics
             Y = y;
             Z = z;
         }
+
+        public readonly bool Contains(int v)
+        {
+            return X == v || Y == v || Z == v;
+        }
     }
 }

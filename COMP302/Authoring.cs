@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using COMP302.MousaHussein;
 using Planets;
 using VECS;
 using VECS.ECS;
@@ -15,6 +17,8 @@ namespace COMP302
         private static readonly int subdivisionsA = 30;
         private static readonly int subdivisionsB = 60;
 
+        private static readonly bool MousaHussein = true;
+        private static readonly bool enableDevation = false;
         private static readonly bool parallelDevation = true;
 
         private static int tileIterCount = 10;
@@ -22,32 +26,56 @@ namespace COMP302
 
         public static void Run()
         {
+            GenerateAndCopyBack(out Mesh[] aMeshes, out Mesh[] bMeshes);
+
+            if (MousaHussein)
+                MousaHusseinSimplification(aMeshes);
+
+            if (enableDevation)
+                DoDevation(aMeshes, bMeshes);
+
+
+        }
+
+        private static void MousaHusseinSimplification(Mesh[] aMeshes)
+        {
+            for (int i = 0; i < 1; i++)
+            {
+                COMP302.MousaHussein.MousaHussein.BuildHalfEdges(aMeshes[i]);
+            }
+        }
+
+        private static void GenerateAndCopyBack(out Mesh[] aMeshes, out Mesh[] bMeshes)
+        {
             var lit = new Material("devation_heat.vert", "devation_heat.frag", typeof(ModelPushConstantData));
 
             World.DefaultWorld.CreateSystem<TexturelessRenderSystem>();
 
-            var a = CreateSubdividedPlanet(World.DefaultWorld.EntityManager,lit,subdivisionsA);
-            var b = CreateSubdividedPlanet(World.DefaultWorld.EntityManager,lit, subdivisionsB);
+            var a = CreateSubdividedPlanet(World.DefaultWorld.EntityManager, lit, subdivisionsA);
+            var b = CreateSubdividedPlanet(World.DefaultWorld.EntityManager, lit, subdivisionsB);
 
             World.DefaultWorld.EntityManager.SetComponent(a, new Translation() { Value = new(-5, 0, 0) });
             World.DefaultWorld.EntityManager.SetComponent(b, new Translation() { Value = new(15, 0, 0) });
 
             var now = DateTime.Now;
             var allMeshes = GetMeshesFrom(World.DefaultWorld.EntityManager, a, b);
-            var aMeshes = allMeshes[0];
-            var bMeshes = allMeshes[1];
-
+            aMeshes = allMeshes[0];
+            bMeshes = allMeshes[1];
             var delta = DateTime.Now - now;
             Console.WriteLine(string.Format("Copy back time: {0}ms", delta.TotalMilliseconds));
-            if(interAllTiles)
+        }
+
+        private static void DoDevation( Mesh[] aMeshes, Mesh[] bMeshes)
+        {
+            if (interAllTiles)
             {
                 tileIterCount = aMeshes.Length;
             }
-            now = DateTime.Now;
+            var now = DateTime.Now;
             string[] stats = new string[tileIterCount];
             for (int i = 0; i < tileIterCount; i++)
             {
-                for(int j = 0; j < bMeshes[i].Vertices.Length; j++)
+                for (int j = 0; j < bMeshes[i].Vertices.Length; j++)
                 {
                     bMeshes[i].Vertices[j].Elevation = 0;
                 }
@@ -59,16 +87,15 @@ namespace COMP302
                 stats[i] = devation.GetStatisticsString();
             }
 
-            delta = DateTime.Now - now;
+            var delta = DateTime.Now - now;
 
-            for (int i = 0; i< tileIterCount; i++)
+            for (int i = 0; i < tileIterCount; i++)
             {
                 Console.WriteLine(stats[i]);
                 aMeshes[i].FlushVertexBuffer();
                 bMeshes[i].FlushVertexBuffer();
             }
             Console.WriteLine(string.Format("Devation Calc: {0}ms", delta.TotalMilliseconds));
-            //Debugger.Break();
         }
 
         public static Mesh[][] GetMeshesFrom(EntityManager entityManager,params Entity[] hierarhcy)
