@@ -1,0 +1,49 @@
+#version 450
+#extension GL_KHR_vulkan_glsl: enable
+#include "structures.glsl"
+
+// information about the main buffer defining what threads should run/abort
+layout(set = 0, binding = 0) uniform ComputeShaderParameters{
+	uint bufferLength;
+	uint width;
+	uint height;
+	uint depth;
+} params;
+
+
+// vertex buffer to operate on (direct mesh buffer) Read/Write here.
+layout(std430,set = 0, binding = 1) buffer VertexBuffer {
+    Vertex vertexBuffer[];
+};
+
+// sizeof vertex buffer * 3 unormalized normals for each vertex expressed as ints to because atomic add
+layout(std430,set = 0, binding = 2) readonly buffer NormalBuffer {
+    int normalBuffer[];
+};
+
+// fucked up float to int conversion magic number (2^16/2)
+const float QUANTIIZE_FACTOR = 32768.0;
+
+layout(local_size_x =1, local_size_y = 1, local_size_z = 1) in;
+void main() {
+	if(params.width <= gl_GlobalInvocationID.x || params.height <= gl_GlobalInvocationID.y){
+	 	return; 
+	}
+
+	uint bufferIndex = gl_GlobalInvocationID.y * params.width + gl_GlobalInvocationID.x;
+
+	Vertex v = vertexBuffer[bufferIndex];
+	uint normalIndex = bufferIndex * 3;
+
+	// convert each component of the normal vector back to a float and normalize the vector
+	vec3 norm = normalize(vec3(normalBuffer[normalIndex] / QUANTIIZE_FACTOR,
+	normalBuffer[normalIndex + 1] / QUANTIIZE_FACTOR,
+	normalBuffer[normalIndex + 2] / QUANTIIZE_FACTOR));
+
+	// set vertex normal
+	v.normalX = norm.x;	 
+	v.normalY = norm.y;	
+	v.normalZ = norm.z;
+
+	vertexBuffer[bufferIndex] = v;
+}
