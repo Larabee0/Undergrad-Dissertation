@@ -45,12 +45,15 @@ namespace VECS
             return new Vertex()
             {
                 Position = Vector3.Lerp(a.Position, b.Position, t),
+                Normal = Vector3.Lerp(a.Normal, b.Normal, t),
+                Elevation = NumericsExtensions.Lerp(a.Elevation, b.Elevation, t),
+                BiomeSelect = MathF.Round(NumericsExtensions.Lerp(a.BiomeSelect, b.BiomeSelect, t))
             };
         }
 
         public static bool operator ==(Vertex left, Vertex right)
         {
-            return left.Position == right.Position;
+            return left.Position == right.Position && left.Normal == right.Normal && left.Elevation == right.Elevation && left.BiomeSelect == right.BiomeSelect;
         }
 
         public static bool operator !=(Vertex left, Vertex right) => !(left == right);
@@ -72,7 +75,7 @@ namespace VECS
 
         public override readonly int GetHashCode()
         {
-            return HashCode.Combine(Position);
+            return HashCode.Combine(Position, Normal, Elevation, BiomeSelect);
         }
 
         /// <summary>

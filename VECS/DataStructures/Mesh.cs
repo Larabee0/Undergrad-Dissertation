@@ -416,6 +416,34 @@ namespace VECS
             Meshes.RemoveAt(index);
         }
 
+        public void Optimise()
+        {
+            Dictionary<Vertex, uint> remap = new(VertexCount);
+
+            for (uint i = 0, v= 0; i < IndexCount; i+=3)
+            {
+                if(remap.TryAdd(Vertices[Indices[i]], v)) { v++; }
+                if(remap.TryAdd(Vertices[Indices[i+1]], v)) { v++; }
+                if(remap.TryAdd(Vertices[Indices[i+2]], v)) { v++; }
+            }
+            Vertex[] newVertices = new Vertex[VertexCount];
+            uint[] newIndices = new uint[IndexCount];
+
+            for (uint i = 0; i < IndexCount; i+=3)
+            {
+                for (int t = 0; t < 3; t++)
+                {
+                    var vertex = Vertices[Indices[i + t]];
+                    var index = remap[vertex];
+                    newIndices[i+t] = index;
+                    newVertices[index] = vertex;
+                }
+            }
+
+            Vertices = newVertices;
+            Indices = newIndices;
+        }
+
         /// <summary>
         /// Load a mesh at the given file path
         /// </summary>
@@ -430,8 +458,8 @@ namespace VECS
             }
 
             AssimpContext importer = new();
-
             Scene scene = importer.ImportFile(filePath);
+            
             if (scene == null)
             {
                 return null;
@@ -439,6 +467,47 @@ namespace VECS
             var meshes = CreateMeshes(scene);
             importer.Dispose();
             return meshes;
+        }
+
+        public static void SaveToFile(Mesh mesh, string filePath)
+        {
+            AssimpContext importer = new();
+            Scene scene = new();
+            Assimp.Mesh mesh1 = new("tile", PrimitiveType.Triangle);
+            for (int i = 0; i < mesh.Vertices.Length; i++)
+            {
+                var pos = mesh.Vertices[i].Position;
+                var normal = mesh.Vertices[i].Normal;
+                var uv = new Vector3D(mesh.Vertices[i].Elevation, mesh.Vertices[i].BiomeSelect,0);
+                mesh1.Vertices.Add(new Vector3D(pos.X, pos.Y, pos.Z));
+                mesh1.Normals.Add(new Vector3D(normal.X, normal.Y, normal.Z));
+                mesh1.TextureCoordinateChannels[0].Add(uv);
+            }
+
+            int[] indices = new int[mesh.IndexCount];
+            for (int i = 0; i < mesh.IndexCount; i++)
+            {
+                indices[i] = (int)mesh.Indices[i];
+
+            }
+            mesh1.SetIndices(indices, 3);
+            scene.RootNode = new("Tile_Test.obj")
+            {
+                Transform = Assimp.Matrix4x4.Identity,
+            };
+            var node = new Node("Element", scene.RootNode)
+            {
+                Transform = Assimp.Matrix4x4.Identity,
+            };
+            scene.Meshes.Add(mesh1);
+            node.MeshIndices.Add(0);
+            scene.RootNode.Children.Add(node);
+            scene.Materials.Add(new());
+            
+            //Scene.FromUnmanagedScene( Assimp.Unmanaged.AssimpLibrary.Instance.ApplyPostProcessing(Scene.ToUnmanagedScene(scene), PostProcessSteps.ValidateDataStructure));
+
+            Console.WriteLine(importer.ExportFile(scene, filePath, "objnomtl"));
+            importer.Dispose();
         }
 
         /// <summary>

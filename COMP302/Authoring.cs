@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using COMP302.MousaHussein;
+using COMP302.Decimator;
 using Planets;
 using VECS;
 using VECS.ECS;
@@ -9,16 +9,17 @@ using VECS.ECS.Presentation;
 using VECS.ECS.Transforms;
 using VECS.LowLevel;
 using Vortice.Vulkan;
+using Mesh = VECS.Mesh;
 
 namespace COMP302
 {
     public static class Authoring
     {
-        private static readonly int subdivisionsA = 30;
-        private static readonly int subdivisionsB = 60;
+        private static readonly int subdivisionsA = 20;
+        private static readonly int subdivisionsB = 20;
 
-        private static readonly bool MousaHussein = true;
-        private static readonly bool enableDevation = false;
+        private static readonly bool QuadricSimplification = true;
+        private static readonly bool enableDevation = true;
         private static readonly bool parallelDevation = true;
 
         private static int tileIterCount = 10;
@@ -28,20 +29,38 @@ namespace COMP302
         {
             GenerateAndCopyBack(out Mesh[] aMeshes, out Mesh[] bMeshes);
 
-            if (MousaHussein)
-                MousaHusseinSimplification(aMeshes);
+            //Mesh.SaveToFile(aMeshes[0], System.IO.Path.Combine(Mesh.DefaultMeshPath, "Tile_Test.obj"));
+
+            //var mesh = Mesh.LoadModelFromFile(Mesh.GetMeshInDefaultPath("Tile_Test.obj"))[0];
+            //aMeshes[0].Vertices = mesh.Vertices;
+            //aMeshes[0].Indices = mesh.Indices;
+            //aMeshes[0].Optimise();
+            //aMeshes[0].FlushMesh();
+            if (QuadricSimplification)
+                DoQuadricSimplification(aMeshes);
 
             if (enableDevation)
-                DoDevation(aMeshes, bMeshes);
-
+                DoDevation(bMeshes, aMeshes);
 
         }
 
-        private static void MousaHusseinSimplification(Mesh[] aMeshes)
+        private static void DoQuadricSimplification(Mesh[] aMeshes)
         {
-            for (int i = 0; i < 1; i++)
+            var parameter = new EdgeCollapseParameter
             {
-                COMP302.MousaHussein.MousaHussein.BuildHalfEdges(aMeshes[i]);
+                UsedProperty = VertexProperty.UV0
+            };
+            for (int i = 0; i < aMeshes.Length; i++)
+            {
+                var conditions = new TargetConditions
+                {
+                    faceCount = aMeshes[i].IndexCount / 3 / 2
+                };
+                var meshDecimation = new UnityMeshDecimation();
+                meshDecimation.Execute(aMeshes[i], parameter, conditions);
+                meshDecimation.ToMesh(aMeshes[i]);
+                //aMeshes[i].Optimise();
+                aMeshes[i].FlushMesh();
             }
         }
 
@@ -92,8 +111,8 @@ namespace COMP302
             for (int i = 0; i < tileIterCount; i++)
             {
                 Console.WriteLine(stats[i]);
-                aMeshes[i].FlushVertexBuffer();
-                bMeshes[i].FlushVertexBuffer();
+                aMeshes[i].FlushMesh();
+                bMeshes[i].FlushMesh();
             }
             Console.WriteLine(string.Format("Devation Calc: {0}ms", delta.TotalMilliseconds));
         }
@@ -122,7 +141,7 @@ namespace COMP302
             offsets.Add(entities.Count - offsets[^1]);
             Mesh[] meshes = new Mesh[entities.Count];
 
-            GPUBuffer<Vertex>[] vertexBuffers = new GPUBuffer<Vertex>[meshes.Length];
+            GPUBuffer<VECS.Vertex>[] vertexBuffers = new GPUBuffer<VECS.Vertex>[meshes.Length];
             GPUBuffer<uint>[] indexBuffers = new GPUBuffer<uint>[meshes.Length];
 
             VkCommandBuffer copyBufferCmd = GraphicsDevice.Instance.BeginSingleTimeCommands();
@@ -131,7 +150,7 @@ namespace COMP302
             {
                 meshes[i] = Mesh.GetMeshAtIndex(entityManager.GetComponent<MeshIndex>(entities[i]).Value);
                 meshes[i].EnsureAlloc();
-                vertexBuffers[i] = new GPUBuffer<Vertex>((uint)meshes[i].VertexCount,VkBufferUsageFlags.TransferDst,true);
+                vertexBuffers[i] = new GPUBuffer<VECS.Vertex>((uint)meshes[i].VertexCount,VkBufferUsageFlags.TransferDst,true);
                 indexBuffers[i] = new GPUBuffer<uint>((uint)meshes[i].IndexCount,VkBufferUsageFlags.TransferDst,true);
 
                 meshes[i].VertexBuffer.CopyTo(copyBufferCmd,vertexBuffers[i]);

@@ -1,13 +1,10 @@
-﻿
-namespace System.Numerics
+﻿namespace System.Numerics
 {
     /// <summary>
     /// Some system numerics extension for floor and step functions
     /// </summary>
     public static class NumericsExtensions
     {
-        
-
         public static Vector4 GetMatrixRow(this Matrix4x4 mat,int row)
         {
             return new Vector4(mat[row, 0], mat[row, 1], mat[row, 2], mat[row, 3]);
@@ -16,34 +13,6 @@ namespace System.Numerics
         public static Vector4 NormalizePlane(this Vector4 p)
         {
             return p / new Vector3(p.X, p.Y, p.Z).Length();
-        }
-
-        public static unsafe void WriteVectorToPointer(this Vector4 vector, float* pBuffer, int startOffset)
-        {
-            pBuffer[startOffset] = vector.X;
-            pBuffer[startOffset + 1] = vector.Y;
-            pBuffer[startOffset + 2] = vector.Z;
-            pBuffer[startOffset + 3] = vector.W;
-        }
-
-        public static unsafe void WriteMatrixToPointer(this Matrix4x4 matrix, float* pBuffer, int startOffset)
-        {
-            pBuffer[startOffset + 0] = matrix.M11;
-            pBuffer[startOffset + 1] = matrix.M44;
-            pBuffer[startOffset + 2] = matrix.M43;
-            pBuffer[startOffset + 3] = matrix.M42;
-            pBuffer[startOffset + 4] = matrix.M41;
-            pBuffer[startOffset + 5] = matrix.M34;
-            pBuffer[startOffset + 6] = matrix.M32;
-            pBuffer[startOffset + 7] = matrix.M31;
-            pBuffer[startOffset + 8] = matrix.M33;
-            pBuffer[startOffset + 9] = matrix.M23;
-            pBuffer[startOffset + 10] = matrix.M22;
-            pBuffer[startOffset + 11] = matrix.M21;
-            pBuffer[startOffset + 12] = matrix.M14;
-            pBuffer[startOffset + 13] = matrix.M13;
-            pBuffer[startOffset + 14] = matrix.M12;
-            pBuffer[startOffset + 15] = matrix.M24;
         }
 
         public static float Angle(Vector3 from, Vector3 to)
