@@ -1,6 +1,5 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
 using System;
-using System.Collections.Generic;
 using Vector2 = System.Numerics.Vector2;
 using Vector3 = System.Numerics.Vector3;
 
@@ -23,42 +22,42 @@ namespace COMP302.Decimator
             Border2 = 1 << 6,
         }
 
-        public Vertex[] vertices { get; private set; } = new Vertex[VERTEX_COUNT];
-        public Vector3[] normals { get; private set; } = new Vector3[VERTEX_COUNT];
-        public Vector2[] uvs { get; private set; } = new Vector2[VERTEX_COUNT];
+        public Vertex[] Vertices { get; private set; } = new Vertex[VERTEX_COUNT];
+        public Vector3[] Normals { get; private set; } = new Vector3[VERTEX_COUNT];
+        public Vector2[] Uvs { get; private set; } = new Vector2[VERTEX_COUNT];
         
-        public int subMeshIndex { get; set; }
-        public Vector3 faceNormal { get; private set; }
+        public int SubMeshIndex { get; set; }
+        public Vector3 FaceNormal { get; private set; }
 
-        public Face[] vfParent { get; private set; } = new Face[VERTEX_COUNT];
-        public int[] vfIndex { get; private set; } = new int[VERTEX_COUNT];
+        public Face[] VfParent { get; private set; } = new Face[VERTEX_COUNT];
+        public int[] VfIndex { get; private set; } = new int[VERTEX_COUNT];
 
         #region Vertex
-        public ref Vertex V(int index) => ref this.vertices[index];
-        public Vector3 P(int index) => this.vertices[index].pos;
+        public ref Vertex V(int index) => ref Vertices[index];
+        public Vector3 P(int index) => Vertices[index].Pos;
 
-        public Vertex V0(int index) => this.V(index);
-        public Vertex V1(int index) => this.V((index + 1) % VERTEX_COUNT);
-        public Vertex V2(int index) => this.V((index + 2) % VERTEX_COUNT);
+        public Vertex V0(int index) => V(index);
+        public Vertex V1(int index) => V((index + 1) % VERTEX_COUNT);
+        public Vertex V2(int index) => V((index + 2) % VERTEX_COUNT);
 
-        public Vector3 P0(int index) => this.V(index).pos;
-        public Vector3 P1(int index) => this.V((index + 1) % VERTEX_COUNT).pos;
-        public Vector3 P2(int index) => this.V((index + 2) % VERTEX_COUNT).pos;
+        public Vector3 P0(int index) => V(index).Pos;
+        public Vector3 P1(int index) => V((index + 1) % VERTEX_COUNT).Pos;
+        public Vector3 P2(int index) => V((index + 2) % VERTEX_COUNT).Pos;
         #endregion
 
         #region Property
-        public static int GetPropertySize(VertexProperty property, Mesh mesh)
+        public static int GetPropertySize(VertexProperty property)
         {
             int count = 0;
-            if (property.HasFlag(VertexProperty.Position))
+            if ((property & VertexProperty.Position) != 0)
             {
                 count += 3;
             }
-            if (property.HasFlag(VertexProperty.Normal))
+            if ((property & VertexProperty.Normal) != 0)
             {
                 count += 3;
             }
-            if (property.HasFlag(VertexProperty.UV0))
+            if ((property & VertexProperty.UV0) != 0)
             {
                 count += 2;
             }
@@ -67,66 +66,84 @@ namespace COMP302.Decimator
 
         public Vector<float> GetPropertyS(VertexProperty property, int id)
         {
-            List<float> result = new List<float>();
-            this.InternalGetProperty(property, id, result);
-            return Vector<float>.Build.Dense(result.ToArray());
+            return Vector<float>.Build.Dense(InternalGetProperty(property, id));
         }
 
         public Vector<double> GetPropertyD(VertexProperty property, int id)
         {
-            List<double> result = new List<double>();
-            this.InternalGetProperty(property, id, result);
-            return Vector<double>.Build.Dense(result.ToArray());
+            return Vector<double>.Build.Dense(InternalGetPropertyD(property, id));
         }
 
         public void SetPropertyS(VertexProperty property, int id, Vector<float> value)
         {
-            this.InternalSetProperty(property, id, value);
+            InternalSetProperty(property, id, value);
         }
 
         public void SetPropertyD(VertexProperty property, int id, Vector<double> value)
         {
-            this.InternalSetProperty(property, id, value);
+            InternalSetProperty(property, id, value);
         }
 
-        private void InternalGetProperty(VertexProperty property, int id, dynamic result)
+        private float[] InternalGetProperty(VertexProperty property, int id)
         {
-            if (property.HasFlag(VertexProperty.Position))
+            float[] rPos = [];
+            float[] rNorm = [];
+            float[] rUv = [];
+            if ((property & VertexProperty.Position) != 0)
             {
-                var pos = this.P(id);
-                result.Add(pos.X);
-                result.Add(pos.Y);
-                result.Add(pos.Z);
+                var pos = P(id);
+                rPos = [pos.X, pos.Y, pos.Z];
             }
-            if (property.HasFlag(VertexProperty.Normal))
+            if ((property & VertexProperty.Normal)!=0)
             {
-                var normal = this.normals[id];
-                result.Add(normal.X);
-                result.Add(normal.Y);
-                result.Add(normal.Z);
+                var normal = Normals[id];
+                rNorm = [normal.X, normal.Y, normal.Z];
             }
-            if (property.HasFlag(VertexProperty.UV0))
+            if ((property & VertexProperty.UV0) != 0)
             {
-                var uv = this.uvs[id];
-                result.Add(uv.X);
-                result.Add(uv.Y);
+                var uv = Uvs[id];
+                rUv = [uv.X, uv.Y];
             }
+            return [.. rPos, .. rNorm, .. rUv];
+        }
+
+        private double[] InternalGetPropertyD(VertexProperty property, int id)
+        {
+            double[] rPos = [];
+            double[] rNorm = [];
+            double[] rUv = [];
+            if ((property & VertexProperty.Position) != 0)
+            {
+                var pos = P(id);
+                rPos = [pos.X, pos.Y, pos.Z];
+            }
+            if ((property & VertexProperty.Normal) != 0)
+            {
+                var normal = Normals[id];
+                rNorm = [normal.X, normal.Y, normal.Z];
+            }
+            if ((property & VertexProperty.UV0) != 0)
+            {
+                var uv = Uvs[id];
+                rUv = [uv.X, uv.Y];
+            }
+            return [.. rPos, .. rNorm, .. rUv];
         }
 
         private void InternalSetProperty(VertexProperty property, int id, dynamic value)
         {
             int index = 0;
-            if (property.HasFlag(VertexProperty.Position))
+            if ((property & VertexProperty.Position) != 0)
             {
-                this.V(id).pos = new Vector3((float)value[index++], (float)value[index++], (float)value[index++]);
+                V(id).Pos = new Vector3((float)value[index++], (float)value[index++], (float)value[index++]);
             }
-            if (property.HasFlag(VertexProperty.Normal))
+            if ((property & VertexProperty.Normal) != 0)
             {
-                this.normals[id] = new Vector3((float)value[index++], (float)value[index++], (float)value[index++]);
+                Normals[id] = new Vector3((float)value[index++], (float)value[index++], (float)value[index++]);
             }
-            if (property.HasFlag(VertexProperty.UV0))
+            if ((property & VertexProperty.UV0) != 0)
             {
-                this.uvs[id] = new Vector2((float)value[index++], (float)value[index++]);
+                Uvs[id] = new Vector2((float)value[index++], (float)value[index++]);
             }
         }
         #endregion
@@ -134,55 +151,54 @@ namespace COMP302.Decimator
         #region Interploation
         public Vector3 InterpolateNormal(Vector3 barycentric)
         {
-            return Vector3.Normalize(this.normals[0] * barycentric.X + this.normals[1] * barycentric.Y + this.normals[2] * barycentric.Z);
+            return Vector3.Normalize(Normals[0] * barycentric.X + Normals[1] * barycentric.Y + Normals[2] * barycentric.Z);
         }
 
         public Vector2 InterpolateUV(Vector3 barycentric)
         {
-            return this.uvs[0] * barycentric.X + this.uvs[1] * barycentric.Y + this.uvs[2] * barycentric.Z;
+            return Uvs[0] * barycentric.X + Uvs[1] * barycentric.Y + Uvs[2] * barycentric.Z;
         }
 
         #endregion
 
         #region Flags
-        public bool IsDeleted() { return this.HasFlag((int)FaceFlags.Deleted); }
-        public void SetDeleted() { this.AddFlag((int)FaceFlags.Deleted); }
-        public void ClearDeleted() { this.RemoveFlag((int)FaceFlags.Deleted); }
+        public bool IsDeleted() { return HasFlag((int)FaceFlags.Deleted); }
+        public void SetDeleted() { AddFlag((int)FaceFlags.Deleted); }
+        public void ClearDeleted() { RemoveFlag((int)FaceFlags.Deleted); }
 
-        public bool IsVisited() { return this.HasFlag((int)FaceFlags.Visited); }
-        public void SetVisited() { this.AddFlag((int)FaceFlags.Visited); }
-        public void ClearVisited() { this.RemoveFlag((int)FaceFlags.Deleted); }
+        public bool IsVisited() { return HasFlag((int)FaceFlags.Visited); }
+        public void SetVisited() { AddFlag((int)FaceFlags.Visited); }
+        public void ClearVisited() { RemoveFlag((int)FaceFlags.Deleted); }
 
-        public bool IsWritable() => !this.HasFlag((int)FaceFlags.NotWrite);
-        public void SetWritable() => this.RemoveFlag((int)FaceFlags.NotWrite);
-        public void ClearWritable() => this.AddFlag((int)FaceFlags.NotWrite);
+        public bool IsWritable() => !HasFlag((int)FaceFlags.NotWrite);
+        public void SetWritable() => RemoveFlag((int)FaceFlags.NotWrite);
+        public void ClearWritable() => AddFlag((int)FaceFlags.NotWrite);
 
-        public bool IsBorder(int index) => this.HasFlag((int)FaceFlags.Border0 << index);
-        public void SetBorder(int index) => this.AddFlag((int)FaceFlags.Border0 << index);
-        public void ClearBorder(int index) => this.RemoveFlag((int)FaceFlags.Border0 << index);
+        public bool IsBorder(int index) => HasFlag((int)FaceFlags.Border0 << index);
+        public void SetBorder(int index) => AddFlag((int)FaceFlags.Border0 << index);
+        public void ClearBorder(int index) => RemoveFlag((int)FaceFlags.Border0 << index);
 
         public void ClearBorderFlags()
         {
-            this.RemoveFlag((int)(FaceFlags.Border0 | FaceFlags.Border1 | FaceFlags.Border2));
+            RemoveFlag((int)(FaceFlags.Border0 | FaceFlags.Border1 | FaceFlags.Border2));
         }
         #endregion
 
         public void BuildFaceNormal()
         {
-            this.faceNormal = MeshUtil.FaceNormal(this);
+            FaceNormal = MeshUtil.FaceNormal(this);
         }
 
         public float GetQuality()
         {
-            var p0 = this.P(0);
-            var p1 = this.P(1);
-            var p2 = this.P(2);
+            var p0 = P(0);
+            var p1 = P(1);
+            var p2 = P(2);
             Vector3 d10 = p1 - p0;
             Vector3 d20 = p2 - p0;
             Vector3 d12 = p1 - p2;
-            Vector3 X = Vector3.Cross(d10, d20);
 
-            float a = X.Length();
+            float a = Vector3.Cross(d10, d20).Length();
             if (a == 0) return 0;
             float b = d10.LengthSquared();
             if (b == 0) return 0;
@@ -196,30 +212,30 @@ namespace COMP302.Decimator
 
         public static void VFDetach(Face f, int Z)
         {
-            if (f.V(Z).vfParent == f)
+            if (f.V(Z).VfParent == f)
             {
-                int fz = f.V(Z).vfIndex;
-                f.V(Z).vfParent = f.vfParent[fz];
-                f.V(Z).vfIndex = f.vfIndex[fz];
+                int fz = f.V(Z).VfIndex;
+                f.V(Z).VfParent = f.VfParent[fz];
+                f.V(Z).VfIndex = f.VfIndex[fz];
             }
             else
             {
-                VFIterator vfi = new VFIterator(f.V(Z));
+                VFIterator vfi = new(f.V(Z));
                 Face tf;
                 int tz;
                 vfi.MoveNext();
                 while (true)
                 {
-                    tf = vfi.f;
-                    tz = vfi.z;
+                    tf = vfi.F;
+                    tz = vfi.Z;
                     if (!vfi.MoveNext())
                     {
                         break;
                     }
-                    if (vfi.f == f)
+                    if (vfi.F == f)
                     {
-                        tf.vfParent[tz] = f.vfParent[Z];
-                        tf.vfIndex[tz] = f.vfIndex[Z];
+                        tf.VfParent[tz] = f.VfParent[Z];
+                        tf.VfIndex[tz] = f.VfIndex[Z];
                         break;
                     }
                 }

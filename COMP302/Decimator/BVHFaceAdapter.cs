@@ -8,19 +8,19 @@ namespace COMP302.Decimator
     {
 
         private BVH<Face> _bvh;
-        private Dictionary<Face, BVHNode<Face>> _gameObjectToLeafMap = new Dictionary<Face, BVHNode<Face>>();
-        private Dictionary<Face, (Vector3 pos, float radius)> _boundingSphere = new Dictionary<Face, (Vector3 pos, float radius)>();
+        private readonly Dictionary<Face, BVHNode<Face>> _gameObjectToLeafMap = [];
+        private readonly Dictionary<Face, (Vector3 pos, float radius)> _boundingSphere = [];
 
         BVH<Face> IBVHNodeAdapter<Face>.BVH
         {
-            get => this._bvh;
-            set => this._bvh = value;
+            get => _bvh;
+            set => _bvh = value;
         }
 
         //TODO: this is not used?
         public void CheckMap(Face obj)
         {
-            if (!this._gameObjectToLeafMap.ContainsKey(obj))
+            if (!_gameObjectToLeafMap.ContainsKey(obj))
             {
                 throw new Exception("missing map for shuffled child");
             }
@@ -28,51 +28,51 @@ namespace COMP302.Decimator
 
         public BVHNode<Face> GetLeaf(Face obj)
         {
-            return this._gameObjectToLeafMap[obj];
+            return _gameObjectToLeafMap[obj];
         }
 
         public Vector3 GetObjectPos(Face obj)
         {
-            return this.GetBoundingSphere(obj).pos;
+            return GetBoundingSphere(obj).pos;
         }
 
         public float GetRadius(Face obj)
         {
-            return this.GetBoundingSphere(obj).radius;
+            return GetBoundingSphere(obj).radius;
         }
 
         public void MapObjectToBVHLeaf(Face obj, BVHNode<Face> leaf)
         {
-            this._gameObjectToLeafMap[obj] = leaf;
+            _gameObjectToLeafMap[obj] = leaf;
         }
 
         // this allows us to be notified when an object moves, so we can adjust the BVH
         public void OnPositionOrSizeChanged(Face changed)
         {
-            var sphere = this.MakeMinimumBoundingSphere(changed.P(0), changed.P(1), changed.P(2));
-            this._boundingSphere[changed] = sphere;
+            var sphere = MakeMinimumBoundingSphere(changed.P(0), changed.P(1), changed.P(2));
+            _boundingSphere[changed] = sphere;
 
             // the SSObject has changed, so notify the BVH leaf to refit for the object
-            this._gameObjectToLeafMap[changed].RefitObjectChanged(this, changed);
+            _gameObjectToLeafMap[changed].RefitObjectChanged(this);
         }
 
         public void UnmapObject(Face obj)
         {
-            this._gameObjectToLeafMap.Remove(obj);
+            _gameObjectToLeafMap.Remove(obj);
         }
 
         private (Vector3 pos, float radius) GetBoundingSphere(Face obj)
         {
-            if (this._boundingSphere.TryGetValue(obj, out (Vector3 pos, float radius) sphere))
+            if (_boundingSphere.TryGetValue(obj, out (Vector3 pos, float radius) sphere))
             {
                 return sphere;
             }
-            sphere = this.MakeMinimumBoundingSphere(obj.P(0), obj.P(1), obj.P(2));
-            this._boundingSphere[obj] = sphere;
+            sphere = MakeMinimumBoundingSphere(obj.P(0), obj.P(1), obj.P(2));
+            _boundingSphere[obj] = sphere;
             return sphere;
         }
 
-        private (Vector3, float) MakeMinimumBoundingSphere(Vector3 p1, Vector3 p2, Vector3 p3)
+        private static (Vector3, float) MakeMinimumBoundingSphere(Vector3 p1, Vector3 p2, Vector3 p3)
         {
             // Calculate relative distances
             float A = (p1 - p2).Length();
@@ -83,17 +83,17 @@ namespace COMP302.Decimator
             Vector3 a = p3, b = p1, c = p2;
             if (B < C)
             {
-                Swap(ref B, ref C);
-                Swap(ref b, ref c);
+                (B, C) = (C, B);
+                (b, c) = (c, b);
             }
             if (A < B)
             {
-                Swap(ref A, ref B);
-                Swap(ref a, ref b);
+                (A, B) = (B, A);
+                (a, b) = (b, a);
             }
 
-            Vector3 pos = Vector3.Zero;
-            float radius = 0;
+            Vector3 pos;
+            float radius;
             // If obtuse, just use longest diameter, otherwise circumscribe
             if ((B * B) + (C * C) <= (A * A))
             {
@@ -112,14 +112,6 @@ namespace COMP302.Decimator
                 pos = c + Vector3.Cross(beta * alpha.LengthSquared() - alpha * beta.LengthSquared(), alphaCrossbeta) / (2 * alphaCrossbeta.LengthSquared());
             }
             return (pos, radius);
-        }
-
-        private static void Swap<T>(ref T lhs, ref T rhs)
-        {
-            T temp;
-            temp = lhs;
-            lhs = rhs;
-            rhs = temp;
         }
     }
 }

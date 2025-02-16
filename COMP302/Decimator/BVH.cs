@@ -10,48 +10,28 @@ namespace COMP302.Decimator
     {
         X, Y, Z,
     }
+
     public delegate bool NodeTraversalTest(Bounds box);
-
-    public class BVHHelper
-    {
-        public static NodeTraversalTest RadialNodeTraversalTest(Vector3 center, float radius)
-        {
-            return (Bounds bounds) =>
-            {
-                //find the closest point inside the bounds
-                //Then get the difference between the point and the circle center
-                float deltaX = center.X - MathF.Max(bounds.Min.X, MathF.Min(center.X, bounds.Max.X));
-                float deltaY = center.Y - MathF.Max(bounds.Min.Y, MathF.Min(center.Y, bounds.Max.Y));
-                float deltaZ = center.Z - MathF.Max(bounds.Min.Z, MathF.Min(center.Z, bounds.Max.Z));
-
-                //sqr magnitude < sqr radius = inside bounds!
-                return (deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) < (radius * radius);
-            };
-        }
-    }
-
 
     public class BVH<T>
     {
-        private Material _debugRenderMaterial = null;
-
         public BVHNode<T> rootBVH;
         public IBVHNodeAdapter<T> nAda;
         public readonly int LEAF_OBJ_MAX;
         public int nodeCount = 0;
         public int maxDepth = 0;
 
-        public HashSet<BVHNode<T>> refitNodes = new HashSet<BVHNode<T>>();
+        public HashSet<BVHNode<T>> refitNodes = [];
 
         // internal functional traversal...
-        private void _traverse(BVHNode<T> curNode, NodeTraversalTest hitTest, List<BVHNode<T>> hitlist)
+        private static void Traverse(BVHNode<T> curNode, NodeTraversalTest hitTest, List<BVHNode<T>> hitlist)
         {
             if (curNode == null) { return; }
             if (hitTest(curNode.Box))
             {
                 hitlist.Add(curNode);
-                _traverse(curNode.Left, hitTest, hitlist);
-                _traverse(curNode.Right, hitTest, hitlist);
+                Traverse(curNode.Left, hitTest, hitlist);
+                Traverse(curNode.Right, hitTest, hitlist);
             }
         }
 
@@ -59,22 +39,9 @@ namespace COMP302.Decimator
         public List<BVHNode<T>> Traverse(NodeTraversalTest hitTest)
         {
             var hits = new List<BVHNode<T>>();
-            this._traverse(rootBVH, hitTest, hits);
+            Traverse(rootBVH, hitTest, hits);
             return hits;
         }
-
-        /*	
-        public List<BVHNode<T> Traverse(Ray ray)
-		{
-			float tnear = 0f, tfar = 0f;
-
-			return Traverse(box => OpenTKHelper.intersectRayAABox1(ray, box, ref tnear, ref tfar));
-		}
-		public List<BVHNode<T>> Traverse(Bounds volume)
-		{
-			return Traverse(box => box.IntersectsAABB(volume));
-		}
-		*/
 
         /// <summary>
         /// Call this to batch-optimize any object-changes notified through 
@@ -97,13 +64,6 @@ namespace COMP302.Decimator
 
                 sweepNodes.ForEach(n => n.TryRotate(this));
             }
-        }
-
-        public void Add(T newOb)
-        {
-            Bounds box = BoundsFromSphere(nAda.GetObjectPos(newOb), nAda.GetRadius(newOb));
-            float boxSAH = BVHNode<T>.SA(ref box);
-            rootBVH.Add(nAda, newOb, ref box, boxSAH);
         }
 
         /// <summary>
@@ -132,11 +92,6 @@ namespace COMP302.Decimator
             leaf.Remove(nAda, newObj);
         }
 
-        public int CountBVHNodes()
-        {
-            return rootBVH.CountBVHNodes();
-        }
-
         /// <summary>
         /// initializes a BVH with a given nodeAdaptor, and object list.
         /// </summary>
@@ -147,17 +102,14 @@ namespace COMP302.Decimator
         {
             this.LEAF_OBJ_MAX = LEAF_OBJ_MAX;
             nodeAdaptor.BVH = this;
-            this.nAda = nodeAdaptor;
+            nAda = nodeAdaptor;
 
-            if (objects.Count > 0)
-            {
-                rootBVH = new BVHNode<T>(this, objects);
-            }
-            else
-            {
-                rootBVH = new BVHNode<T>(this);
-                rootBVH.GObjects = new List<T>(); // it's a leaf, so give it an empty object list
-            }
+            rootBVH = objects.Count > 0
+                ? new BVHNode<T>(this, objects)
+                : new BVHNode<T>(this)
+                {
+                    GObjects = [] // it's a leaf, so give it an empty object list
+                };
         }
 
     }

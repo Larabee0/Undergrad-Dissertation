@@ -37,11 +37,11 @@ namespace COMP302.Decimator
 
             public PropertySetting()
             {
-                this.ExtraWeight = 0;
-                this.InterpolateWithAdjacentFace = true;
-                this.InterpolateClamped = true;
-                this.SampleFunc = null;
-                this.SqrDistanceThreshold = 0.003f;
+                ExtraWeight = 0;
+                InterpolateWithAdjacentFace = true;
+                InterpolateClamped = true;
+                SampleFunc = null;
+                SqrDistanceThreshold = 0.003f;
             }
         }
 
@@ -109,39 +109,38 @@ namespace COMP302.Decimator
 
         public EdgeCollapseParameter()
         {
-            this.SetDefaultParams();
+            SetDefaultParams();
         }
 
         public void SetDefaultParams()
         {
-            this.UsedProperty = VertexProperty.UV0;
-            this.BoundaryWeight = 0.5;
-            this.NormalCheck = false;
-            this.NormalCosineThr = Math.Cos(Math.PI / 2);
-            this.OptimalPlacement = true;
-            this.OptimalSampleCount = 1;
-            this.PreserveBoundary = false;
-            this.QuadricEpsilon = 1e-15;
-            this.QualityThr = 0.1;
-            this.QualityQuadric = false;
-            this.PreventIntersection = false;
-            this.PropertySettings = new VertexPropertySetting();
+            UsedProperty = VertexProperty.UV0;
+            BoundaryWeight = 0.5;
+            NormalCheck = false;
+            NormalCosineThr = Math.Cos(Math.PI / 2);
+            OptimalPlacement = true;
+            OptimalSampleCount = 1;
+            PreserveBoundary = false;
+            QuadricEpsilon = 1e-15;
+            QualityThr = 0.1;
+            QualityQuadric = false;
+            PreventIntersection = false;
+            PropertySettings = [];
         }
 
         public PropertySetting GetPropertySetting(VertexProperty property)
         {
-            PropertySetting setting = null;
-            if (!this.PropertySettings.TryGetValue(property, out setting))
+            if (!PropertySettings.TryGetValue(property, out PropertySetting setting))
             {
                 setting = new PropertySetting();
-                this.PropertySettings[property] = setting;
+                PropertySettings[property] = setting;
             }
             return setting;
         }
 
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return MemberwiseClone();
         }
     }
 }

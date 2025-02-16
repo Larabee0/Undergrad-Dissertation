@@ -2,31 +2,31 @@
 {
     public class FlagBase
     {
-        protected int flags = 0;
+        protected int _flags = 0;
 
         public void SetFlags(int flags)
         {
-            this.flags = flags;
+            _flags = flags;
         }
 
         public void ClearFlags()
         {
-            this.flags = 0;
+            _flags = 0;
         }
 
         public bool HasFlag(int flag)
         {
-            return (this.flags & flag) == flag;
+            return (_flags & flag) == flag;
         }
 
         public void AddFlag(int flag)
         {
-            this.flags |= flag;
+            _flags |= flag;
         }
 
         public void RemoveFlag(int flag)
         {
-            this.flags &= ~flag;
+            _flags &= ~flag;
         }
     }
 }

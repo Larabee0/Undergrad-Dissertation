@@ -6,7 +6,6 @@ using VECS;
 
 namespace COMP302.Decimator
 {
-
     public class BVHNode<T>
     {
         public Bounds Box;
@@ -22,44 +21,14 @@ namespace COMP302.Decimator
 
         public override string ToString()
         {
-            return string.Format("BVHNode<{0}>:{1}", typeof(T), this.NodeNumber);
+            return string.Format("BVHNode<{0}>:{1}", typeof(T), NodeNumber);
         }
 
-        private Axis PickSplitAxis()
-        {
-            float axis_x = Box.Max.X - Box.Max.X;
-            float axis_y = Box.Max.Y - Box.Max.Y;
-            float axis_z = Box.Max.Z - Box.Max.Z;
-
-            // return the biggest axis
-            if (axis_x > axis_y)
-            {
-                if (axis_x > axis_z)
-                {
-                    return Axis.X;
-                }
-                else
-                {
-                    return Axis.Z;
-                }
-            }
-            else
-            {
-                if (axis_y > axis_z)
-                {
-                    return Axis.Y;
-                }
-                else
-                {
-                    return Axis.Z;
-                }
-            }
-        }
         public bool IsLeaf
         {
             get
             {
-                bool isLeaf = (this.GObjects != null);
+                bool isLeaf = (GObjects != null);
                 // if we're a leaf, then both left and right should be null..
                 if (isLeaf && ((Right != null) || (Left != null)))
                 {
@@ -70,18 +39,7 @@ namespace COMP302.Decimator
             }
         }
 
-        private Axis NextAxis(Axis cur)
-        {
-            switch (cur)
-            {
-                case Axis.X: return Axis.Y;
-                case Axis.Y: return Axis.Z;
-                case Axis.Z: return Axis.X;
-                default: throw new NotSupportedException();
-            }
-        }
-
-        public void RefitObjectChanged(IBVHNodeAdapter<T> nAda, T obj)
+        public void RefitObjectChanged(IBVHNodeAdapter<T> nAda)
         {
             if (GObjects == null)
             {
@@ -164,7 +122,7 @@ namespace COMP302.Decimator
         {
             if (GObjects.Count == 0)
             {
-                // TODO: fix this... we should never get called in this case...
+                // TODO: fix .. we should never get called in this case...
                 throw new NotImplementedException();
             }
 
@@ -173,7 +131,7 @@ namespace COMP302.Decimator
             ComputeVolume(nAda);
             if (!Box.Equals(oldbox))
             {
-                if (Parent != null) Parent.ChildRefit(nAda);
+                Parent?.ChildRefit();
                 return true;
             }
             else
@@ -191,6 +149,7 @@ namespace COMP302.Decimator
             return 2.0f * ((x_size * y_size) + (x_size * z_size) + (y_size * z_size));
 
         }
+
         internal static float SA(ref Bounds box)
         {
             float x_size = box.Max.X - box.Min.X;
@@ -200,6 +159,7 @@ namespace COMP302.Decimator
             return 2.0f * ((x_size * y_size) + (x_size * z_size) + (y_size * z_size));
 
         }
+
         internal static float SA(BVHNode<T> node)
         {
             float x_size = node.Box.Max.X - node.Box.Min.X;
@@ -207,13 +167,6 @@ namespace COMP302.Decimator
             float z_size = node.Box.Max.Z - node.Box.Min.Z;
 
             return 2.0f * ((x_size * y_size) + (x_size * z_size) + (y_size * z_size));
-        }
-        internal static float SA(IBVHNodeAdapter<T> nAda, T obj)
-        {
-            float radius = nAda.GetRadius(obj);
-
-            float size = radius * 2;
-            return 6.0f * (size * size);
         }
 
         internal static Bounds AABBofPair(BVHNode<T> nodea, BVHNode<T> nodeb)
@@ -223,30 +176,13 @@ namespace COMP302.Decimator
             return box;
         }
 
-        internal float SAofPair(BVHNode<T> nodea, BVHNode<T> nodeb)
-        {
-            Bounds box = nodea.Box;
-            box.Encapsulate(nodeb.Box);
-            return SA(ref box);
-        }
-        internal float SAofPair(Bounds boxa, Bounds boxb)
-        {
-            Bounds pairbox = boxa;
-            pairbox.Encapsulate(boxb);
-            return SA(ref pairbox);
-        }
         internal static Bounds AABBofOBJ(IBVHNodeAdapter<T> nAda, T obj)
         {
             float radius = nAda.GetRadius(obj);
-            Bounds box = new Bounds
-            {
-                Min = new Vector3(-radius, -radius, -radius),
-                Max = new Vector3(radius, radius, radius)
-            };
-            return box;
+            return Bounds.FromMinMax(new Vector3(-radius, -radius, -radius), new Vector3(radius, radius, radius));
         }
 
-        internal float SAofList(IBVHNodeAdapter<T> nAda, List<T> list)
+        internal static float SAofList(IBVHNodeAdapter<T> nAda, List<T> list)
         {
             var box = AABBofOBJ(nAda, list[0]);
 
@@ -267,25 +203,21 @@ namespace COMP302.Decimator
         internal class RotOpt : IComparable<RotOpt>
         {  // rotation option
             public float SAH;
-            public Rot rot;
+            public Rot Rot;
+
             internal RotOpt(float SAH, Rot rot)
             {
                 this.SAH = SAH;
-                this.rot = rot;
+                Rot = rot;
             }
+
             public int CompareTo(RotOpt other)
             {
                 return SAH.CompareTo(other.SAH);
             }
         }
 
-        private static List<Rot> EachRot
-        {
-            get
-            {
-                return new List<Rot>((Rot[])Enum.GetValues(typeof(Rot)));
-            }
-        }
+        private static List<Rot> EachRot => [.. Enum.GetValues<Rot>()];
 
         /// <summary>
         /// tryRotate looks at all candidate rotations, and executes the rotation with the best resulting SAH (if any)
@@ -341,13 +273,13 @@ namespace COMP302.Decimator
             });
 
             // perform the best rotation...            
-            if (bestRot.rot != Rot.NONE)
+            if (bestRot.Rot != Rot.NONE)
             {
                 // if the best rotation is no-rotation... we check our parents anyhow..                
                 if (Parent != null)
                 {
                     // but only do it some random percentage of the time.
-                    if ((DateTime.Now.Ticks % 100) < 2)
+                    if ((DateTime.UtcNow.Ticks % 100) < 2)
                     {
                         bvh.refitNodes.Add(Parent);
                     }
@@ -362,7 +294,7 @@ namespace COMP302.Decimator
                 {
                     return; // the benefit is not worth the cost
                 }
-                Console.WriteLine("BVH swap {0} from {1} to {2}", bestRot.rot.ToString(), mySA, bestRot.SAH);
+                Console.WriteLine("BVH swap {0} from {1} to {2}", bestRot.Rot.ToString(), mySA, bestRot.SAH);
 
                 // in order to swap we need to:
                 //  1. swap the node locations
@@ -370,56 +302,52 @@ namespace COMP302.Decimator
                 //  3. update the parent pointers
                 //  4. refit the boundary box
                 BVHNode<T> swap = null;
-                switch (bestRot.rot)
+                switch (bestRot.Rot)
                 {
                     case Rot.NONE: break;
                     // child to grandchild rotations
-                    case Rot.L_RL: swap = Left; Left = Right.Left; Left.Parent = this; Right.Left = swap; swap.Parent = Right; Right.ChildRefit(nAda, propagate: false); break;
-                    case Rot.L_RR: swap = Left; Left = Right.Right; Left.Parent = this; Right.Right = swap; swap.Parent = Right; Right.ChildRefit(nAda, propagate: false); break;
-                    case Rot.R_LL: swap = Right; Right = Left.Left; Right.Parent = this; Left.Left = swap; swap.Parent = Left; Left.ChildRefit(nAda, propagate: false); break;
-                    case Rot.R_LR: swap = Right; Right = Left.Right; Right.Parent = this; Left.Right = swap; swap.Parent = Left; Left.ChildRefit(nAda, propagate: false); break;
+                    case Rot.L_RL: swap = Left; Left = Right.Left; Left.Parent = this; Right.Left = swap; swap.Parent = Right; Right.ChildRefit(false); break;
+                    case Rot.L_RR: swap = Left; Left = Right.Right; Left.Parent = this; Right.Right = swap; swap.Parent = Right; Right.ChildRefit(false); break;
+                    case Rot.R_LL: swap = Right; Right = Left.Left; Right.Parent = this; Left.Left = swap; swap.Parent = Left; Left.ChildRefit(false); break;
+                    case Rot.R_LR: swap = Right; Right = Left.Right; Right.Parent = this; Left.Right = swap; swap.Parent = Left; Left.ChildRefit(false); break;
 
                     // grandchild to grandchild rotations
-                    case Rot.LL_RR: swap = Left.Left; Left.Left = Right.Right; Right.Right = swap; Left.Left.Parent = Left; swap.Parent = Right; Left.ChildRefit(nAda, propagate: false); Right.ChildRefit(nAda, propagate: false); break;
-                    case Rot.LL_RL: swap = Left.Left; Left.Left = Right.Left; Right.Left = swap; Left.Left.Parent = Left; swap.Parent = Right; Left.ChildRefit(nAda, propagate: false); Right.ChildRefit(nAda, propagate: false); break;
+                    case Rot.LL_RR: swap = Left.Left; Left.Left = Right.Right; Right.Right = swap; Left.Left.Parent = Left; swap.Parent = Right; Left.ChildRefit(false); Right.ChildRefit(false); break;
+                    case Rot.LL_RL: swap = Left.Left; Left.Left = Right.Left; Right.Left = swap; Left.Left.Parent = Left; swap.Parent = Right; Left.ChildRefit(false); Right.ChildRefit(false); break;
 
                     // unknown...
-                    default: throw new NotImplementedException("missing implementation for BVH Rotation .. " + bestRot.rot.ToString());
+                    default: throw new NotImplementedException("missing implementation for BVH Rotation .. " + bestRot.Rot.ToString());
                 }
 
                 // fix the depths if necessary....
-                switch (bestRot.rot)
+                switch (bestRot.Rot)
                 {
                     case Rot.L_RL:
                     case Rot.L_RR:
                     case Rot.R_LL:
                     case Rot.R_LR:
-                        this.SetDepth(nAda, this.Depth);
+                        SetDepth(nAda, Depth);
                         break;
                 }
             }
         }
 
-        private static List<Axis> EachAxis
-        {
-            get
-            {
-                return new List<Axis>((Axis[])Enum.GetValues(typeof(Axis)));
-            }
-        }
+        private static List<Axis> EachAxis => [.. Enum.GetValues<Axis>()];
 
         internal class SplitAxisOpt<GO> : IComparable<SplitAxisOpt<GO>>
         {  // split Axis option
             public float SAH;
-            public Axis axis;
-            public List<GO> left, right;
+            public Axis Axis;
+            public List<GO> Left, Right;
+
             internal SplitAxisOpt(float SAH, Axis axis, List<GO> left, List<GO> right)
             {
                 this.SAH = SAH;
-                this.axis = axis;
-                this.left = left;
-                this.right = right;
+                Axis = axis;
+                Left = left;
+                Right = right;
             }
+
             public int CompareTo(SplitAxisOpt<GO> other)
             {
                 return SAH.CompareTo(other.SAH);
@@ -430,8 +358,8 @@ namespace COMP302.Decimator
         {
             // second, decide which axis to split on, and sort..
             List<T> splitlist = GObjects;
-            splitlist.ForEach(o => nAda.UnmapObject(o));
-            int center = (int)(splitlist.Count / 2); // find the center object
+            splitlist.ForEach(nAda.UnmapObject);
+            int center = splitlist.Count / 2; // find the center object
 
             SplitAxisOpt<T> bestSplit = EachAxis.Min((axis) =>
             {
@@ -460,8 +388,8 @@ namespace COMP302.Decimator
 
             // perform the split
             GObjects = null;
-            this.Left = new BVHNode<T>(nAda.BVH, this, bestSplit.left, bestSplit.axis, this.Depth + 1); // Split the Hierarchy to the left
-            this.Right = new BVHNode<T>(nAda.BVH, this, bestSplit.right, bestSplit.axis, this.Depth + 1); // Split the Hierarchy to the right                                
+            Left = new BVHNode<T>(nAda.BVH, this, bestSplit.Left, Depth + 1); // Split the Hierarchy to the left
+            Right = new BVHNode<T>(nAda.BVH, this, bestSplit.Right, Depth + 1); // Split the Hierarchy to the right                                
         }
 
         internal void SplitIfNecessary(IBVHNodeAdapter<T> nAda)
@@ -483,19 +411,23 @@ namespace COMP302.Decimator
             var right = curNode.Right;
 
             // merge and pushdown left and right as a new node..
-            var mergedSubnode = new BVHNode<T>(nAda.BVH);
-            mergedSubnode.Left = left;
-            mergedSubnode.Right = right;
-            mergedSubnode.Parent = curNode;
-            mergedSubnode.GObjects = null; // we need to be an interior node... so null out our object list..
+            var mergedSubnode = new BVHNode<T>(nAda.BVH)
+            {
+                Left = left,
+                Right = right,
+                Parent = curNode,
+                GObjects = null // we need to be an interior node... so null out our object list..
+            };
             left.Parent = mergedSubnode;
             right.Parent = mergedSubnode;
-            mergedSubnode.ChildRefit(nAda, propagate: false);
+            mergedSubnode.ChildRefit(false);
 
             // make new subnode for obj
-            var newSubnode = new BVHNode<T>(nAda.BVH);
-            newSubnode.Parent = curNode;
-            newSubnode.GObjects = new List<T> { newOb };
+            var newSubnode = new BVHNode<T>(nAda.BVH)
+            {
+                Parent = curNode,
+                GObjects = [newOb]
+            };
             nAda.MapObjectToBVHLeaf(newOb, newSubnode);
             newSubnode.ComputeVolume(nAda);
 
@@ -503,7 +435,7 @@ namespace COMP302.Decimator
             curNode.Left = mergedSubnode;
             curNode.Right = newSubnode;
             curNode.SetDepth(nAda, curNode.Depth); // propagate new depths to our children.
-            curNode.ChildRefit(nAda);
+            curNode.ChildRefit();
         }
 
         internal static void Add(IBVHNodeAdapter<T> nAda, BVHNode<T> curNode, T newOb, ref Bounds newObBox, float newObSAH)
@@ -523,17 +455,9 @@ namespace COMP302.Decimator
                 float rightSAH = SA(right);
 
                 //Create new bounds to avoid modifying originals when using encapsulate
-                Bounds leftExpanded = new Bounds
-                {
-                    Min = left.Box.Min,
-                    Max = left.Box.Max
-                };
+                Bounds leftExpanded = Bounds.FromMinMax(left.Box.Min, left.Box.Max);
 
-                Bounds rightExpanded = new Bounds
-                {
-                    Min = right.Box.Min,
-                    Max = right.Box.Max
-                };
+                Bounds rightExpanded = Bounds.FromMinMax(right.Box.Min, right.Box.Max);
 
                 leftExpanded.Encapsulate(newObBox);
                 rightExpanded.Encapsulate(newObBox);
@@ -571,17 +495,7 @@ namespace COMP302.Decimator
             curNode.SplitIfNecessary(nAda);
         }
 
-        internal int CountBVHNodes()
-        {
-            if (GObjects != null)
-            {
-                return 1;
-            }
-            else
-            {
-                return Left.CountBVHNodes() + Right.CountBVHNodes();
-            }
-        }
+        internal int CountBVHNodes() => GObjects != null ? 1 : Left.CountBVHNodes() + Right.CountBVHNodes();
 
         internal void Remove(IBVHNodeAdapter<T> nAda, T newOb)
         {
@@ -607,7 +521,7 @@ namespace COMP302.Decimator
 
         void SetDepth(IBVHNodeAdapter<T> nAda, int newdepth)
         {
-            this.Depth = newdepth;
+            Depth = newdepth;
             if (newdepth > nAda.BVH.maxDepth)
             {
                 nAda.BVH.maxDepth = newdepth;
@@ -646,7 +560,7 @@ namespace COMP302.Decimator
             if (GObjects == null)
             {
                 Left.Parent = this; Right.Parent = this;  // reassign child parents..
-                this.SetDepth(nAda, this.Depth); // this reassigns depth for our children
+                SetDepth(nAda, Depth); // this reassigns depth for our children
             }
             else
             {
@@ -655,17 +569,7 @@ namespace COMP302.Decimator
             }
 
             // propagate our new volume..
-            if (Parent != null)
-            {
-                Parent.ChildRefit(nAda);
-            }
-        }
-
-        internal BVHNode<T> RootNode()
-        {
-            BVHNode<T> cur = this;
-            while (cur.Parent != null) { cur = cur.Parent; }
-            return cur;
+            Parent?.ChildRefit();
         }
 
         internal void FindOverlappingLeaves(IBVHNodeAdapter<T> nAda, Vector3 origin, float radius, List<BVHNode<T>> overlapList)
@@ -685,7 +589,7 @@ namespace COMP302.Decimator
         }
 
         //Modified from https://github.com/jeske/SimpleScene/blob/master/SimpleScene/Core/SSAABB.cs
-        private bool BoundsIntersectsSphere(Bounds bounds, Vector3 origin, float radius)
+        private static bool BoundsIntersectsSphere(Bounds bounds, Vector3 origin, float radius)
         {
             if (
                 (origin.X + radius < bounds.Min.X) ||
@@ -722,12 +626,7 @@ namespace COMP302.Decimator
 
         internal Bounds ToBounds()
         {
-            Bounds bounds = new Bounds
-            {
-                Min = new Vector3(Box.Min.X, Box.Min.Y, Box.Min.Z),
-                Max = new Vector3(Box.Max.X, Box.Max.Y, Box.Max.Z)
-            };
-            return bounds;
+            return Bounds.FromMinMax(new Vector3(Box.Min.X, Box.Min.Y, Box.Min.Z), new Vector3(Box.Max.X, Box.Max.Y, Box.Max.Z));
         }
 
         internal void ChildExpanded(IBVHNodeAdapter<T> nAda, BVHNode<T> child)
@@ -771,16 +670,15 @@ namespace COMP302.Decimator
             }
         }
 
-        internal void ChildRefit(IBVHNodeAdapter<T> nAda, bool propagate = true)
+        internal void ChildRefit(bool propagate = true)
         {
-            ChildRefit(nAda, this, propagate: propagate);
+            ChildRefit(this, propagate);
         }
 
-        internal static void ChildRefit(IBVHNodeAdapter<T> nAda, BVHNode<T> curNode, bool propagate = true)
+        internal static void ChildRefit(BVHNode<T> curNode, bool propagate = true)
         {
             do
             {
-                Bounds oldbox = curNode.Box;
                 BVHNode<T> left = curNode.Left;
                 BVHNode<T> right = curNode.Right;
 
@@ -824,24 +722,24 @@ namespace COMP302.Decimator
 
         internal BVHNode(BVH<T> bvh)
         {
-            GObjects = new List<T>();
+            GObjects = [];
             Left = Right = null;
             Parent = null;
-            this.NodeNumber = bvh.nodeCount++;
+            NodeNumber = bvh.nodeCount++;
         }
 
-        internal BVHNode(BVH<T> bvh, List<T> gobjectlist) : this(bvh, null, gobjectlist, Axis.X, 0)
+        internal BVHNode(BVH<T> bvh, List<T> gobjectlist) : this(bvh, null, gobjectlist,0)
         {
 
         }
 
-        private BVHNode(BVH<T> bvh, BVHNode<T> lparent, List<T> gobjectlist, Axis lastSplitAxis, int curdepth)
+        private BVHNode(BVH<T> bvh, BVHNode<T> lparent, List<T> gobjectlist, int curdepth)
         {
             IBVHNodeAdapter<T> nAda = bvh.nAda;
-            this.NodeNumber = bvh.nodeCount++;
+            NodeNumber = bvh.nodeCount++;
 
-            this.Parent = lparent; // save off the parent BVHGObj Node
-            this.Depth = curdepth;
+            Parent = lparent; // save off the parent BVHGObj Node
+            Depth = curdepth;
 
             if (bvh.maxDepth < curdepth)
             {
@@ -874,7 +772,7 @@ namespace COMP302.Decimator
                 GObjects = gobjectlist;
                 ComputeVolume(nAda);
                 SplitNode(nAda);
-                ChildRefit(nAda, propagate: false);
+                ChildRefit(false);
             }
         }
 

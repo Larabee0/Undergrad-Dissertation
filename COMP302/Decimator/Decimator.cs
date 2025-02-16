@@ -45,10 +45,7 @@ namespace COMP302.Decimator
 
     public sealed class UnityMeshDecimation
     {
-
-        private const int PRINT_FREQUENCY = 200;
         private const int HEAP_RATIO = 4;
-
         private Mesh _mesh;
         private BinaryHeap<float, EdgeCollapse> _heap;
         private BVH<Face> _bvh;
@@ -59,35 +56,22 @@ namespace COMP302.Decimator
         private float _currMetric;
         private int _currOperations;
 
-        private bool _showProgress;
-
-
-        private Stopwatch _stopWatch;
-        private Stopwatch StopWatch
-        {
-            get
-            {
-                _stopWatch ??= new Stopwatch();
-                return _stopWatch;
-            }
-        }
-
+        private Stopwatch _stopWatch=new();
         #region API
-        public void Execute(UnityMesh mesh, EdgeCollapseParameter collapseParam, TargetConditions targetConditions, bool showProgress = false)
+        public void Execute(UnityMesh mesh, EdgeCollapseParameter collapseParam, TargetConditions targetConditions)
         {
-            _showProgress = showProgress;
             InitializeMesh(mesh, collapseParam, targetConditions);
             OptimizeMesh();
         }
 
-        public void Execute(UnityMesh mesh, EdgeCollapseParameter collapseParam, int targetTriangles, float targetMetric, bool showProgress = false)
+        public void Execute(UnityMesh mesh, EdgeCollapseParameter collapseParam, int targetTriangles, float targetMetric)
         {
             var targetOptions = new TargetConditions()
             {
                 faceCount = targetTriangles,
                 maxMetrix = targetMetric,
             };
-            Execute(mesh, collapseParam, targetOptions, showProgress);
+            Execute(mesh, collapseParam, targetOptions);
         }
 
         public void ToMesh(UnityMesh m)
@@ -95,87 +79,33 @@ namespace COMP302.Decimator
             _mesh?.ToMesh(m);
         }
 
-        public Face GetSelectedFace(Vector3 start, Vector3 end)
-        {
-            var hit = _bvh.Traverse((b) => {
-                return MeshUtil.IsLineInBox(start, end, b);
-            });
-
-            Face selected = null;
-            float minD = float.MaxValue;
-            for (int h = 0; h < hit.Count; h++)
-            {
-                var faces = hit[h].GObjects;
-                if (faces == null)
-                {
-                    continue;
-                }
-                for (int i = 0; i < faces.Count; i++)
-                {
-                    var face = faces[i];
-                    if (MeshUtil.IsLineIntersectTriangle(start, end, face.P(0), face.P(1), face.P(2), out Vector3 result))
-                    {
-                        Vector3 center = (face.P(0) + face.P(1) + face.P(2)) / 3;
-                        float d = (center - start).LengthSquared();
-                        if (d < minD)
-                        {
-                            minD = d;
-                            selected = face;
-                        }
-                    }
-                }
-            }
-            return selected;
-        }
-
-        public EdgeCollapse[] GetFaceCollapse(Face face)
-        {
-            var collapse = new List<EdgeCollapse>();
-            using (var tEnu = _heap.GetEnumerator())
-            {
-                while (tEnu.MoveNext())
-                {
-                    var edge = tEnu.Current;
-                    var v0 = edge.v0;
-                    var v1 = edge.v1;
-                    if ((v0 == face.V(0) && v1 == face.V(1)) || (v0 == face.V(1) && v1 == face.V(0)) ||
-                        (v0 == face.V(0) && v1 == face.V(2)) || (v0 == face.V(2) && v1 == face.V(0)) ||
-                        (v0 == face.V(1) && v1 == face.V(2)) || (v0 == face.V(2) && v1 == face.V(1)))
-                    {
-                        collapse.Add(edge);
-                    }
-                }
-            }
-            return [.. collapse];
-        }
         #endregion
 
         #region Internal Methods
         private void InitializeMesh(UnityMesh mesh, EdgeCollapseParameter collapseParam, TargetConditions targetOptions)
         {
-            StopWatch.Restart();
+            //StopWatch.Restart();
 
             _targetConditions = targetOptions;
             _mesh = new Mesh(mesh);
             _heap = new BinaryHeap<float, EdgeCollapse>(HEAP_RATIO * _mesh.FaceCount, float.MinValue, float.MaxValue);
-            _bvh = new BVH<Face>(new BVHFaceAdapter(), collapseParam.PreventIntersection ? _mesh.faces : []);
+            _bvh = new BVH<Face>(new BVHFaceAdapter(), collapseParam.PreventIntersection ? _mesh.Faces : []);
 
             _mesh.InitIMark();
-            EdgeCollapse.globalMark = 0;
-            EdgeCollapse.Init(_mesh, _heap, _bvh, collapseParam);
+            EdgeCollapseSharedData.Init(_mesh, _heap, _bvh, collapseParam);
 
             _initVertexCount = _mesh.VertexCount;
             _initFaceCount = _mesh.FaceCount;
             _currMetric = _heap.First.Priority();
 
-            _stopWatch.Stop();
-            Console.WriteLine($"<color=cyan>Initialization time: {_stopWatch.ElapsedMilliseconds / 1000f}</color>");
+            //_stopWatch.Stop();
+            //Console.WriteLine($"<color=cyan>Initialization time: {_stopWatch.ElapsedMilliseconds / 1000f}</color>");
 
         }
 
         private void OptimizeMesh()
         {
-            StopWatch.Restart();
+            _stopWatch.Restart();
 
             _currOperations = 0;
             while (!IsGoalReached() && _heap.Count > 0)
@@ -198,18 +128,18 @@ namespace COMP302.Decimator
                         Console.WriteLine(e);
                         break;
                     }
-                    if (_currOperations % PRINT_FREQUENCY == 0)
-                    {
-                        var status = GetCurrentStatus();
-                        Console.WriteLine(status);
-                    }
+                    //if (_currOperations % PRINT_FREQUENCY == 0)
+                    //{
+                    //    var status = GetCurrentStatus();
+                    //    Console.WriteLine(status);
+                    //}
                 }
             }
-            Console.WriteLine(GetCurrentStatus());
+            //Console.WriteLine(GetCurrentStatus());
 
-            StopWatch.Stop();
-            Console.WriteLine($"<color=cyan>Optimization time: {StopWatch.ElapsedMilliseconds / 1000f}</color>");
-            Console.WriteLine($"<color=lime>Original Face: {_initFaceCount}, Final Face: {_mesh.FaceCount}, Ratio: {_mesh.FaceCount * 100 / _initFaceCount}%</color>");
+            _stopWatch.Stop();
+            //Console.WriteLine($"<color=cyan>Optimization time: {StopWatch.ElapsedMilliseconds / 1000f}</color>");
+            //Console.WriteLine($"<color=lime>Original Face: {_initFaceCount}, Final Face: {_mesh.FaceCount}, Ratio: {_mesh.FaceCount * 100 / _initFaceCount}%</color>");
 
         }
 
@@ -223,10 +153,6 @@ namespace COMP302.Decimator
             return false;
         }
 
-        private string GetCurrentStatus()
-        {
-            return $"vert: {_mesh.VertexCount} face: {_mesh.FaceCount} bvh size: {_bvh.nodeCount} heap size: {_heap.Count} error: {_currMetric}";
-        }
         #endregion
     }
 }

@@ -5,13 +5,13 @@ namespace COMP302.Decimator
 {
     public class VertexPair
     {
-        public Vertex v0 { get; private set; }
-        public Vertex v1 { get; private set; }
+        public Vertex V0 { get; private set; }
+        public Vertex V1 { get; private set; }
 
         public VertexPair(Vertex v0, Vertex v1)
         {
-            this.v0 = v0;
-            this.v1 = v1;
+            V0 = v0;
+            V1 = v1;
         }
     }
 
@@ -30,54 +30,53 @@ namespace COMP302.Decimator
             User = 1 << 6,
         }
 
-        public Vector3 pos;
-        public Face vfParent;
-        public int vfIndex;
-        public int iMark = 0;
+        public Vector3 Pos;
+        public Face VfParent;
+        public int VfIndex;
+        public int IMark = 0;
+
+        public bool IsDeleted => HasFlag((int)VertexFlags.Deleted);
+        public bool IsVisited => HasFlag((int)VertexFlags.Visited);
+        public bool IsWritable => !HasFlag((int)VertexFlags.NotWrite);
 
         public Vertex(Vector3 pos)
         {
-            this.pos = pos;
+            Pos = pos;
         }
 
         public void InitIMark()
         {
-            this.iMark = 0;
+            IMark = 0;
         }
 
         #region Flags
-        public bool IsDeleted() => this.HasFlag((int)VertexFlags.Deleted);
-        public void SetDeleted() => this.AddFlag((int)VertexFlags.Deleted);
-        public void ClearDeleted() => this.RemoveFlag((int)VertexFlags.Deleted);
+        public void SetDeleted() => AddFlag((int)VertexFlags.Deleted);
 
-        public bool IsVisited() => this.HasFlag((int)VertexFlags.Visited);
-        public void SetVisited() => this.AddFlag((int)VertexFlags.Visited);
-        public void ClearVisited() => this.RemoveFlag((int)VertexFlags.Visited);
+        public void SetVisited() => AddFlag((int)VertexFlags.Visited);
+        public void ClearVisited() => RemoveFlag((int)VertexFlags.Visited);
 
-        public bool IsWritable() => !this.HasFlag((int)VertexFlags.NotWrite);
-        public void SetWritable() => this.RemoveFlag((int)VertexFlags.NotWrite);
-        public void ClearWritable() => this.AddFlag((int)VertexFlags.NotWrite);
+        public void ClearWritable() => AddFlag((int)VertexFlags.NotWrite);
         #endregion
 
         #region Operators
         public static bool operator <(Vertex X, Vertex Y)
         {
-            return (X.pos.Z != Y.pos.Z) ? (X.pos.Z < Y.pos.Z) : (X.pos.Y != Y.pos.Y) ? (X.pos.Y < Y.pos.Y) : (X.pos.X < Y.pos.X);
+            return (X.Pos.Z != Y.Pos.Z) ? (X.Pos.Z < Y.Pos.Z) : (X.Pos.Y != Y.Pos.Y) ? (X.Pos.Y < Y.Pos.Y) : (X.Pos.X < Y.Pos.X);
         }
 
         public static bool operator >(Vertex X, Vertex Y)
         {
-            return (X.pos.Z != Y.pos.Z) ? (X.pos.Z > Y.pos.Z) : (X.pos.Y != Y.pos.Y) ? (X.pos.Y > Y.pos.Y) : (X.pos.X > Y.pos.X);
+            return (X.Pos.Z != Y.Pos.Z) ? (X.Pos.Z > Y.Pos.Z) : (X.Pos.Y != Y.Pos.Y) ? (X.Pos.Y > Y.Pos.Y) : (X.Pos.X > Y.Pos.X);
         }
 
         public static bool operator <=(Vertex X, Vertex Y)
         {
-            return (X.pos.Z != Y.pos.Z) ? (X.pos.Z < Y.pos.Z) : (X.pos.Y != Y.pos.Y) ? (X.pos.Y < Y.pos.Y) : (X.pos.X <= Y.pos.X);
+            return (X.Pos.Z != Y.Pos.Z) ? (X.Pos.Z < Y.Pos.Z) : (X.Pos.Y != Y.Pos.Y) ? (X.Pos.Y < Y.Pos.Y) : (X.Pos.X <= Y.Pos.X);
         }
 
         public static bool operator >=(Vertex X, Vertex Y)
         {
-            return (X.pos.Z != Y.pos.Z) ? (X.pos.Z > Y.pos.Z) : (X.pos.Y != Y.pos.Y) ? (X.pos.Y > Y.pos.Y) : (X.pos.X >= Y.pos.X);
+            return (X.Pos.Z != Y.Pos.Z) ? (X.Pos.Z > Y.Pos.Z) : (X.Pos.Y != Y.Pos.Y) ? (X.Pos.Y > Y.Pos.Y) : (X.Pos.X >= Y.Pos.X);
         }
         #endregion
     }

@@ -32,7 +32,7 @@ namespace COMP302.Decimator
             for (int i = 1; i <= cap; ++i)
             {
                 data[i].key = supremum;
-                data[i].value = default(V);
+                data[i].value = default;
             }
         }
 

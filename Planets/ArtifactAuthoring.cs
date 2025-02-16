@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Numerics;
 using System.Threading.Tasks;
 using Planets.Colour;
@@ -33,7 +34,7 @@ namespace Planets
         private readonly int subdivisons = 4;
 
         private readonly bool generateIndirectMeshes = true;
-
+        private static Stopwatch _stopwatch = new(); 
         public ArtifactAuthoring()
         {
             //World.DefaultWorld.CreateSystem<TransformPlanetsSystem>();
@@ -213,10 +214,10 @@ namespace Planets
                     //indirectMeshes[i] = new(0,meshes[i]);
                 }
 
-                var now = DateTime.Now;
+                _stopwatch.Restart();
                 GPUMesh<Vertex>[] indirectMeshes = GPUMesh<Vertex>.BulkCreate(meshes);
-                var delta = DateTime.Now - now;
-                Console.WriteLine(string.Format("GPU Meshing: {0}ms", delta.TotalMilliseconds));
+                _stopwatch.Stop();
+                Console.WriteLine(string.Format("GPU Meshing: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
 
 
                 var childrenEntities = entityManager.GetComponent<Children>(planetInstance).Value;
@@ -326,7 +327,7 @@ namespace Planets
         private static void SubdividePlanet(Mesh[] shape,int subdivisons)
         {
             Console.WriteLine(string.Format("Begin Subdivison {0} steps", subdivisons));
-            var now = DateTime.Now;
+            _stopwatch.Restart();
             ParallelOptions options = new()
             {
                 MaxDegreeOfParallelism = 7
@@ -337,13 +338,13 @@ namespace Planets
                 shape[i].Subdivide(subdivisons);
             });
 
-            var delta = DateTime.Now - now;
-            Console.WriteLine(string.Format("Subdivide Mesh: {0}ms", delta.TotalMilliseconds));
+            _stopwatch.Stop();
+            Console.WriteLine(string.Format("Subdivide Mesh: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
 
         public static void GeneratePlanet(Entity planetRoot, ShapeGenerator generator)
         {
-            var now = DateTime.Now;
+            _stopwatch.Restart();
             MeshIndex[] meshIndices = World.DefaultWorld.EntityManager.GetComponentsInHierarchy<MeshIndex>(planetRoot);
 
             Mesh[] meshes = new Mesh[meshIndices.Length];
@@ -405,8 +406,8 @@ namespace Planets
                 World.DefaultWorld.EntityManager.SetComponent(planetRoot, properties);
             }
 
-            var delta = DateTime.Now - now;
-            Console.WriteLine(string.Format("Generated planet: {0}ms", delta.TotalMilliseconds));
+            _stopwatch.Stop();
+            Console.WriteLine(string.Format("Generated planet: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
 
         /// <summary>

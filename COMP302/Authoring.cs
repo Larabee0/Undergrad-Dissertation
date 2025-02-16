@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using COMP302.Decimator;
 using Planets;
@@ -15,8 +16,8 @@ namespace COMP302
 {
     public static class Authoring
     {
-        private static readonly int subdivisionsA = 20;
-        private static readonly int subdivisionsB = 20;
+        private static readonly int subdivisionsA = 25;
+        private static readonly int subdivisionsB = 25;
 
         private static readonly bool QuadricSimplification = true;
         private static readonly bool enableDevation = true;
@@ -24,6 +25,8 @@ namespace COMP302
 
         private static int tileIterCount = 10;
         private static readonly bool interAllTiles = true;
+
+        private static readonly Stopwatch _stopwatch = new();
 
         public static void Run()
         {
@@ -46,22 +49,40 @@ namespace COMP302
 
         private static void DoQuadricSimplification(Mesh[] aMeshes)
         {
-            var parameter = new EdgeCollapseParameter
+            _stopwatch.Restart();
+            ParallelOptions parallelOptions = new()
             {
-                UsedProperty = VertexProperty.UV0
+                MaxDegreeOfParallelism = 16
             };
+            Parallel.For(0, aMeshes.Length,parallelOptions, (int i) =>
+            {
+                Simplify(aMeshes[i]);
+            });
+
             for (int i = 0; i < aMeshes.Length; i++)
             {
-                var conditions = new TargetConditions
-                {
-                    faceCount = aMeshes[i].IndexCount / 3 / 2
-                };
-                var meshDecimation = new UnityMeshDecimation();
-                meshDecimation.Execute(aMeshes[i], parameter, conditions);
-                meshDecimation.ToMesh(aMeshes[i]);
-                //aMeshes[i].Optimise();
                 aMeshes[i].FlushMesh();
             }
+            _stopwatch.Stop();
+            Console.WriteLine(string.Format("Simplification time: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
+        }
+
+        private static void Simplify(Mesh mesh)
+        {
+            var parameter = new EdgeCollapseParameter
+            {
+                UsedProperty = VertexProperty.UV0,
+                PreserveBoundary = true,
+                NormalCheck = false,
+                BoundaryWeight = 0.5f
+            };
+            var conditions = new TargetConditions
+            {
+                faceCount = mesh.IndexCount / 3 / 2
+            };
+            var meshDecimation = new UnityMeshDecimation();
+            meshDecimation.Execute(mesh, parameter, conditions);
+            meshDecimation.ToMesh(mesh);
         }
 
         private static void GenerateAndCopyBack(out Mesh[] aMeshes, out Mesh[] bMeshes)
@@ -76,12 +97,12 @@ namespace COMP302
             World.DefaultWorld.EntityManager.SetComponent(a, new Translation() { Value = new(-5, 0, 0) });
             World.DefaultWorld.EntityManager.SetComponent(b, new Translation() { Value = new(15, 0, 0) });
 
-            var now = DateTime.Now;
+            _stopwatch.Restart();
             var allMeshes = GetMeshesFrom(World.DefaultWorld.EntityManager, a, b);
             aMeshes = allMeshes[0];
             bMeshes = allMeshes[1];
-            var delta = DateTime.Now - now;
-            Console.WriteLine(string.Format("Copy back time: {0}ms", delta.TotalMilliseconds));
+            _stopwatch.Stop();
+            Console.WriteLine(string.Format("Copy back time: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
 
         private static void DoDevation( Mesh[] aMeshes, Mesh[] bMeshes)
@@ -90,7 +111,7 @@ namespace COMP302
             {
                 tileIterCount = aMeshes.Length;
             }
-            var now = DateTime.Now;
+            _stopwatch.Restart();
             string[] stats = new string[tileIterCount];
             for (int i = 0; i < tileIterCount; i++)
             {
@@ -106,7 +127,7 @@ namespace COMP302
                 stats[i] = devation.GetStatisticsString();
             }
 
-            var delta = DateTime.Now - now;
+            _stopwatch.Stop();
 
             for (int i = 0; i < tileIterCount; i++)
             {
@@ -114,7 +135,7 @@ namespace COMP302
                 aMeshes[i].FlushMesh();
                 bMeshes[i].FlushMesh();
             }
-            Console.WriteLine(string.Format("Devation Calc: {0}ms", delta.TotalMilliseconds));
+            Console.WriteLine(string.Format("Devation Calc: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
 
         public static Mesh[][] GetMeshesFrom(EntityManager entityManager,params Entity[] hierarhcy)
@@ -145,7 +166,6 @@ namespace COMP302
             GPUBuffer<uint>[] indexBuffers = new GPUBuffer<uint>[meshes.Length];
 
             VkCommandBuffer copyBufferCmd = GraphicsDevice.Instance.BeginSingleTimeCommands();
-
             for (int i = 0; i < meshes.Length; i++)
             {
                 meshes[i] = Mesh.GetMeshAtIndex(entityManager.GetComponent<MeshIndex>(entities[i]).Value);

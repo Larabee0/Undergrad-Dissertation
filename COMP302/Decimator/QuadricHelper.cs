@@ -7,23 +7,21 @@ namespace COMP302.Decimator
     public sealed class QuadricHelper
     {
 
-        private static Dictionary<Vertex, List<(Vector<float>, Quadric)>> QuadricNTemp;
-        private static Dictionary<Vertex, Quadric> QuadricTemp;
+        private readonly Dictionary<Vertex, List<(Vector<float>, Quadric)>> QuadricNTemp = [];
+        private readonly Dictionary<Vertex, Quadric> QuadricTemp = [];
 
-        public static void Init(IEnumerable<Vertex> verts)
+        public QuadricHelper(IEnumerable<Vertex> verts)
         {
-            QuadricNTemp = new Dictionary<Vertex, List<(Vector<float>, Quadric)>>();
-            QuadricTemp = new Dictionary<Vertex, Quadric>();
             foreach (var vert in verts)
             {
                 var q = new Quadric(3);
                 q.Zero();
                 QuadricTemp[vert] = q;
-                QuadricNTemp[vert] = new List<(Vector<float>, Quadric)>();
+                QuadricNTemp[vert] = [];
             }
         }
 
-        public static void Alloc(Vertex vert, Vector<float> props)
+        public void Alloc(Vertex vert, Vector<float> props)
         {
             var qv = QuadricNTemp[vert];
             var newq = new Quadric(3 + props.Count);
@@ -32,7 +30,7 @@ namespace COMP302.Decimator
             qv.Add((props, newq));
         }
 
-        public static void SumAll(Vertex vert, Vector<float> props, Quadric q)
+        public void SumAll(Vertex vert, Vector<float> props, Quadric q)
         {
             var qv = QuadricNTemp[vert];
             for (int i = 0; i < qv.Count; i++)
@@ -49,7 +47,7 @@ namespace COMP302.Decimator
             }
         }
 
-        public static bool Contains(Vertex vert, Vector<float> props)
+        public bool Contains(Vertex vert, Vector<float> props)
         {
             var qv = QuadricNTemp[vert];
             for (int i = 0; i < qv.Count; i++)
@@ -63,7 +61,7 @@ namespace COMP302.Decimator
             return false;
         }
 
-        public static Quadric Qd(Vertex vert, Vector<float> props)
+        public Quadric Qd(Vertex vert, Vector<float> props)
         {
             var qv = QuadricNTemp[vert];
             for (int i = 0; i < qv.Count; i++)
@@ -77,22 +75,22 @@ namespace COMP302.Decimator
             return qv[0].Item2;
         }
 
-        public static Quadric Qd3(Vertex vert)
+        public Quadric Qd3(Vertex vert)
         {
             return QuadricTemp[vert];
         }
 
-        public static void Qd3(Vertex vert, Quadric value)
+        public void Qd3(Vertex vert, Quadric value)
         {
             QuadricTemp[vert] = value;
         }
 
-        public static List<(Vector<float>, Quadric)> Vd(Vertex vert)
+        public List<(Vector<float>, Quadric)> Vd(Vertex vert)
         {
             return QuadricNTemp[vert];
         }
 
-        public static void Vd(Vertex vert, List<(Vector<float>, Quadric)> value)
+        public void Vd(Vertex vert, List<(Vector<float>, Quadric)> value)
         {
             QuadricNTemp[vert] = value;
         }

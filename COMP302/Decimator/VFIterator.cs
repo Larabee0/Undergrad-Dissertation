@@ -4,44 +4,43 @@ namespace COMP302.Decimator
 {
     public class VFIterator : IEnumerator
     {
-        public Face f { get; private set; }
-        public int z { get; private set; }
+        public Face F { get; private set; }
+        public int Z { get; private set; }
 
-        private Vertex _v;
+        private readonly Vertex _v;
         private bool _init = false;
 
         public VFIterator(Vertex v)
         {
-            this._v = v;
+            _v = v;
         }
 
         public void Reset()
         {
-            this._init = false;
+            _init = false;
         }
 
         public bool MoveNext()
         {
-            if (!this._init)
+            if (!_init)
             {
-                this.f = this._v.vfParent;
-                this.z = this._v.vfIndex;
-                this._init = true;
+                F = _v.VfParent;
+                Z = _v.VfIndex;
+                _init = true;
             }
-            else if (this.f != null)
+            else if (F != null)
             {
-                var t = this.f;
-                this.f = t.vfParent[this.z];
-                this.z = t.vfIndex[this.z];
+                var t = F;
+                F = t.VfParent[Z];
+                Z = t.VfIndex[Z];
             }
-            return this.f != null;
+            return F != null;
         }
 
         public object Current => this;
 
-        public Vertex V() => this.f.V(this.z);
-        public Vertex V0() => this.f.V0(this.z);
-        public Vertex V1() => this.f.V1(this.z);
-        public Vertex V2() => this.f.V2(this.z);
+        public Vertex V0 => F.V0(Z);
+        public Vertex V1 => F.V1(Z);
+        public Vertex V2 => F.V2(Z);
     }
 }

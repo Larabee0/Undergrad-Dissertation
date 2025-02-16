@@ -6,48 +6,48 @@ namespace COMP302.Decimator
     public class Quadric
     {
 
-        public Matrix<double> a;
-        public Vector<double> b;
-        public double c;
+        public Matrix<double> A;
+        public Vector<double> B;
+        public double C;
 
         public Quadric(Quadric src)
         {
-            a = Matrix<double>.Build.Dense(src.a.RowCount, src.a.ColumnCount);
-            src.a.CopyTo(a);
-            b = Vector<double>.Build.Dense(src.b.Count);
-            src.b.CopyTo(b);
-            c = src.c;
+            A = Matrix<double>.Build.Dense(src.A.RowCount, src.A.ColumnCount);
+            src.A.CopyTo(A);
+            B = Vector<double>.Build.Dense(src.B.Count);
+            src.B.CopyTo(B);
+            C = src.C;
         }
 
         public Quadric(int size)
         {
-            a = Matrix<double>.Build.Dense(size, size);
-            b = Vector<double>.Build.Dense(size);
-            c = -1;
+            A = Matrix<double>.Build.Dense(size, size);
+            B = Vector<double>.Build.Dense(size);
+            C = -1;
         }
 
-        public int Size => b.Count;
+        public int Size => B.Count;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        bool IsValid() { return c >= 0; }
+        bool IsValid() { return C >= 0; }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        void SetInvalid() { c = -1; }
+        void SetInvalid() { C = -1; }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void CopyTo(Quadric dst)
         {
-            a.CopyTo(dst.a);
-            b.CopyTo(dst.b);
-            dst.c = c;
+            A.CopyTo(dst.A);
+            B.CopyTo(dst.B);
+            dst.C = C;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Zero()
         {
-            a.Clear();
-            b.Clear();
-            c = 0;
+            A.Clear();
+            B.Clear();
+            C = 0;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -57,15 +57,15 @@ namespace COMP302.Decimator
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    q3.a[i, j] += a[i, j];
+                    q3.A[i, j] += A[i, j];
                 }
             }
 
-            q3.b[0] += b[0];
-            q3.b[1] += b[1];
-            q3.b[2] += b[2];
+            q3.B[0] += B[0];
+            q3.B[1] += B[1];
+            q3.B[2] += B[2];
 
-            q3.c += c;
+            q3.C += C;
         }
 
         public void ByFace(Face face, Quadric q1, Quadric q2, Quadric q3, bool qualityQuadric, double borderWeight, VertexProperty property)
@@ -73,29 +73,29 @@ namespace COMP302.Decimator
             float q = face.GetQuality();
             if (q > 0)
             {
-                this.ByFace(face, true, property);
-                this.AddtoQ3(q1);
-                this.AddtoQ3(q2);
-                this.AddtoQ3(q3);
-                this.ByFace(face, false, property);
+                ByFace(face, true, property);
+                AddtoQ3(q1);
+                AddtoQ3(q2);
+                AddtoQ3(q3);
+                ByFace(face, false, property);
                 for (int i = 0; i < Face.VERTEX_COUNT; i++)
                 {
                     if (face.IsBorder(i) || qualityQuadric)
                     {
-                        Quadric temp = new Quadric(this.Size);
-                        Vector3 newPos = (face.P0(i) + face.P1(i)) / 2 + face.faceNormal * Vector3.Distance(face.P0(i), face.P1(i));
+                        Quadric temp = new(Size);
+                        Vector3 newPos = (face.P0(i) + face.P1(i)) / 2 + face.FaceNormal * Vector3.Distance(face.P0(i), face.P1(i));
                         Vector<float> newAttr = (face.GetPropertyS(property, (i + 0) % 3) + face.GetPropertyS(property, (i + 1) % 3)) / 2;
                         Vector3 oldPos = face.P2(i);
                         Vector<float> oldAttr = face.GetPropertyS(property, (i + 2) % 3);
 
-                        face.V2(i).pos = newPos;
+                        face.V2(i).Pos = newPos;
                         face.SetPropertyS(property, (i + 2) % 3, newAttr);
 
                         temp.ByFace(face, false, property);
                         temp.Scale(face.IsBorder(i) ? borderWeight : 0.05);
-                        this.Add(temp);
+                        Add(temp);
 
-                        face.V2(i).pos = oldPos;
+                        face.V2(i).Pos = oldPos;
                         face.SetPropertyS(property, (i + 2) % 3, oldAttr);
                     }
                 }
@@ -112,11 +112,11 @@ namespace COMP302.Decimator
 
                 if (!(a + b == c || a + c == b || b + c == a))
                 {
-                    this.ByFace(face, false, property);
+                    ByFace(face, false, property);
                 }
                 else
                 {
-                    this.Zero();
+                    Zero();
                 }
             }
         }
@@ -130,7 +130,7 @@ namespace COMP302.Decimator
 
             if (onlyGeo)
             {
-                for (int i = 3; i < this.Size; i++)
+                for (int i = 3; i < Size; i++)
                 {
                     p[i] = 0;
                     q[i] = 0;
@@ -138,10 +138,10 @@ namespace COMP302.Decimator
                 }
             }
 
-            Vector<double> e1 = Vector<double>.Build.Dense(this.Size);
-            Vector<double> e2 = Vector<double>.Build.Dense(this.Size);
-            this.ComputeE1E2(p, q, r, e1, e2);
-            this.ComputeQuadricFromE1E2(e1, e2, p);
+            Vector<double> e1 = Vector<double>.Build.Dense(Size);
+            Vector<double> e2 = Vector<double>.Build.Dense(Size);
+            ComputeE1E2(p, q, r, e1, e2);
+            ComputeQuadricFromE1E2(e1, e2, p);
 
             if (IsValid())
             {
@@ -199,8 +199,8 @@ namespace COMP302.Decimator
                         break;
                 }
 
-                this.ComputeE1E2(p, q, r, e1, e2);
-                this.ComputeQuadricFromE1E2(e1, e2, p);
+                ComputeE1E2(p, q, r, e1, e2);
+                ComputeQuadricFromE1E2(e1, e2, p);
 
                 if (IsValid())
                 {
@@ -210,17 +210,17 @@ namespace COMP302.Decimator
                 {
                     break;
                 }
-                else if (-c < minerror)
+                else if (-C < minerror)
                 {
-                    minerror = -c;
+                    minerror = -C;
                     minerrorIndex = i;
                 }
             }
-            c = 0;
+            C = 0;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void ComputeE1E2(Vector<double> p, Vector<double> q, Vector<double> r, Vector<double> e1, Vector<double> e2)
+        private static void ComputeE1E2(Vector<double> p, Vector<double> q, Vector<double> r, Vector<double> e1, Vector<double> e2)
         {
             (q - p).Normalize(2).CopyTo(e1);
 
@@ -230,36 +230,36 @@ namespace COMP302.Decimator
 
         private void ComputeQuadricFromE1E2(Vector<double> e1, Vector<double> e2, Vector<double> p)
         {
-            a = Matrix<double>.Build.DenseIdentity(this.Size);
+            A = Matrix<double>.Build.DenseIdentity(Size);
 
             var t1 = e1.OuterProduct(e1);
-            a -= t1;
+            A -= t1;
             var t2 = e2.OuterProduct(e2);
-            a -= t2;
+            A -= t2;
 
             var pe1 = p.DotProduct(e1);
             var pe2 = p.DotProduct(e2);
 
-            for (int i = 0; i < b.Count; i++)
+            for (int i = 0; i < B.Count; i++)
             {
-                b[i] = pe1 * e1[i] + pe2 * e2[i];
+                B[i] = pe1 * e1[i] + pe2 * e2[i];
             }
-            b -= p;
+            B -= p;
 
-            c = p.DotProduct(p) - pe1 * pe1 - pe2 * pe2;
+            C = p.DotProduct(p) - pe1 * pe1 - pe2 * pe2;
         }
 
         public bool MinimumWithGeoContraints(Vector<double> x, Vector<double> geo)
         {
-            Matrix<double> m = a.SubMatrix(3, Size - 3, 3, Size - 3);
+            Matrix<double> m = A.SubMatrix(3, Size - 3, 3, Size - 3);
             Vector<double> r = Vector<double>.Build.Dense(Size - 3);
 
             for (int i = 0; i < r.Count; i++)
             {
-                r[i] = b[i + 3];
+                r[i] = B[i + 3];
                 for (int j = 0; j < 3; j++)
                 {
-                    r[i] += a[i + 3, j] * geo[j];
+                    r[i] += A[i + 3, j] * geo[j];
                 }
             }
 
@@ -282,9 +282,9 @@ namespace COMP302.Decimator
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Minimum(Vector<double> x)
         {
-            if (a.Determinant() != 0)
+            if (A.Determinant() != 0)
             {
-                (-b * a.Inverse()).CopyTo(x);
+                (-B * A.Inverse()).CopyTo(x);
                 return true;
             }
             return false;
@@ -293,18 +293,18 @@ namespace COMP302.Decimator
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Add(Quadric q)
         {
-            for (int i = 0; i < a.RowCount; i++)
+            for (int i = 0; i < A.RowCount; i++)
             {
-                for (int j = 0; j < a.ColumnCount; j++)
+                for (int j = 0; j < A.ColumnCount; j++)
                 {
-                    a[i, j] += q.a[i, j];
+                    A[i, j] += q.A[i, j];
                 }
             }
-            for (int i = 0; i < b.Count; i++)
+            for (int i = 0; i < B.Count; i++)
             {
-                b[i] += q.b[i];
+                B[i] += q.B[i];
             }
-            c += q.c;
+            C += q.C;
         }
 
         public void Sum3(Quadric q3, Vector<float> props)
@@ -318,46 +318,46 @@ namespace COMP302.Decimator
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    a[i, j] += q3.a[i, j];
+                    A[i, j] += q3.A[i, j];
                 }
             }
-            for (int i = 3; i < this.Size; i++)
+            for (int i = 3; i < Size; i++)
             {
-                a[i, i] += 1;
+                A[i, i] += 1;
             }
 
-            b[0] += q3.b[0];
-            b[1] += q3.b[1];
-            b[2] += q3.b[2];
-            for (int i = 3; i < this.Size; i++)
+            B[0] += q3.B[0];
+            B[1] += q3.B[1];
+            B[2] += q3.B[2];
+            for (int i = 3; i < Size; i++)
             {
-                b[i] -= props[i - 3];
+                B[i] -= props[i - 3];
             }
 
-            c += q3.c + props.DotProduct(props);
+            C += q3.C + props.DotProduct(props);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Scale(double val)
         {
-            for (int i = 0; i < a.RowCount; i++)
+            for (int i = 0; i < A.RowCount; i++)
             {
-                for (int j = 0; j < a.ColumnCount; j++)
+                for (int j = 0; j < A.ColumnCount; j++)
                 {
-                    a[i, j] *= val;
+                    A[i, j] *= val;
                 }
             }
-            for (int i = 0; i < b.Count; i++)
+            for (int i = 0; i < B.Count; i++)
             {
-                b[i] *= val;
+                B[i] *= val;
             }
-            c *= val;
+            C *= val;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public double Apply(Vector<double> v)
         {
-            return (a * v).DotProduct(v) + 2 * b.DotProduct(v) + c;
+            return (A * v).DotProduct(v) + 2 * B.DotProduct(v) + C;
         }
     }
 }

@@ -28,14 +28,14 @@ namespace COMP302.Decimator
     {
         public const int UV_COUNT = 8;
 
-        public List<Vertex> verts { get; private set; }
-        public List<Face> faces { get; private set; }
+        public List<Vertex> Verts { get; private set; }
+        public List<Face> Faces { get; private set; }
 
         public int VertexCount { get; private set; }
         public int FaceCount { get; private set; }
         public int[] UvSizes { get; private set; }
 
-        public VertexProperty properties => (VertexProperty)flags;
+        public VertexProperty Properties => (VertexProperty)_flags;
 
         public Mesh(VECS.Mesh mesh)
         {
@@ -55,7 +55,7 @@ namespace COMP302.Decimator
             }
 
             var vertDic = new Dictionary<Vector3, Vertex>();
-            faces = [];
+            Faces = [];
             var indices = mesh.Indices;
 
             for (int j = 0; j < indices.Length; j += 3)
@@ -72,15 +72,15 @@ namespace COMP302.Decimator
                     }
                     face.V(k) = vert;
 
-                    if (HasFlag((int)VertexProperty.Normal)) face.normals[k] = normals[index];
-                    if (HasFlag((int)VertexProperty.UV0)) face.uvs[k] = uvs[index];
+                    if (HasFlag((int)VertexProperty.Normal)) face.Normals[k] = normals[index];
+                    if (HasFlag((int)VertexProperty.UV0)) face.Uvs[k] = uvs[index];
                 }
                 face.BuildFaceNormal();
-                faces.Add(face);
+                Faces.Add(face);
             }
-            verts = [.. vertDic.Values];
-            FaceCount = faces.Count;
-            VertexCount = verts.Count;
+            Verts = [.. vertDic.Values];
+            FaceCount = Faces.Count;
+            VertexCount = Verts.Count;
         }
 
         public void ToMesh(VECS.Mesh dstMesh)
@@ -92,19 +92,19 @@ namespace COMP302.Decimator
 
             var subMeshes = new List<uint>();
 
-            for (int i = 0; i < faces.Count; i++)
+            for (int i = 0; i < Faces.Count; i++)
             {
-                var face = faces[i];
+                var face = Faces[i];
                 if (!face.IsDeleted())
                 {
                     for (int j = 0; j < Face.VERTEX_COUNT; j++)
                     {
-                        var key = face.GetPropertyS((VertexProperty)flags, j);
+                        var key = face.GetPropertyS((VertexProperty)_flags, j);
                         if (!dic.TryGetValue(key, out uint idx))
                         {
-                            vertices.Add(face.V(j).pos);
-                            if (HasFlag((int)VertexProperty.Normal)) normals.Add(face.normals[j]);
-                            if (HasFlag((int)VertexProperty.UV0)) uvs.Add(face.uvs[j]);
+                            vertices.Add(face.V(j).Pos);
+                            if (HasFlag((int)VertexProperty.Normal)) normals.Add(face.Normals[j]);
+                            if (HasFlag((int)VertexProperty.UV0)) uvs.Add(face.Uvs[j]);
                             idx = (uint)vertices.Count - 1;
                             dic.Add(key, idx);
                         }
@@ -133,33 +133,33 @@ namespace COMP302.Decimator
 
         public void InitIMark()
         {
-            for (int i = 0; i < verts.Count; i++)
+            for (int i = 0; i < Verts.Count; i++)
             {
-                if (!verts[i].IsDeleted())
+                if (!Verts[i].IsDeleted)
                 {
-                    verts[i].InitIMark();
+                    Verts[i].InitIMark();
                 }
             }
         }
 
         public void BuildVertexFace()
         {
-            for (int i = 0; i < verts.Count; i++)
+            for (int i = 0; i < Verts.Count; i++)
             {
-                verts[i].vfParent = null;
-                verts[i].vfIndex = 0;
+                Verts[i].VfParent = null;
+                Verts[i].VfIndex = 0;
             }
-            for (int i = 0; i < faces.Count; i++)
+            for (int i = 0; i < Faces.Count; i++)
             {
-                var face = faces[i];
+                var face = Faces[i];
                 if (!face.IsDeleted())
                 {
                     for (int j = 0; j < Face.VERTEX_COUNT; j++)
                     {
-                        face.vfParent[j] = face.V(j).vfParent;
-                        face.vfIndex[j] = face.V(j).vfIndex;
-                        face.V(j).vfParent = face;
-                        face.V(j).vfIndex = j;
+                        face.VfParent[j] = face.V(j).VfParent;
+                        face.VfIndex[j] = face.V(j).VfIndex;
+                        face.V(j).VfParent = face;
+                        face.V(j).VfIndex = j;
                     }
                 }
             }
@@ -167,40 +167,40 @@ namespace COMP302.Decimator
 
         public void BuildFaceBorder()
         {
-            for (int i = 0; i < faces.Count; i++)
+            for (int i = 0; i < Faces.Count; i++)
             {
-                faces[i].ClearBorderFlags();
+                Faces[i].ClearBorderFlags();
             }
             int[] borderFlags = [(int)Face.FaceFlags.Border0, (int)Face.FaceFlags.Border1, (int)Face.FaceFlags.Border2];
-            for (int i = 0; i < verts.Count; i++)
+            for (int i = 0; i < Verts.Count; i++)
             {
-                var vertex = verts[i];
-                if (!vertex.IsDeleted())
+                var vertex = Verts[i];
+                if (!vertex.IsDeleted)
                 {
                     var vfi = new VFIterator(vertex);
                     while (vfi.MoveNext())
                     {
-                        vfi.f.V1(vfi.z).ClearVisited();
-                        vfi.f.V2(vfi.z).ClearVisited();
+                        vfi.F.V1(vfi.Z).ClearVisited();
+                        vfi.F.V2(vfi.Z).ClearVisited();
                     }
                     vfi.Reset();
                     while (vfi.MoveNext())
                     {
-                        if (vfi.f.V1(vfi.z).IsVisited()) vfi.f.V1(vfi.z).ClearVisited();
-                        else vfi.f.V1(vfi.z).SetVisited();
-                        if (vfi.f.V2(vfi.z).IsVisited()) vfi.f.V2(vfi.z).ClearVisited();
-                        else vfi.f.V2(vfi.z).SetVisited();
+                        if (vfi.F.V1(vfi.Z).IsVisited) vfi.F.V1(vfi.Z).ClearVisited();
+                        else vfi.F.V1(vfi.Z).SetVisited();
+                        if (vfi.F.V2(vfi.Z).IsVisited) vfi.F.V2(vfi.Z).ClearVisited();
+                        else vfi.F.V2(vfi.Z).SetVisited();
                     }
                     vfi.Reset();
                     while (vfi.MoveNext())
                     {
-                        if (vfi.f.V(vfi.z) < vfi.f.V1(vfi.z) && vfi.f.V1(vfi.z).IsVisited())
+                        if (vfi.F.V(vfi.Z) < vfi.F.V1(vfi.Z) && vfi.F.V1(vfi.Z).IsVisited)
                         {
-                            vfi.f.AddFlag(borderFlags[vfi.z]);
+                            vfi.F.AddFlag(borderFlags[vfi.Z]);
                         }
-                        if (vfi.f.V(vfi.z) < vfi.f.V2(vfi.z) && vfi.f.V2(vfi.z).IsVisited())
+                        if (vfi.F.V(vfi.Z) < vfi.F.V2(vfi.Z) && vfi.F.V2(vfi.Z).IsVisited)
                         {
-                            vfi.f.AddFlag(borderFlags[(vfi.z + 2) % 3]);
+                            vfi.F.AddFlag(borderFlags[(vfi.Z + 2) % 3]);
                         }
                     }
                 }
