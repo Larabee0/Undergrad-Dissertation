@@ -543,9 +543,10 @@ namespace VECS
             var vertices = GetFullVertexData<Vector3>(VertexAttribute.Position);
             var faceNormals = new Vector3[_allocatedIndexCount / 3];
 
-            for (int i = 0; i < vertices.Length; i++)
+            for (int i = 0; i < faceNormals.Length; i++)
             {
-                faceNormals[i] = Vector3.Cross(vertices[(int)_faces[i][1]] - vertices[(int)_faces[i][0]], vertices[(int)_faces[i][2]] - vertices[(int)_faces[i][0]]);
+                var v0 = vertices[(int)_faces[i][0]];
+                faceNormals[i] = Vector3.Cross(vertices[(int)_faces[i][1]] - v0, vertices[(int)_faces[i][2]] - v0);
             }
 
             return faceNormals;

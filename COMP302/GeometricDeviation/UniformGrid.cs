@@ -371,7 +371,7 @@ namespace COMP302
                         (c.X - a.X) * (b.Y - a.Y);
         }
 
-        private unsafe void DistancePoint2Face(Neighborhood neighbors, Vector3 p, int f)
+        private void DistancePoint2Face(Neighborhood neighbors, Vector3 p, int f)
         {
 
             int i, j, k = 0;
@@ -401,11 +401,10 @@ namespace COMP302
             // If Distance < Error
             if (MathF.Abs(d) < neighbors.Distance())
             {
-                float* pMfn = stackalloc[] { mfn[f].X, mfn[f].Y, mfn[f].Z };
                 // Find largest component
                 for (i = 0; i < 3; i++)
                 {
-                    m = MathF.Abs(pMfn[i]); // Current Component
+                    m = MathF.Abs(mfn[f][i]); // Current Component
                     if (m > l)              // Biggest component
                     {
                         l = m;      // Save value
@@ -417,32 +416,24 @@ namespace COMP302
                 // project out coordinate "k"
                 j = 0;
 
-                float* pmva = stackalloc[] { mv[a].X, mv[a].Y, mv[a].Z };
-                float* pmvb = stackalloc[] { mv[b].X, mv[b].Y, mv[b].Z };
-                float* pmvc = stackalloc[] { mv[c].X, mv[c].Y, mv[c].Z };
-                float* pu = stackalloc[] { u.X, u.Y, u.Z };
-                float* paa = stackalloc[] { aa.X, aa.Y };
-                float* pbb = stackalloc[] { bb.X, bb.Y };
-                float* pcc = stackalloc[] { cc.X, cc.Y };
-                float* ppp = stackalloc[] { pp.X, pp.Y };
                 for (i = 0; i < 3; i++) 
                 {
                     if (i != k)
                     {
-                        paa[j] = pmva[i];
-                        pbb[j] = pmvb[i];
-                        pcc[j] = pmvc[i];
-                        ppp[j] = pu[i];
+                        aa[j] = mv[a][i];
+                        bb[j] = mv[b][i];
+                        cc[j] = mv[c][i];
+                        pp[j] = u[i];
                         j++;
                     }
                 }
 
-                aa.X = paa[0]; aa.Y = paa[1];
+                aa.X = aa[0]; aa.Y = aa[1];
 
-                bb.X = pbb[0]; bb.Y = pbb[1];
+                bb.X = bb[0]; bb.Y = bb[1];
 
-                cc.X = pcc[0]; cc.Y = pcc[1];
-                pp.X = ppp[0]; pp.Y = ppp[1];
+                cc.X = cc[0]; cc.Y = cc[1];
+                pp.X = pp[0]; pp.Y = pp[1];
 
                 // compute areas
                 l = Area2D(pp, aa, bb);
