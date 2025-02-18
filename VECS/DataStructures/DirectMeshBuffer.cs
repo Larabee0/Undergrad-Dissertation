@@ -180,6 +180,7 @@ namespace VECS
         private bool _disposed;
         private readonly Dictionary<VertexAttribute, GPUBuffer> _vertexBuffers;
         private Vector3UInt[] _faces;
+        private Vector3UInt[] _faceOffsets;
         private Vector3[] _faceNormals;
 
 
@@ -240,6 +241,18 @@ namespace VECS
                     _indexBuffer.TryAllocHostBuffer(true);
                 }
                 return _indexBuffer.HostBuffer;
+            }
+        }
+
+        private Span<uint> IndexOffsets
+        {
+            get
+            {
+                if(IndexOffsetBuffer.HostBuffer == Span<uint>.Empty)
+                {
+                    IndexOffsetBuffer.TryAllocHostBuffer(true);
+                }
+                return IndexOffsetBuffer.HostBuffer;
             }
         }
 
@@ -449,7 +462,7 @@ namespace VECS
 
         public Span<Vector3> GetFaceNormalsSpan(uint offset, uint length)
         {
-            _faceNormals ??= ComputeFaceNormals();
+            ForceCrunchFaceData();
 
             return _faceNormals.AsSpan((int)offset / 3, (int)length / 3);
         }
@@ -524,7 +537,9 @@ namespace VECS
 
         public void ForceCrunchFaceData()
         {
-            _faces = CrunchIndicesToFaces();
+            _faces ??= CrunchIndicesToFaces();
+            _faceOffsets ??= CrunchIndexOffsetsToFaceOffsets();
+            _faceNormals ??= ComputeFaceNormals();
         }
 
         private unsafe Vector3UInt[] CrunchIndicesToFaces()
@@ -538,15 +553,28 @@ namespace VECS
             return faces;
         }
 
+        private unsafe Vector3UInt[] CrunchIndexOffsetsToFaceOffsets()
+        {
+            var faceOffsets = new Vector3UInt[IndexBufferLength / 3];
+
+            fixed (void* pIndexOffsets = &IndexOffsets[0])
+            fixed (void* pFaceOffsets = &faceOffsets[0])
+                NativeMemory.Copy(pIndexOffsets, pFaceOffsets, (nuint)(IndexBufferLength * sizeof(uint)));
+
+            return faceOffsets;
+        }
+
         private Vector3[] ComputeFaceNormals()
         {
             var vertices = GetFullVertexData<Vector3>(VertexAttribute.Position);
-            var faceNormals = new Vector3[_allocatedIndexCount / 3];
+            var faceNormals = new Vector3[IndexBufferLength / 3];
 
             for (int i = 0; i < faceNormals.Length; i++)
             {
-                var v0 = vertices[(int)_faces[i][0]];
-                faceNormals[i] = Vector3.Cross(vertices[(int)_faces[i][1]] - v0, vertices[(int)_faces[i][2]] - v0);
+                var v0 = vertices[(int)(_faces[i][0] + _faceOffsets[i][0])];
+                var v1 = vertices[(int)(_faces[i][1] + _faceOffsets[i][1])];
+                var v2 = vertices[(int)(_faces[i][2] + _faceOffsets[i][2])];
+                faceNormals[i] = Vector3.Normalize(Vector3.Cross(v1 - v0, v2 - v0));
             }
 
             return faceNormals;
