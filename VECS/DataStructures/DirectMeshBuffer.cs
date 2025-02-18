@@ -541,7 +541,7 @@ namespace VECS
         private Vector3[] ComputeFaceNormals()
         {
             var vertices = GetFullVertexData<Vector3>(VertexAttribute.Position);
-            var faceNormals = new Vector3[vertices.Length];
+            var faceNormals = new Vector3[_allocatedIndexCount / 3];
 
             for (int i = 0; i < vertices.Length; i++)
             {
