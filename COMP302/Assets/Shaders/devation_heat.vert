@@ -1,9 +1,8 @@
-#version 450
+#version 460
 
 layout (location = 0) in vec3 position;
 layout (location = 1) in vec3 normal;
-layout (location = 2) in float elevation;
-layout (location = 3) in float biome;
+layout (location = 2) in vec2 uv;
 	   
 layout (location = 0) out vec3 fragColour;
 layout (location = 1) out vec3 fragPosWorld;
@@ -44,12 +43,12 @@ void main()
 	float lightIntensity = AMBIENT + max(dot(fragNormalWorld, DIRECTION_TO_LIGHT), 0);
 	
 	fragPosWorld = positionWorld.xyz;
-	fragElevation = elevation;
-	if (elevation < 0) fragColour = vec3(0, 0, 0);
-    else if (elevation < 0.25) fragColour =vec3(0, elevation * 4.0, 1);
-    else if (elevation < 0.50) fragColour =vec3(0, 1, 1 - (elevation - 0.25) * 4.0);
-    else if (elevation < 0.75) fragColour =vec3((elevation - 0.5f) * 4.0, 1, 0);
-    else if (elevation < 1) fragColour =vec3(1, 1.0 - (elevation - 0.75) * 4.0f, 0);
+	fragElevation = uv.x;
+	if (uv.x < 0) fragColour = vec3(0, 0, 0);
+    else if (uv.x < 0.25) fragColour =vec3(0, uv.x * 4.0, 1);
+    else if (uv.x < 0.50) fragColour =vec3(0, 1, 1 - (uv.x - 0.25) * 4.0);
+    else if (uv.x < 0.75) fragColour =vec3((uv.x - 0.5f) * 4.0, 1, 0);
+    else if (uv.x < 1) fragColour =vec3(1, 1.0 - (uv.x - 0.75) * 4.0f, 0);
     else fragColour =vec3(1, 0, 0);
 
 	fragColour = fragColour * lightIntensity;

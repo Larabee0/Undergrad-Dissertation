@@ -34,7 +34,7 @@ namespace Planets
         private static readonly bool useComputeShaderForGeneration = true;
         private readonly int subdivisons = 4;
 
-        private readonly bool generateIndirectMeshes = true;
+        private readonly bool generateIndirectMeshes = false;
         private static Material indirectMeshMaterial;
         private static Stopwatch _stopwatch = new(); 
         public ArtifactAuthoring()
@@ -60,7 +60,7 @@ namespace Planets
             //});
 
             // LoadTestScene(entityManager);
-            var prefabPlanet = CreatePrefabPlanet(entityManager);
+            //var prefabPlanet = CreatePrefabPlanet(entityManager);
             VertexAttributeDescription[] vertexAttributeDescriptions = [
                 new(VertexAttribute.Position,VertexAttributeFormat.Float3,0,0,0),
                 new(VertexAttribute.Normal,VertexAttributeFormat.Float3,0,1,1),
@@ -76,7 +76,7 @@ namespace Planets
                 new DescriptorSetBinding() { Count = 1, DescriptorType = VkDescriptorType.StorageBuffer, StageFlags = VkShaderStageFlags.Vertex}
                 );
             
-            CreateSinglePlanetTestScene(entityManager, prefabPlanet);
+            //CreateSinglePlanetTestScene(entityManager, prefabPlanet);
 
             Console.WriteLine("Shape loaded");
             GeometryStats();

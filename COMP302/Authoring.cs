@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Threading.Tasks;
 using COMP302.Decimator;
 using Planets;
+using Planets.Colour;
 using VECS;
 using VECS.DataStructures;
 using VECS.ECS;
@@ -17,8 +18,8 @@ namespace COMP302
 {
     public static class Authoring
     {
-        private static readonly int subdivisionsA = 10;
-        private static readonly int subdivisionsB = 10;
+        private static readonly int subdivisionsA = 25;
+        private static readonly int subdivisionsB = 25;
 
         private static readonly bool QuadricSimplification = true;
         private static readonly bool enableDevation = true;
@@ -33,13 +34,6 @@ namespace COMP302
         {
             GenerateAndCopyBack(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes);
 
-            //Mesh.SaveToFile(aMeshes[0], System.IO.Path.Combine(Mesh.DefaultMeshPath, "Tile_Test.obj"));
-
-            //var mesh = Mesh.LoadModelFromFile(Mesh.GetMeshInDefaultPath("Tile_Test.obj"))[0];
-            //aMeshes[0].Vertices = mesh.Vertices;
-            //aMeshes[0].Indices = mesh.Indices;
-            //aMeshes[0].Optimise();
-            //aMeshes[0].FlushMesh();
             if (QuadricSimplification)
                 DoQuadricSimplification(aMeshes);
 
@@ -86,7 +80,15 @@ namespace COMP302
 
         private static void GenerateAndCopyBack(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes)
         {
-            var lit = new Material("devation_heat.vert", "devation_heat.frag", typeof(ModelPushConstantData));
+            VertexAttributeDescription[] vertexAttributeDescriptions = [
+                new(VertexAttribute.Position,VertexAttributeFormat.Float3,0,0,0),
+                new(VertexAttribute.Normal,VertexAttributeFormat.Float3,0,1,1),
+                new(VertexAttribute.TexCoord0,VertexAttributeFormat.Float2,0,2,2),
+            ];
+
+            var bindingDescriptions = DirectMeshBuffer.GetBindingDescription(vertexAttributeDescriptions);
+            var attributeDescriptions = DirectMeshBuffer.GetAttributeDescriptions(vertexAttributeDescriptions);
+            var lit = new Material("devation_heat.vert", "devation_heat.frag", typeof(ModelPushConstantData), bindingDescriptions, attributeDescriptions);
 
             World.DefaultWorld.CreateSystem<TexturelessRenderSystem>();
 
@@ -100,6 +102,8 @@ namespace COMP302
             var allMeshes = GetMeshesFrom(World.DefaultWorld.EntityManager, a, b);
             aMeshes = allMeshes[0];
             bMeshes = allMeshes[1];
+            aMeshes[0].DirectMeshBuffer.ReadAllBuffers();
+            bMeshes[0].DirectMeshBuffer.ReadAllBuffers();
             _stopwatch.Stop();
             Console.WriteLine(string.Format("Copy back time: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
@@ -137,6 +141,8 @@ namespace COMP302
             }
             aMeshes[0].DirectMeshBuffer.FlushAll();
             bMeshes[0].DirectMeshBuffer.FlushAll();
+            //DirectMeshBuffer.RecalcualteAllNormals(aMeshes[0].DirectMeshBuffer);
+            //DirectMeshBuffer.RecalcualteAllNormals(bMeshes[0].DirectMeshBuffer);
             Console.WriteLine(string.Format("Devation Calc: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
 
@@ -177,7 +183,7 @@ namespace COMP302
             
             }
             //GraphicsDevice.Instance.EndSingleTimeCommands(copyBufferCmd);
-
+            
             DirectSubMesh[][] splits = new DirectSubMesh[hierarhcy.Length][];
 
             for (int i = 0; i < hierarhcy.Length; i++)
