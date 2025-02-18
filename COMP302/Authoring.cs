@@ -19,9 +19,9 @@ namespace COMP302
     public static class Authoring
     {
         private static readonly int subdivisionsA = 25;
-        private static readonly int subdivisionsB = 25;
+        private static readonly int subdivisionsB = 10;
 
-        private static readonly bool QuadricSimplification = true;
+        private static readonly bool QuadricSimplification = false;
         private static readonly bool enableDevation = true;
         private static readonly bool parallelDevation = true;
 
@@ -49,7 +49,7 @@ namespace COMP302
             {
                 MaxDegreeOfParallelism = 16
             };
-            aMeshes[0].DirectMeshBuffer.ReadAllBuffers();
+            //aMeshes[0].DirectMeshBuffer.ReadAllBuffers();
             Parallel.For(0, aMeshes.Length,parallelOptions, (int i) =>
             {
                 Simplify(aMeshes[i]);
@@ -141,8 +141,8 @@ namespace COMP302
             }
             aMeshes[0].DirectMeshBuffer.FlushAll();
             bMeshes[0].DirectMeshBuffer.FlushAll();
-            //DirectMeshBuffer.RecalcualteAllNormals(aMeshes[0].DirectMeshBuffer);
-            //DirectMeshBuffer.RecalcualteAllNormals(bMeshes[0].DirectMeshBuffer);
+            DirectMeshBuffer.RecalcualteAllNormals(aMeshes[0].DirectMeshBuffer);
+            DirectMeshBuffer.RecalcualteAllNormals(bMeshes[0].DirectMeshBuffer);
             Console.WriteLine(string.Format("Devation Calc: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
 

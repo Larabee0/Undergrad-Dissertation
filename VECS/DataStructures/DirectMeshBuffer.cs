@@ -7,6 +7,7 @@ using VECS.ECS.Presentation;
 using VECS.LowLevel;
 using Vortice.Vulkan;
 using System.Collections.Concurrent;
+using System.Threading.Tasks;
 
 namespace VECS
 {
@@ -821,13 +822,28 @@ namespace VECS
             return DirectMeshes.IndexOf(mesh);
         }
 
-        public void ReadAllBuffers()
+        public unsafe void ReadAllBuffers()
         {
-            foreach (var buffer in _vertexBuffers.Values)
+            GPUBuffer[] buffers = [_indexBuffer, .. _vertexBuffers.Values];
+            GPUBuffer[] tmpReadBuffers = new GPUBuffer[buffers.Length];
+            for (int i = 0; i < buffers.Length; i++)
             {
-                buffer.ReadToHostBuffer();
+                tmpReadBuffers[i] = new GPUBuffer(buffers[i].UInstanceCount, buffers[i].InstanceSize, VkBufferUsageFlags.TransferDst, true);
             }
-            _indexBuffer.ReadToHostBuffer();
+            VkCommandBuffer singleTime = GraphicsDevice.Instance.BeginSingleTimeCommands();
+            for (int i = 0; i < buffers.Length; i++)
+            {
+                buffers[i].CopyTo(singleTime, tmpReadBuffers[i]);
+            }
+            GraphicsDevice.Instance.EndSingleTimeCommands(singleTime);
+
+            for (int i = 0; i < buffers.Length; i++)
+            {
+                buffers[i].TryAllocHostBuffer(false);
+                NativeMemory.Copy(tmpReadBuffers[i].HostPtr, buffers[i].HostPtr, (nuint)tmpReadBuffers[i].BufferSize);
+                tmpReadBuffers[i].Dispose();
+            }
+
         }
 
         public void SoftReallocateSubMesh(int subMeshIndex, DirectSubMeshCreateData directSubMeshCreateData)
