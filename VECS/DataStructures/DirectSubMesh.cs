@@ -101,7 +101,7 @@ namespace VECS
             Vector3 min = new(minX, minY, minZ);
             Vector3 max = new(maxX, maxY, maxZ);
 
-            Vector3 extents = (min - max) * 0.5f;
+            Vector3 extents = (max - min) * 0.5f;
             Vector3 centerAlt = (min + max) * 0.5f;
             Vector3 center = min + extents;
 
