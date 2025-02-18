@@ -1,6 +1,7 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
+using VECS;
 using Vector2 = System.Numerics.Vector2;
 using Vector3 = System.Numerics.Vector3;
 
@@ -37,26 +38,20 @@ namespace COMP302.Decimator
 
         public VertexProperty Properties => (VertexProperty)_flags;
 
-        public Mesh(VECS.Mesh mesh)
+        public Mesh(DirectSubMesh mesh)
         {
-            var VECSVertices = mesh.Vertices;
-            var vertices = new Vector3[mesh.VertexCount];
-            var normals = new Vector3[mesh.VertexCount];
-            var uvs = new Vector2[mesh.VertexCount];
+            var vertices = mesh.Vertices;
+            var normals = mesh.GetVertexDataSpan<Vector3>(VertexAttribute.Normal);
+            var uvs = mesh.GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
 
             AddFlag((int)VertexProperty.Position);
             if (normals.Length > 0) AddFlag((int)VertexProperty.Normal);
             if (uvs.Length > 0) AddFlag((int)VertexProperty.UV0);
-            for (int i = 0; i < mesh.VertexCount; i++)
-            {
-                vertices[i] = VECSVertices[i].Position;
-                normals[i] = VECSVertices[i].Normal;
-                uvs[i] = new(VECSVertices[i].Elevation, VECSVertices[i].BiomeSelect);
-            }
+            
 
             var vertDic = new Dictionary<Vector3, Vertex>();
             Faces = [];
-            var indices = mesh.Indices;
+            var indices = mesh.Indicies;
 
             for (int j = 0; j < indices.Length; j += 3)
             {
@@ -64,7 +59,7 @@ namespace COMP302.Decimator
                 for (int k = 0; k < Face.VERTEX_COUNT; k++)
                 {
                     var index = indices[j + k];
-                    var v = vertices[index];
+                    var v = vertices[(int)index];
                     if (!vertDic.TryGetValue(v, out Vertex vert))
                     {
                         vert = new Vertex(v);
@@ -72,8 +67,8 @@ namespace COMP302.Decimator
                     }
                     face.V(k) = vert;
 
-                    if (HasFlag((int)VertexProperty.Normal)) face.Normals[k] = normals[index];
-                    if (HasFlag((int)VertexProperty.UV0)) face.Uvs[k] = uvs[index];
+                    if (HasFlag((int)VertexProperty.Normal)) face.Normals[k] = normals[(int)index];
+                    if (HasFlag((int)VertexProperty.UV0)) face.Uvs[k] = uvs[(int)index];
                 }
                 face.BuildFaceNormal();
                 Faces.Add(face);
@@ -83,7 +78,7 @@ namespace COMP302.Decimator
             VertexCount = Verts.Count;
         }
 
-        public void ToMesh(VECS.Mesh dstMesh)
+        public void ToMesh(DirectSubMesh dstMesh)
         {
             var dic = new Dictionary<Vector<float>, uint>();
             var vertices = new List<Vector3>();
@@ -113,22 +108,21 @@ namespace COMP302.Decimator
                 }
             }
 
-            VECS.Vertex[] VECSvertices = new VECS.Vertex[vertices.Count];
-            for (int i = 0; i < vertices.Count; i++)
-            {
-                VECSvertices[i] = new()
-                {
-                    Position = vertices[i],
-                    Normal = normals[i],
-                    Elevation = uvs[i].X,
-                    BiomeSelect = uvs[i].Y,
-                };
+            var meshVertices = dstMesh.Vertices;
+            var meshNormals = dstMesh.GetVertexDataSpan<Vector3>(VertexAttribute.Normal);
+            var meshUV = dstMesh.GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
+            var meshIndices = dstMesh.Indicies;
 
-            }
+            dstMesh.Vertices.Fill(Vector3.Zero);
+            meshNormals.Fill(Vector3.Zero);
+            meshUV.Fill(Vector2.Zero);
 
-            dstMesh.Vertices = VECSvertices;
+            vertices.CopyTo(meshVertices);
+            normals.CopyTo(meshNormals);
+            uvs.CopyTo(meshUV);
+            subMeshes.CopyTo(meshIndices);
 
-            dstMesh.Indices = [.. subMeshes];
+            dstMesh.SoftReallocate(new((uint)vertices.Count, (uint)subMeshes.Count));
         }
 
         public void InitIMark()

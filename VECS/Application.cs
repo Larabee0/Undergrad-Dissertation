@@ -24,7 +24,7 @@ namespace VECS
 
         public Application()
         {
-            _appWindow = new(Width, Height, "Vulkan CS");
+            _appWindow = new(Width, Height, "VECS");
             _device = new(_appWindow);
             _presenter = new(_appWindow);
         }

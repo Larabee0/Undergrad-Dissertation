@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Numerics;
 using System.Threading.Tasks;
 using COMP302.Decimator;
 using Planets;
 using VECS;
+using VECS.DataStructures;
 using VECS.ECS;
 using VECS.ECS.Presentation;
 using VECS.ECS.Transforms;
 using VECS.LowLevel;
 using Vortice.Vulkan;
-using Mesh = VECS.Mesh;
 
 namespace COMP302
 {
     public static class Authoring
     {
-        private static readonly int subdivisionsA = 25;
-        private static readonly int subdivisionsB = 25;
+        private static readonly int subdivisionsA = 10;
+        private static readonly int subdivisionsB = 10;
 
         private static readonly bool QuadricSimplification = true;
         private static readonly bool enableDevation = true;
@@ -30,7 +31,7 @@ namespace COMP302
 
         public static void Run()
         {
-            GenerateAndCopyBack(out Mesh[] aMeshes, out Mesh[] bMeshes);
+            GenerateAndCopyBack(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes);
 
             //Mesh.SaveToFile(aMeshes[0], System.IO.Path.Combine(Mesh.DefaultMeshPath, "Tile_Test.obj"));
 
@@ -47,27 +48,25 @@ namespace COMP302
 
         }
 
-        private static void DoQuadricSimplification(Mesh[] aMeshes)
+        private static void DoQuadricSimplification(DirectSubMesh[] aMeshes)
         {
             _stopwatch.Restart();
             ParallelOptions parallelOptions = new()
             {
                 MaxDegreeOfParallelism = 16
             };
+            aMeshes[0].DirectMeshBuffer.ReadAllBuffers();
             Parallel.For(0, aMeshes.Length,parallelOptions, (int i) =>
             {
                 Simplify(aMeshes[i]);
             });
 
-            for (int i = 0; i < aMeshes.Length; i++)
-            {
-                aMeshes[i].FlushMesh();
-            }
+            aMeshes[0].DirectMeshBuffer.FlushAll();
             _stopwatch.Stop();
             Console.WriteLine(string.Format("Simplification time: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
 
-        private static void Simplify(Mesh mesh)
+        private static void Simplify(DirectSubMesh mesh)
         {
             var parameter = new EdgeCollapseParameter
             {
@@ -78,14 +77,14 @@ namespace COMP302
             };
             var conditions = new TargetConditions
             {
-                faceCount = mesh.IndexCount / 3 / 2
+                faceCount = (int)mesh.IndexCount / 3 / 2
             };
             var meshDecimation = new UnityMeshDecimation();
             meshDecimation.Execute(mesh, parameter, conditions);
             meshDecimation.ToMesh(mesh);
         }
 
-        private static void GenerateAndCopyBack(out Mesh[] aMeshes, out Mesh[] bMeshes)
+        private static void GenerateAndCopyBack(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes)
         {
             var lit = new Material("devation_heat.vert", "devation_heat.frag", typeof(ModelPushConstantData));
 
@@ -105,7 +104,7 @@ namespace COMP302
             Console.WriteLine(string.Format("Copy back time: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
 
-        private static void DoDevation( Mesh[] aMeshes, Mesh[] bMeshes)
+        private static void DoDevation(DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes)
         {
             if (interAllTiles)
             {
@@ -113,11 +112,14 @@ namespace COMP302
             }
             _stopwatch.Restart();
             string[] stats = new string[tileIterCount];
+            aMeshes[0].DirectMeshBuffer.ForceCrunchFaceData();
+            bMeshes[0].DirectMeshBuffer.ForceCrunchFaceData();
             for (int i = 0; i < tileIterCount; i++)
             {
+                var uvs = bMeshes[i].GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
                 for (int j = 0; j < bMeshes[i].Vertices.Length; j++)
                 {
-                    bMeshes[i].Vertices[j].Elevation = 0;
+                    uvs[j].X = 0;
                 }
 
                 var devation = new Deviation();
@@ -132,13 +134,13 @@ namespace COMP302
             for (int i = 0; i < tileIterCount; i++)
             {
                 Console.WriteLine(stats[i]);
-                aMeshes[i].FlushMesh();
-                bMeshes[i].FlushMesh();
             }
+            aMeshes[0].DirectMeshBuffer.FlushAll();
+            bMeshes[0].DirectMeshBuffer.FlushAll();
             Console.WriteLine(string.Format("Devation Calc: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
 
-        public static Mesh[][] GetMeshesFrom(EntityManager entityManager,params Entity[] hierarhcy)
+        public static DirectSubMesh[][] GetMeshesFrom(EntityManager entityManager,params Entity[] hierarhcy)
         {
             List<Entity> entities = [];
             List<int> offsets = [];
@@ -160,42 +162,27 @@ namespace COMP302
                 
             }
             offsets.Add(entities.Count - offsets[^1]);
-            Mesh[] meshes = new Mesh[entities.Count];
+            DirectSubMesh[] meshes = new DirectSubMesh[entities.Count];
 
-            GPUBuffer<VECS.Vertex>[] vertexBuffers = new GPUBuffer<VECS.Vertex>[meshes.Length];
-            GPUBuffer<uint>[] indexBuffers = new GPUBuffer<uint>[meshes.Length];
-
-            VkCommandBuffer copyBufferCmd = GraphicsDevice.Instance.BeginSingleTimeCommands();
+            //VkCommandBuffer copyBufferCmd = GraphicsDevice.Instance.BeginSingleTimeCommands();
             for (int i = 0; i < meshes.Length; i++)
             {
-                meshes[i] = Mesh.GetMeshAtIndex(entityManager.GetComponent<MeshIndex>(entities[i]).Value);
-                meshes[i].EnsureAlloc();
-                vertexBuffers[i] = new GPUBuffer<VECS.Vertex>((uint)meshes[i].VertexCount,VkBufferUsageFlags.TransferDst,true);
-                indexBuffers[i] = new GPUBuffer<uint>((uint)meshes[i].IndexCount,VkBufferUsageFlags.TransferDst,true);
-
-                meshes[i].VertexBuffer.CopyTo(copyBufferCmd,vertexBuffers[i]);
-                meshes[i].IndexBuffer.CopyTo(copyBufferCmd, indexBuffers[i]);
-
+                meshes[i] = DirectSubMesh.GetSubMeshAtIndex(entityManager.GetComponent<DirectSubMeshIndex>(entities[i]));
+                //meshes[i].EnsureAlloc();
+                //vertexBuffers[i] = meshes[i].GetAllVertexBuffers();// new GPUBuffer<VECS.Vertex>((uint)meshes[i].VertexCount,VkBufferUsageFlags.TransferDst,true);
+                //indexBuffers[i] = new GPUBuffer<uint>((uint)meshes[i].IndexCount,VkBufferUsageFlags.TransferDst,true);
+            
+                //meshes[i].VertexBuffer.CopyTo(copyBufferCmd,vertexBuffers[i]);
+                //meshes[i].IndexBuffer.CopyTo(copyBufferCmd, indexBuffers[i]);
+            
             }
-            GraphicsDevice.Instance.EndSingleTimeCommands(copyBufferCmd);
+            //GraphicsDevice.Instance.EndSingleTimeCommands(copyBufferCmd);
 
-            Parallel.For(0, meshes.Length, (int i) =>
+            DirectSubMesh[][] splits = new DirectSubMesh[hierarhcy.Length][];
+
+            for (int i = 0; i < hierarhcy.Length; i++)
             {
-                vertexBuffers[i].ReadFromBuffer(meshes[i].Vertices);
-                indexBuffers[i].ReadFromBuffer(meshes[i].Indices);
-            });
-
-            for (int i = 0; i < meshes.Length; i++)
-            {
-                vertexBuffers[i].Dispose();
-                indexBuffers[i].Dispose();
-            }
-
-            Mesh[][] splits = new Mesh[hierarhcy.Length][];
-
-            for (int i = 0;i < hierarhcy.Length; i++)
-            {
-                splits[i] = new Mesh[offsets[i]];
+                splits[i] = new DirectSubMesh[offsets[i]];
                 Array.Copy(meshes,((i == 0) ? 0 : offsets[i-1]), splits[i],0, splits[i].Length);
             }
 
@@ -230,22 +217,21 @@ namespace COMP302
 
         public static void LoadTestScene(EntityManager entityManager)
         {
-            var cubeUvMesh = Mesh.LoadModelFromFile(Mesh.GetMeshInDefaultPath("blender-cube.obj"));
-            var flatVaseMesh = Mesh.LoadModelFromFile(Mesh.GetMeshInDefaultPath("blender-sphere.obj"));
+            var cubeUvMesh = MeshLoader.LoadModelFromFile(MeshLoader.GetMeshInDefaultPath("blender-cube.obj"), [new VertexAttributeDescription(VertexAttribute.TexCoord0, VertexAttributeFormat.Float2)]);
+            var flatVaseMesh = MeshLoader.LoadModelFromFile(MeshLoader.GetMeshInDefaultPath("blender-sphere.obj"), [new VertexAttributeDescription(VertexAttribute.TexCoord0, VertexAttributeFormat.Float2)]);
 
             World.DefaultWorld.CreateSystem<TexturelessRenderSystem>();
 
             var lit = new Material("devation_heat.vert", "devation_heat.frag", typeof(ModelPushConstantData));
 
-
             var cube = entityManager.CreateEntity();
             entityManager.AddComponent(cube, new Translation() { Value = new(1.5f, -1.5f, 0) });
-            entityManager.AddComponent(cube, new MeshIndex() { Value = Mesh.GetIndexOfMesh(cubeUvMesh[0]) });
+            entityManager.AddComponent(cube, new DirectSubMeshIndex() { DirectMeshBuffer = DirectMeshBuffer.GetIndexOfMesh(cubeUvMesh[0].DirectMeshBuffer), SubMeshIndex = 0 });
             entityManager.AddComponent(cube, new MaterialIndex() { Value = Material.GetIndexOfMaterial(lit) });
 
             var sphere = entityManager.CreateEntity();
             entityManager.AddComponent(sphere, new Translation() { Value = new(-1.5f, 1.5f, 0) });
-            entityManager.AddComponent(sphere, new MeshIndex() { Value = Mesh.GetIndexOfMesh(flatVaseMesh[0]) });
+            entityManager.AddComponent(sphere, new DirectSubMeshIndex() { DirectMeshBuffer = DirectMeshBuffer.GetIndexOfMesh(flatVaseMesh[0].DirectMeshBuffer), SubMeshIndex = 0 });
             entityManager.AddComponent(sphere, new MaterialIndex() { Value = Material.GetIndexOfMaterial(lit) });
 
         }

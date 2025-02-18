@@ -13,8 +13,8 @@ namespace COMP302
     /// </summary>
     public class Deviation
     {
-        private Mesh ma;
-        private Mesh mb;
+        private DirectSubMesh ma;
+        private DirectSubMesh mb;
 
         private int mavn;
         private int mbvn;
@@ -46,21 +46,19 @@ namespace COMP302
 
         }
 
-        public bool Initialization(Mesh a, Mesh b, float SampleStep = 0, float GridSize = 0.5f)
+        public bool Initialization(DirectSubMesh a, DirectSubMesh b, float SampleStep = 0, float GridSize = 0.5f)
         {
             ma = a;
             mb = b;
 
-            mavn = ma.VertexCount;
-            mbvn = mb.VertexCount;
+            mavn = (int)ma.VertexCount;
+            mbvn = (int)mb.VertexCount;
 
             mafn = ma.Faces.Length;
             mbfn = mb.Faces.Length;
 
-            mb.ComputeFaceNormals();
-
-            ma.RecalculateBounds();
-            bb = ma.Bounds;
+            ma.RecalculateRenderBounds();
+            bb = ma.Bounds.Bounds;
 
             // if (SampleStep != 0)
             // {
@@ -72,8 +70,8 @@ namespace COMP302
             //     step = 0;
             // }
             // snum = 0;
-            mb.RecalculateBounds();
-            bb = mb.Bounds;
+            mb.RecalculateRenderBounds();
+            bb = mb.Bounds.Bounds;
 
             ug = new UniformGrid(mb, bb, bb.Size.Length() * GridSize * 0.01f);
 
@@ -94,19 +92,20 @@ namespace COMP302
         private bool GeometricDeviation(bool parallel)
         {
             dev = new float[mavn];
-
+            Vector3[] vertices = [..ma.Vertices];
             if (parallel)
             {
+
                 Parallel.For(0, dev.Length, (int i) =>
                 {
-                    dev[i] = ug.NearestNeighbors(ma.Vertices[i].Position).Distance();
+                    dev[i] = ug.NearestNeighbors(vertices[i]).Distance();
                 });
             }
             else
             {
                 for (int i = 0; i < dev.Length; i++)
                 {
-                    dev[i] = ug.NearestNeighbors(ma.Vertices[i].Position).Distance();
+                    dev[i] = ug.NearestNeighbors(vertices[i]).Distance();
                 }
             }
 
@@ -167,10 +166,11 @@ namespace COMP302
                 dev_bound = 1;
             }
 
+            var uvs = ma.GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
             for (int i = 0; i < mavn; i++)
             {
                 // Normalize deviation values
-                ma.Vertices[i].Elevation = (dev[i]*1) / dev_bound;
+                uvs[i].X = (dev[i] * 1) / dev_bound;
             }
         }
 

@@ -70,6 +70,40 @@ namespace VECS
             CreatePipeline(vertexFilePath, fragmentFilePath);
             Materials.Add(this);
         }
+
+
+        public Material(string vertexShader, string fragmentShader, Type pushConstantType,
+            VkVertexInputBindingDescription[] bindingDescriptions,
+            VkVertexInputAttributeDescription[] attributeDescriptions)
+        {
+            string vertexFilePath = GetShaderFilePath(vertexShader);
+            string fragmentFilePath = GetShaderFilePath(fragmentShader);
+            CreatePipelineLayoutWithPushConstant(Presenter.Instance.GlobalSetLayout, pushConstantType);
+            CreatePipeline(vertexFilePath, fragmentFilePath, bindingDescriptions, attributeDescriptions);
+            Materials.Add(this);
+        }
+
+        public Material(string vertexShader, string fragmentShader,
+            VkVertexInputBindingDescription[] bindingDescriptions,
+            VkVertexInputAttributeDescription[] attributeDescriptions,
+            params DescriptorSetBinding[] reqs)
+        {
+            string vertexFilePath = GetShaderFilePath(vertexShader);
+            string fragmentFilePath = GetShaderFilePath(fragmentShader);
+
+            var builder = new DescriptorSetLayout.Builder();
+            for (uint i = 0; i < reqs.Length; i++)
+            {
+                builder.AddBinding(i, reqs[i]);
+            }
+
+            _materialDescriptorLayout = builder.Build();
+
+            CreatePipelineLayout(Presenter.Instance.GlobalSetLayout);
+            CreatePipeline(vertexFilePath, fragmentFilePath, bindingDescriptions, attributeDescriptions);
+            Materials.Add(this);
+        }
+
         /// <summary>
         /// Creates a material consiting of a vertex and fragment shader and also a descriptor set layout for arbitary data.
         /// </summary>
@@ -267,13 +301,22 @@ namespace VECS
             }
         }
 
-        /// <summary>
-        /// Creates a RenderPipeline with the given vertex and fragment shaders programs
-        /// </summary>
-        /// <param name="vertexShader"></param>
-        /// <param name="fragmentShader"></param>
-        /// <exception cref="InvalidOperationException"></exception>
-        private void CreatePipeline(string vertexShader, string fragmentShader,bool enableAlphaBlending = false, bool customInput = false)
+        private void CreatePipeline(string vertexShader, string fragmentShader, bool enableAlphaBlending = false, bool customInput = false)
+        {
+            if (customInput)
+            {
+                CreatePipeline(vertexShader, fragmentShader, [], [], enableAlphaBlending);
+            }
+            else
+            {
+                CreatePipeline(vertexShader, fragmentShader, null, null, enableAlphaBlending);
+            }
+        }
+
+        private void CreatePipeline(string vertexShader, string fragmentShader,
+            VkVertexInputBindingDescription[] bindingDescriptions,
+            VkVertexInputAttributeDescription[] attributeDescriptions,
+            bool enableAlphaBlending = false)
         {
             if (_pipelineLayout == VkPipelineLayout.Null)
             {
@@ -287,15 +330,17 @@ namespace VECS
                 GraphicsPipelineConfigInfo.EnableAlphaBlending(ref pipelineConfigInfo);
             }
 
-            if (customInput)
+            if (attributeDescriptions != null)
             {
-                pipelineConfigInfo.AttributeDescriptions = [];
-                pipelineConfigInfo.BindingDescriptions = [];
+                pipelineConfigInfo.AttributeDescriptions = attributeDescriptions;
             }
-
+            if (bindingDescriptions != null)
+            {
+                pipelineConfigInfo.BindingDescriptions = bindingDescriptions;
+            }
             //pipelineConfigInfo.rasterizationInfo.polygonMode = VkPolygonMode.Line;
             //pipelineConfigInfo.rasterizationInfo.lineWidth = 1;
-            //pipelineConfigInfo.rasterizationInfo.cullMode = VkCullModeFlags.Front;
+            pipelineConfigInfo.rasterizationInfo.cullMode = VkCullModeFlags.Front;
 
             _materialPipeline = new(GraphicsDevice.Instance, vertexShader, fragmentShader, pipelineConfigInfo);
         }
@@ -304,61 +349,6 @@ namespace VECS
         {
             PushConstants(rendererFrameInfo.CommandBuffer, pushConstants);
             Vulkan.vkCmdDraw(rendererFrameInfo.CommandBuffer, 6, 1, 0, 0);
-        }
-
-        /// <summary>
-        /// binds and draws the given mesh and textures
-        /// </summary>
-        /// <param name="rendererFrameInfo"></param>
-        /// <param name="meshIndex"></param>
-        /// <param name="textures"></param>
-        public void BindAndDraw(RendererFrameInfo rendererFrameInfo, int meshIndex, params int[] textures)
-        {
-            Mesh mesh = Mesh.GetMeshAtIndex(meshIndex);
-            if (mesh == null) return;
-            var builder = new DescriptorWriter(_materialDescriptorLayout, rendererFrameInfo.FrameDescriptorPool);
-            AddTextures(builder, textures);
-            BindDescriptorSet(rendererFrameInfo, builder);
-
-            mesh.BindAndDraw(rendererFrameInfo.CommandBuffer);
-        }
-
-        public void BindAndDraw<T>(RendererFrameInfo rendererFrameInfo, int meshIndex, T pushConstants) where T : unmanaged
-        {
-            Mesh mesh = Mesh.GetMeshAtIndex(meshIndex);
-            if (mesh == null) return;
-            PushConstants(rendererFrameInfo.CommandBuffer, pushConstants);
-            mesh.BindAndDraw(rendererFrameInfo.CommandBuffer);
-        }
-
-        /// <summary>
-        /// binds and draws the given mesh and textures and also push constants
-        /// </summary>
-        /// <typeparam name="T">Push constants</typeparam>
-        /// <param name="rendererFrameInfo"></param>
-        /// <param name="meshIndex"></param>
-        /// <param name="pushConstants"></param>
-        /// <param name="textures"></param>
-        public  void BindAndDraw<T>(RendererFrameInfo rendererFrameInfo, int meshIndex, T pushConstants, params int[] textures) where T : unmanaged
-        {
-            Mesh mesh = Mesh.GetMeshAtIndex(meshIndex);
-            if (mesh == null) return;
-            var builder = new DescriptorWriter(_materialDescriptorLayout, rendererFrameInfo.FrameDescriptorPool);
-            AddTextures(builder, textures);
-            BindDescriptorSet(rendererFrameInfo, builder);
-            PushConstants(rendererFrameInfo.CommandBuffer, pushConstants);
-            mesh.BindAndDraw(rendererFrameInfo.CommandBuffer);
-        }
-
-        public void BindAndDraw<T,U>(RendererFrameInfo rendererFrameInfo, int meshIndex, T pushConstants, params GPUBuffer<U>[] buffers) where T : unmanaged where U : unmanaged
-        {
-            Mesh mesh = Mesh.GetMeshAtIndex(meshIndex);
-            if (mesh == null) return;
-            var builder = new DescriptorWriter(_materialDescriptorLayout, rendererFrameInfo.FrameDescriptorPool);
-            AddBuffers(builder, buffers);
-            BindDescriptorSet(rendererFrameInfo, builder);
-            PushConstants(rendererFrameInfo.CommandBuffer, pushConstants);
-            mesh.BindAndDraw(rendererFrameInfo.CommandBuffer);
         }
 
         public unsafe void BindDescriptorSet(RendererFrameInfo rendererFrameInfo, DescriptorWriter writer)
@@ -444,6 +434,7 @@ namespace VECS
             {
                 var entityManager = World.DefaultWorld.EntityManager;
                 var allMeshEntities = entityManager.GetAllEntitiesWithComponent<MaterialIndex>();
+                if (allMeshEntities == null) return;
                 allMeshEntities.ForEach(e =>
                 {
                     var materialIndex = entityManager.GetComponent<MaterialIndex>(e);

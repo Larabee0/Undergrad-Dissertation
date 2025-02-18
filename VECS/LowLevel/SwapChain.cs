@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Numerics;
 using System.Runtime.InteropServices;
+using System.Threading;
 using VECS.Compute;
 using Vortice.Vulkan;
 
@@ -135,6 +137,7 @@ namespace VECS.LowLevel
             CreateFramebuffers();
 
             CreateSyncObjects();
+            StartSubmissionThread();
         }
 
         private unsafe void CreateSwapChain()
@@ -668,6 +671,7 @@ namespace VECS.LowLevel
 
         public unsafe void Dispose()
         {
+            _submissionQueue.Enqueue(new() { breakThread = true });
             foreach (var item in _swapChainImageViews)
             {
                 Vulkan.vkDestroyImageView(Device, item);
@@ -847,52 +851,115 @@ namespace VECS.LowLevel
             }
         }
 
-        public unsafe VkResult SubmitCommandBuffers(VkCommandBuffer* commandBuffer, uint* imageIndex)
+        private Thread _submissionThread;
+        private readonly ConcurrentQueue<SubmitInfo> _submissionQueue = [];
+        private readonly Mutex _submissionMutex = new();
+        private VkResult _submittedFrameResult;
+        public VkResult SubmittedFrameResult => _submittedFrameResult;
+        private VkResult _nextFrameResult;
+        public VkResult NextFrameResult => _submittedFrameResult;
+        private uint _nextFrameIndex;
+        public uint NextFrameIndex => _nextFrameIndex;
+        public Mutex SubmissionMutex => _submissionMutex;
+        private struct SubmitInfo
         {
-            if (_imagesInFlight[*imageIndex] != VkFence.Null)
+            public VkCommandBuffer CommandBuffer;
+            public uint ImageIndex;
+            public bool breakThread;
+
+            public SubmitInfo(VkCommandBuffer commandBuffer, uint imageIndex)
             {
-                VkFence fence = _imagesInFlight[*imageIndex];
+                CommandBuffer = commandBuffer;
+                ImageIndex = imageIndex;
+                breakThread = false;
+            }
+        }
+        public void StartSubmissionThread()
+        {
+            _submissionThread = new(new ThreadStart(SubmitQueue))
+            {
+                IsBackground = true
+            };
+            _submissionThread.Start();
+        }
+        private unsafe void SubmitQueue()
+        {
+            // acquire first frame
+            _nextFrameResult = AcquireNextImage( out _nextFrameIndex);
+            
+            while (true)
+            {
+                if (_submissionQueue.TryDequeue(out var info))
+                {
+                    if (info.breakThread)
+                    {
+                        return;
+                    }
+                    _submissionMutex.WaitOne();
+                    int submitFrame = _currentFrame;
+                    _currentFrame = (_currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
+                    _nextFrameResult = AcquireNextImage(out _nextFrameIndex);
+                    _submissionMutex.ReleaseMutex();
+                    _submittedFrameResult = SubmitCommandBuffers(info.CommandBuffer, info.ImageIndex, submitFrame);
+                }
+            }
+        }
+
+        public void EnqueueCommandBuffer(VkCommandBuffer commandBuffer, uint imageIndex)
+        {
+            _submissionQueue.Enqueue(new(commandBuffer, imageIndex));
+        }
+
+        public unsafe VkResult SubmitCommandBuffers(VkCommandBuffer commandBuffer, uint imageIndex, int currentFrame)
+        {
+
+            if (_imagesInFlight[imageIndex] != VkFence.Null)
+            {
+                VkFence fence = _imagesInFlight[imageIndex];
                 Vulkan.vkWaitForFences(_device.Device, fence, true, ulong.MaxValue);
             }
 
-            _imagesInFlight[*imageIndex] = _inFlightFences[_currentFrame];
+            _imagesInFlight[imageIndex] = _inFlightFences[currentFrame];
 
-            VkSemaphore waitPresent = _presentSemaphore[_currentFrame];
-            VkSemaphore waitRender = _renderSemaphore[_currentFrame];
+            VkSemaphore waitPresent = _presentSemaphore[currentFrame];
+            VkSemaphore waitRender = _renderSemaphore[currentFrame];
             VkPipelineStageFlags waitStage = VkPipelineStageFlags.ColorAttachmentOutput;
             VkSubmitInfo submit = new()
             {
                 waitSemaphoreCount = 1,
                 commandBufferCount = 1,
                 signalSemaphoreCount = 1,
-                pCommandBuffers = commandBuffer,
+                pCommandBuffers = &commandBuffer,
                 pWaitDstStageMask = &waitStage,
                 pWaitSemaphores = &waitPresent,
                 pSignalSemaphores = &waitRender
             };
-            Vulkan.vkResetFences(_device.Device, _inFlightFences[_currentFrame]);
+            Vulkan.vkResetFences(_device.Device, _inFlightFences[currentFrame]);
 
-            if (Vulkan.vkQueueSubmit(_device.GraphicsQueue, submit, _inFlightFences[_currentFrame]) != VkResult.Success)
+            if (Vulkan.vkQueueSubmit(_device.GraphicsQueue, submit, _inFlightFences[currentFrame]) != VkResult.Success)
             {
                 throw new Exception("Failed to queue submit");
             }
+            VkResult result= QueuePresent(imageIndex, waitRender);
+
+            return result;
+        }
+
+        private unsafe VkResult QueuePresent(uint imageIndex, VkSemaphore waitRender)
+        {
             VkSwapchainKHR swapChains = _swapChain;
             VkPresentInfoKHR presentInfo = new()
             {
                 swapchainCount = 1,
                 waitSemaphoreCount = 1,
-                pImageIndices = imageIndex,
+                pImageIndices = &imageIndex,
                 pSwapchains = &swapChains,
-                pWaitSemaphores = &waitRender,
-                
-                
+                pWaitSemaphores = &waitRender
             };
-            VkResult result = Vulkan.vkQueuePresentKHR(_device.GraphicsQueue, &presentInfo);
-
-            _currentFrame = (_currentFrame + 1) % SwapChain.MAX_FRAMES_IN_FLIGHT;
-
-            return VkResult.Success;
+            var result = Vulkan.vkQueuePresentKHR(_device.GraphicsQueue, &presentInfo);
+            return result;
         }
+
         public bool CompareSwapFormats(SwapChain swapChain)
         {
             return swapChain._depthFormat == _depthFormat

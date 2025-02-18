@@ -27,7 +27,6 @@ namespace Planets.Colour
 
         public override void OnFowardPass(EntityManager entityManager, RendererFrameInfo rendererFrameInfo)
         {
-            return;
             if (_starQuery.HasEntities && entityManager.SingletonEntity<Camera>(out Entity cameraEntity))
             {
                 var stars = _starQuery.GetEntities();
@@ -63,7 +62,7 @@ namespace Planets.Colour
 
         public override void OnPostPresentation(EntityManager entityManager)
         {
-            _starQuery.MarkStale();
+            //_starQuery.MarkStale();
         }
 
         [StructLayout(LayoutKind.Sequential,Size =40)]

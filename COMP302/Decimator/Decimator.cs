@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
-using UnityMesh = VECS.Mesh;
+using UnityMesh = VECS.DirectSubMesh;
 
 namespace COMP302.Decimator
 {

@@ -1,6 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Numerics;
+using System.Threading.Tasks;
+using VECS.DataStructures;
+using VECS.ECS;
+using VECS.ECS.Presentation;
 
 namespace VECS
 {
@@ -8,9 +11,52 @@ namespace VECS
     {
         private const int VERTEX_WRITE_OFFSET = 3;
 
-        public static void Subdivide(this Mesh mesh, int divisions)
+        public static DirectMeshBuffer Subdivide(this DirectMeshBuffer srcMesh, int divisions)
         {
-            uint curTris = (uint)mesh.IndexCount / 3;
+            DirectSubMeshCreateData[] newSubMeshes = new DirectSubMeshCreateData[srcMesh.SubMeshInfos.Length];
+            uint vertexCountPerFace = GetVertsPerFace(divisions);
+            uint indexCountPerFace = GetIndicesPerFace(divisions);
+            for (int i = 0; i < srcMesh.SubMeshInfos.Length; i++)
+            {
+                var existingSubMesh = srcMesh.SubMeshInfos[i];
+                newSubMeshes[i] = new(vertexCountPerFace * (existingSubMesh.IndexCount / 3), indexCountPerFace * (existingSubMesh.IndexCount / 3));
+            }
+
+            DirectMeshBuffer newBuffer = new(srcMesh.AttributeDescriptions, newSubMeshes);
+            
+            DirectSubMesh[] srcSubMeshes = srcMesh.DirectSubMeshes;
+            DirectSubMesh[] dstSubMeshes = newBuffer.DirectSubMeshes;
+
+            for (int i = 0; i < srcMesh.SubMeshInfos.Length; i++)
+            {
+                Subdivide(srcSubMeshes[i], dstSubMeshes[i], divisions);
+            }
+            newBuffer.GetBufferAtAttribute(VertexAttribute.Position).WriteFromHostBuffer();
+            newBuffer.IndexBuffer.WriteFromHostBuffer();
+            //DirectMeshBuffer.RecalcualteAllNormals(newBuffer);
+            var oldIndex = DirectMeshBuffer.GetIndexOfMesh(srcMesh);
+            var newIndex = DirectMeshBuffer.GetIndexOfMesh(newBuffer);
+            var entityManager = World.DefaultWorld.EntityManager;
+            var allMeshEntities = entityManager.GetAllEntitiesWithComponent<DirectSubMeshIndex>();
+            allMeshEntities?.ForEach(e =>
+                {
+                    var meshIndex = entityManager.GetComponent<DirectSubMeshIndex>(e);
+
+                    if (meshIndex.DirectMeshBuffer == oldIndex)
+                    {
+                        var value = entityManager.GetComponent<DirectSubMeshIndex>(e);
+                        value.DirectMeshBuffer = newIndex;
+                        entityManager.SetComponent(e, value);
+                    }
+                });
+            srcMesh.Dispose();
+            return newBuffer;
+        }
+
+
+        public static void Subdivide(DirectSubMesh src,DirectSubMesh dst, int divisions)
+        {
+            uint curTris = src.IndexCount / 3;
             uint vertexCountPerFace = GetVertsPerFace(divisions);
             uint triCountPerFace = GetIndicesPerFace(divisions);
             uint vertexCount = vertexCountPerFace * curTris;
@@ -20,64 +66,48 @@ namespace VECS
             {
                 return;
             }
-
-            Vertex[] vertices = new Vertex[vertexCount];
-            uint[] indicies = new uint[triCount];
+            var srcVertices = src.Vertices;
+            var srcIndices = src.Indicies;
+            var dstVertices = dst.Vertices;
+            var dstIndices = dst.Indicies;
             uint vertexOffset = 0;
             uint indexOffset = 0;
-            for (int i = 0; i < mesh.IndexCount; i += 3)
+            for (int i = 0; i < src.IndexCount; i += 3)
             {
-                vertices[vertexOffset] = mesh.Vertices[mesh.Indices[i + 0]];
-                vertices[vertexOffset + 1] = mesh.Vertices[mesh.Indices[i + 1]];
-                vertices[vertexOffset + 2] = mesh.Vertices[mesh.Indices[i + 2]];
-                indicies[indexOffset] = vertexOffset;
-                indicies[indexOffset + 1] = vertexOffset + 1;
-                indicies[indexOffset + 2] = vertexOffset + 2;
+                dstVertices[(int)vertexOffset] = srcVertices[(int)srcIndices[i + 0]];
+                dstVertices[(int)vertexOffset + 1] = srcVertices[(int)srcIndices[i + 1]];
+                dstVertices[(int)vertexOffset + 2] = srcVertices[(int)srcIndices[i + 2]];
+                dstIndices[(int)indexOffset] = vertexOffset;
+                dstIndices[(int)indexOffset + 1] = vertexOffset + 1;
+                dstIndices[(int)indexOffset + 2] = vertexOffset + 2;
 
-                DivideFace(divisions, vertices, indicies, vertexOffset, indexOffset);
+                DivideFace(divisions, dstVertices, dstIndices, vertexOffset, indexOffset);
 
                 vertexOffset += vertexCountPerFace;
                 indexOffset += triCountPerFace;
             }
-
-            mesh.Vertices = vertices;
-            mesh.Indices = indicies;
         }
 
-        private unsafe static bool ValidateDivisionsCount(uint vertexCount, uint triCount)
-        {
-            if (sizeof(Vector3) * vertexCount > int.MaxValue)
-            {
-                Console.WriteLine("Cannot subdivide mesh, exceeds max vertices count");
-                return false;
-            }
-            if (sizeof(int) * triCount > int.MaxValue)
-            {
-                Console.WriteLine("Cannot subdivide mesh, exceeds max triangles count");
-                return false;
-            }
-
-            return true;
-        }
-
-        private static void DivideFace(int divisions, Vertex[] vertices, uint[] indices, uint vertexOffset, uint indexOffset)
+        private static void DivideFace(int divisions, Span<Vector3> vertices, Span<uint> indices, uint vertexOffset, uint indexOffset)
         {
             int numDivisions = Math.Max(0, divisions);
             uint writeOffset = vertexOffset + VERTEX_WRITE_OFFSET;
             uint[] vertexTriPairs =
-                [indices[indexOffset + 0],
-                indices[indexOffset + 1],
-                indices[indexOffset + 0],
-                indices[indexOffset + 2],
-                indices[indexOffset + 1],
-                indices[indexOffset + 2]];
+            [
+                indices[(int)indexOffset + 0],
+                indices[(int)indexOffset + 1],
+                indices[(int)indexOffset + 0],
+                indices[(int)indexOffset + 2],
+                indices[(int)indexOffset + 1],
+                indices[(int)indexOffset + 2]
+            ];
 
             Edge[] edges = new Edge[3];
 
             for (int i = 0; i < vertexTriPairs.Length; i += 2)
             {
-                Vertex startVertex = vertices[vertexTriPairs[i]];
-                Vertex endVertex = vertices[vertexTriPairs[i + 1]];
+                Vector3 startVertex = vertices[(int)vertexTriPairs[i]];
+                Vector3 endVertex = vertices[(int)vertexTriPairs[i + 1]];
 
                 uint[] edgeVertexIndices = new uint[numDivisions + 2];
                 edgeVertexIndices[0] = vertexTriPairs[i];
@@ -86,7 +116,7 @@ namespace VECS
                 {
                     float t = (divisionIndex + 1f) / (numDivisions + 1f);
                     edgeVertexIndices[divisionIndex + 1] = writeOffset;
-                    vertices[writeOffset] = Vertex.Lerp(startVertex, endVertex, t);
+                    vertices[(int)writeOffset] = Vector3.Lerp(startVertex, endVertex, t);
                     writeOffset++;
                 }
                 edgeVertexIndices[numDivisions + 1] = vertexTriPairs[i + 1];
@@ -97,7 +127,7 @@ namespace VECS
             CreateFace(numDivisions, edges, vertices, writeOffset, indices, indexOffset);
         }
 
-        private static void CreateFace(int divisions, Edge[] edges, Vertex[] vertices, uint nextVertex, uint[] indices, uint indexOffset)
+        private static void CreateFace(int divisions, Edge[] edges, Span<Vector3> vertices, uint nextVertex, Span<uint> indices, uint indexOffset)
         {
             int numPointsInEdge = edges[0].vertexIndices.Length;
 
@@ -113,15 +143,15 @@ namespace VECS
                 mapWriteIndex++;
 
                 // Add vertices between sideA and sideB
-                Vertex sideAVertex = vertices[edges[0].vertexIndices[i]];
-                Vertex sideBVertex = vertices[edges[1].vertexIndices[i]];
+                Vector3 sideAVertex = vertices[(int)edges[0].vertexIndices[i]];
+                Vector3 sideBVertex = vertices[(int)edges[1].vertexIndices[i]];
                 int numInnerPoints = i - 1;
                 for (int j = 0; j < numInnerPoints; j++)
                 {
                     float t = (j + 1f) / (numInnerPoints + 1f);
                     vertexMap[mapWriteIndex] = nextVertex;
                     mapWriteIndex++;
-                    vertices[nextVertex] = Vertex.Lerp(sideAVertex, sideBVertex, t);
+                    vertices[(int)nextVertex] = Vector3.Lerp(sideAVertex, sideBVertex, t);
                     nextVertex++;
                 }
 
@@ -166,9 +196,9 @@ namespace VECS
                         v2 = topVertex - 1;
                     }
 
-                    indices[indicesWriteIndex] = vertexMap[v0];
-                    indices[indicesWriteIndex + 1] = vertexMap[v2];
-                    indices[indicesWriteIndex + 2] = vertexMap[v1];
+                    indices[(int)indicesWriteIndex] = vertexMap[v0];
+                    indices[(int)indicesWriteIndex + 1] = vertexMap[v2];
+                    indices[(int)indicesWriteIndex + 2] = vertexMap[v1];
                     indicesWriteIndex += 3;
                 }
             }
@@ -186,77 +216,20 @@ namespace VECS
             return (divisionsU + 1) * (divisionsU + 1) * 3;
         }
 
-        public static void Simplify(this Mesh targetMesh)
+        private unsafe static bool ValidateDivisionsCount(uint vertexCount, uint triCount)
         {
-            Vertex[] currentVertices = targetMesh.Vertices;
-            uint[] currentTriangles = targetMesh.Indices;
-
-
-            currentTriangles = FilterTriangles(currentTriangles);
-
-            HashSet<Vertex> uniqueTriangles = GetUniqueUsedVertices(currentVertices, currentTriangles);
-
-            KeyValuePair<Vertex, uint>[] vertexTriPair = new KeyValuePair<Vertex, uint>[uniqueTriangles.Count];
-            IterateUniques(uniqueTriangles, vertexTriPair);
-
-            Dictionary<Vertex, uint> uniqueVertices = new(vertexTriPair, new Vertex());
-            RemapTriangles(currentVertices, currentTriangles, uniqueVertices);
-
-            currentTriangles = FilterTriangles(currentTriangles);
-
-            targetMesh.Vertices = [.. uniqueTriangles];
-            targetMesh.Indices = currentTriangles;
-        }
-
-        private static uint[] FilterTriangles(uint[] currentTriangles)
-        {
-            List<uint> shortTris = new(currentTriangles.Length);
-
-
-            for (int i = 0; i < currentTriangles.Length; i+=3)
+            if (sizeof(Vector3) * vertexCount > int.MaxValue)
             {
-                if (currentTriangles[i] == currentTriangles[i + 1]
-                    && currentTriangles[i] == currentTriangles[i + 2]
-                    && currentTriangles[i + 1] == currentTriangles[i + 2])
-                {
-                    continue;
-                }
-                shortTris.AddRange(currentTriangles.AsSpan(i, 3));
+                Console.WriteLine("Cannot subdivide mesh, exceeds max vertices count");
+                return false;
+            }
+            if (sizeof(int) * triCount > int.MaxValue)
+            {
+                Console.WriteLine("Cannot subdivide mesh, exceeds max triangles count");
+                return false;
             }
 
-            return [.. shortTris];
-        }
-
-        private static HashSet<Vertex> GetUniqueUsedVertices(Vertex[] currentVertices, uint[] currentTriangles)
-        {
-            HashSet<Vertex> uniques = new(currentVertices.Length);
-
-            for (uint i = 0; i < currentTriangles.Length; i++)
-            {
-                uniques.Add(currentVertices[currentTriangles[i]]);
-            }
-
-            return uniques;
-        }
-
-        private static void RemapTriangles(Vertex[] currentVertices, uint[] currentTriangles, Dictionary<Vertex, uint> uniqueVertices)
-        {
-            for (int i = 0; i < currentTriangles.Length; i++)
-            {
-                uint curIndex = currentTriangles[i];
-                var vertex = currentVertices[curIndex];
-                currentTriangles[i] = uniqueVertices[vertex];
-            }
-        }
-
-        private static void IterateUniques(HashSet<Vertex> uniqueTriangles, KeyValuePair<Vertex, uint>[] vertexTriPair)
-        {
-            uint index = 0;
-            foreach (var vertex in uniqueTriangles)
-            {
-                vertexTriPair[index] = new(vertex, index);
-                index++;
-            }
+            return true;
         }
 
         private class Edge
@@ -268,5 +241,24 @@ namespace VECS
                 this.vertexIndices = vertexIndices;
             }
         }
+
+        private readonly struct LerpableVertex
+        {
+            public readonly Vector2UInt vertices;
+            public readonly float t;
+
+            public LerpableVertex(uint v)
+            {
+                vertices = new(v);
+                t = -1;
+            }
+
+            public LerpableVertex(uint x, uint y, float t)
+            {
+                vertices = new(x, y);
+                this.t = t;
+            }
+        }
+
     }
 }

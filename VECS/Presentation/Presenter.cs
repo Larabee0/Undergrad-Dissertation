@@ -217,7 +217,7 @@ namespace VECS
                 _renderer.BeginForwardRenderPass(frameInfo.CommandBuffer);
                 World.DefaultWorld.PresentFowardPassUpdate(frameInfo);
                 Renderer.EndForwardRenderPass(frameInfo.CommandBuffer);
-
+                DirectMeshBuffer.ClearBufferBinds();
                 // depth pyramid mip maps
                 _renderer.ReduceDepth(frameInfo);
                 // copy to swap chain
@@ -246,14 +246,9 @@ namespace VECS
                 Texture2d.Textures[i].Dispose();
             }
 
-            for (int i = GPUMesh<Vertex>.MeshSets.Count - 1; i >= 0; i--)
+            for (int i = DirectMeshBuffer.DirectMeshes.Count - 1; i >= 0; i--)
             {
-                GPUMesh<Vertex>.MeshSets[i].Dispose();
-            }
-
-            for (int i = Mesh.Meshes.Count - 1; i >= 0; i--)
-            {
-                Mesh.Meshes[i].Dispose();
+                DirectMeshBuffer.DirectMeshes[i].Dispose();
             }
 
             Instance = null;

@@ -74,14 +74,13 @@ namespace VECS.LowLevel
 
         private void RecreateSwapChain()
         {
-
+            currentImageIndex = SwapChain.MAX_FRAMES_IN_FLIGHT + 1;
             var extent = _window.WindowExtend;
             while (extent.width == 0 || extent.height == 0)
             {
                 extent = _window.WindowExtend;
                 _window.WaitForNextWindowEvent();
             }
-
             Vulkan.vkDeviceWaitIdle(_device.Device);
 
             if (_swapChain == null)
@@ -208,12 +207,24 @@ namespace VECS.LowLevel
 
         public unsafe VkCommandBuffer BeginFrame()
         {
+            while (currentImageIndex == _swapChain.NextFrameIndex)
+            {
+                _swapChain.SubmissionMutex.WaitOne();
+                _swapChain.SubmissionMutex.ReleaseMutex();
+            }
+            if (_swapChain.SubmittedFrameResult != VkResult.Success)
+            {
+                throw new Exception("Failed to acquire next swap chain image!");
+            }
             if (isFrameStarted)
             {
                 throw new InvalidOperationException("Can't call BeginFrame while frame already in progress");
             }
-            _swapChain.WaitResetRenderFence((uint)currentFrameIndex);
-            var result = _swapChain.AcquireNextImage(out currentImageIndex);
+            //_swapChain.WaitResetRenderFence((uint)currentFrameIndex);
+            //var result = _swapChain.AcquireNextImage(out currentImageIndex);
+
+            var result = _swapChain.NextFrameResult;
+            currentImageIndex = _swapChain.NextFrameIndex;
 
             if (result == VkResult.ErrorOutOfDateKHR)
             {
@@ -225,7 +236,6 @@ namespace VECS.LowLevel
             {
                 throw new Exception("Failed to acquire next swap chain image");
             }
-
             isFrameStarted = true;
 
             var commandBuffer = CurrentCommandBuffer;
@@ -517,24 +527,25 @@ namespace VECS.LowLevel
                 throw new Exception("Failed to record command buffer");
             }
 
+            //VkResult result = _swapChain.SubmitCommandBuffers(commandBuffer, currentImageIndex);
+            _swapChain.EnqueueCommandBuffer(commandBuffer, currentImageIndex);
 
-            uint* pCurrentImageIndex = stackalloc uint[1]
-            {
-                currentImageIndex
-            };
-
-            VkResult result = _swapChain.SubmitCommandBuffers(&commandBuffer, pCurrentImageIndex);
-
-            if (result == VkResult.ErrorOutOfDateKHR || result == VkResult.SuboptimalKHR || _window.WasWindowResized)
+            if (_swapChain.SubmittedFrameResult == VkResult.ErrorOutOfDateKHR || _swapChain.SubmittedFrameResult == VkResult.SuboptimalKHR || _window.WasWindowResized)
             {
                 _window.ResetWindowResizedFlag();
                 RecreateSwapChain();
 
             }
-            else if (result != VkResult.Success)
-            {
-                throw new Exception("Failed to acquire next swap chain image!");
-            }
+            //if (result == VkResult.ErrorOutOfDateKHR || result == VkResult.SuboptimalKHR || _window.WasWindowResized)
+            //{
+            //    _window.ResetWindowResizedFlag();
+            //    RecreateSwapChain();
+            //
+            //}
+            //else if (result != VkResult.Success)
+            //{
+            //    throw new Exception("Failed to acquire next swap chain image!");
+            //}
 
             isFrameStarted = false;
             currentFrameIndex = (currentFrameIndex + 1) % SwapChain.MAX_FRAMES_IN_FLIGHT;

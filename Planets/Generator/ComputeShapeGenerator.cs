@@ -23,10 +23,11 @@ namespace Planets.Generator
         private GPUBuffer<GlobalNoiseSettings> _noiseSettings;
         private readonly GPUBuffer<NoiseGeneratorParams> _noiseGeneratorParams;
 
-        public unsafe ComputeShapeGenerator()
+        public ComputeShapeGenerator()
         {
             _terrainGenerator = new GenericComputePipeline("terrain_generator.comp",
                 new DescriptorSetBinding(VkDescriptorType.UniformBuffer, VkShaderStageFlags.Compute),
+                new DescriptorSetBinding(VkDescriptorType.StorageBuffer, VkShaderStageFlags.Compute),
                 new DescriptorSetBinding(VkDescriptorType.StorageBuffer, VkShaderStageFlags.Compute),
                 new DescriptorSetBinding(VkDescriptorType.UniformBuffer, VkShaderStageFlags.Compute),
                 new DescriptorSetBinding(VkDescriptorType.StorageBuffer, VkShaderStageFlags.Compute),
@@ -35,8 +36,8 @@ namespace Planets.Generator
             );
 
             _pool = new DescriptorPool.Builder()
-                .AddPoolSize(VkDescriptorType.UniformBuffer, 3)
-                .AddPoolSize(VkDescriptorType.StorageBuffer, 4)
+                .AddPoolSize(VkDescriptorType.UniformBuffer, 2)
+                .AddPoolSize(VkDescriptorType.StorageBuffer, 5)
                 .Build();
             _terrainGenerator.AllocateDescriptorSet(_pool);
             // size of these buffers is known in advance.
@@ -63,7 +64,7 @@ namespace Planets.Generator
         /// The first element is hte noise setting for the colour generator. This is not used for terrain displacement.
         /// </summary>
         /// <param name="generator"></param>
-        private unsafe void WriteNoiseSettings(ShapeGenerator generator)
+        private void WriteNoiseSettings(ShapeGenerator generator)
         {
             if (_noiseSettings != null && _noiseSettings.UInstanceCount32 != (uint)generator.NoiseFilters.Length + 1)
             {
@@ -72,21 +73,21 @@ namespace Planets.Generator
             }
             _noiseSettings = new((uint)generator.NoiseFilters.Length + 1, VkBufferUsageFlags.StorageBuffer, true);
 
-            GlobalNoiseSettings* settingsPoint = stackalloc GlobalNoiseSettings[generator.NoiseFilters.Length + 1];
+            Span<GlobalNoiseSettings> settingsPoint = _noiseSettings.HostBuffer;
             settingsPoint[0] = generator.ColourGenerator.settings.biomeColourSettings.noise.GetSettings();
             for (int i = 0; i < generator.NoiseFilters.Length; i++)
             {
                 settingsPoint[i + 1] = generator.NoiseFilters[i].GetSettings();
             }
 
-            _noiseSettings.WriteToBuffer(settingsPoint);
+            _noiseSettings.WriteFromHostBuffer();
         }
 
         /// <summary>
         /// Writes the start height % for each biome to the _biomeStartHeights buffer.
         /// </summary>
         /// <param name="colourSettings"></param>
-        private unsafe void WriteBiomeStartHeights(ColourSettings colourSettings)
+        private void WriteBiomeStartHeights(ColourSettings colourSettings)
         {
             int biomeCount = colourSettings.biomeColourSettings.biomes.Length;
             if(_biomeStartHeights != null && _biomeStartHeights.UInstanceCount32 != (uint)biomeCount)
@@ -96,24 +97,23 @@ namespace Planets.Generator
             }
             _biomeStartHeights ??= new((uint)biomeCount, VkBufferUsageFlags.StorageBuffer, true);
 
-            float* startHeights = stackalloc float[biomeCount];
+            Span<float> startHeights = _biomeStartHeights.HostBuffer;
 
             for (int i = 0; i < biomeCount; i++)
             {
                 startHeights[i] = colourSettings.biomeColourSettings.biomes[i].startHeight;
             }
-
-            _biomeStartHeights.WriteToBuffer(startHeights);
+            _biomeStartHeights.WriteFromHostBuffer();
         }
 
         /// <summary>
         /// Write the noise generator parameters to the _noiseGeneratorParams buffer.
         /// </summary>
         /// <param name="generator"></param>
-        private unsafe void WriteGeneratorParameters(ShapeGenerator generator)
+        private void WriteGeneratorParameters(ShapeGenerator generator)
         {
-            NoiseGeneratorParams* parameters = stackalloc NoiseGeneratorParams[1] { new(generator) };
-            _noiseGeneratorParams.WriteToBuffer(parameters);
+            _noiseGeneratorParams.HostBuffer[0] = new(generator);
+            _noiseGeneratorParams.WriteFromHostBuffer();
         }
 
         /// <summary>
@@ -121,19 +121,20 @@ namespace Planets.Generator
         /// This done before the dispatch command is run for each tile of the planet.
         /// </summary>
         /// <param name="vertexBuffer"></param>
-        private unsafe void Prepare(GPUBuffer<Vertex> vertexBuffer)
+        private unsafe void Prepare(DirectMeshBuffer mesh)
         {
-            _terrainGenerator.Prepare(vertexBuffer.UInstanceCount32, vertexBuffer.UInstanceCount32, 1);
+            _terrainGenerator.Prepare((uint)mesh.VertexBufferLength, (uint)mesh.VertexBufferLength, 1);
 
             fixed (VkDescriptorSet* pSet = &_terrainGenerator.DescriptorSet)
             {
                 new DescriptorWriter(_terrainGenerator.DescriptorSetLayout, _pool)
                     .WriteBuffer(0, _terrainGenerator.ShaderParameters.DescriptorInfo())
-                    .WriteBuffer(1, vertexBuffer.DescriptorInfo())
-                    .WriteBuffer(2, _noiseGeneratorParams.DescriptorInfo())
-                    .WriteBuffer(3, _noiseSettings.DescriptorInfo())
-                    .WriteBuffer(4, _biomeStartHeights.DescriptorInfo())
-                    .WriteBuffer(5, _elevationMinMax.DescriptorInfo())
+                    .WriteBuffer(1, mesh.GetBufferAtAttribute(VertexAttribute.Position).DescriptorInfo())
+                    .WriteBuffer(2, mesh.GetBufferAtAttribute(VertexAttribute.TexCoord0).DescriptorInfo())
+                    .WriteBuffer(3, _noiseGeneratorParams.DescriptorInfo())
+                    .WriteBuffer(4, _noiseSettings.DescriptorInfo())
+                    .WriteBuffer(5, _biomeStartHeights.DescriptorInfo())
+                    .WriteBuffer(6, _elevationMinMax.DescriptorInfo())
                     .Build(pSet);
             }
         }
@@ -143,17 +144,17 @@ namespace Planets.Generator
         /// </summary>
         /// <param name="commandBuffer"></param>
         /// <param name="mesh"></param>
-        public void Dispatch(VkCommandBuffer commandBuffer, Mesh mesh)
+        public void Dispatch(VkCommandBuffer commandBuffer, DirectMeshBuffer mesh)
         {
-            Prepare(mesh.VertexBuffer);
-            _terrainGenerator.Dispatch(commandBuffer, (uint)mesh.VertexCount, 1, 1);
+            Prepare(mesh);
+            _terrainGenerator.Dispatch(commandBuffer, (uint)mesh.VertexBufferLength, 1, 1);
         }
 
         /// <summary>
         /// Calls dispatch but creates and ends a command buffer just for one operation.
         /// </summary>
         /// <param name="mesh"></param>
-        public void DispatchSingleTimeCmd(Mesh mesh)
+        public void DispatchSingleTimeCmd(DirectMeshBuffer mesh)
         {
             var commandBuffer = GraphicsDevice.Instance.BeginSingleTimeCommands();
 
@@ -166,24 +167,23 @@ namespace Planets.Generator
         /// Read and convert the min and max elevation as a Vector2
         /// </summary>
         /// <returns></returns>
-        public unsafe Vector2 ReadElevationMinMax()
+        public Vector2 ReadElevationMinMax()
         {
-            int* pMinMax = stackalloc int[2];
-            _elevationMinMax.ReadFromBuffer(pMinMax);
-
+            
+            _elevationMinMax.ReadToHostBuffer();
+            Span<int> pMinMax = _elevationMinMax.HostBuffer;
             return new Vector2(pMinMax[0] / QUANTIIZE_FACTOR, pMinMax[1] / QUANTIIZE_FACTOR);
         }
 
         /// <summary>
         /// provides a way to reset the min max buffer allowing the same pipeline to generate multiple planets.
         /// </summary>
-        public unsafe void ResetMinMax()
+        public void ResetMinMax()
         {
-            int* pMinMax = stackalloc int[2];
+            Span<int> pMinMax = _elevationMinMax.HostBuffer;
             pMinMax[0] = int.MaxValue;
             pMinMax[1] = int.MinValue;
-
-            _elevationMinMax.WriteToBuffer(pMinMax);
+            _elevationMinMax.WriteFromHostBuffer();
         }
 
         public void Dispose()

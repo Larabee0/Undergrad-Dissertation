@@ -46,6 +46,8 @@ namespace VECS.ECS
         private readonly Dictionary<Guid, int> _componentTypeToIdLookup = []; // look up for the component type guid to the smaller component id
         private readonly Dictionary<int, Type> _componentIdToTypeLookup = []; // look up for a component id to the component type
 
+        private readonly List<EntityQuery> _queries=[];
+
         /// <summary>
         /// Generates ids for all the components present in the executing assembly,
         /// then tracks them in <see cref="_componentIdToTypeLookup"/> and <see cref="_componentTypeToIdLookup"/>
@@ -126,7 +128,7 @@ namespace VECS.ECS
 
                 _compSignatureToCompReference.Add(GetEntityComponentSigature<T>(entity), comp);
                 UpdateEntityArchetype(entity);
-
+                AutoMarkQueriesStale(compId);
                 return comp;
             }
         }
@@ -200,6 +202,7 @@ namespace VECS.ECS
                 {
                     UpdateEntityArchetype(entity);
                 }
+                AutoMarkQueriesStale(compId);
             }
         }
 
@@ -798,11 +801,6 @@ namespace VECS.ECS
                 AddComponent<Parent>(instance, new() { Value = parentEntity });
             }
 
-            if (instantiateNewMeshes && components.Remove(GetComponentId<MeshIndex>()))
-            {
-                InstantiateMeshes(entity, instance);
-            }
-
             foreach (var compId in components)
             {
                 IComponent sourceInstance = GetComponent(entity, compId);   
@@ -826,11 +824,17 @@ namespace VECS.ECS
             AddComponent(instance, instanceChildren);
         }
 
-        private void InstantiateMeshes(Entity entity, Entity instance)
+        internal void AddQuery(EntityQuery query)
         {
-            MeshIndex mesh = GetComponent<MeshIndex>(entity);
-            Mesh instanceMesh = new(Mesh.GetMeshAtIndex(mesh.Value, false));
-            AddComponent(instance, new MeshIndex() { Value = Mesh.GetIndexOfMesh(instanceMesh) });
+            if (!_queries.Contains(query))
+            {
+                _queries.Add(query);
+            }
+        }
+
+        private void AutoMarkQueriesStale(int componentId)
+        {
+            _queries.ForEach(q => q.AutoStale(componentId));
         }
     }
 }

@@ -20,7 +20,7 @@ namespace COMP302
         private Vector3 m_pMin;
 
         // Cells number in the 3 dimensions
-        private Vector3Int m_pCellNum;
+        private Vector3UInt m_pCellNum;
 
         // Faces tested number
         //private int _FacesTested;
@@ -28,30 +28,30 @@ namespace COMP302
         // Nearest Neighbors
         // private Neighborhood neighbors;
 
-        private readonly Vertex[] mv;
-        private readonly Vector3Int[] mf;
+        private readonly Vector3[] mv;
+        private readonly Vector3UInt[] mf;
         private readonly Vector3[] mfn;
         private readonly float[] mp; // Mesh face planes
 
         //Cell3D pCell;
 
-        public UniformGrid(Mesh m, Bounds bbox, float dim)
+        public UniformGrid(DirectSubMesh m, Bounds bbox, float dim)
         {
             int i, j, k, l;
-            mv = m.Vertices;
-            mf = m.Faces;
-            mfn = m.FaceNormals;
+            mv = [..m.Vertices];
+            mf = [..m.Faces];
+            mfn = [..m.FaceNormals];
             mp = new float[mf.Length];
             for (i = 0; i < mp.Length; i++)
             {
-                mp[i] = Vector3.Dot(-mfn[i], mv[mf[i][0]].Position);
+                mp[i] = Vector3.Dot(-mfn[i], mv[mf[i][0]]);
             }
 
 
             m_pMin = new(bbox.Min.X, bbox.Min.Y, bbox.Min.Z);
             m_rSize = dim;
 
-            m_pCellNum = new((int)(bbox.Size.Length() / m_rSize + 1.0f));
+            m_pCellNum = new((uint)(bbox.Size.Length() / m_rSize + 1.0f));
 
             m_pCell = new Cell3D[m_pCellNum[0]][][];
 
@@ -68,9 +68,9 @@ namespace COMP302
             {
                 //////////////////////////////////////////////////////
                 // Compute cell position
-                j = (int)((mv[i].Position.X - m_pMin.X) / m_rSize);
-                k = (int)((mv[i].Position.Y - m_pMin.Y) / m_rSize);
-                l = (int)((mv[i].Position.Z - m_pMin.Z) / m_rSize);
+                j = (int)((mv[i].X - m_pMin.X) / m_rSize);
+                k = (int)((mv[i].Y - m_pMin.Y) / m_rSize);
+                l = (int)((mv[i].Z - m_pMin.Z) / m_rSize);
                 /////////////////////////////////////////////////////
                 // Register point
                 AddOnePoint(i, j, k, l);
@@ -97,15 +97,15 @@ namespace COMP302
         {
             /////////////////////////////////////////
             // Set vertices index
-            int a = mf[i][0];
-            int b = mf[i][1];
-            int c = mf[i][2];
+            int a = (int)mf[i][0];
+            int b = (int)mf[i][1];
+            int c = (int)mf[i][2];
             //////////////////////////////////////////////////////
             // Compute cell position
             int x1, x2, y1, y2, z1, z2;
-            x1 = x2 = (int)((mv[a].Position.X - m_pMin.X) / m_rSize);
-            y1 = y2 = (int)((mv[a].Position.Y - m_pMin.Y) / m_rSize);
-            z1 = z2 = (int)((mv[a].Position.Z - m_pMin.Z) / m_rSize);
+            x1 = x2 = (int)((mv[a].X - m_pMin.X) / m_rSize);
+            y1 = y2 = (int)((mv[a].Y - m_pMin.Y) / m_rSize);
+            z1 = z2 = (int)((mv[a].Z - m_pMin.Z) / m_rSize);
             //////////////////////////////////////////////////////
             // Compute cell position
             ComputeCellPosition(b,ref x1,ref x2, ref y1, ref y2, ref z1, ref z2);
@@ -119,9 +119,9 @@ namespace COMP302
 
         private void ComputeCellPosition(int vertex, ref int x1, ref int x2, ref int y1, ref int y2, ref int z1, ref int z2)
         {
-            int xx = (int)((mv[vertex].Position.X - m_pMin.X) / m_rSize);
-            int yy = (int)((mv[vertex].Position.Y - m_pMin.Y) / m_rSize);
-            int zz = (int)((mv[vertex].Position.Z - m_pMin.Z) / m_rSize);
+            int xx = (int)((mv[vertex].X - m_pMin.X) / m_rSize);
+            int yy = (int)((mv[vertex].Y - m_pMin.Y) / m_rSize);
+            int zz = (int)((mv[vertex].Z - m_pMin.Z) / m_rSize);
             // Check for x
             if (xx < x1) x1 = xx;
             else if (xx > x2) x2 = xx;
@@ -304,12 +304,12 @@ namespace COMP302
             {
                 n++;
 
-                ia = Clamp(xx - n, m_pCellNum[0]);
-                ib = Clamp(xx + n, m_pCellNum[0]);
-                ja = Clamp(yy - n, m_pCellNum[1]);
-                jb = Clamp(yy + n, m_pCellNum[1]);
-                ka = Clamp(zz - n, m_pCellNum[2]);
-                kb = Clamp(zz + n, m_pCellNum[2]);
+                ia = Clamp(xx - n, (int)m_pCellNum[0]);
+                ib = Clamp(xx + n, (int)m_pCellNum[0]);
+                ja = Clamp(yy - n, (int)m_pCellNum[1]);
+                jb = Clamp(yy + n, (int)m_pCellNum[1]);
+                ka = Clamp(zz - n, (int)m_pCellNum[2]);
+                kb = Clamp(zz + n, (int)m_pCellNum[2]);
 
                 for (i = ia; i <= ib; i++)
                 {
@@ -327,16 +327,16 @@ namespace COMP302
                                 // current reference mesh point
                                 if (pCell.v != -1)
                                 {
-                                    d = (point - mv[pCell.v].Position).Length();
+                                    d = (point - mv[pCell.v]).Length();
                                     if (d <= neighbors.Distance())
                                     {
                                         if (d == neighbors.Distance())
                                         {
-                                            neighbors.AddVertex(mv[pCell.v].Position, pCell.v);
+                                            neighbors.AddVertex(mv[pCell.v], pCell.v);
                                         }
                                         else
                                         {
-                                            neighbors.NewVertex(d, mv[pCell.v].Position, pCell.v);
+                                            neighbors.NewVertex(d, mv[pCell.v], pCell.v);
                                             if (d == 0) return (neighbors);
                                         }
                                     }
@@ -381,14 +381,14 @@ namespace COMP302
 
 
             // Save Current Face Vertices Indices
-            int a = mf[f][0];
-            if ((p - mv[a].Position).LengthSquared() == 0) return;
+            int a = (int)mf[f][0];
+            if ((p - mv[a]).LengthSquared() == 0) return;
 
-            int b = mf[f][1];
-            if ((p - mv[b].Position).LengthSquared() == 0) return;
+            int b = (int)mf[f][1];
+            if ((p - mv[b]).LengthSquared() == 0) return;
 
-            int c = mf[f][2];
-            if ((p - mv[c].Position).LengthSquared() == 0) return;
+            int c = (int)mf[f][2];
+            if ((p - mv[c]).LengthSquared() == 0) return;
 
 
 
@@ -417,9 +417,9 @@ namespace COMP302
                 // project out coordinate "k"
                 j = 0;
 
-                float* pmva = stackalloc[] { mv[a].Position.X, mv[a].Position.Y, mv[a].Position.Z };
-                float* pmvb = stackalloc[] { mv[b].Position.X, mv[b].Position.Y, mv[b].Position.Z };
-                float* pmvc = stackalloc[] { mv[c].Position.X, mv[c].Position.Y, mv[c].Position.Z };
+                float* pmva = stackalloc[] { mv[a].X, mv[a].Y, mv[a].Z };
+                float* pmvb = stackalloc[] { mv[b].X, mv[b].Y, mv[b].Z };
+                float* pmvc = stackalloc[] { mv[c].X, mv[c].Y, mv[c].Z };
                 float* pu = stackalloc[] { u.X, u.Y, u.Z };
                 float* paa = stackalloc[] { aa.X, aa.Y };
                 float* pbb = stackalloc[] { bb.X, bb.Y };
@@ -452,18 +452,18 @@ namespace COMP302
                 if (((l > 0) && (m > 0) && (n > 0)) || ((l < 0) && (m < 0) && (n < 0)))
                 {
 
-                    v = Vector3.Normalize(mv[b].Position - mv[a].Position);
+                    v = Vector3.Normalize(mv[b] - mv[a]);
 
                     // both ^ corss or dot
-                    l = Vector3.Cross(v, (u - mv[a].Position)).Length() / Vector3.Cross(v, (mv[c].Position - mv[a].Position)).Length();
+                    l = Vector3.Cross(v, (u - mv[a])).Length() / Vector3.Cross(v, (mv[c] - mv[a])).Length();
 
                     if (l > 1) l = 1;
                     if (l < 0) l = 0;
 
 
-                    v = Vector3.Lerp(mv[a].Position, mv[c].Position, l);
+                    v = Vector3.Lerp(mv[a], mv[c], l);
 
-                    m = (u - v).Length() / (Vector3.Lerp(mv[b].Position, mv[c].Position, l) - v).Length();
+                    m = (u - v).Length() / (Vector3.Lerp(mv[b], mv[c], l) - v).Length();
 
                     d = MathF.Abs(d);
                     if (!((l < 0) || (l > 1) || (m < 0) || (m > 1)))
@@ -480,8 +480,8 @@ namespace COMP302
             /////////////////////////////////////////////
             // Distance Point To Edge
             /////////////////////////////////////////////
-            u = p - mv[a].Position;
-            v = mv[b].Position - mv[a].Position;
+            u = p - mv[a];
+            v = mv[b] - mv[a];
             l = v.Length();
             // ^ cross or dot
             d = Vector3.Cross(v, u).Length() / l;
@@ -493,7 +493,7 @@ namespace COMP302
                 if ((m > 0.0f) && (m < l))
                 {
                     m /= l;
-                    v = Vector3.Lerp(mv[a].Position, mv[b].Position, m);
+                    v = Vector3.Lerp(mv[a], mv[b], m);
                     if (d == neighbors.Distance())
                         neighbors.AddEdge(v, f, 0, m);
                     else neighbors.NewEdge(d, v, f, 0, m);
@@ -502,8 +502,8 @@ namespace COMP302
                 }
             }
 
-            u = p - mv[b].Position;
-            v = mv[c].Position - mv[b].Position;
+            u = p - mv[b];
+            v = mv[c] - mv[b];
             l = v.Length();
             // ^ cross or dot
             d = Vector3.Cross(v, u).Length() / l;
@@ -515,7 +515,7 @@ namespace COMP302
                 if ((m > 0.0f) && (m < l))
                 {
                     m /= l;
-                    v = Vector3.Lerp(mv[b].Position, mv[c].Position, m);
+                    v = Vector3.Lerp(mv[b], mv[c], m);
                     if (d == neighbors.Distance())
                         neighbors.AddEdge(v, f, 1, m);
                     else neighbors.NewEdge(d, v, f, 1, m);
@@ -524,8 +524,8 @@ namespace COMP302
                 }
             }
 
-            u = p - mv[c].Position;
-            v = mv[a].Position - mv[c].Position;
+            u = p - mv[c];
+            v = mv[a] - mv[c];
             l = v.Length();
             // ^ is dot or cross
             d = Vector3.Cross(v, u).Length() / l;
@@ -536,7 +536,7 @@ namespace COMP302
                 if ((m > 0.0f) && (m < l))
                 {
                     m /= l;
-                    v = Vector3.Lerp(mv[c].Position, mv[a].Position, m);
+                    v = Vector3.Lerp(mv[c], mv[a], m);
                     if (d == neighbors.Distance())
                         neighbors.AddEdge(v, f, 2, m);
                     else neighbors.NewEdge(d, v, f, 2, m);
