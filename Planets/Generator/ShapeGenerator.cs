@@ -38,19 +38,22 @@ namespace Planets.Generator
             ColourGenerator.UpdateSettings(colourSettings);
         }
 
-        public void RandomiseSettings()
+        public int RandomiseSeed()
         {
-            Seed = RandomSeed ? Random.Shared.Next(int.MinValue, int.MaxValue) : 0;
+            var Seed = RandomSeed ? Random.Shared.Next(int.MinValue, int.MaxValue) : 0;
+            SetSeed(Seed);
 
+            return Seed;
+        }
+
+        public void SetSeed(int seed)
+        {
+            Seed = seed;
             Random = new(Seed);
-
-
             for (int i = 0; i < NoiseFilters.Length; i++)
             {
                 NoiseFilters[i].centre = new Vector3(Random.Next(-1000, 1000), Random.Next(-1000, 1000), Random.Next(-1000, 1000));
             }
-
-            
         }
 
         public void RaiseMesh(DirectSubMesh mesh)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Numerics;
 using System.Threading.Tasks;
 using COMP302.Decimator;
@@ -16,6 +17,8 @@ namespace COMP302
 {
     public static class Authoring
     {
+        private const string OUTPUT_PATH = "Results";
+
         private static readonly int subdivisionsA = 50; // high res
         private static int subdivisionsB; // low res
         private static readonly int subdivisionsC = subdivisionsA; // high res
@@ -34,6 +37,9 @@ namespace COMP302
         private static int tileIterCount = 10;
         private static readonly bool interAllTiles = true;
 
+        private static int Seed = -1635325477;
+        private static readonly bool RandomSeed = true;
+
         private static readonly Stopwatch _stopwatch = new();
         private static DirectMeshBuffer _reference;
         private static Material _deviationHeatMap;
@@ -46,16 +52,22 @@ namespace COMP302
 
             if (QuadricSimplification)
                 DoQuadricSimplification(dMeshes);
-
+            string[] csv = ["Seed, Tile Index, Algorithm,Vertex Count, Triangle Count,Vertex Reduction Rate (%),Triangle Reduction Rate (%), Min Deviation, Max Deviation, Mean Deviation"];
             if (enableDevation)
             {
                 Console.WriteLine();
                 Console.WriteLine("Calculating Meshes B Deviations (High Res vs Low Res Generation)");
-                DoDevation(aMeshes, bMeshes);
+                csv = [..csv,..DoDevation("Terrain Generator", aMeshes, bMeshes)];
+
+                
+
                 Console.WriteLine();
                 Console.WriteLine("Calculating Meshes D Deviations (High Res vs Quadric Simplified)");
-                DoDevation(cMeshes, dMeshes);
+                csv = [.. csv, .. DoDevation( "Quadric Simplification", cMeshes, dMeshes)];
             }
+            Directory.CreateDirectory(Path.Combine(Application.ExecutingDirectory, OUTPUT_PATH));
+            File.WriteAllLines(Path.Combine(Application.ExecutingDirectory, OUTPUT_PATH, string.Format("{0}_{1}_{2}.csv", subdivisionsA, (inputReductionRate * 100f).ToString("000"), Seed)), csv);
+
             Console.WriteLine(string.Format("\nInput reduct-rate: {0}% | Actual: {1}% | Subdivisions (Mesh B) {2}", (inputReductionRate * 100f).ToString("00.00"), (actualReductionRate * 100f).ToString("00.00"), subdivisionsB));
             Console.WriteLine();
             Console.WriteLine();
@@ -64,6 +76,9 @@ namespace COMP302
             Console.WriteLine();
             Console.WriteLine("Meshes C-D (High Res vs Quadric Simplified)");
             GetStats(cMeshes, dMeshes);
+            Console.WriteLine();
+            CalculateVertsAndTris(aMeshes, out uint Hverts, out uint Htris);
+            Console.WriteLine(string.Format("Seed: {0}, Src Vert Count: {1} Src Tri Count: {2}", Seed, Hverts, Htris / 3));
         }
 
         private static void CalculateActualSimplificationRates()
@@ -95,6 +110,14 @@ namespace COMP302
             subdivisionsB = subdivisonsForB;
         }
 
+        private static (float,float) CalculateSimplificationRates(DirectSubMesh[] a, DirectSubMesh[] b)
+        {
+            CalculateVertsAndTris(a, out uint aV, out uint aT);
+            CalculateVertsAndTris(b, out uint bV, out uint bT);
+
+            return ((float)bV / (float)aV, (float)bT / (float)aT);
+        }
+
         private static (uint, uint) GetSubdivisonCounts(int tile, int subdivisions)
         {
             var vertices = MeshExtensions.GetVertsPerFace(subdivisions);
@@ -109,29 +132,27 @@ namespace COMP302
 
         private static void GetStats(DirectSubMesh[] highRes, DirectSubMesh[] lowRes)
         {
-            uint Lverts = 0;
-            uint Ltris = 0;
+            CalculateVertsAndTris(lowRes, out uint Lverts, out uint Ltris);
+            CalculateVertsAndTris(highRes, out uint Hverts, out uint Htris);
+
+            Console.WriteLine(string.Format("Low res Mesh stats: Verts: {0}, Indices: {1}, Tris {2}", Lverts, Ltris, Ltris / 3));
+            Console.WriteLine(string.Format("High res Mesh stats: Verts: {0}, Indices: {1}, Tris {2}", Hverts, Htris, Htris / 3));
+            Console.WriteLine(string.Format("Reduction rates: Verts: {0}%, Indices: {1}%", (((float)Lverts / (float)Hverts) * 100f).ToString("00.00"), (((float)Ltris / (float)Htris) * 100f).ToString("00.00")));
+        }
+
+        private static void CalculateVertsAndTris(DirectSubMesh[] lowRes, out uint Lverts, out uint Ltris)
+        {
+            Lverts = 0;
+            Ltris = 0;
             for (int i = 0; i < lowRes[0].DirectMeshBuffer.SubMeshInfos.Length; i++)
             {
                 Lverts += lowRes[0].DirectMeshBuffer.SubMeshInfos[i].VertexCount;
                 Ltris += lowRes[0].DirectMeshBuffer.SubMeshInfos[i].IndexCount;
             }
-            uint Hverts = 0;
-            uint Htris = 0;
-            for (int i = 0; i < highRes[0].DirectMeshBuffer.SubMeshInfos.Length; i++)
-            {
-                Hverts += highRes[0].DirectMeshBuffer.SubMeshInfos[i].VertexCount;
-                Htris += highRes[0].DirectMeshBuffer.SubMeshInfos[i].IndexCount;
-            }
-
-            Console.WriteLine(string.Format("Low res Mesh stats: Verts: {0}, Indices: {1}, Tris {2}", Lverts, Ltris, Ltris / 3));
-            Console.WriteLine(string.Format("High res Mesh stats: Verts: {0}, Indices: {1}, Tris {2}", Hverts, Htris, Htris / 3));
-            Console.WriteLine(string.Format("Reduction rates: Verts: {0}%, Indices: {1}%", (((float)Lverts/(float)Hverts)*100f).ToString("00.00"), (((float)Ltris / (float)Htris) * 100f).ToString("00.00")));
         }
 
         private static void DoQuadricSimplification(DirectSubMesh[] aMeshes)
         {
-            aMeshes[0].DirectMeshBuffer.ReadAllBuffers();
             _stopwatch.Restart();
             ParallelOptions parallelOptions = new()
             {
@@ -193,8 +214,16 @@ namespace COMP302
 
             World.DefaultWorld.CreateSystem<TexturelessRenderSystem>();
             var shapeGenerator = PlanetPresets.ShapeGeneratorFixedEarthLike();
-            shapeGenerator.RandomiseSettings();
-            var a = CreateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, subdivisionsA);
+            if (RandomSeed)
+            {
+                Seed = shapeGenerator.RandomiseSeed();
+            }
+            else
+            {
+                shapeGenerator.SetSeed(Seed);
+            }
+
+                var a = CreateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, subdivisionsA);
             var b = CreateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, subdivisionsB);
             var c = CreateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, subdivisionsC);
             var d = CreateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, subdivisionsD);
@@ -217,7 +246,7 @@ namespace COMP302
             Console.WriteLine(string.Format("Copy back time: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
 
-        private static void DoDevation(DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes)
+        private static string[] DoDevation(string method,DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes)
         {
             if (interAllTiles)
             {
@@ -227,6 +256,9 @@ namespace COMP302
             string[] stats = new string[tileIterCount];
             aMeshes[0].DirectMeshBuffer.ForceCrunchFaceData();
             bMeshes[0].DirectMeshBuffer.ForceCrunchFaceData();
+            CalculateVertsAndTris(bMeshes, out uint bverts, out uint btris);
+            btris /= 3;
+            var actualReductionRates = CalculateSimplificationRates(aMeshes, bMeshes);
             for (int i = 0; i < tileIterCount; i++)
             {
                 var uvs = bMeshes[i].GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
@@ -239,9 +271,8 @@ namespace COMP302
 
                 devation.Initialization(aMeshes[i], bMeshes[i]);
                 devation.Compute(normalDevation,parallelDevation);
-                stats[i] = devation.GetStatisticsString();
+                stats[i] = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", Seed,i, method, bverts, btris, actualReductionRates.Item1, actualReductionRates.Item2, devation.GetCSVStatisticRow());
             }
-
             _stopwatch.Stop();
             if (logDeviations)
             {
@@ -255,6 +286,7 @@ namespace COMP302
             DirectMeshBuffer.RecalcualteAllNormals(aMeshes[0].DirectMeshBuffer);
             DirectMeshBuffer.RecalcualteAllNormals(bMeshes[0].DirectMeshBuffer);
             Console.WriteLine(string.Format("Devation Calc: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
+            return stats;
         }
 
         public static DirectSubMesh[] GetMeshesInChildren(EntityManager entityManager, Entity parent)

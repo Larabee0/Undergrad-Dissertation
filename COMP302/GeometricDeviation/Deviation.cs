@@ -47,7 +47,7 @@ namespace COMP302
 
         }
 
-        public bool Initialization(DirectSubMesh a, DirectSubMesh b, float SampleStep = 0, float GridSize = 0.5f)
+        public bool Initialization(DirectSubMesh a, DirectSubMesh b,float GridSize = 0.5f)
         {
             ma = a;
             mb = b;
@@ -61,16 +61,6 @@ namespace COMP302
             ma.RecalculateRenderBounds();
             bb = ma.Bounds.Bounds;
 
-            // if (SampleStep != 0)
-            // {
-            //     step = bb.Size.Length() * SampleStep * 0.01f;
-            //     samples = new Sample[mafn];
-            // }
-            // else
-            // {
-            //     step = 0;
-            // }
-            // snum = 0;
             mb.RecalculateRenderBounds();
             bb = mb.Bounds.Bounds;
 
@@ -213,7 +203,12 @@ namespace COMP302
 
         public string GetStatisticsString()
         {
-            return(string.Format("minDev {0}, maxDev {1}, meanDev {2}, varDev {3}, rmsDev {4}", mindev, maxdev, meandev, vardev, rmsdev));
+            return string.Format("minDev {0}, maxDev {1}, meanDev {2}, varDev {3}, rmsDev {4}", mindev, maxdev, meandev, vardev, rmsdev);
+        }
+
+        public string GetCSVStatisticRow()
+        {
+            return string.Format("{0}, {1}, {2}", mindev, maxdev, meandev);
         }
 
         private static float Sqr(float x)
