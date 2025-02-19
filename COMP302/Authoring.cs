@@ -5,23 +5,23 @@ using System.Numerics;
 using System.Threading.Tasks;
 using COMP302.Decimator;
 using Planets;
-using Planets.Colour;
+using Planets.Generator;
 using VECS;
 using VECS.DataStructures;
 using VECS.ECS;
 using VECS.ECS.Presentation;
 using VECS.ECS.Transforms;
-using VECS.LowLevel;
-using Vortice.Vulkan;
 
 namespace COMP302
 {
     public static class Authoring
     {
-        private static readonly int subdivisionsA = 25;
-        private static readonly int subdivisionsB = 10;
+        private static readonly int subdivisionsA = 50;
+        private static readonly int subdivisionsB = 25;
+        private static readonly int subdivisionsC = 50;
+        private static readonly int subdivisionsD = 50;
 
-        private static readonly bool QuadricSimplification = false;
+        private static readonly bool QuadricSimplification = true;
         private static readonly bool enableDevation = true;
         private static readonly bool parallelDevation = true;
 
@@ -32,18 +32,39 @@ namespace COMP302
 
         public static void Run()
         {
-            GenerateAndCopyBack(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes);
+            GenerateAndCopyBack(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes, out DirectSubMesh[] cMeshes, out DirectSubMesh[] dMeshes);
 
             if (QuadricSimplification)
-                DoQuadricSimplification(aMeshes);
+                DoQuadricSimplification(dMeshes);
+
+
 
             if (enableDevation)
-                DoDevation(bMeshes, aMeshes);
+            {
+                DoDevation(aMeshes, bMeshes);
+                DoDevation(cMeshes, dMeshes);
+            }
+            GetStats(aMeshes);
+            GetStats(bMeshes);
+            GetStats(dMeshes);
+        }
 
+        private static void GetStats(DirectSubMesh[] meshes)
+        {
+            uint verts = 0;
+            uint tris = 0;
+            for (int i = 0; i < meshes[0].DirectMeshBuffer.SubMeshInfos.Length; i++)
+            {
+                verts += meshes[0].DirectMeshBuffer.SubMeshInfos[i].VertexCount;
+                tris += meshes[0].DirectMeshBuffer.SubMeshInfos[i].IndexCount;
+            }
+
+            Console.WriteLine(string.Format("Mesh stats: Verts: {0}, Indices: {1}, Tris {2}", verts, tris, tris / 3));
         }
 
         private static void DoQuadricSimplification(DirectSubMesh[] aMeshes)
         {
+            aMeshes[0].DirectMeshBuffer.ReadAllBuffers();
             _stopwatch.Restart();
             ParallelOptions parallelOptions = new()
             {
@@ -78,7 +99,7 @@ namespace COMP302
             meshDecimation.ToMesh(mesh);
         }
 
-        private static void GenerateAndCopyBack(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes)
+        private static void GenerateAndCopyBack(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes, out DirectSubMesh[] cMeshes, out DirectSubMesh[] dMeshes)
         {
             VertexAttributeDescription[] vertexAttributeDescriptions = [
                 new(VertexAttribute.Position,VertexAttributeFormat.Float3,0,0,0),
@@ -91,19 +112,28 @@ namespace COMP302
             var lit = new Material("devation_heat.vert", "devation_heat.frag", typeof(ModelPushConstantData), bindingDescriptions, attributeDescriptions);
 
             World.DefaultWorld.CreateSystem<TexturelessRenderSystem>();
+            var shapeGenerator = PlanetPresets.ShapeGeneratorFixedEarthLike();
+            shapeGenerator.RandomiseSettings();
+            var a = CreateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, lit, subdivisionsA);
+            var b = CreateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, lit, subdivisionsB);
+            var c = CreateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, lit, subdivisionsC);
+            var d = CreateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, lit, subdivisionsD);
 
-            var a = CreateSubdividedPlanet(World.DefaultWorld.EntityManager, lit, subdivisionsA);
-            var b = CreateSubdividedPlanet(World.DefaultWorld.EntityManager, lit, subdivisionsB);
-
-            World.DefaultWorld.EntityManager.SetComponent(a, new Translation() { Value = new(-5, 0, 0) });
-            World.DefaultWorld.EntityManager.SetComponent(b, new Translation() { Value = new(15, 0, 0) });
+            World.DefaultWorld.EntityManager.SetComponent(a, new Translation() { Value = new(5f, 0, 5f) });
+            World.DefaultWorld.EntityManager.SetComponent(b, new Translation() { Value = new(5, 0, -5f) });
+            World.DefaultWorld.EntityManager.SetComponent(c, new Translation() { Value = new(-5f, 0, 5f) });
+            World.DefaultWorld.EntityManager.SetComponent(d, new Translation() { Value = new(-5f, 0, -5f) });
 
             _stopwatch.Restart();
-            var allMeshes = GetMeshesFrom(World.DefaultWorld.EntityManager, a, b);
+            var allMeshes = GetMeshesFrom(World.DefaultWorld.EntityManager, a, b, c, d);
             aMeshes = allMeshes[0];
             bMeshes = allMeshes[1];
+            cMeshes = allMeshes[2];
+            dMeshes = allMeshes[3];
             aMeshes[0].DirectMeshBuffer.ReadAllBuffers();
             bMeshes[0].DirectMeshBuffer.ReadAllBuffers();
+            cMeshes[0].DirectMeshBuffer.ReadAllBuffers();
+            dMeshes[0].DirectMeshBuffer.ReadAllBuffers();
             _stopwatch.Stop();
             Console.WriteLine(string.Format("Copy back time: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
@@ -148,32 +178,38 @@ namespace COMP302
 
         public static DirectSubMesh[][] GetMeshesFrom(EntityManager entityManager,params Entity[] hierarhcy)
         {
-            List<Entity> entities = [];
-            List<int> offsets = [];
+            //List<Entity> entities = [];
+            //List<int> offsets = [];
+            //for (int i = 0; i < hierarhcy.Length; i++)
+            //{
+            //    if (!entityManager.HasComponent<Children>(hierarhcy[i]))
+            //    {
+            //        continue;
+            //    }
+            //    entities.AddRange(entityManager.GetComponent<Children>(hierarhcy[i]).Value);
+            //    if (i != 0)
+            //    {
+            //        offsets.Add(entities.Count);
+            //    }
+            //    else
+            //    {
+            //        offsets.Add(entities.Count);
+            //    }
+            //    
+            //}
+            //offsets.Add(entities.Count - offsets[^1]);
+            //DirectSubMesh[] meshes = new DirectSubMesh[entities.Count];
+
+            DirectSubMesh[][] splits = new DirectSubMesh[hierarhcy.Length][];
+            //VkCommandBuffer copyBufferCmd = GraphicsDevice.Instance.BeginSingleTimeCommands();
             for (int i = 0; i < hierarhcy.Length; i++)
             {
-                if (!entityManager.HasComponent<Children>(hierarhcy[i]))
+                var entityMeshes = entityManager.GetComponent<Children>(hierarhcy[i]).Value;
+                splits[i] = new DirectSubMesh[entityMeshes.Length];
+                for (int j = 0; j < entityMeshes.Length; j++)
                 {
-                    continue;
+                    splits[i][j] = DirectSubMesh.GetSubMeshAtIndex(entityManager.GetComponent<DirectSubMeshIndex>(entityMeshes[j]));
                 }
-                entities.AddRange(entityManager.GetComponent<Children>(hierarhcy[i]).Value);
-                if (i != 0)
-                {
-                    offsets.Add(entities.Count - offsets[^1]);
-                }
-                else
-                {
-                    offsets.Add(entities.Count);
-                }
-                
-            }
-            offsets.Add(entities.Count - offsets[^1]);
-            DirectSubMesh[] meshes = new DirectSubMesh[entities.Count];
-
-            //VkCommandBuffer copyBufferCmd = GraphicsDevice.Instance.BeginSingleTimeCommands();
-            for (int i = 0; i < meshes.Length; i++)
-            {
-                meshes[i] = DirectSubMesh.GetSubMeshAtIndex(entityManager.GetComponent<DirectSubMeshIndex>(entities[i]));
                 //meshes[i].EnsureAlloc();
                 //vertexBuffers[i] = meshes[i].GetAllVertexBuffers();// new GPUBuffer<VECS.Vertex>((uint)meshes[i].VertexCount,VkBufferUsageFlags.TransferDst,true);
                 //indexBuffers[i] = new GPUBuffer<uint>((uint)meshes[i].IndexCount,VkBufferUsageFlags.TransferDst,true);
@@ -184,18 +220,17 @@ namespace COMP302
             }
             //GraphicsDevice.Instance.EndSingleTimeCommands(copyBufferCmd);
             
-            DirectSubMesh[][] splits = new DirectSubMesh[hierarhcy.Length][];
 
-            for (int i = 0; i < hierarhcy.Length; i++)
-            {
-                splits[i] = new DirectSubMesh[offsets[i]];
-                Array.Copy(meshes,((i == 0) ? 0 : offsets[i-1]), splits[i],0, splits[i].Length);
-            }
+            //for (int i = 0; i < hierarhcy.Length; i++)
+            //{
+            //    splits[i] = new DirectSubMesh[offsets[i]];
+            //    Array.Copy(meshes,((i == 0) ? 0 : offsets[i-1]), splits[i],0, splits[i].Length);
+            //}
 
             return splits;
         }
 
-        private static Entity CreateSubdividedPlanet(EntityManager entityManager, Material material, int subdivisons)
+        private static Entity CreateSubdividedPlanet(ShapeGenerator shapeGenerator,EntityManager entityManager, Material material, int subdivisons)
         {
 
             var planet = entityManager.CreateEntity();
@@ -209,7 +244,7 @@ namespace COMP302
             entityManager.RemoveComponentFromHierarchy<DoNotRender>(planet);
             entityManager.RemoveComponentFromHierarchy<Prefab>(planet);
 
-            ArtifactAuthoring.GeneratePlanet(planet, PlanetPresets.ShapeGeneratorFixedEarthLike());
+            ArtifactAuthoring.GeneratePlanet(planet, shapeGenerator);
 
             var children = entityManager.GetComponent<Children>(planet);
 

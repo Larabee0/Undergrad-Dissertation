@@ -16,6 +16,7 @@ namespace Planets.Generator
         public MinMax MinMax;
         public ColourGenerator ColourGenerator;
         public SimpleNoiseSettings[] NoiseFilters;
+        public ColourSettings ColourSettings;
 
         public ShapeGenerator()
         {
@@ -27,11 +28,13 @@ namespace Planets.Generator
         {
             MinMax = new MinMax();
             ColourGenerator = new();
-            SetColourSettings(colourSettings);
+            ColourSettings = colourSettings;
+            //SetColourSettings(colourSettings);
         }
 
         public void SetColourSettings(ColourSettings colourSettings)
         {
+            ColourSettings = colourSettings;
             ColourGenerator.UpdateSettings(colourSettings);
         }
 

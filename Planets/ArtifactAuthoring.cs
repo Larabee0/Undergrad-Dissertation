@@ -355,6 +355,9 @@ namespace Planets
         public static void GeneratePlanet(Entity planetRoot, ShapeGenerator generator)
         {
             _stopwatch.Restart();
+            generator.MinMax = new MinMax();
+            generator.ColourGenerator = new();
+            generator.SetColourSettings(generator.ColourSettings);
             DirectSubMeshIndex[] meshIndices = World.DefaultWorld.EntityManager.GetComponentsInHierarchy<DirectSubMeshIndex>(planetRoot);
 
             DirectSubMesh[] meshes = new DirectSubMesh[meshIndices.Length];
@@ -395,13 +398,17 @@ namespace Planets
                 generator.MinMax.AddValue(shaderMinMax.X);
                 generator.MinMax.AddValue(shaderMinMax.Y);
             }
-            DirectMeshBuffer.RecalcualteAllNormals(meshes[0].DirectMeshBuffer);
+            else
+            {
+                meshes[0].DirectMeshBuffer.FlushAll();
+            }
+                DirectMeshBuffer.RecalcualteAllNormals(meshes[0].DirectMeshBuffer);
             // for (int i = 0; i < meshes.Length; i++)
             // {
             //     meshes[i].RecalculateNormals();
             // }
             computeGenerator?.Dispose();
-            generator.ColourGenerator.UpdateColours();
+            //generator.ColourGenerator.UpdateColours();
 
             if (World.DefaultWorld.EntityManager.HasComponent<PlanetPropeties>(planetRoot))
             {
