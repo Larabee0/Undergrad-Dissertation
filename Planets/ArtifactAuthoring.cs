@@ -36,7 +36,7 @@ namespace Planets
 
         private readonly bool generateIndirectMeshes = false;
         private static Material indirectMeshMaterial;
-        private static Stopwatch _stopwatch = new(); 
+        private readonly static Stopwatch _stopwatch = new(); 
         public ArtifactAuthoring()
         {
             //World.DefaultWorld.CreateSystem<TransformPlanetsSystem>();
@@ -333,10 +333,10 @@ namespace Planets
         {
             Console.WriteLine(string.Format("Begin Subdivison {0} steps", subdivisons));
             _stopwatch.Restart();
-            ParallelOptions options = new()
-            {
-                MaxDegreeOfParallelism = 7
-            };
+            // ParallelOptions options = new()
+            // {
+            //     MaxDegreeOfParallelism = 7
+            // };
 
             //Parallel.For(0, shape.Length, options, (i)=>{
             //

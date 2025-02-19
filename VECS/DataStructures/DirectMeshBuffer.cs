@@ -825,12 +825,6 @@ namespace VECS
         public unsafe void ReadAllBuffers()
         {
             GPUBuffer[] buffers = [_indexBuffer, .. _vertexBuffers.Values];
-
-            //for (int i = 0; i < buffers.Length; i++)
-            //{
-            //    buffers[i].ReadToHostBuffer();
-            //}
-
             GPUBuffer[] tmpReadBuffers = new GPUBuffer[buffers.Length];
             for (int i = 0; i < buffers.Length; i++)
             {
@@ -847,7 +841,6 @@ namespace VECS
             {
                 buffers[i].TryAllocHostBuffer(false);
                 tmpReadBuffers[i].ReadFromBuffer(buffers[i].HostPtr);
-                //NativeMemory.Copy(tmpReadBuffers[i].HostPtr, buffers[i].HostPtr, (nuint)tmpReadBuffers[i].BufferSize);
                 tmpReadBuffers[i].Dispose();
                 buffers[i].SetGPUBufferChanged(false);
             }

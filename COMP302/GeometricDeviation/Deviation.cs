@@ -13,6 +13,7 @@ namespace COMP302
     /// </summary>
     public class Deviation
     {
+        private readonly static int[][] Edge2Vertex = [[0, 1], [1, 2], [2, 0]];
         private DirectSubMesh ma;
         private DirectSubMesh mb;
 
@@ -78,9 +79,17 @@ namespace COMP302
             return true;
         }
 
-        public bool Compute(bool parallel)
+        public bool Compute(bool normalDeviation, bool parallel)
         {
-            return GeometricDeviation(parallel);
+            if (normalDeviation)
+            {
+                return MeshDeviation(parallel, [..ma.GetVertexDataSpan<Vector3>(VertexAttribute.Normal)], [.. mb.GetVertexDataSpan<Vector3>(VertexAttribute.Normal)]);
+            }
+            else
+            {
+                return GeometricDeviation(parallel);
+            }
+                
         }
 
 
@@ -113,6 +122,67 @@ namespace COMP302
             Deviation2Material();
 
             return true;
+        }
+
+        public bool MeshDeviation(bool parallel, Vector3[] aa, Vector3[]ab)
+        {
+            dev = new float[mavn];
+            Vector3[] vertices = [.. ma.Vertices];
+
+            if (parallel)
+            {
+
+                Parallel.For(0, mavn, (int i) =>
+                {
+                    NormalDeviation(aa, ab, vertices, i);
+                });
+            }
+            else
+            {
+                for (int i = 0; i < mavn; i++)
+                {
+                    NormalDeviation(aa, ab, vertices, i);
+                }
+            }
+
+
+            Statistics();
+            Deviation2Material();
+            return true;
+        }
+
+        private void NormalDeviation(Vector3[] aa, Vector3[] ab, Vector3[] vertices, int i)
+        {
+            Neighbor nearest = ug.NearestNeighbors(vertices[i]).Neighbors();
+            float d;
+            while (nearest != null)
+            {
+                if (nearest.v != -1)
+                {
+                    d = (aa[i] - ab[nearest.v]).Length();
+                }
+                else if (nearest.e != -1)
+                {
+
+                    uint a = mb.Face(nearest.f, Edge2Vertex[nearest.e][0]);
+                    uint b = mb.Face(nearest.f, Edge2Vertex[nearest.e][1]);
+
+                    d = (aa[i] - Vector3.Lerp(ab[a], ab[b], nearest.r1)).Length();
+                }
+                else
+                {
+                    uint a = mb.Face(nearest.f, 0);
+                    uint b = mb.Face(nearest.f, 1);
+                    uint c = mb.Face(nearest.f, 2);
+
+                    d = (aa[i] - Vector3.Lerp(Vector3.Lerp(ab[a], ab[c], nearest.r1), Vector3.Lerp(ab[b], ab[c], nearest.r1), nearest.r2)).Length();
+                }
+                if (d < dev[i])
+                {
+                    dev[i] = d;
+                }
+                nearest = nearest.next;
+            }
         }
 
         public bool Statistics()

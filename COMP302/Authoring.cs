@@ -25,6 +25,7 @@ namespace COMP302
 
         private static readonly bool QuadricSimplification = true;
         private static readonly bool enableDevation = true;
+        private static readonly bool normalDevation = false;
         private static readonly bool parallelDevation = true;
 
         private static readonly bool logSimplificationRMS = false;
@@ -49,7 +50,7 @@ namespace COMP302
             if (enableDevation)
             {
                 Console.WriteLine();
-                Console.WriteLine("Calculating Meshes B Deviations (High Res vs Low Res Generation");
+                Console.WriteLine("Calculating Meshes B Deviations (High Res vs Low Res Generation)");
                 DoDevation(aMeshes, bMeshes);
                 Console.WriteLine();
                 Console.WriteLine("Calculating Meshes D Deviations (High Res vs Quadric Simplified)");
@@ -237,7 +238,7 @@ namespace COMP302
                 var devation = new Deviation();
 
                 devation.Initialization(aMeshes[i], bMeshes[i]);
-                devation.Compute(parallelDevation);
+                devation.Compute(normalDevation,parallelDevation);
                 stats[i] = devation.GetStatisticsString();
             }
 
