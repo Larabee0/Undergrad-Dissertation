@@ -826,30 +826,31 @@ namespace VECS
         {
             GPUBuffer[] buffers = [_indexBuffer, .. _vertexBuffers.Values];
 
+            //for (int i = 0; i < buffers.Length; i++)
+            //{
+            //    buffers[i].ReadToHostBuffer();
+            //}
+
+            GPUBuffer[] tmpReadBuffers = new GPUBuffer[buffers.Length];
             for (int i = 0; i < buffers.Length; i++)
             {
-                buffers[i].ReadToHostBuffer();
+                tmpReadBuffers[i] = new GPUBuffer(buffers[i].UInstanceCount, buffers[i].InstanceSize, VkBufferUsageFlags.TransferDst, true);
             }
-
-            //GPUBuffer[] tmpReadBuffers = new GPUBuffer[buffers.Length];
-            //for (int i = 0; i < buffers.Length; i++)
-            //{
-            //    tmpReadBuffers[i] = new GPUBuffer(buffers[i].UInstanceCount, buffers[i].InstanceSize, VkBufferUsageFlags.TransferDst, true);
-            //}
-            //VkCommandBuffer singleTime = GraphicsDevice.Instance.BeginSingleTimeCommands();
-            //for (int i = 0; i < buffers.Length; i++)
-            //{
-            //    buffers[i].CopyTo(singleTime, tmpReadBuffers[i]);
-            //}
-            //GraphicsDevice.Instance.EndSingleTimeCommands(singleTime);
-            //
-            //for (int i = 0; i < buffers.Length; i++)
-            //{
-            //    buffers[i].TryAllocHostBuffer(false);
-            //    NativeMemory.Copy(tmpReadBuffers[i].HostPtr, buffers[i].HostPtr, (nuint)tmpReadBuffers[i].BufferSize);
-            //    tmpReadBuffers[i].Dispose();
-            //    buffers[i].SetGPUBufferChanged(false);
-            //}
+            VkCommandBuffer singleTime = GraphicsDevice.Instance.BeginSingleTimeCommands();
+            for (int i = 0; i < buffers.Length; i++)
+            {
+                buffers[i].CopyTo(singleTime, tmpReadBuffers[i]);
+            }
+            GraphicsDevice.Instance.EndSingleTimeCommands(singleTime);
+            
+            for (int i = 0; i < buffers.Length; i++)
+            {
+                buffers[i].TryAllocHostBuffer(false);
+                tmpReadBuffers[i].ReadFromBuffer(buffers[i].HostPtr);
+                //NativeMemory.Copy(tmpReadBuffers[i].HostPtr, buffers[i].HostPtr, (nuint)tmpReadBuffers[i].BufferSize);
+                tmpReadBuffers[i].Dispose();
+                buffers[i].SetGPUBufferChanged(false);
+            }
 
         }
 

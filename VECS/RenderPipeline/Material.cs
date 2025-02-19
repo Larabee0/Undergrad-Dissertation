@@ -338,7 +338,7 @@ namespace VECS
             {
                 pipelineConfigInfo.BindingDescriptions = bindingDescriptions;
             }
-            //pipelineConfigInfo.rasterizationInfo.polygonMode = VkPolygonMode.Line;
+            pipelineConfigInfo.rasterizationInfo.polygonMode = VkPolygonMode.Line;
             //pipelineConfigInfo.rasterizationInfo.lineWidth = 1;
             pipelineConfigInfo.rasterizationInfo.cullMode = VkCullModeFlags.Front;
 

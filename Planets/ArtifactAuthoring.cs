@@ -305,8 +305,11 @@ namespace Planets
             {
                 tileNormals[i] = planetTileMeshes[i].AverageNormal();
             }
-
-            planetTileMeshes=SubdividePlanet(planetTileMeshes[0].DirectMeshBuffer, subdivisons).DirectSubMeshes;
+            
+            if (subdivisons > 0)
+            {
+                planetTileMeshes = SubdividePlanet(planetTileMeshes[0].DirectMeshBuffer, subdivisons).DirectSubMeshes;
+            }
 
             Children propertyChildren = entityManager.GetComponent<Children>(planetRoot);
             propertyChildren.Value = new Entity[planetTileMeshes.Length];

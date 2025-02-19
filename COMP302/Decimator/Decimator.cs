@@ -55,7 +55,7 @@ namespace COMP302.Decimator
         private int _initFaceCount;
         private float _currMetric;
         private int _currOperations;
-
+        public float EstimatedError => _currMetric;
         private Stopwatch _stopWatch=new();
         #region API
         public void Execute(UnityMesh mesh, EdgeCollapseParameter collapseParam, TargetConditions targetConditions)

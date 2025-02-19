@@ -134,8 +134,8 @@ namespace COMP302
                 rmsdev += dev[i] * dev[i];
                 vardev += Sqr(dev[i] - meandev);
             }
-            vardev /= (float)(dev.Length - 1);
-            rmsdev /= (float)dev.Length;
+            vardev /= dev.Length - 1;
+            rmsdev /= dev.Length;
             rmsdev = MathF.Sqrt(rmsdev);
 
             return true;
