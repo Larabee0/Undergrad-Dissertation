@@ -26,8 +26,8 @@ namespace COMP302
         private static float inputReductionRate = 0.5f;
         private static float actualReductionRate;
 
-        private static readonly bool QuadricSimplification = true;
-        private static readonly bool enableDevation = true;
+        private static readonly bool QuadricSimplification = false;
+        private static readonly bool enableDevation = false;
         private static readonly bool normalDevation = false;
         private static readonly bool parallelDevation = true;
 
@@ -118,6 +118,14 @@ namespace COMP302
             return ((float)bV / (float)aV, (float)bT / (float)aT);
         }
 
+        private static (float, float) CalculateSimplificationRates(DirectSubMesh a, DirectSubMesh b)
+        {
+            CalculateVertsAndTris(a, out uint aV, out uint aT);
+            CalculateVertsAndTris(b, out uint bV, out uint bT);
+
+            return ((float)bV / (float)aV, (float)bT / (float)aT);
+        }
+
         private static (uint, uint) GetSubdivisonCounts(int tile, int subdivisions)
         {
             var vertices = MeshExtensions.GetVertsPerFace(subdivisions);
@@ -140,15 +148,21 @@ namespace COMP302
             Console.WriteLine(string.Format("Reduction rates: Verts: {0}%, Indices: {1}%", (((float)Lverts / (float)Hverts) * 100f).ToString("00.00"), (((float)Ltris / (float)Htris) * 100f).ToString("00.00")));
         }
 
-        private static void CalculateVertsAndTris(DirectSubMesh[] lowRes, out uint Lverts, out uint Ltris)
+        private static void CalculateVertsAndTris(DirectSubMesh[] lowRes, out uint verts, out uint indices)
         {
-            Lverts = 0;
-            Ltris = 0;
+            verts = 0;
+            indices = 0;
             for (int i = 0; i < lowRes[0].DirectMeshBuffer.SubMeshInfos.Length; i++)
             {
-                Lverts += lowRes[0].DirectMeshBuffer.SubMeshInfos[i].VertexCount;
-                Ltris += lowRes[0].DirectMeshBuffer.SubMeshInfos[i].IndexCount;
+                verts += lowRes[0].DirectMeshBuffer.SubMeshInfos[i].VertexCount;
+                indices += lowRes[0].DirectMeshBuffer.SubMeshInfos[i].IndexCount;
             }
+        }
+
+        private static void CalculateVertsAndTris(DirectSubMesh mesh, out uint verts, out uint indices)
+        {
+            verts = mesh.VertexCount;
+            indices = mesh.IndexCount;
         }
 
         private static void DoQuadricSimplification(DirectSubMesh[] aMeshes)
@@ -256,9 +270,6 @@ namespace COMP302
             string[] stats = new string[tileIterCount];
             aMeshes[0].DirectMeshBuffer.ForceCrunchFaceData();
             bMeshes[0].DirectMeshBuffer.ForceCrunchFaceData();
-            CalculateVertsAndTris(bMeshes, out uint bverts, out uint btris);
-            btris /= 3;
-            var actualReductionRates = CalculateSimplificationRates(aMeshes, bMeshes);
             for (int i = 0; i < tileIterCount; i++)
             {
                 var uvs = bMeshes[i].GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
@@ -271,7 +282,10 @@ namespace COMP302
 
                 devation.Initialization(aMeshes[i], bMeshes[i]);
                 devation.Compute(normalDevation,parallelDevation);
-                stats[i] = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", Seed,i, method, bverts, btris, actualReductionRates.Item1, actualReductionRates.Item2, devation.GetCSVStatisticRow());
+                CalculateVertsAndTris(bMeshes[i], out uint bverts, out uint btris);
+                btris /= 3;
+                var actualReductionRates = CalculateSimplificationRates(aMeshes[i], bMeshes[i]);
+                stats[i] = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", Seed,i, method, bverts, btris, (actualReductionRates.Item1).ToString("00.00%"), (actualReductionRates.Item2 ).ToString("00.00%"), devation.GetCSVStatisticRow());
             }
             _stopwatch.Stop();
             if (logDeviations)
