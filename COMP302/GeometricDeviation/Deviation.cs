@@ -94,8 +94,11 @@ namespace COMP302
             Vector3[] vertices = [..ma.Vertices];
             if (parallel)
             {
-
-                Parallel.For(0, dev.Length, (int i) =>
+                ParallelOptions options = new()
+                {
+                    MaxDegreeOfParallelism = 8
+                };
+                Parallel.For(0, dev.Length, options, (int i) =>
                 {
                     dev[i] = ug.NearestNeighbors(vertices[i]).Distance();
                 });

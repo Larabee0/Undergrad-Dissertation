@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Vector3 = System.Numerics.Vector3;
 
 namespace COMP302.Decimator
@@ -66,6 +67,12 @@ namespace COMP302.Decimator
         private void InitQuadric(Mesh mesh, EdgeCollapseParameter param)
         {
             QH = new(mesh.Verts);
+            Quadric[] qf = new Quadric[mesh.Faces.Count];
+
+            for (int i = 0; i < mesh.Faces.Count; i++)
+            {
+                FillQF(mesh, param, qf, i);
+            }
 
             for (int i = 0; i < mesh.Faces.Count; i++)
             {
@@ -74,23 +81,36 @@ namespace COMP302.Decimator
                 {
                     continue;
                 }
-                Quadric q = new(QuadricSize);
-                q.ByFace(face, QH.Qd3(face.V(0)), QH.Qd3(face.V(1)), QH.Qd3(face.V(2)), param.QualityQuadric, param.BoundaryWeight, param.UsedProperty);
+                SumWriteables(param, qf, i, face);
+            }
+        }
 
-                for (int j = 0; j < Face.VERTEX_COUNT; j++)
+        private void SumWriteables(EdgeCollapseParameter param, Quadric[] qf, int i, Face face)
+        {
+            for (int j = 0; j < Face.VERTEX_COUNT; j++)
+            {
+                var vert = face.V(j);
+                var props = face.GetPropertyS(param.UsedProperty, j);
+                if (vert.IsWritable)
                 {
-                    var vert = face.V(j);
-                    var props = face.GetPropertyS(param.UsedProperty, j);
-                    if (vert.IsWritable)
+                    if (!QH.Contains(vert, props))
                     {
-                        if (!QH.Contains(vert, props))
-                        {
-                            QH.Alloc(vert, props);
-                        }
-                        QH.SumAll(vert, props, q);
+                        QH.Alloc(vert, props);
                     }
+                    QH.SumAll(vert, props, qf[i]);
                 }
             }
+        }
+
+        private void FillQF(Mesh mesh, EdgeCollapseParameter param, Quadric[] qf, int i)
+        {
+            var face = mesh.Faces[i];
+            if (face.IsDeleted())
+            {
+                return;
+            }
+            qf[i] = new(QuadricSize);
+            qf[i].ByFace(face, QH.Qd3(face.V(0)), QH.Qd3(face.V(1)), QH.Qd3(face.V(2)), param.QualityQuadric, param.BoundaryWeight, param.UsedProperty);
         }
 
         private void InitCollapses(Mesh mesh, BinaryHeap<float, EdgeCollapse> heap, BVH<Face> bvh, EdgeCollapseParameter param)

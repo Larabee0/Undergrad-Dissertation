@@ -26,8 +26,8 @@ namespace COMP302
         private static float inputReductionRate = 0.5f;
         private static float actualReductionRate;
 
-        private static readonly bool QuadricSimplification = false;
-        private static readonly bool enableDevation = false;
+        private static readonly bool QuadricSimplification = true;
+        private static readonly bool enableDevation = true;
         private static readonly bool normalDevation = false;
         private static readonly bool parallelDevation = true;
 
@@ -51,7 +51,10 @@ namespace COMP302
             GenerateAndCopyBack(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes, out DirectSubMesh[] cMeshes, out DirectSubMesh[] dMeshes);
 
             if (QuadricSimplification)
+            {
                 DoQuadricSimplification(dMeshes);
+                GC.Collect();
+            }
             string[] csv = ["Seed, Tile Index, Algorithm,Vertex Count, Triangle Count,Vertex Reduction Rate (%),Triangle Reduction Rate (%), Min Deviation, Max Deviation, Mean Deviation"];
             if (enableDevation)
             {
@@ -59,7 +62,7 @@ namespace COMP302
                 Console.WriteLine("Calculating Meshes B Deviations (High Res vs Low Res Generation)");
                 csv = [..csv,..DoDevation("Terrain Generator", aMeshes, bMeshes)];
 
-                
+                GC.Collect();
 
                 Console.WriteLine();
                 Console.WriteLine("Calculating Meshes D Deviations (High Res vs Quadric Simplified)");
@@ -180,6 +183,11 @@ namespace COMP302
                 estimatedErrors[i] = Simplify(aMeshes[i]);
             });
 
+            //for (int i = 0; i < aMeshes.Length; i++)
+            //{
+            //    estimatedErrors[i] = Simplify(aMeshes[i]);
+            //}
+
             aMeshes[0].DirectMeshBuffer.FlushAll();
             _stopwatch.Stop();
             if (logSimplificationRMS)
@@ -252,10 +260,12 @@ namespace COMP302
             bMeshes = GetMeshesInChildren(World.DefaultWorld.EntityManager,b);
             cMeshes = GetMeshesInChildren(World.DefaultWorld.EntityManager,c);
             dMeshes = GetMeshesInChildren(World.DefaultWorld.EntityManager,d);
-            aMeshes[0].DirectMeshBuffer.ReadAllBuffers();
-            bMeshes[0].DirectMeshBuffer.ReadAllBuffers();
-            cMeshes[0].DirectMeshBuffer.ReadAllBuffers();
-            dMeshes[0].DirectMeshBuffer.ReadAllBuffers();
+
+            DirectMeshBuffer.ReadAllBuffersBatched(
+                aMeshes[0].DirectMeshBuffer,                
+                bMeshes[0].DirectMeshBuffer,
+                cMeshes[0].DirectMeshBuffer,
+                dMeshes[0].DirectMeshBuffer);
             _stopwatch.Stop();
             Console.WriteLine(string.Format("Copy back time: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
@@ -270,7 +280,15 @@ namespace COMP302
             string[] stats = new string[tileIterCount];
             aMeshes[0].DirectMeshBuffer.ForceCrunchFaceData();
             bMeshes[0].DirectMeshBuffer.ForceCrunchFaceData();
+
+
+
             for (int i = 0; i < tileIterCount; i++)
+            //ParallelOptions options = new()
+            //{
+            //    MaxDegreeOfParallelism = 1
+            //};
+            //Parallel.For(0, tileIterCount, options, (int i) =>
             {
                 var uvs = bMeshes[i].GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
                 for (int j = 0; j < bMeshes[i].Vertices.Length; j++)
@@ -281,11 +299,11 @@ namespace COMP302
                 var devation = new Deviation();
 
                 devation.Initialization(aMeshes[i], bMeshes[i]);
-                devation.Compute(normalDevation,parallelDevation);
+                devation.Compute(normalDevation, parallelDevation);
                 CalculateVertsAndTris(bMeshes[i], out uint bverts, out uint btris);
                 btris /= 3;
                 var actualReductionRates = CalculateSimplificationRates(aMeshes[i], bMeshes[i]);
-                stats[i] = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", Seed,i, method, bverts, btris, (actualReductionRates.Item1).ToString("00.00%"), (actualReductionRates.Item2 ).ToString("00.00%"), devation.GetCSVStatisticRow());
+                stats[i] = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", Seed, i, method, bverts, btris, (actualReductionRates.Item1).ToString("00.00%"), (actualReductionRates.Item2).ToString("00.00%"), devation.GetCSVStatisticRow());
             }
             _stopwatch.Stop();
             if (logDeviations)
