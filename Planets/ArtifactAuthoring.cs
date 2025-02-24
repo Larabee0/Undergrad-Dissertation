@@ -486,7 +486,7 @@ namespace Planets
             entityManager.AddComponent<MainCamera>(MainCamera);
         }
 
-        public void Destroy() { }
+        public static void Destroy() { }
 
         public static Entity CreateDirectCubeEntity(EntityManager entityManager,DirectSubMesh cubeMesh, MaterialIndex mat)
         {

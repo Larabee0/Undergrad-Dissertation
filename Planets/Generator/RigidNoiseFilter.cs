@@ -14,7 +14,7 @@ namespace Planets.Generator
 
             for (int i = 0; i < settings.numLayers; i++)
             {
-                float v = 1 - MathF.Abs(noise3Dgrad.snoise(point * frequency + settings.centre, out Vector3 gradient));
+                float v = 1 - MathF.Abs(Noise3Dgrad.Snoise(point * frequency + settings.centre, out Vector3 gradient));
                 if (settings.gradientWeight)
                 {
                     v += SimpleNosieFilter.GradientWeight(gradient) * settings.gradientWeightMul;

@@ -63,7 +63,7 @@ namespace VECS
             _presenter.Start(); // presenter depends on the main entity world existing right away
             PreOnCreate?.Invoke();
 
-            _mainWorld.OnCreate();
+            World.OnCreate();
 
             PostOnCreate?.Invoke();
         }

@@ -471,7 +471,7 @@ namespace VECS.ECS
         {
             if (_componentIdToEntities.TryGetValue(compId, out var entitiesSet))
             {
-                return new(entitiesSet);
+                return [.. entitiesSet];
             }
 
             return null;
@@ -530,11 +530,11 @@ namespace VECS.ECS
                 }
             }
 
-            HashSet<Entity> allEntities = new(_entityIdToEntity.Values);
+            HashSet<Entity> allEntities = [.. _entityIdToEntity.Values];
 
             componentIds.ForEach(comp => allEntities.IntersectWith(_componentIdToEntities[comp]));
 
-            return new(allEntities);
+            return [.. allEntities];
         }
 
         /// <summary>
@@ -628,7 +628,7 @@ namespace VECS.ECS
         {
             if (_entityIds.Remove(entity.Id))
             {
-                List<int> componentsToRemove = new(_entityToComponentIds[entity.Id]);
+                List<int> componentsToRemove = [.. _entityToComponentIds[entity.Id]];
 
                 componentsToRemove.ForEach(comp => RemoveComponent(entity, comp, false));
 
@@ -645,6 +645,8 @@ namespace VECS.ECS
 
                 _idsToRecyle.Enqueue(entity);
                 _entityIdToEntity.Remove(entity.Id);
+                _entityToComponentIds.Remove(entity.Id);
+
                 return true;
             }
             return false;
@@ -786,7 +788,7 @@ namespace VECS.ECS
         /// <returns></returns>
         public Entity Instantiate(Entity entity, bool instantiateNewMeshes = false, Entity parentEntity = default)
         {
-            HashSet<int> components = new(_entityToComponentIds[entity.Id]);
+            HashSet<int> components = [.. _entityToComponentIds[entity.Id]];
             components.Remove(GetComponentId<Prefab>());
 
             Entity instance = CreateEntity();
@@ -835,6 +837,21 @@ namespace VECS.ECS
         private void AutoMarkQueriesStale(int componentId)
         {
             _queries.ForEach(q => q.AutoStale(componentId));
+        }
+
+
+        public void DestroyEntityHierarchy(Entity entity)
+        {
+            if (HasComponent<Children>(entity, out int signature))
+            {
+                var children = (Children)_compSignatureToCompReference[signature];
+                var childCount = children.Value != null ? children.Value.Length : 0;
+                for (int i = 0; i < childCount; i++)
+                {
+                    DestroyEntityHierarchy(children.Value[i]);
+                }
+            }
+            DestroyEntity(entity);
         }
     }
 }

@@ -17,32 +17,32 @@ namespace Planets
     /// Conversion of https://github.com/ashima/webgl-noise/blob/6abed1e77ed1e18b181627c35f688eb30c9fe75e/src/noise3Dgrad.glsl#L30
     /// to C# by William Vickers Hastings
     /// </summary>
-    public static class noise3Dgrad
+    public static class Noise3Dgrad
     {
         private static Vector2 C = new(1.0f / 6.0f, 1.0f / 3.0f);
         private static Vector4 D = new(0.0f, 0.5f, 1.0f, 2.0f);
 
-        private static Vector3 mod289(Vector3 x)
+        private static Vector3 Mod289(Vector3 x)
         {
             return x - NumericsExtensions.Floor(x * (1.0f / 289.0f)) * 289.0f;
         }
 
-        private static Vector4 mod289(Vector4 x)
+        private static Vector4 Mod289(Vector4 x)
         {
             return x - NumericsExtensions.Floor(x * (1.0f / 289.0f)) * 289.0f;
         }
 
-        private static Vector4 permute(Vector4 x)
+        private static Vector4 Permute(Vector4 x)
         {
-            return mod289(((x * 34.0f) + new Vector4(10.0f)) * x);
+            return Mod289(((x * 34.0f) + new Vector4(10.0f)) * x);
         }
 
-        private static Vector4 taylorInvSqrt(Vector4 r)
+        private static Vector4 TaylorInvSqrt(Vector4 r)
         {
             return new Vector4(1.79284291400159f) - 0.85373472095314f * r;
         }
 
-        public static float snoise(Vector3 v, out Vector3 gradient)
+        public static float Snoise(Vector3 v, out Vector3 gradient)
         {
             // First corner
             Vector3 i = NumericsExtensions.Floor(v + new Vector3(Vector3.Dot(v, new Vector3(C.Y))));
@@ -60,9 +60,9 @@ namespace Planets
             Vector3 x2 = x0 - i2 + new Vector3(C.Y);
             Vector3 x3 = x0 - new Vector3(D.Y);
 
-            i = mod289(i);
+            i = Mod289(i);
 
-            Vector4 p = permute(permute(permute(
+            Vector4 p = Permute(Permute(Permute(
                   new Vector4(i.Z) + new Vector4(0.0f, i1.Z, i2.Z, 1.0f))
                 + new Vector4(i.Y) + new Vector4(0.0f, i1.Y, i2.Y, 1.0f))
                 + new Vector4(i.X) + new Vector4(0.0f, i1.X, i2.X, 1.0f));
@@ -99,7 +99,7 @@ namespace Planets
             Vector3 p3 = new(a1.Z, a1.W, h.W);
 
             //Normalise gradients
-            Vector4 norm = taylorInvSqrt(new Vector4(Vector3.Dot(p0, p0), Vector3.Dot(p1, p1), Vector3.Dot(p2, p2), Vector3.Dot(p3, p3)));
+            Vector4 norm = TaylorInvSqrt(new Vector4(Vector3.Dot(p0, p0), Vector3.Dot(p1, p1), Vector3.Dot(p2, p2), Vector3.Dot(p3, p3)));
             p0 *= norm.X;
             p1 *= norm.Y;
             p2 *= norm.Z;

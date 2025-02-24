@@ -342,11 +342,11 @@ namespace Planets
             Vector4 centerV4 = sphereBounds;
             centerV4.W = 1;
 
-            Vector3 center = new(centerV4.X, centerV4.Y, centerV4.Z);
+            //Vector3 center = new(centerV4.X, centerV4.Y, centerV4.Z);
             centerV4 = Vector4.Transform(centerV4, objectData[i].ModelMatrix);
             centerV4.W = 1;
             centerV4 = Vector4.Transform(centerV4, frameInfo.Ubo.View);
-            center = new(centerV4.X, centerV4.Y, centerV4.Z);
+            Vector3 center = new(centerV4.X, centerV4.Y, centerV4.Z);
 
             float radius = sphereBounds.W;
             bool visible = true;
@@ -397,7 +397,7 @@ namespace Planets
                     //ReadDepthPyramidAt(frameInfo, level);
                     float depth = SampleDepthPyramid(frameInfo,uv, level);
                     float depthSphere =Math.Abs((drawCullData.Znear / (center.Z - radius)));
-                    float sum = depth + depthSphere;
+                    //float sum = depth + depthSphere;
                     if (depth != 0 && 1 - depthSphere <= depth)
                     {
                         visible = visible;

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Numerics;
@@ -8,7 +7,6 @@ using COMP302.Decimator;
 using Planets;
 using Planets.Generator;
 using VECS;
-using VECS.DataStructures;
 using VECS.ECS;
 using VECS.ECS.Presentation;
 using VECS.ECS.Transforms;
@@ -17,61 +15,115 @@ namespace COMP302
 {
     public static class Authoring
     {
-        private const string OUTPUT_PATH = "Results";
+        private const string RESULTS_OUTPUT_PATH = "Results";
 
-        private static readonly int subdivisionsA = 50; // high res
-        private static int subdivisionsB; // low res
-        private static readonly int subdivisionsC = subdivisionsA; // high res
-        private static readonly int subdivisionsD = 50; // simplified
-        private static float inputReductionRate = 0.5f;
-        private static float actualReductionRate;
+        // start mesh subdivisions.
+        // mesh a and mesh c are duplicates for displaying the geometric devation heatmap
+        private static readonly int _subdivisionsA = 50; // high res
+        private static int _subdivisionsB; // low res
+        private static readonly int _subdivisionsC = _subdivisionsA; // high res 
+        private static readonly int _subdivisionsD = 50; // simplified
+        // mesh a,b,c,d entities.
+        private static Entity[] _rootEntities;
 
-        private static readonly bool QuadricSimplification = true;
-        private static readonly bool enableDevation = true;
-        private static readonly bool normalDevation = false;
-        private static readonly bool parallelDevation = true;
+        // simplification settings
+        private static readonly bool _enableQuadricSimplification = true;
+        private static readonly bool _logSimplificationRMS = false;
+        private static float _inputReductionRate = 0.5f;
+        private static float _actualReductionRate;
 
-        private static readonly bool logSimplificationRMS = false;
-        private static readonly bool logDeviations = false;
 
-        private static int tileIterCount = 10;
-        private static readonly bool interAllTiles = true;
-
-        private static int Seed = -1635325477;
-        private static readonly bool RandomSeed = true;
-
-        private static readonly Stopwatch _stopwatch = new();
-        private static DirectMeshBuffer _reference;
+        // geometric devation settings
         private static Material _deviationHeatMap;
+        private static readonly bool _enableDevation = true;
+        private static readonly bool _normalDevation = false;
+        private static readonly bool _parallelDevation = true;
+        private static readonly bool _logDeviations = false;
+
+        // planet iteration settings (basically, do we look at each tile on a planet
+        private static readonly int _runs = 2;
+        private static int _tileIterCount = 10;
+        private static readonly bool _interAllTiles = true;
+
+        // generation settings
+        private static int _seed = -1635325477;
+        private static readonly bool _randomSeed = true;
+
+        // reference mesh for calculating simplification rates
+        private static DirectMeshBuffer _reference;
+        
+        private static readonly Stopwatch _stopwatch = new();
 
         public static void Run()
         {
-            inputReductionRate = Math.Clamp(inputReductionRate, 0, 1);
-            CalculateActualSimplificationRates();
-            GenerateAndCopyBack(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes, out DirectSubMesh[] cMeshes, out DirectSubMesh[] dMeshes);
+            Init();
 
-            if (QuadricSimplification)
+            CreateReferencePlanet();
+            for (int i = 0; i < _runs; i++)
+            {
+                RunOnce();
+            }
+            Console.WriteLine("Completed runs");
+        }
+
+        private static void Init()
+        {
+            VertexAttributeDescription[] _vertexAttributeDescriptions =
+            [
+                new(VertexAttribute.Position,VertexAttributeFormat.Float3,0,0,0),
+                new(VertexAttribute.Normal,VertexAttributeFormat.Float3,0,1,1),
+                new(VertexAttribute.TexCoord0,VertexAttributeFormat.Float2,0,2,2),
+            ];
+
+            var bindingDescriptions = DirectMeshBuffer.GetBindingDescription(_vertexAttributeDescriptions);
+            var attributeDescriptions = DirectMeshBuffer.GetAttributeDescriptions(_vertexAttributeDescriptions);
+            _deviationHeatMap = new Material(
+                "devation_heat.vert",
+                "devation_heat.frag",
+                typeof(ModelPushConstantData),
+                bindingDescriptions,
+                attributeDescriptions);
+
+            World.DefaultWorld.CreateSystem<TexturelessRenderSystem>();
+        }
+
+        private static void CreateReferencePlanet()
+        {
+            Entity root = CreateSubdividedPlanet(World.DefaultWorld.EntityManager, 0);
+            DirectSubMeshIndex[] submehses = World.DefaultWorld.EntityManager.GetComponentsInHierarchy<DirectSubMeshIndex>(root);
+            // all mesehs within a planet share the same direct mesh buffer
+            _reference = DirectMeshBuffer.GetMeshAtIndex(submehses[0].DirectMeshBuffer);
+        }
+
+        private static void RunOnce()
+        {
+            _inputReductionRate = Math.Clamp(_inputReductionRate, 0, 1);
+            GetBMeshSimplificationRate();
+            DoGeneration(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes, out DirectSubMesh[] cMeshes, out DirectSubMesh[] dMeshes);
+            GC.Collect();
+            if (_enableQuadricSimplification)
             {
                 DoQuadricSimplification(dMeshes);
                 GC.Collect();
             }
             string[] csv = ["Seed, Tile Index, Algorithm,Vertex Count, Triangle Count,Vertex Reduction Rate (%),Triangle Reduction Rate (%), Min Deviation, Max Deviation, Mean Deviation"];
-            if (enableDevation)
+            if (_enableDevation)
             {
                 Console.WriteLine();
                 Console.WriteLine("Calculating Meshes B Deviations (High Res vs Low Res Generation)");
-                csv = [..csv,..DoDevation("Terrain Generator", aMeshes, bMeshes)];
+                csv = [.. csv, .. DoDevation("Terrain Generator", aMeshes, bMeshes)];
 
                 GC.Collect();
 
                 Console.WriteLine();
                 Console.WriteLine("Calculating Meshes D Deviations (High Res vs Quadric Simplified)");
-                csv = [.. csv, .. DoDevation( "Quadric Simplification", cMeshes, dMeshes)];
+                csv = [.. csv, .. DoDevation("Quadric Simplification", cMeshes, dMeshes)];
+                GC.Collect();
             }
-            Directory.CreateDirectory(Path.Combine(Application.ExecutingDirectory, OUTPUT_PATH));
-            File.WriteAllLines(Path.Combine(Application.ExecutingDirectory, OUTPUT_PATH, string.Format("{0}_{1}_{2}.csv", subdivisionsA, (inputReductionRate * 100f).ToString("000"), Seed)), csv);
+            Directory.CreateDirectory(Path.Combine(Application.ExecutingDirectory, RESULTS_OUTPUT_PATH));
+            File.WriteAllLines(Path.Combine(Application.ExecutingDirectory, RESULTS_OUTPUT_PATH, string.Format("{0}_{1}_{2}.csv", _subdivisionsA, (_inputReductionRate * 100f).ToString("000"), _seed)), csv);
 
-            Console.WriteLine(string.Format("\nInput reduct-rate: {0}% | Actual: {1}% | Subdivisions (Mesh B) {2}", (inputReductionRate * 100f).ToString("00.00"), (actualReductionRate * 100f).ToString("00.00"), subdivisionsB));
+            Console.WriteLine(string.Format("\nInput reduct-rate: {0}% | Actual: {1}% | Subdivisions (Mesh B) {2}", (_inputReductionRate * 100f).ToString("00.00"), (_actualReductionRate * 100f).ToString("00.00"), _subdivisionsB));
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Meshes A-B (High Res vs Low Res Generation");
@@ -81,91 +133,49 @@ namespace COMP302
             GetStats(cMeshes, dMeshes);
             Console.WriteLine();
             CalculateVertsAndTris(aMeshes, out uint Hverts, out uint Htris);
-            Console.WriteLine(string.Format("Seed: {0}, Src Vert Count: {1} Src Tri Count: {2}", Seed, Hverts, Htris / 3));
+            Console.WriteLine(string.Format("Seed: {0}, Src Vert Count: {1} Src Tri Count: {2}", _seed, Hverts, Htris / 3));
+
+            CleanUp();
+            GC.Collect();
         }
 
-        private static void CalculateActualSimplificationRates()
+        private static void DoGeneration(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes, out DirectSubMesh[] cMeshes, out DirectSubMesh[] dMeshes)
         {
-            _reference = GetMeshesInChildren(World.DefaultWorld.EntityManager, CreateUnGeneratedPlanet(World.DefaultWorld.EntityManager, 0))[0].DirectMeshBuffer;
-            int subdivisonsForB = subdivisionsA;
-            uint currentIndexCount = GetSubdivisonCounts(0, subdivisionsA).Item2;
-            int dstFromTarget = int.MaxValue;
-            uint targetIndexCount = (uint)MathF.Floor(currentIndexCount * inputReductionRate);
-            for (int i = subdivisionsA; i > 0; i--)
+            ShapeGenerator shapeGenerator = PlanetPresets.ShapeGeneratorFixedEarthLike();
+            if (_randomSeed)
             {
-                var newDstFromTarget = Math.Abs((int)targetIndexCount - (int)GetSubdivisonCounts(0, i).Item2);
-
-                if (newDstFromTarget < dstFromTarget)
-                {
-                    subdivisonsForB = i;
-                    dstFromTarget = newDstFromTarget;
-                }
-                else if (newDstFromTarget > dstFromTarget)
-                {
-                    break;
-                }
+                _seed = shapeGenerator.RandomiseSeed();
             }
-            var calculatedIndexCount = GetSubdivisonCounts(0, subdivisonsForB).Item2;
-
-            actualReductionRate = (float)calculatedIndexCount / (float)currentIndexCount;
-
-
-            subdivisionsB = subdivisonsForB;
-        }
-
-        private static (float,float) CalculateSimplificationRates(DirectSubMesh[] a, DirectSubMesh[] b)
-        {
-            CalculateVertsAndTris(a, out uint aV, out uint aT);
-            CalculateVertsAndTris(b, out uint bV, out uint bT);
-
-            return ((float)bV / (float)aV, (float)bT / (float)aT);
-        }
-
-        private static (float, float) CalculateSimplificationRates(DirectSubMesh a, DirectSubMesh b)
-        {
-            CalculateVertsAndTris(a, out uint aV, out uint aT);
-            CalculateVertsAndTris(b, out uint bV, out uint bT);
-
-            return ((float)bV / (float)aV, (float)bT / (float)aT);
-        }
-
-        private static (uint, uint) GetSubdivisonCounts(int tile, int subdivisions)
-        {
-            var vertices = MeshExtensions.GetVertsPerFace(subdivisions);
-            var indices = MeshExtensions.GetIndicesPerFace(subdivisions);
-            var currentIndices = _reference.SubMeshInfos[tile].IndexCount;
-
-            vertices *= (currentIndices / 3);
-            indices *= (currentIndices / 3);
-
-            return (vertices, indices);
-        }
-
-        private static void GetStats(DirectSubMesh[] highRes, DirectSubMesh[] lowRes)
-        {
-            CalculateVertsAndTris(lowRes, out uint Lverts, out uint Ltris);
-            CalculateVertsAndTris(highRes, out uint Hverts, out uint Htris);
-
-            Console.WriteLine(string.Format("Low res Mesh stats: Verts: {0}, Indices: {1}, Tris {2}", Lverts, Ltris, Ltris / 3));
-            Console.WriteLine(string.Format("High res Mesh stats: Verts: {0}, Indices: {1}, Tris {2}", Hverts, Htris, Htris / 3));
-            Console.WriteLine(string.Format("Reduction rates: Verts: {0}%, Indices: {1}%", (((float)Lverts / (float)Hverts) * 100f).ToString("00.00"), (((float)Ltris / (float)Htris) * 100f).ToString("00.00")));
-        }
-
-        private static void CalculateVertsAndTris(DirectSubMesh[] lowRes, out uint verts, out uint indices)
-        {
-            verts = 0;
-            indices = 0;
-            for (int i = 0; i < lowRes[0].DirectMeshBuffer.SubMeshInfos.Length; i++)
+            else
             {
-                verts += lowRes[0].DirectMeshBuffer.SubMeshInfos[i].VertexCount;
-                indices += lowRes[0].DirectMeshBuffer.SubMeshInfos[i].IndexCount;
+                shapeGenerator.SetSeed(_seed);
             }
-        }
 
-        private static void CalculateVertsAndTris(DirectSubMesh mesh, out uint verts, out uint indices)
-        {
-            verts = mesh.VertexCount;
-            indices = mesh.IndexCount;
+            Entity a = GenerateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, _subdivisionsA);
+            Entity b = GenerateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, _subdivisionsB);
+            Entity c = GenerateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, _subdivisionsC);
+            Entity d = GenerateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, _subdivisionsD);
+
+            _rootEntities = [a, b, c, d];
+
+            World.DefaultWorld.EntityManager.SetComponent(a, new Translation() { Value = new(5f, 0, 5f) });
+            World.DefaultWorld.EntityManager.SetComponent(b, new Translation() { Value = new(5, 0, -5f) });
+            World.DefaultWorld.EntityManager.SetComponent(c, new Translation() { Value = new(-5f, 2, 5f) });
+            World.DefaultWorld.EntityManager.SetComponent(d, new Translation() { Value = new(-5f, 2, -5f) });
+
+            _stopwatch.Restart();
+            aMeshes = GetMeshesInChildren(World.DefaultWorld.EntityManager, a);
+            bMeshes = GetMeshesInChildren(World.DefaultWorld.EntityManager, b);
+            cMeshes = GetMeshesInChildren(World.DefaultWorld.EntityManager, c);
+            dMeshes = GetMeshesInChildren(World.DefaultWorld.EntityManager, d);
+
+            DirectMeshBuffer.ReadAllBuffersBatched(
+                aMeshes[0].DirectMeshBuffer,
+                bMeshes[0].DirectMeshBuffer,
+                cMeshes[0].DirectMeshBuffer,
+                dMeshes[0].DirectMeshBuffer);
+            _stopwatch.Stop();
+            Console.WriteLine(string.Format("Copy back time: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
 
         private static void DoQuadricSimplification(DirectSubMesh[] aMeshes)
@@ -178,19 +188,14 @@ namespace COMP302
 
             float[] estimatedErrors = new float[aMeshes.Length];
 
-            Parallel.For(0, aMeshes.Length,parallelOptions, (int i) =>
+            Parallel.For(0, aMeshes.Length, parallelOptions, (int i) =>
             {
                 estimatedErrors[i] = Simplify(aMeshes[i]);
             });
 
-            //for (int i = 0; i < aMeshes.Length; i++)
-            //{
-            //    estimatedErrors[i] = Simplify(aMeshes[i]);
-            //}
-
             aMeshes[0].DirectMeshBuffer.FlushAll();
             _stopwatch.Stop();
-            if (logSimplificationRMS)
+            if (_logSimplificationRMS)
             {
                 Console.WriteLine();
                 Console.WriteLine("Logging simplification Estiamte RMS");
@@ -214,7 +219,7 @@ namespace COMP302
             };
             var conditions = new TargetConditions
             {
-                faceCount = (int)MathF.Floor(mesh.IndexCount / 3 * actualReductionRate)
+                faceCount = (int)MathF.Floor(mesh.IndexCount / 3 * _actualReductionRate)
             };
             var meshDecimation = new UnityMeshDecimation();
             meshDecimation.Execute(mesh, parameter, conditions);
@@ -222,75 +227,22 @@ namespace COMP302
             return meshDecimation.EstimatedError;
         }
 
-        private static void GenerateAndCopyBack(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes, out DirectSubMesh[] cMeshes, out DirectSubMesh[] dMeshes)
+        private static string[] DoDevation(string method, DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes)
         {
-            VertexAttributeDescription[] vertexAttributeDescriptions = [
-                new(VertexAttribute.Position,VertexAttributeFormat.Float3,0,0,0),
-                new(VertexAttribute.Normal,VertexAttributeFormat.Float3,0,1,1),
-                new(VertexAttribute.TexCoord0,VertexAttributeFormat.Float2,0,2,2),
-            ];
-
-            var bindingDescriptions = DirectMeshBuffer.GetBindingDescription(vertexAttributeDescriptions);
-            var attributeDescriptions = DirectMeshBuffer.GetAttributeDescriptions(vertexAttributeDescriptions);
-            _deviationHeatMap = new Material("devation_heat.vert", "devation_heat.frag", typeof(ModelPushConstantData), bindingDescriptions, attributeDescriptions);
-
-            World.DefaultWorld.CreateSystem<TexturelessRenderSystem>();
-            var shapeGenerator = PlanetPresets.ShapeGeneratorFixedEarthLike();
-            if (RandomSeed)
+            if (_interAllTiles)
             {
-                Seed = shapeGenerator.RandomiseSeed();
-            }
-            else
-            {
-                shapeGenerator.SetSeed(Seed);
-            }
-
-                var a = CreateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, subdivisionsA);
-            var b = CreateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, subdivisionsB);
-            var c = CreateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, subdivisionsC);
-            var d = CreateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, subdivisionsD);
-
-            World.DefaultWorld.EntityManager.SetComponent(a, new Translation() { Value = new(5f, 0, 5f) });
-            World.DefaultWorld.EntityManager.SetComponent(b, new Translation() { Value = new(5, 0, -5f) });
-            World.DefaultWorld.EntityManager.SetComponent(c, new Translation() { Value = new(-5f, 2, 5f) });
-            World.DefaultWorld.EntityManager.SetComponent(d, new Translation() { Value = new(-5f, 2, -5f) });
-
-            _stopwatch.Restart();
-            aMeshes = GetMeshesInChildren(World.DefaultWorld.EntityManager,a);
-            bMeshes = GetMeshesInChildren(World.DefaultWorld.EntityManager,b);
-            cMeshes = GetMeshesInChildren(World.DefaultWorld.EntityManager,c);
-            dMeshes = GetMeshesInChildren(World.DefaultWorld.EntityManager,d);
-
-            DirectMeshBuffer.ReadAllBuffersBatched(
-                aMeshes[0].DirectMeshBuffer,                
-                bMeshes[0].DirectMeshBuffer,
-                cMeshes[0].DirectMeshBuffer,
-                dMeshes[0].DirectMeshBuffer);
-            _stopwatch.Stop();
-            Console.WriteLine(string.Format("Copy back time: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
-        }
-
-        private static string[] DoDevation(string method,DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes)
-        {
-            if (interAllTiles)
-            {
-                tileIterCount = aMeshes.Length;
+                _tileIterCount = aMeshes.Length;
             }
             _stopwatch.Restart();
-            string[] stats = new string[tileIterCount];
+            
+            string[] stats = new string[_tileIterCount];
+
             aMeshes[0].DirectMeshBuffer.ForceCrunchFaceData();
             bMeshes[0].DirectMeshBuffer.ForceCrunchFaceData();
 
-
-
-            for (int i = 0; i < tileIterCount; i++)
-            //ParallelOptions options = new()
-            //{
-            //    MaxDegreeOfParallelism = 1
-            //};
-            //Parallel.For(0, tileIterCount, options, (int i) =>
+            for (int i = 0; i < _tileIterCount; i++)
             {
-                var uvs = bMeshes[i].GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
+                Span<Vector2> uvs = bMeshes[i].GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
                 for (int j = 0; j < bMeshes[i].Vertices.Length; j++)
                 {
                     uvs[j].X = 0;
@@ -299,16 +251,26 @@ namespace COMP302
                 var devation = new Deviation();
 
                 devation.Initialization(aMeshes[i], bMeshes[i]);
-                devation.Compute(normalDevation, parallelDevation);
-                CalculateVertsAndTris(bMeshes[i], out uint bverts, out uint btris);
+                devation.Compute(_normalDevation, _parallelDevation);
+
+                uint bverts = bMeshes[i].VertexCount;
+                uint btris = bMeshes[i].IndexCount;
                 btris /= 3;
-                var actualReductionRates = CalculateSimplificationRates(aMeshes[i], bMeshes[i]);
-                stats[i] = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", Seed, i, method, bverts, btris, (actualReductionRates.Item1).ToString("00.00%"), (actualReductionRates.Item2).ToString("00.00%"), devation.GetCSVStatisticRow());
+                Vector2 actualReductionRates = CalculateResultantSimplificationRates(aMeshes[i], bMeshes[i]);
+                stats[i] = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}",
+                    _seed,
+                    i,
+                    method,
+                    bverts,
+                    btris,
+                    actualReductionRates.X.ToString("00.00%"),
+                    actualReductionRates.Y.ToString("00.00%"),
+                    devation.GetCSVStatisticRow());
             }
             _stopwatch.Stop();
-            if (logDeviations)
+            if (_logDeviations)
             {
-                for (int i = 0; i < tileIterCount; i++)
+                for (int i = 0; i < _tileIterCount; i++)
                 {
                     Console.WriteLine(stats[i]);
                 }
@@ -321,9 +283,105 @@ namespace COMP302
             return stats;
         }
 
+        private static void CleanUp()
+        {
+            var entityManager = World.DefaultWorld.EntityManager;
+            for (int i = 0; i < _rootEntities.Length; i++)
+            {
+                DirectSubMeshIndex[] meshes = entityManager.GetComponentsInHierarchy<DirectSubMeshIndex>(_rootEntities[i]);
+
+                for (int j = 0; j < meshes.Length; j++)
+                {
+                    DirectMeshBuffer.GetMeshAtIndex(meshes[i].DirectMeshBuffer)?.Dispose();
+                }
+
+                entityManager.DestroyEntityHierarchy(_rootEntities[i]);
+            }
+
+            _rootEntities = null;
+        }
+
+        private static void GetBMeshSimplificationRate()
+        {
+            int subdivisonsForB = _subdivisionsA;
+            uint currentIndexCount = GetSubdivisonCounts(0, _subdivisionsA).Y;
+            int dstFromTarget = int.MaxValue;
+            uint targetIndexCount = (uint)MathF.Floor(currentIndexCount * _inputReductionRate);
+            for (int i = _subdivisionsA; i > 0; i--)
+            {
+                int newDstFromTarget = Math.Abs((int)targetIndexCount - (int)GetSubdivisonCounts(0, i).Y);
+
+                if (newDstFromTarget < dstFromTarget)
+                {
+                    subdivisonsForB = i;
+                    dstFromTarget = newDstFromTarget;
+                }
+                else if (newDstFromTarget > dstFromTarget)
+                {
+                    break;
+                }
+            }
+            uint calculatedIndexCount = GetSubdivisonCounts(0, subdivisonsForB).Y;
+
+            _actualReductionRate = (float)calculatedIndexCount / (float)currentIndexCount;
+
+            _subdivisionsB = subdivisonsForB;
+        }
+
+        //private static (float,float) CalculateSimplificationRates(DirectSubMesh[] a, DirectSubMesh[] b)
+        //{
+        //    CalculateVertsAndTris(a, out uint aV, out uint aT);
+        //    CalculateVertsAndTris(b, out uint bV, out uint bT);
+        //
+        //    return ((float)bV / (float)aV, (float)bT / (float)aT);
+        //}
+
+        private static Vector2 CalculateResultantSimplificationRates(DirectSubMesh a, DirectSubMesh b)
+        {
+            uint aV = a.VertexCount;
+            uint aT = a.IndexCount;
+            uint bV = b.VertexCount;
+            uint bT = b.IndexCount;
+
+            return new ((float)bV / (float)aV, (float)bT / (float)aT);
+        }
+
+        private static Vector2UInt GetSubdivisonCounts(int tile, int subdivisions)
+        {
+            var vertices = MeshExtensions.GetVertsPerFace(subdivisions);
+            var indices = MeshExtensions.GetIndicesPerFace(subdivisions);
+            var currentIndices = _reference.SubMeshInfos[tile].IndexCount;
+
+            vertices *= currentIndices / 3;
+            indices *= currentIndices / 3;
+
+            return new (vertices, indices);
+        }
+
+        private static void GetStats(DirectSubMesh[] highRes, DirectSubMesh[] lowRes)
+        {
+            CalculateVertsAndTris(lowRes, out uint Lverts, out uint Ltris);
+            CalculateVertsAndTris(highRes, out uint Hverts, out uint Htris);
+
+            Console.WriteLine(string.Format("Low res Mesh stats: Verts: {0}, Indices: {1}, Tris {2}", Lverts, Ltris, Ltris / 3));
+            Console.WriteLine(string.Format("High res Mesh stats: Verts: {0}, Indices: {1}, Tris {2}", Hverts, Htris, Htris / 3));
+            Console.WriteLine(string.Format("Reduction rates: Verts: {0}%, Indices: {1}%", (((float)Lverts / (float)Hverts) * 100f).ToString("00.00"), (((float)Ltris / (float)Htris) * 100f).ToString("00.00")));
+        }
+
+        private static void CalculateVertsAndTris(DirectSubMesh[] lowRes, out uint verts, out uint indices)
+        {
+            verts = 0;
+            indices = 0;
+            for (int i = 0; i < lowRes[0].DirectMeshBuffer.SubMeshInfos.Length; i++)
+            {
+                verts += lowRes[0].DirectMeshBuffer.SubMeshInfos[i].VertexCount;
+                indices += lowRes[0].DirectMeshBuffer.SubMeshInfos[i].IndexCount;
+            }
+        }
+
         public static DirectSubMesh[] GetMeshesInChildren(EntityManager entityManager, Entity parent)
         {
-            var entityMeshes = entityManager.GetComponent<Children>(parent).Value;
+            Entity[] entityMeshes = entityManager.GetComponent<Children>(parent).Value;
             DirectSubMesh[] meshes = new DirectSubMesh[entityMeshes.Length];
             for (int j = 0; j < entityMeshes.Length; j++)
             {
@@ -332,9 +390,9 @@ namespace COMP302
             return meshes;
         }
 
-        private static Entity CreateSubdividedPlanet(ShapeGenerator shapeGenerator,EntityManager entityManager, int subdivisons)
+        private static Entity GenerateSubdividedPlanet(ShapeGenerator shapeGenerator,EntityManager entityManager, int subdivisons)
         {
-            Entity planet = CreateUnGeneratedPlanet(entityManager, subdivisons);
+            Entity planet = CreateSubdividedPlanet(entityManager, subdivisons);
 
             entityManager.RemoveComponentFromHierarchy<DoNotRender>(planet);
             entityManager.RemoveComponentFromHierarchy<Prefab>(planet);
@@ -343,7 +401,7 @@ namespace COMP302
             return planet;
         }
 
-        private static Entity CreateUnGeneratedPlanet(EntityManager entityManager, int subdivisons)
+        private static Entity CreateSubdividedPlanet(EntityManager entityManager, int subdivisons)
         {
             var planet = entityManager.CreateEntity();
             entityManager.AddComponent(planet, new Translation() { Value = new(0, 0f, 0) });
@@ -361,27 +419,6 @@ namespace COMP302
             }
 
             return planet;
-        }
-
-        public static void LoadTestScene(EntityManager entityManager)
-        {
-            var cubeUvMesh = MeshLoader.LoadModelFromFile(MeshLoader.GetMeshInDefaultPath("blender-cube.obj"), [new VertexAttributeDescription(VertexAttribute.TexCoord0, VertexAttributeFormat.Float2)]);
-            var flatVaseMesh = MeshLoader.LoadModelFromFile(MeshLoader.GetMeshInDefaultPath("blender-sphere.obj"), [new VertexAttributeDescription(VertexAttribute.TexCoord0, VertexAttributeFormat.Float2)]);
-
-            World.DefaultWorld.CreateSystem<TexturelessRenderSystem>();
-
-            var lit = new Material("devation_heat.vert", "devation_heat.frag", typeof(ModelPushConstantData));
-
-            var cube = entityManager.CreateEntity();
-            entityManager.AddComponent(cube, new Translation() { Value = new(1.5f, -1.5f, 0) });
-            entityManager.AddComponent(cube, new DirectSubMeshIndex() { DirectMeshBuffer = DirectMeshBuffer.GetIndexOfMesh(cubeUvMesh[0].DirectMeshBuffer), SubMeshIndex = 0 });
-            entityManager.AddComponent(cube, new MaterialIndex() { Value = Material.GetIndexOfMaterial(lit) });
-
-            var sphere = entityManager.CreateEntity();
-            entityManager.AddComponent(sphere, new Translation() { Value = new(-1.5f, 1.5f, 0) });
-            entityManager.AddComponent(sphere, new DirectSubMeshIndex() { DirectMeshBuffer = DirectMeshBuffer.GetIndexOfMesh(flatVaseMesh[0].DirectMeshBuffer), SubMeshIndex = 0 });
-            entityManager.AddComponent(sphere, new MaterialIndex() { Value = Material.GetIndexOfMaterial(lit) });
-
         }
     }
 }

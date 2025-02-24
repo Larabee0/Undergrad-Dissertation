@@ -12,7 +12,7 @@ namespace Planets.Generator
             float amplitude = 1;
             for (int i = 0; i < settings.numLayers; i++)
             {
-                float v = noise3Dgrad.snoise(point * frequency + settings.centre, out Vector3 gradient);
+                float v = Noise3Dgrad.Snoise(point * frequency + settings.centre, out Vector3 gradient);
                 if (settings.gradientWeight)
                 {
                     v += GradientWeight(gradient) * settings.gradientWeightMul;

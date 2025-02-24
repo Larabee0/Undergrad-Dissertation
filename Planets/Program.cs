@@ -7,7 +7,7 @@ namespace Planets
     {
         private static ArtifactAuthoring artifactAuthoring;
 
-        static int Main(string[] args)
+        static int Main()
         {
             try
             {
@@ -34,7 +34,7 @@ namespace Planets
 
         static void DestroyArtifact()
         {
-            artifactAuthoring.Destroy();
+            ArtifactAuthoring.Destroy();
         }
     }
 }
