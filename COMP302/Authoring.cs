@@ -31,6 +31,8 @@ namespace COMP302
         private static readonly bool _logSimplificationRMS = false;
         private static float _inputReductionRate = 0.5f;
         private static float _actualReductionRate;
+        private static readonly bool _runAllReductionRates = true;
+        private static float[] _simplificationRates = [0.9f, 0.75f, 0.5f, 0.25f, 0.1f];
 
 
         // geometric devation settings
@@ -47,7 +49,7 @@ namespace COMP302
 
         // generation settings
         private static int _seed = -1635325477;
-        private static readonly bool _randomSeed = true;
+        private static bool _randomSeed = true;
 
         // reference mesh for calculating simplification rates
         private static DirectMeshBuffer _reference;
@@ -61,7 +63,20 @@ namespace COMP302
             CreateReferencePlanet();
             for (int i = 0; i < _runs; i++)
             {
-                RunOnce();
+                if (_runAllReductionRates)
+                {
+                    for (int r = 0; r < _simplificationRates.Length; r++)
+                    {
+                        _inputReductionRate = _simplificationRates[r];
+                        RunOnce();
+                        _randomSeed = false;
+                    }
+                    _randomSeed = true;
+                }
+                else
+                {
+                    RunOnce();
+                }
             }
             Console.WriteLine("Completed runs");
         }

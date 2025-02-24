@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using VECS.ECS.Presentation;
 using VECS.ECS.Transforms;
 
 namespace VECS.ECS
