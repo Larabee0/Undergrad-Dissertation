@@ -15,14 +15,18 @@ namespace COMP302
 {
     public static class Authoring
     {
-        private const string RESULTS_OUTPUT_PATH = "Results";
+        private const string RESULTS_OUTPUT_PATH = "Results/Test-2";
 
         // start mesh subdivisions.
+        private static readonly bool _runAllSubdivisions = true;
+        private static readonly int[] _subdivisonLevels = [5, 10, 25, 50, 75, 100];
+
         // mesh a and mesh c are duplicates for displaying the geometric devation heatmap
-        private static readonly int _subdivisionsA = 50; // high res
+        private static  int _subdivisionsA = 50; // high res
+        //the actual value for this is calculated, determined by the _inputReductionRate
         private static int _subdivisionsB; // low res
-        private static readonly int _subdivisionsC = _subdivisionsA; // high res 
-        private static readonly int _subdivisionsD = 50; // simplified
+        private static int _subdivisionsC = _subdivisionsA; // high res 
+        private static  int _subdivisionsD = _subdivisionsA; //  simplified 
         // mesh a,b,c,d entities.
         private static Entity[] _rootEntities;
 
@@ -32,7 +36,7 @@ namespace COMP302
         private static float _inputReductionRate = 0.5f;
         private static float _actualReductionRate;
         private static readonly bool _runAllReductionRates = true;
-        private static float[] _simplificationRates = [0.9f, 0.75f, 0.5f, 0.25f, 0.1f];
+        private static readonly float[] _simplificationRates = [0.9f, 0.75f, 0.5f, 0.25f, 0.1f];
 
 
         // geometric devation settings
@@ -43,7 +47,7 @@ namespace COMP302
         private static readonly bool _logDeviations = false;
 
         // planet iteration settings (basically, do we look at each tile on a planet
-        private static readonly int _runs = 2;
+        private static readonly int _runs = 10;
         private static int _tileIterCount = 10;
         private static readonly bool _interAllTiles = true;
 
@@ -63,22 +67,42 @@ namespace COMP302
             CreateReferencePlanet();
             for (int i = 0; i < _runs; i++)
             {
-                if (_runAllReductionRates)
+                if (_runAllSubdivisions)
                 {
-                    for (int r = 0; r < _simplificationRates.Length; r++)
+                    for (int s = 0; s < _subdivisonLevels.Length; s++)
                     {
-                        _inputReductionRate = _simplificationRates[r];
-                        RunOnce();
-                        _randomSeed = false;
+                        _subdivisionsA = _subdivisionsC = _subdivisionsD = _subdivisonLevels[s];
+                        RunReductionRates();
                     }
                     _randomSeed = true;
                 }
                 else
                 {
-                    RunOnce();
+                    RunReductionRates();
                 }
             }
             Console.WriteLine("Completed runs");
+        }
+
+        private static void RunReductionRates()
+        {
+            if (_runAllReductionRates)
+            {
+                for (int r = 0; r < _simplificationRates.Length; r++)
+                {
+                    _inputReductionRate = _simplificationRates[r];
+                    RunOnce();
+                    _randomSeed = false;
+                }
+                if (!_runAllSubdivisions)
+                {
+                    _randomSeed = true;
+                }
+            }
+            else
+            {
+                RunOnce();
+            }
         }
 
         private static void Init()
@@ -115,6 +139,7 @@ namespace COMP302
             _inputReductionRate = Math.Clamp(_inputReductionRate, 0, 1);
             GetBMeshSimplificationRate();
             DoGeneration(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes, out DirectSubMesh[] cMeshes, out DirectSubMesh[] dMeshes);
+            Console.WriteLine(string.Format("Begin Test| Sub: {0} In Reduct: {1} Seed: {2}", _subdivisionsA, (_inputReductionRate * 100f).ToString("000"), _seed));
             GC.Collect();
             if (_enableQuadricSimplification)
             {
@@ -136,7 +161,7 @@ namespace COMP302
                 GC.Collect();
             }
             Directory.CreateDirectory(Path.Combine(Application.ExecutingDirectory, RESULTS_OUTPUT_PATH));
-            File.WriteAllLines(Path.Combine(Application.ExecutingDirectory, RESULTS_OUTPUT_PATH, string.Format("{0}_{1}_{2}.csv", _subdivisionsA, (_inputReductionRate * 100f).ToString("000"), _seed)), csv);
+            File.WriteAllLines(Path.Combine(Application.ExecutingDirectory, RESULTS_OUTPUT_PATH, string.Format("{2}_{1}_{0}.csv", _subdivisionsA.ToString("000"), (_inputReductionRate * 100f).ToString("000"), _seed)), csv);
 
             Console.WriteLine(string.Format("\nInput reduct-rate: {0}% | Actual: {1}% | Subdivisions (Mesh B) {2}", (_inputReductionRate * 100f).ToString("00.00"), (_actualReductionRate * 100f).ToString("00.00"), _subdivisionsB));
             Console.WriteLine();
