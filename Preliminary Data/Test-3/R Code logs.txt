@@ -1,0 +1,32 @@
+> X555675670_050_050 <- read_csv("H:/GitFork/Comp-302-2202796/Preliminary Data/Test-3/555675670_050_050.csv", col_types = cols(Seed = col_integer(),'Tile Index' = col_integer(), Algorithm = col_integer(), 'Source Subdivisions' = col_integer(),'Vertex Count' = col_integer(),'Triangle Count' = col_integer()))
+                                                                                                           
+> t.test(Algorithm~Mean_Deviation, data = X555675670_050_050)
+Error in t.test.formula(Algorithm ~ Mean_Deviation, data = X555675670_050_050) : 
+  grouping factor must have exactly 2 levels
+> t.test(Mean_Deviation-Algorithm, data = X555675670_050_050)
+Error: object 'Mean_Deviation' not found
+> t.test(Mean_Deviation~Algorithm, data = X555675670_050_050)
+
+	Welch Two Sample t-test
+
+data:  Mean_Deviation by Algorithm
+t = 12.039, df = 207.63, p-value < 2.2e-16
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ 4.033171e-05 5.612816e-05
+sample estimates:
+mean in group 0 mean in group 1 
+   7.754365e-05    2.931372e-05 
+
+> t.test(Mean_Deviation~Algorithm, data = X555675670_050_050, Paired=TRUE)
+
+	Welch Two Sample t-test
+
+data:  Mean_Deviation by Algorithm
+t = 12.039, df = 207.63, p-value < 2.2e-16
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ 4.033171e-05 5.612816e-05
+sample estimates:
+mean in group 0 mean in group 1 
+   7.754365e-05    2.931372e-05 
