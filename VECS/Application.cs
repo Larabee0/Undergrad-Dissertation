@@ -9,6 +9,7 @@ namespace VECS
     {
         public readonly static int Width = 1280;
         public readonly static int Height = 720;
+        private static bool running = true;
 
         private readonly SDL3Window _appWindow;
         private readonly GraphicsDevice _device;
@@ -35,7 +36,6 @@ namespace VECS
         public void Run()
         {
             Start();
-            bool running = true;
             while (running)
             {
                 running = !_appWindow.UpdateWindowEvents();
@@ -50,6 +50,11 @@ namespace VECS
             }
             Vulkan.vkDeviceWaitIdle(_device.Device);
             Destroy();
+        }
+
+        public static void Exit()
+        {
+            running = false;
         }
 
         /// <summary>
@@ -115,5 +120,6 @@ namespace VECS
             _device.Dispose();
             _appWindow.Dispose();
         }
+
     }
 }

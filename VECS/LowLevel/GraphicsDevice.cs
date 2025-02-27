@@ -201,11 +201,8 @@ namespace VECS.LowLevel
             {
                 requiredExtensions.Add(new ReadOnlySpan<byte>(Encoding.UTF8.GetBytes(sdlRequiredExtensions[i])));
             }
-#if DEBBUG
-            if (ENABLE_VALIDATION_LAYERS)
-            {
-                requiredExtensions.Add(Vulkan.VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
-            }
+#if DEBUG
+            requiredExtensions.Add(Vulkan.VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
 #endif
             return requiredExtensions;
         }
@@ -223,9 +220,10 @@ namespace VECS.LowLevel
 
             fixed (VkDebugUtilsMessengerEXT* toPtr = &_debugMessenger)
             {
-                if (CreateDebugUtilsMessengerEXT(_instance, &createInfoEXT, null, toPtr) != VkResult.Success)
+                var result = CreateDebugUtilsMessengerEXT(_instance, &createInfoEXT, null, toPtr);
+                if (result != VkResult.Success)
                 {
-                    throw new Exception("failed to set up debug messenger!");
+                    throw new Exception(string.Format("failed to set up debug messenger! {0}",result.ToString()));
                 }
             }
         }

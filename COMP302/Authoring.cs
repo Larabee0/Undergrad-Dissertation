@@ -15,7 +15,7 @@ namespace COMP302
 {
     public static class Authoring
     {
-        private const string RESULTS_OUTPUT_PATH = "Results/Test-2";
+        private const string RESULTS_OUTPUT_PATH = "Results/Test-3";
 
         // start mesh subdivisions.
         private static readonly bool _runAllSubdivisions = true;
@@ -47,7 +47,7 @@ namespace COMP302
         private static readonly bool _logDeviations = false;
 
         // planet iteration settings (basically, do we look at each tile on a planet
-        private static readonly int _runs = 10;
+        private static readonly int _runs = 1;
         private static int _tileIterCount = 10;
         private static readonly bool _interAllTiles = true;
 
@@ -82,6 +82,7 @@ namespace COMP302
                 }
             }
             Console.WriteLine("Completed runs");
+            Application.Exit();
         }
 
         private static void RunReductionRates()
@@ -146,7 +147,7 @@ namespace COMP302
                 DoQuadricSimplification(dMeshes);
                 GC.Collect();
             }
-            string[] csv = ["Seed, Tile Index, Algorithm,Vertex Count, Triangle Count,Vertex Reduction Rate (%),Triangle Reduction Rate (%), Min Deviation, Max Deviation, Mean Deviation"];
+            string[] csv = ["Seed, Tile Index, Algorithm, Source Subdivisions, Vertex Count, Triangle Count,Vertex Reduction Rate (%),Triangle Reduction Rate (%), Min Elevation, Max Elevation, Mean Elevation, Min Deviation, Max Deviation, Mean Deviation"];
             if (_enableDevation)
             {
                 Console.WriteLine();
@@ -282,11 +283,25 @@ namespace COMP302
 
             for (int i = 0; i < _tileIterCount; i++)
             {
-                Span<Vector2> uvs = bMeshes[i].GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
-                for (int j = 0; j < bMeshes[i].Vertices.Length; j++)
+                Span<Vector2> buvs = bMeshes[i].GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
+                Span<Vector2> auvs = aMeshes[i].GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
+                float minElevation = float.MaxValue;
+                float maxElevation = float.MinValue;
+                float meanElevation = 0;
+
+                for (int j = 0; j < aMeshes[i].VertexCount; j++)
                 {
-                    uvs[j].X = 0;
+                    minElevation = MathF.Min(minElevation, auvs[j].X);
+                    maxElevation = MathF.Max(maxElevation, auvs[j].X);
+                    meanElevation += auvs[j].X;
                 }
+                meanElevation /= aMeshes[i].VertexCount;
+
+                for (int j = 0; j < bMeshes[i].VertexCount; j++)
+                {
+                    buvs[j].X = 0;
+                }
+
 
                 var devation = new Deviation();
 
@@ -297,14 +312,18 @@ namespace COMP302
                 uint btris = bMeshes[i].IndexCount;
                 btris /= 3;
                 Vector2 actualReductionRates = CalculateResultantSimplificationRates(aMeshes[i], bMeshes[i]);
-                stats[i] = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}",
+                stats[i] = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}",
                     _seed,
                     i,
                     method,
+                    _subdivisionsA,
                     bverts,
                     btris,
                     actualReductionRates.X.ToString("00.00%"),
                     actualReductionRates.Y.ToString("00.00%"),
+                    minElevation.ToString(),
+                    maxElevation.ToString(),
+                    meanElevation.ToString(),
                     devation.GetCSVStatisticRow());
             }
             _stopwatch.Stop();
