@@ -15,7 +15,17 @@ namespace COMP302
 {
     public static class Authoring
     {
-        private const string RESULTS_OUTPUT_PATH = "Results/Test-3";
+        // data collection
+        private const string RESULTS_OUTPUT_PATH = "Results/Test-6";
+        private static readonly string[] _csvHeader = ["Seed, Tile_ID, Algorithm, Src_SubDiv, Vert_Count, Tri_Count, Vert_Reduction, Tri_Reduction, Min_Elev, Max_Elev, Mean_Elev, Min_Dev, Max_Dev, Mean_Dev"];
+
+        // algorithim = 0 = terrain generator
+        // algorithim = 1 = Quadric Simplification
+
+        private static string[] _terrainGenCSV = _csvHeader;
+        private static string[] _terrainGenSummaryCSV = _csvHeader;
+        private static string[] _quadricSimplificationCSV = _csvHeader;
+        private static string[] _quadricSimplificationSummaryCSV = _csvHeader;
 
         // start mesh subdivisions.
         private static readonly bool _runAllSubdivisions = true;
@@ -81,6 +91,12 @@ namespace COMP302
                     RunReductionRates();
                 }
             }
+            string outputPath = Path.Combine(Application.ExecutingDirectory, RESULTS_OUTPUT_PATH);
+            Directory.CreateDirectory(outputPath);
+            File.WriteAllLines(Path.Combine(outputPath, "Terrain_Generator.csv"), _terrainGenCSV);
+            File.WriteAllLines(Path.Combine(outputPath, "SUMMARY_Terrain_Generator.csv"), _terrainGenSummaryCSV);
+            File.WriteAllLines(Path.Combine(outputPath, "Quadric_Simplification.csv"), _quadricSimplificationCSV);
+            File.WriteAllLines(Path.Combine(outputPath, "SUMMARY_Quadric_Simplification.csv"), _quadricSimplificationSummaryCSV);
             Console.WriteLine("Completed runs");
             Application.Exit();
         }
@@ -104,6 +120,7 @@ namespace COMP302
             {
                 RunOnce();
             }
+
         }
 
         private static void Init()
@@ -147,22 +164,20 @@ namespace COMP302
                 DoQuadricSimplification(dMeshes);
                 GC.Collect();
             }
-            string[] csv = ["Seed, Tile Index, Algorithm, Source Subdivisions, Vertex Count, Triangle Count,Vertex Reduction Rate (%),Triangle Reduction Rate (%), Min Elevation, Max Elevation, Mean Elevation, Min Deviation, Max Deviation, Mean Deviation"];
+            
             if (_enableDevation)
             {
                 Console.WriteLine();
                 Console.WriteLine("Calculating Meshes B Deviations (High Res vs Low Res Generation)");
-                csv = [.. csv, .. DoDevation("Terrain Generator", aMeshes, bMeshes)];
+                DoDevation(0, aMeshes, bMeshes);
 
                 GC.Collect();
 
                 Console.WriteLine();
                 Console.WriteLine("Calculating Meshes D Deviations (High Res vs Quadric Simplified)");
-                csv = [.. csv, .. DoDevation("Quadric Simplification", cMeshes, dMeshes)];
+                DoDevation(1, cMeshes, dMeshes);
                 GC.Collect();
             }
-            Directory.CreateDirectory(Path.Combine(Application.ExecutingDirectory, RESULTS_OUTPUT_PATH));
-            File.WriteAllLines(Path.Combine(Application.ExecutingDirectory, RESULTS_OUTPUT_PATH, string.Format("{2}_{1}_{0}.csv", _subdivisionsA.ToString("000"), (_inputReductionRate * 100f).ToString("000"), _seed)), csv);
 
             Console.WriteLine(string.Format("\nInput reduct-rate: {0}% | Actual: {1}% | Subdivisions (Mesh B) {2}", (_inputReductionRate * 100f).ToString("00.00"), (_actualReductionRate * 100f).ToString("00.00"), _subdivisionsB));
             Console.WriteLine();
@@ -268,7 +283,7 @@ namespace COMP302
             return meshDecimation.EstimatedError;
         }
 
-        private static string[] DoDevation(string method, DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes)
+        private static void DoDevation(int method, DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes)
         {
             if (_interAllTiles)
             {
@@ -277,6 +292,8 @@ namespace COMP302
             _stopwatch.Restart();
             
             string[] stats = new string[_tileIterCount];
+            Vector3 elevationMeans = new(float.MaxValue, float.MinValue, 0);
+            Vector3 meanDevStats = new(float.MaxValue, float.MinValue, 0);
 
             aMeshes[0].DirectMeshBuffer.ForceCrunchFaceData();
             bMeshes[0].DirectMeshBuffer.ForceCrunchFaceData();
@@ -296,6 +313,10 @@ namespace COMP302
                     meanElevation += auvs[j].X;
                 }
                 meanElevation /= aMeshes[i].VertexCount;
+
+                elevationMeans.X = MathF.Min(minElevation, elevationMeans.X);
+                elevationMeans.Y = MathF.Max(maxElevation, elevationMeans.Y);
+                elevationMeans.Z += meanElevation;
 
                 for (int j = 0; j < bMeshes[i].VertexCount; j++)
                 {
@@ -319,13 +340,23 @@ namespace COMP302
                     _subdivisionsA,
                     bverts,
                     btris,
-                    actualReductionRates.X.ToString("00.00%"),
-                    actualReductionRates.Y.ToString("00.00%"),
-                    minElevation.ToString(),
-                    maxElevation.ToString(),
-                    meanElevation.ToString(),
+                    actualReductionRates.X,
+                    actualReductionRates.Y,
+                    minElevation,
+                    maxElevation,
+                    meanElevation,
                     devation.GetCSVStatisticRow());
+
+                var devData = devation.GetDataForMean();
+
+                meanDevStats.X = MathF.Min(devData.X, meanDevStats.X);
+                meanDevStats.Y = MathF.Max(devData.Y, meanDevStats.Y);
+                meanDevStats.Z += devData.Z;
             }
+
+            elevationMeans.Z /= _tileIterCount;
+            meanDevStats.Z /= _tileIterCount;
+
             _stopwatch.Stop();
             if (_logDeviations)
             {
@@ -339,7 +370,45 @@ namespace COMP302
             DirectMeshBuffer.RecalcualteAllNormals(aMeshes[0].DirectMeshBuffer);
             DirectMeshBuffer.RecalcualteAllNormals(bMeshes[0].DirectMeshBuffer);
             Console.WriteLine(string.Format("Devation Calc: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
-            return stats;
+
+            if(method == 0)
+            {
+                _terrainGenCSV = AddCSVRows(_terrainGenCSV, stats);
+                _terrainGenSummaryCSV = [.. _terrainGenSummaryCSV, CreateSummaryCSVRow(method, aMeshes, bMeshes, elevationMeans, meanDevStats)];
+            }
+            else
+            {
+                _quadricSimplificationCSV = AddCSVRows(_quadricSimplificationCSV, stats);
+                _quadricSimplificationSummaryCSV = [.. _quadricSimplificationSummaryCSV, CreateSummaryCSVRow(method, aMeshes, bMeshes, elevationMeans, meanDevStats)];
+            }
+
+        }
+
+        private static string CreateSummaryCSVRow(int method, DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes, Vector3 elevationData, Vector3 deviationData)
+        {
+            CalculateVertsAndTris(bMeshes, out uint bverts, out uint btris);
+            var actualReductionRates = CalculateSimplificationRates(aMeshes, bMeshes);
+
+            return string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}",
+                    _seed,
+                    0,
+                    method,
+                    _subdivisionsA,
+                    bverts,
+                    btris,
+                    actualReductionRates.X,
+                    actualReductionRates.Y,
+                    elevationData.X,
+                    elevationData.Y,
+                    elevationData.Z,
+                    deviationData.X,
+                    deviationData.Y,
+                    deviationData.Z);
+        }
+
+        private static string[] AddCSVRows(string[] csv, string[] row)
+        {
+            return [.. csv, .. row];
         }
 
         private static void CleanUp()
@@ -387,13 +456,13 @@ namespace COMP302
             _subdivisionsB = subdivisonsForB;
         }
 
-        //private static (float,float) CalculateSimplificationRates(DirectSubMesh[] a, DirectSubMesh[] b)
-        //{
-        //    CalculateVertsAndTris(a, out uint aV, out uint aT);
-        //    CalculateVertsAndTris(b, out uint bV, out uint bT);
-        //
-        //    return ((float)bV / (float)aV, (float)bT / (float)aT);
-        //}
+        private static Vector2 CalculateSimplificationRates(DirectSubMesh[] a, DirectSubMesh[] b)
+        {
+            CalculateVertsAndTris(a, out uint aV, out uint aT);
+            CalculateVertsAndTris(b, out uint bV, out uint bT);
+        
+            return new((float)bV / (float)aV, (float)bT / (float)aT);
+        }
 
         private static Vector2 CalculateResultantSimplificationRates(DirectSubMesh a, DirectSubMesh b)
         {

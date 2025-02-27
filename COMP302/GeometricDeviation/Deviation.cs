@@ -214,6 +214,11 @@ namespace COMP302
             return string.Format("{0}, {1}, {2}", mindev, maxdev, meandev);
         }
 
+        public Vector3 GetDataForMean()
+        {
+            return new Vector3(mindev, maxdev, meandev);
+        }
+
         private static float Sqr(float x)
         {
             return x * x;
