@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Numerics;
@@ -16,20 +17,32 @@ namespace COMP302
     public static class Authoring
     {
         // data collection
-        private const string RESULTS_OUTPUT_PATH = "Results/Test-6";
-        private static readonly string[] _csvHeader = ["Seed, Tile_ID, Algorithm, Src_SubDiv, Vert_Count, Tri_Count, Vert_Reduction, Tri_Reduction, Min_Elev, Max_Elev, Mean_Elev, Min_Dev, Max_Dev, Mean_Dev"];
+        private const string RESULTS_OUTPUT_PATH = "Results/Test-11";
+        private static readonly string[] _csvHeader = ["Seed, Tile_ID, Algorithm, Src_SubDiv, Input_Reduction, Vert_Count, Tri_Count, Vert_Reduction, Tri_Reduction, Min_Elev, Max_Elev, Mean_Elev, Min_Dev, Max_Dev, Mean_Dev"];
 
         // algorithim = 0 = terrain generator
         // algorithim = 1 = Quadric Simplification
 
-        private static string[] _terrainGenCSV = _csvHeader;
-        private static string[] _terrainGenSummaryCSV = _csvHeader;
-        private static string[] _quadricSimplificationCSV = _csvHeader;
-        private static string[] _quadricSimplificationSummaryCSV = _csvHeader;
+        private static string[] _simpTerrainGenCSV = _csvHeader;
+        private static string[] _simpTerrainGenSummaryCSV = _csvHeader;
+        private static string[] _subTerrainGenCSV = _csvHeader;
+        private static string[] _subTerrainGenSummaryCSV = _csvHeader;
+
+        private static string[] _simpQuadricSimplificationCSV = _csvHeader;
+        private static string[] _simpQuadricSimplificationSummaryCSV = _csvHeader;
+        private static string[] _subQuadricSimplificationCSV = _csvHeader;
+        private static string[] _subQuadricSimplificationSummaryCSV = _csvHeader;
+
+        private static readonly Dictionary<(int, int, int), string[]> _testsTerrainGen = [];
+        private static readonly Dictionary<(int, int, int), string[]> _testsQuadricSimplification = [];
+
+        private static readonly Dictionary<(int, int, int), string> _summaryTestsTerrainGen = [];
+        private static readonly Dictionary<(int, int, int), string> _summaryTestsQuadricSimplification = [];
 
         // start mesh subdivisions.
         private static readonly bool _runAllSubdivisions = true;
-        private static readonly int[] _subdivisonLevels = [5, 10, 25, 50, 75, 100];
+        private static readonly int[] _subdivisonLevels = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+        //private static readonly int[] _subdivisonLevels = [20];
 
         // mesh a and mesh c are duplicates for displaying the geometric devation heatmap
         private static  int _subdivisionsA = 50; // high res
@@ -46,7 +59,8 @@ namespace COMP302
         private static float _inputReductionRate = 0.5f;
         private static float _actualReductionRate;
         private static readonly bool _runAllReductionRates = true;
-        private static readonly float[] _simplificationRates = [0.9f, 0.75f, 0.5f, 0.25f, 0.1f];
+        private static readonly float[] _simplificationRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 0.70f, 0.65f, 0.60f, 0.55f, 0.50f, 0.45f, 0.40f, 0.35f, 0.30f, 0.25f, 0.20f, 0.15f, 0.10f, 0.05f];
+        //private static readonly float[] _simplificationRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f];
 
 
         // geometric devation settings
@@ -56,14 +70,15 @@ namespace COMP302
         private static readonly bool _parallelDevation = true;
         private static readonly bool _logDeviations = false;
 
+        private static int[] _seeds;
+        private static readonly int _planetCount = 1;
         // planet iteration settings (basically, do we look at each tile on a planet
-        private static readonly int _runs = 1;
         private static int _tileIterCount = 10;
         private static readonly bool _interAllTiles = true;
 
         // generation settings
         private static int _seed = -1635325477;
-        private static bool _randomSeed = true;
+        private static readonly bool _randomSeed = false;
 
         // reference mesh for calculating simplification rates
         private static DirectMeshBuffer _reference;
@@ -72,55 +87,115 @@ namespace COMP302
 
         public static void Run()
         {
+            _seeds = new int[_planetCount];
+            for (int i = 0; i < _planetCount; i++)
+            {
+                _seeds[i] = Random.Shared.Next(int.MinValue, int.MaxValue);
+            }
+
             Init();
 
             CreateReferencePlanet();
-            for (int i = 0; i < _runs; i++)
-            {
-                if (_runAllSubdivisions)
-                {
-                    for (int s = 0; s < _subdivisonLevels.Length; s++)
-                    {
-                        _subdivisionsA = _subdivisionsC = _subdivisionsD = _subdivisonLevels[s];
-                        RunReductionRates();
-                    }
-                    _randomSeed = true;
-                }
-                else
-                {
-                    RunReductionRates();
-                }
-            }
-            string outputPath = Path.Combine(Application.ExecutingDirectory, RESULTS_OUTPUT_PATH);
-            Directory.CreateDirectory(outputPath);
-            File.WriteAllLines(Path.Combine(outputPath, "Terrain_Generator.csv"), _terrainGenCSV);
-            File.WriteAllLines(Path.Combine(outputPath, "SUMMARY_Terrain_Generator.csv"), _terrainGenSummaryCSV);
-            File.WriteAllLines(Path.Combine(outputPath, "Quadric_Simplification.csv"), _quadricSimplificationCSV);
-            File.WriteAllLines(Path.Combine(outputPath, "SUMMARY_Quadric_Simplification.csv"), _quadricSimplificationSummaryCSV);
-            Console.WriteLine("Completed runs");
+
+            RunTests();
+
+            CreatedCSVOrderedBySimplificationThenSubdivisions();
+            CreatedCSVOrderedBySubdivisionsThenSimplification();
+
+            ExportCSVs();
+
             Application.Exit();
         }
 
-        private static void RunReductionRates()
+        private static void ExportCSVs()
         {
-            if (_runAllReductionRates)
+            string outputPath = Path.Combine(Application.ExecutingDirectory, RESULTS_OUTPUT_PATH);
+            Directory.CreateDirectory(outputPath);
+            File.WriteAllLines(Path.Combine(outputPath, "SUB_Terrain_Generator.csv"), _subTerrainGenCSV);
+            File.WriteAllLines(Path.Combine(outputPath, "SUMMARY_SUB_Terrain_Generator.csv"), _subTerrainGenSummaryCSV);
+            File.WriteAllLines(Path.Combine(outputPath, "SIMP_Terrain_Generator.csv"), _simpTerrainGenCSV);
+            File.WriteAllLines(Path.Combine(outputPath, "SUMMARY_SIMP_Terrain_Generator.csv"), _simpTerrainGenSummaryCSV);
+
+            File.WriteAllLines(Path.Combine(outputPath, "SUB_Quadric_Simplification.csv"), _subQuadricSimplificationCSV);
+            File.WriteAllLines(Path.Combine(outputPath, "SUMMARY_SUB_Quadric_Simplification.csv"), _subQuadricSimplificationSummaryCSV);
+            File.WriteAllLines(Path.Combine(outputPath, "SIMP_Quadric_Simplification.csv"), _simpQuadricSimplificationCSV);
+            File.WriteAllLines(Path.Combine(outputPath, "SUMMARY_SIMP_Quadric_Simplification.csv"), _simpQuadricSimplificationSummaryCSV);
+            Console.WriteLine("Completed runs");
+        }
+
+        private static void CreatedCSVOrderedBySimplificationThenSubdivisions()
+        {
+            for (int s = 0; s < _subdivisonLevels.Length; s++)
             {
                 for (int r = 0; r < _simplificationRates.Length; r++)
                 {
-                    _inputReductionRate = _simplificationRates[r];
-                    RunOnce();
-                    _randomSeed = false;
-                }
-                if (!_runAllSubdivisions)
-                {
-                    _randomSeed = true;
-                }
-            }
-            else
-            {
-                RunOnce();
-            }
+                    for (int i = 0; i < _planetCount; i++)
+                    {
+                        var key = (_seeds[i], _subdivisonLevels[s], (int)(_simplificationRates[r] * 100));
 
+                        var terrainGen = _testsTerrainGen[key];
+                        var quadSimp = _testsTerrainGen[key];
+                        var summaryTerrainGen = _summaryTestsTerrainGen[key];
+                        var summaryQuadSimp = _summaryTestsQuadricSimplification[key];
+
+                        _subTerrainGenCSV = AddCSVRows(_subTerrainGenCSV, terrainGen);
+                        _subQuadricSimplificationCSV = AddCSVRows(_subQuadricSimplificationCSV, quadSimp);
+
+                        _subTerrainGenSummaryCSV = [.. _subTerrainGenSummaryCSV, summaryTerrainGen];
+                        _subQuadricSimplificationSummaryCSV = [.. _subQuadricSimplificationSummaryCSV, summaryQuadSimp];
+                    }
+                }
+                
+            }
+        }
+
+        private static void CreatedCSVOrderedBySubdivisionsThenSimplification()
+        {
+            for (int r = 0; r < _simplificationRates.Length; r++)
+            {
+                for (int s = 0; s < _subdivisonLevels.Length; s++)
+                {
+                    for (int i = 0; i < _planetCount; i++)
+                    {
+                        var key = (_seeds[i], _subdivisonLevels[s], (int)(_simplificationRates[r] * 100));
+
+                        var terrainGen = _testsTerrainGen[key];
+                        var quadSimp = _testsTerrainGen[key];
+                        var summaryTerrainGen = _summaryTestsTerrainGen[key];
+                        var summaryQuadSimp = _summaryTestsQuadricSimplification[key];
+
+                        _simpTerrainGenCSV = AddCSVRows(_simpTerrainGenCSV, terrainGen);
+                        _simpQuadricSimplificationCSV = AddCSVRows(_simpQuadricSimplificationCSV, quadSimp);
+
+                        _simpTerrainGenSummaryCSV = [.. _simpTerrainGenSummaryCSV, summaryTerrainGen];
+                        _simpQuadricSimplificationSummaryCSV = [.. _simpQuadricSimplificationSummaryCSV, summaryQuadSimp];
+                    }
+                }
+            }
+        }
+
+        private static void RunTests()
+        {
+            for (int s = 0; s < _subdivisonLevels.Length; s++)
+            {
+                _subdivisionsA = _subdivisonLevels[s];
+                // _subdivisionsB is calculated internally
+                _subdivisionsC = _subdivisonLevels[s];
+                _subdivisionsD = _subdivisonLevels[s];
+                var upperProgress = string.Format("Subdivision: {0}/{1}", s + 1, _subdivisonLevels.Length);
+                for (int r = 0; r < _simplificationRates.Length; r++)
+                {
+                    var innerProgress = string.Format("Simplification Rate: {0}/{1}", r + 1, _simplificationRates.Length);
+                    _inputReductionRate = _simplificationRates[r];
+                    for (int i = 0; i < _planetCount; i++)
+                    {
+                        var planetProgress = string.Format("Planet: {0}/{1}", i + 1, _planetCount);
+                        Console.WriteLine(string.Format("{0}\nof {1}\nof {2}\nElapsed Time: {3}", planetProgress, innerProgress, upperProgress, Time.TimeSinceStartUpAsDouble.ToString("000000s")));
+                        _seed = _seeds[i];
+                        RunOnce();
+                    }
+                }
+            }
         }
 
         private static void Init()
@@ -333,11 +408,12 @@ namespace COMP302
                 uint btris = bMeshes[i].IndexCount;
                 btris /= 3;
                 Vector2 actualReductionRates = CalculateResultantSimplificationRates(aMeshes[i], bMeshes[i]);
-                stats[i] = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}",
+                stats[i] = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}",
                     _seed,
                     i,
                     method,
                     _subdivisionsA,
+                    (int)(_inputReductionRate*100),
                     bverts,
                     btris,
                     actualReductionRates.X,
@@ -373,13 +449,17 @@ namespace COMP302
 
             if(method == 0)
             {
-                _terrainGenCSV = AddCSVRows(_terrainGenCSV, stats);
-                _terrainGenSummaryCSV = [.. _terrainGenSummaryCSV, CreateSummaryCSVRow(method, aMeshes, bMeshes, elevationMeans, meanDevStats)];
+                _testsTerrainGen.Add((_seed, _subdivisionsA, (int)(_inputReductionRate*100)), stats);
+                //_terrainGenCSV = AddCSVRows(_terrainGenCSV, stats);
+                //_terrainGenSummaryCSV = [.. _terrainGenSummaryCSV, CreateSummaryCSVRow(method, aMeshes, bMeshes, elevationMeans, meanDevStats)];
+                _summaryTestsTerrainGen.Add((_seed, _subdivisionsA, (int)(_inputReductionRate * 100)), CreateSummaryCSVRow(method, aMeshes, bMeshes, elevationMeans, meanDevStats));
             }
             else
             {
-                _quadricSimplificationCSV = AddCSVRows(_quadricSimplificationCSV, stats);
-                _quadricSimplificationSummaryCSV = [.. _quadricSimplificationSummaryCSV, CreateSummaryCSVRow(method, aMeshes, bMeshes, elevationMeans, meanDevStats)];
+                _testsQuadricSimplification.Add((_seed, _subdivisionsA, (int)(_inputReductionRate * 100)), stats);
+                //_quadricSimplificationCSV = AddCSVRows(_quadricSimplificationCSV, stats);
+                //_quadricSimplificationSummaryCSV = [.. _quadricSimplificationSummaryCSV, CreateSummaryCSVRow(method, aMeshes, bMeshes, elevationMeans, meanDevStats)];
+                _summaryTestsQuadricSimplification.Add((_seed, _subdivisionsA, (int)(_inputReductionRate * 100)), CreateSummaryCSVRow(method, aMeshes, bMeshes, elevationMeans, meanDevStats));
             }
 
         }
@@ -389,21 +469,23 @@ namespace COMP302
             CalculateVertsAndTris(bMeshes, out uint bverts, out uint btris);
             var actualReductionRates = CalculateSimplificationRates(aMeshes, bMeshes);
 
-            return string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}",
-                    _seed,
-                    0,
-                    method,
-                    _subdivisionsA,
-                    bverts,
-                    btris,
-                    actualReductionRates.X,
-                    actualReductionRates.Y,
-                    elevationData.X,
-                    elevationData.Y,
-                    elevationData.Z,
-                    deviationData.X,
-                    deviationData.Y,
-                    deviationData.Z);
+            return string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}",
+                _seed,
+                0,
+                method,
+                _subdivisionsA,
+                (int)(_inputReductionRate * 100),
+                bverts,
+                btris,
+                actualReductionRates.X,
+                actualReductionRates.Y,
+                elevationData.X,
+                elevationData.Y,
+                elevationData.Z,
+                deviationData.X,
+                deviationData.Y,
+                deviationData.Z
+            );
         }
 
         private static string[] AddCSVRows(string[] csv, string[] row)
