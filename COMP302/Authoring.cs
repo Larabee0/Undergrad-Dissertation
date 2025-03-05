@@ -17,27 +17,41 @@ namespace COMP302
     public static class Authoring
     {
         // data collection
-        private const string RESULTS_OUTPUT_PATH = "Results/Test-11";
-        private static readonly string[] _csvHeader = ["Seed, Tile_ID, Algorithm, Src_SubDiv, Input_Reduction, Vert_Count, Tri_Count, Vert_Reduction, Tri_Reduction, Min_Elev, Max_Elev, Mean_Elev, Min_Dev, Max_Dev, Mean_Dev"];
+        private const string RESULTS_OUTPUT_PATH = "Results/Test-12";
+        private static readonly string[] _csvHeaderDev = ["Seed, Tile_ID, Algorithm, Src_SubDiv, Input_Reduction, Vert_Count, Tri_Count, Vert_Reduction, Tri_Reduction, Min_Elev, Max_Elev, Mean_Elev, Min_Dev, Max_Dev, Mean_Dev"];
+        private static readonly string[] _csvHeaderExeTime = ["Seed, Tile_ID, Algorithm, Src_SubDiv, Input_Reduction, Vert_Count, Tri_Count, Vert_Reduction, Tri_Reduction, Execution_Time"];
 
         // algorithim = 0 = terrain generator
         // algorithim = 1 = Quadric Simplification
 
-        private static string[] _simpTerrainGenCSV = _csvHeader;
-        private static string[] _simpTerrainGenSummaryCSV = _csvHeader;
-        private static string[] _subTerrainGenCSV = _csvHeader;
-        private static string[] _subTerrainGenSummaryCSV = _csvHeader;
+        private static string[] _simpTerrainGenCSV = _csvHeaderDev;
+        private static string[] _simpTerrainGenSummaryCSV = _csvHeaderDev;
 
-        private static string[] _simpQuadricSimplificationCSV = _csvHeader;
-        private static string[] _simpQuadricSimplificationSummaryCSV = _csvHeader;
-        private static string[] _subQuadricSimplificationCSV = _csvHeader;
-        private static string[] _subQuadricSimplificationSummaryCSV = _csvHeader;
+        private static string[] _subTerrainGenCSV = _csvHeaderDev;
+        private static string[] _subTerrainGenSummaryCSV = _csvHeaderDev;
+
+        private static string[] _simpQuadricSimplificationCSV = _csvHeaderDev;
+        private static string[] _simpQuadricSimplificationSummaryCSV = _csvHeaderDev;
+
+        private static string[] _subQuadricSimplificationCSV = _csvHeaderDev;
+        private static string[] _subQuadricSimplificationSummaryCSV = _csvHeaderDev;
+
+
+        private static string[] _exeTimeSimpBySubTerrainGenCSV = _csvHeaderExeTime;
+        private static string[] _exeTimeSimpBySubQuadricSimplificationCSV = _csvHeaderExeTime;
+
+        private static string[] _exeTimeSubBySimpTerrainGenCSV= _csvHeaderExeTime;
+        private static string[] _exeTimeSubBySimpQuadricSimplificationCSV= _csvHeaderExeTime;
+
 
         private static readonly Dictionary<(int, int, int), string[]> _testsTerrainGen = [];
         private static readonly Dictionary<(int, int, int), string[]> _testsQuadricSimplification = [];
 
         private static readonly Dictionary<(int, int, int), string> _summaryTestsTerrainGen = [];
         private static readonly Dictionary<(int, int, int), string> _summaryTestsQuadricSimplification = [];
+
+        private static readonly Dictionary<(int, int, int), string> _executionTimeTerrainGen = [];
+        private static readonly Dictionary<(int, int, int), string> _executionTimeQuadricSimplification = [];
 
         // start mesh subdivisions.
         private static readonly bool _runAllSubdivisions = true;
@@ -62,16 +76,30 @@ namespace COMP302
         private static readonly float[] _simplificationRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 0.70f, 0.65f, 0.60f, 0.55f, 0.50f, 0.45f, 0.40f, 0.35f, 0.30f, 0.25f, 0.20f, 0.15f, 0.10f, 0.05f];
         //private static readonly float[] _simplificationRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f];
 
+        private static (int, int, int) CurrentTestKey => (_seed, _subdivisionsA, (int)(_inputReductionRate * 100));
 
         // geometric devation settings
         private static Material _deviationHeatMap;
-        private static readonly bool _enableDevation = true;
+        private static readonly bool _enableDevation = false;
         private static readonly bool _normalDevation = false;
         private static readonly bool _parallelDevation = true;
         private static readonly bool _logDeviations = false;
+        private static readonly bool _logExecutionTime = true;
 
-        private static int[] _seeds;
-        private static readonly int _planetCount = 1;
+        private static int[] _seeds = [
+            -238246973,
+            -1981713786,
+            -728742154,
+            1884866878,
+            -772070360,
+            -2085966360,
+            1172812092,
+            961934364,
+            1361839499,
+            1293553328
+        ];
+
+        private static readonly int _planetCount = 10; // set this to 10
         // planet iteration settings (basically, do we look at each tile on a planet
         private static int _tileIterCount = 10;
         private static readonly bool _interAllTiles = true;
@@ -80,6 +108,11 @@ namespace COMP302
         private static int _seed = -1635325477;
         private static readonly bool _randomSeed = false;
 
+        // generation stats
+        private static double _terrainGenerationTimeB;
+        private static double _terrainGenerationTimeD;
+        private static double _simplificationTimeD;
+
         // reference mesh for calculating simplification rates
         private static DirectMeshBuffer _reference;
         
@@ -87,11 +120,11 @@ namespace COMP302
 
         public static void Run()
         {
-            _seeds = new int[_planetCount];
-            for (int i = 0; i < _planetCount; i++)
-            {
-                _seeds[i] = Random.Shared.Next(int.MinValue, int.MaxValue);
-            }
+            //_seeds = new int[_planetCount];
+            //for (int i = 0; i < _planetCount; i++)
+            //{
+            //    _seeds[i] = Random.Shared.Next(int.MinValue, int.MaxValue);
+            //}
 
             Init();
 
@@ -99,18 +132,81 @@ namespace COMP302
 
             RunTests();
 
-            CreatedCSVOrderedBySimplificationThenSubdivisions();
-            CreatedCSVOrderedBySubdivisionsThenSimplification();
+            string outputPath = Path.Combine(Application.ExecutingDirectory, RESULTS_OUTPUT_PATH);
+            Directory.CreateDirectory(outputPath);
+            if (_logDeviations)
+            {
 
-            ExportCSVs();
+                CreatedCSVOrderedBySimplificationThenSubdivisions();
+                CreatedCSVOrderedBySubdivisionsThenSimplification();
 
+                ExportDeviationCSVs(outputPath);
+            }
+
+            if (_logExecutionTime)
+            {
+                Created_EXE_TIME_CSVOrderedBySimplificationThenSubdivisions();
+                Created_EXE_TIME_CSVOrderedBySubdivisionsThenSimplification();
+
+                ExportExecutionTimeCSV(outputPath);
+            }
+
+            Console.WriteLine(string.Format("Completed runs | Elapsed time: {0}", Time.TimeSinceStartUp));
+            Console.WriteLine("Press enter key to close");
+            Console.ReadLine();
             Application.Exit();
         }
 
-        private static void ExportCSVs()
+        private static void ExportExecutionTimeCSV(string outputPath)
         {
-            string outputPath = Path.Combine(Application.ExecutingDirectory, RESULTS_OUTPUT_PATH);
-            Directory.CreateDirectory(outputPath);
+            File.WriteAllLines(Path.Combine(outputPath, "EXE_SUB_Terrain_Generator.csv"), _exeTimeSubBySimpTerrainGenCSV);
+            File.WriteAllLines(Path.Combine(outputPath, "EXE_SIMP_Terrain_Generator.csv"), _exeTimeSimpBySubTerrainGenCSV);
+
+            File.WriteAllLines(Path.Combine(outputPath, "EXE_SUB_Quadric_Simplification.csv"), _exeTimeSubBySimpQuadricSimplificationCSV);
+            File.WriteAllLines(Path.Combine(outputPath, "EXE_SIMP_Quadric_Simplification.csv"), _exeTimeSimpBySubQuadricSimplificationCSV);
+        }
+
+        private static void Created_EXE_TIME_CSVOrderedBySimplificationThenSubdivisions()
+        {
+            for (int s = 0; s < _subdivisonLevels.Length; s++)
+            {
+                for (int r = 0; r < _simplificationRates.Length; r++)
+                {
+                    for (int i = 0; i < _planetCount; i++)
+                    {
+                        var key = (_seeds[i], _subdivisonLevels[s], (int)(_simplificationRates[r] * 100));
+
+                        var terrainGen = _executionTimeTerrainGen[key];
+                        var quadSimp = _executionTimeQuadricSimplification[key];
+
+                        _exeTimeSimpBySubTerrainGenCSV = [.. _exeTimeSimpBySubTerrainGenCSV, terrainGen];
+                        _exeTimeSimpBySubQuadricSimplificationCSV = [.. _exeTimeSimpBySubQuadricSimplificationCSV, quadSimp];
+                    }
+                }
+            }
+        }
+
+        private static void Created_EXE_TIME_CSVOrderedBySubdivisionsThenSimplification()
+        {
+            for (int r = 0; r < _simplificationRates.Length; r++)
+            {
+                for (int s = 0; s < _subdivisonLevels.Length; s++)
+                {
+                    for (int i = 0; i < _planetCount; i++)
+                    {
+                        var key = (_seeds[i], _subdivisonLevels[s], (int)(_simplificationRates[r] * 100));
+
+                        var terrainGen = _executionTimeTerrainGen[key];
+                        var quadSimp = _executionTimeQuadricSimplification[key];
+
+                        _exeTimeSubBySimpTerrainGenCSV = [.. _exeTimeSubBySimpTerrainGenCSV, terrainGen];
+                        _exeTimeSubBySimpQuadricSimplificationCSV = [.. _exeTimeSubBySimpQuadricSimplificationCSV, quadSimp];
+                    }
+                }
+            }
+        }
+        private static void ExportDeviationCSVs(string outputPath)
+        {
             File.WriteAllLines(Path.Combine(outputPath, "SUB_Terrain_Generator.csv"), _subTerrainGenCSV);
             File.WriteAllLines(Path.Combine(outputPath, "SUMMARY_SUB_Terrain_Generator.csv"), _subTerrainGenSummaryCSV);
             File.WriteAllLines(Path.Combine(outputPath, "SIMP_Terrain_Generator.csv"), _simpTerrainGenCSV);
@@ -120,7 +216,6 @@ namespace COMP302
             File.WriteAllLines(Path.Combine(outputPath, "SUMMARY_SUB_Quadric_Simplification.csv"), _subQuadricSimplificationSummaryCSV);
             File.WriteAllLines(Path.Combine(outputPath, "SIMP_Quadric_Simplification.csv"), _simpQuadricSimplificationCSV);
             File.WriteAllLines(Path.Combine(outputPath, "SUMMARY_SIMP_Quadric_Simplification.csv"), _simpQuadricSimplificationSummaryCSV);
-            Console.WriteLine("Completed runs");
         }
 
         private static void CreatedCSVOrderedBySimplificationThenSubdivisions()
@@ -238,8 +333,13 @@ namespace COMP302
             {
                 DoQuadricSimplification(dMeshes);
                 GC.Collect();
+
+                _executionTimeTerrainGen.Add(CurrentTestKey, CreateCSVRowExeTime(0,aMeshes,bMeshes, _terrainGenerationTimeB));
+                _executionTimeQuadricSimplification.Add(CurrentTestKey, CreateCSVRowExeTime(1, cMeshes, dMeshes, _terrainGenerationTimeD + _simplificationTimeD));
             }
             
+
+
             if (_enableDevation)
             {
                 Console.WriteLine();
@@ -284,8 +384,10 @@ namespace COMP302
 
             Entity a = GenerateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, _subdivisionsA);
             Entity b = GenerateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, _subdivisionsB);
+            _terrainGenerationTimeB = _stopwatch.Elapsed.TotalMilliseconds;
             Entity c = GenerateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, _subdivisionsC);
             Entity d = GenerateSubdividedPlanet(shapeGenerator, World.DefaultWorld.EntityManager, _subdivisionsD);
+            _terrainGenerationTimeD = _stopwatch.Elapsed.TotalMilliseconds;
 
             _rootEntities = [a, b, c, d];
 
@@ -311,35 +413,37 @@ namespace COMP302
 
         private static void DoQuadricSimplification(DirectSubMesh[] aMeshes)
         {
-            _stopwatch.Restart();
             ParallelOptions parallelOptions = new()
             {
                 MaxDegreeOfParallelism = 16
             };
 
-            float[] estimatedErrors = new float[aMeshes.Length];
+            //float[] estimatedErrors = new float[aMeshes.Length];
 
+            _stopwatch.Restart();
             Parallel.For(0, aMeshes.Length, parallelOptions, (int i) =>
             {
-                estimatedErrors[i] = Simplify(aMeshes[i]);
+                //estimatedErrors[i] = Simplify(aMeshes[i]);
+                Simplify(aMeshes[i]);
             });
 
             aMeshes[0].DirectMeshBuffer.FlushAll();
             _stopwatch.Stop();
-            if (_logSimplificationRMS)
-            {
-                Console.WriteLine();
-                Console.WriteLine("Logging simplification Estiamte RMS");
-                for (int i = 0; i < aMeshes.Length; i++)
-                {
-                    Console.WriteLine(string.Format("RMS error {0}", estimatedErrors[i]));
-                }
-            }
+            _simplificationTimeD = _stopwatch.Elapsed.TotalMilliseconds;
+            //if (_logSimplificationRMS)
+            //{
+            //    Console.WriteLine();
+            //    Console.WriteLine("Logging simplification Estiamte RMS");
+            //    for (int i = 0; i < aMeshes.Length; i++)
+            //    {
+            //        Console.WriteLine(string.Format("RMS error {0}", estimatedErrors[i]));
+            //    }
+            //}
             Console.WriteLine();
             Console.WriteLine(string.Format("Simplification time: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
         }
 
-        private static float Simplify(DirectSubMesh mesh)
+        private static void Simplify(DirectSubMesh mesh)
         {
             var parameter = new EdgeCollapseParameter
             {
@@ -355,7 +459,7 @@ namespace COMP302
             var meshDecimation = new UnityMeshDecimation();
             meshDecimation.Execute(mesh, parameter, conditions);
             meshDecimation.ToMesh(mesh);
-            return meshDecimation.EstimatedError;
+            //return meshDecimation.EstimatedError;
         }
 
         private static void DoDevation(int method, DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes)
@@ -434,13 +538,13 @@ namespace COMP302
             meanDevStats.Z /= _tileIterCount;
 
             _stopwatch.Stop();
-            if (_logDeviations)
-            {
-                for (int i = 0; i < _tileIterCount; i++)
-                {
-                    Console.WriteLine(stats[i]);
-                }
-            }
+            //if (_logDeviations)
+            //{
+            //    for (int i = 0; i < _tileIterCount; i++)
+            //    {
+            //        Console.WriteLine(stats[i]);
+            //    }
+            //}
             aMeshes[0].DirectMeshBuffer.FlushAll();
             bMeshes[0].DirectMeshBuffer.FlushAll();
             DirectMeshBuffer.RecalcualteAllNormals(aMeshes[0].DirectMeshBuffer);
@@ -449,22 +553,41 @@ namespace COMP302
 
             if(method == 0)
             {
-                _testsTerrainGen.Add((_seed, _subdivisionsA, (int)(_inputReductionRate*100)), stats);
+                _testsTerrainGen.Add(CurrentTestKey, stats);
                 //_terrainGenCSV = AddCSVRows(_terrainGenCSV, stats);
                 //_terrainGenSummaryCSV = [.. _terrainGenSummaryCSV, CreateSummaryCSVRow(method, aMeshes, bMeshes, elevationMeans, meanDevStats)];
-                _summaryTestsTerrainGen.Add((_seed, _subdivisionsA, (int)(_inputReductionRate * 100)), CreateSummaryCSVRow(method, aMeshes, bMeshes, elevationMeans, meanDevStats));
+                _summaryTestsTerrainGen.Add(CurrentTestKey, CreateSummaryCSVRowDev(method, aMeshes, bMeshes, elevationMeans, meanDevStats));
             }
             else
             {
-                _testsQuadricSimplification.Add((_seed, _subdivisionsA, (int)(_inputReductionRate * 100)), stats);
+                _testsQuadricSimplification.Add(CurrentTestKey, stats);
                 //_quadricSimplificationCSV = AddCSVRows(_quadricSimplificationCSV, stats);
                 //_quadricSimplificationSummaryCSV = [.. _quadricSimplificationSummaryCSV, CreateSummaryCSVRow(method, aMeshes, bMeshes, elevationMeans, meanDevStats)];
-                _summaryTestsQuadricSimplification.Add((_seed, _subdivisionsA, (int)(_inputReductionRate * 100)), CreateSummaryCSVRow(method, aMeshes, bMeshes, elevationMeans, meanDevStats));
+                _summaryTestsQuadricSimplification.Add(CurrentTestKey, CreateSummaryCSVRowDev(method, aMeshes, bMeshes, elevationMeans, meanDevStats));
             }
 
         }
 
-        private static string CreateSummaryCSVRow(int method, DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes, Vector3 elevationData, Vector3 deviationData)
+        private static string CreateCSVRowExeTime(int method, DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes, double executionTime)
+        {
+            CalculateVertsAndTris(bMeshes, out uint bverts, out uint btris);
+            var actualReductionRates = CalculateSimplificationRates(aMeshes, bMeshes);
+
+            return string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}",
+                _seed,
+                0,
+                method,
+                _subdivisionsA,
+                (int)(_inputReductionRate * 100),
+                bverts,
+                btris,
+                actualReductionRates.X,
+                actualReductionRates.Y,
+                executionTime
+            );
+        }
+
+        private static string CreateSummaryCSVRowDev(int method, DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes, Vector3 elevationData, Vector3 deviationData)
         {
             CalculateVertsAndTris(bMeshes, out uint bverts, out uint btris);
             var actualReductionRates = CalculateSimplificationRates(aMeshes, bMeshes);
@@ -606,8 +729,9 @@ namespace COMP302
 
             entityManager.RemoveComponentFromHierarchy<DoNotRender>(planet);
             entityManager.RemoveComponentFromHierarchy<Prefab>(planet);
+            _stopwatch.Restart();
             ArtifactAuthoring.GeneratePlanet(planet, shapeGenerator);
-
+            _stopwatch.Stop();
             return planet;
         }
 
