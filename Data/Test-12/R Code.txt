@@ -1,0 +1,233 @@
+library(readr)
+> SUMMARY_SUB_Terrain_Generator <- read_csv("H:\\GitFork\\Comp-302-2202796\\Data\\Test-12\\SUMMARY_SUB_Terrain_Generator.csv")
+Rows: 1900 Columns: 15                                                                                     
+── Column specification ───────────────────────────────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (15): Seed, Tile_ID, Algorithm, Src_SubDiv, Input_Reduction, Vert_Count, Tri_Count, Vert_Reduction,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+> View(SUMMARY_SUB_Terrain_Generator)
+> library(readr)
+> SUMMARY_SUB_Quadric_Simplification <- read_csv("H:\\GitFork\\Comp-302-2202796\\Data\\Test-12\\SUMMARY_SUB_Quadric_Simplification.csv")
+Rows: 1900 Columns: 15                                                                                     
+── Column specification ───────────────────────────────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (15): Seed, Tile_ID, Algorithm, Src_SubDiv, Input_Reduction, Vert_Count, Tri_Count, Vert_Reduction,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+> View(SUMMARY_SUB_Quadric_Simplification)
+> View(SUMMARY_SUB_Quadric_Simplification)
+> Combined_Set <- rbind(data SUMMARY_SUB_Terrain_Generator, data SUMMARY_SUB_Quadric_Simplification)
+Error: unexpected symbol in "Combined_Set <- rbind(data SUMMARY_SUB_Terrain_Generator"
+> combined_Set <- rbind(SUMMARY_SUB_Terrain_Generator, SUMMARY_SUB_Quadric_Simplification)
+> summary(combined_Set)
+      Seed               Tile_ID    Algorithm     Src_SubDiv   Input_Reduction   Vert_Count     
+ Min.   :-2.086e+09   Min.   :0   Min.   :0.0   Min.   : 5.0   Min.   : 5      Min.   :   5760  
+ 1st Qu.:-7.721e+08   1st Qu.:0   1st Qu.:0.0   1st Qu.:15.0   1st Qu.:25      1st Qu.:  63360  
+ Median : 3.618e+08   Median :0   Median :0.5   Median :27.5   Median :50      Median : 182400  
+ Mean   : 8.683e+07   Mean   :0   Mean   :0.5   Mean   :27.5   Mean   :50      Mean   : 280891  
+ 3rd Qu.: 1.294e+09   3rd Qu.:0   3rd Qu.:1.0   3rd Qu.:40.0   3rd Qu.:75      3rd Qu.: 417600  
+ Max.   : 1.885e+09   Max.   :0   Max.   :1.0   Max.   :50.0   Max.   :95      Max.   :1275230  
+   Tri_Count       Vert_Reduction   Tri_Reduction        Min_Elev           Max_Elev     
+ Min.   :  11520   Min.   :0.0566   Min.   :0.03306   Min.   :-0.13086   Min.   :0.1299  
+ 1st Qu.: 233280   1st Qu.:0.3494   1st Qu.:0.25000   1st Qu.:-0.10233   1st Qu.:0.1465  
+ Median : 832320   Median :0.5580   Median :0.49026   Median :-0.08826   Median :0.1500  
+ Mean   :1465767   Mean   :0.5516   Mean   :0.50327   Mean   :-0.09397   Mean   :0.1581  
+ 3rd Qu.:2257884   3rd Qu.:0.7720   3rd Qu.:0.73469   3rd Qu.:-0.08248   3rd Qu.:0.1604  
+ Max.   :7200000   Max.   :1.0000   Max.   :1.00000   Max.   :-0.07493   Max.   :0.2281  
+   Mean_Elev          Min_Dev     Max_Dev            Mean_Dev        
+ Min.   :0.01143   Min.   :0   Min.   :0.000000   Min.   :0.000e+00  
+ 1st Qu.:0.01201   1st Qu.:0   1st Qu.:0.001500   1st Qu.:5.526e-05  
+ Median :0.01330   Median :0   Median :0.008085   Median :1.385e-04  
+ Mean   :0.01360   Mean   :0   Mean   :0.011773   Mean   :3.675e-04  
+ 3rd Qu.:0.01481   3rd Qu.:0   3rd Qu.:0.015088   3rd Qu.:3.978e-04  
+ Max.   :0.01648   Max.   :0   Max.   :0.074267   Max.   :3.263e-03  
+> manova_res <- manova(cbind(Algorithm,Src_SubDiv,Input_Reduction)~Mean_Dev,data = combined_Set)
+> summary(manova_res)
+            Df  Pillai approx F num Df den Df    Pr(>F)    
+Mean_Dev     1 0.53518   1456.8      3   3796 < 2.2e-16 ***
+Residuals 3798                                             
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+> summary.aov(manova_res)
+ Response Algorithm :
+              Df Sum Sq Mean Sq F value   Pr(>F)    
+Mean_Dev       1   4.24  4.2393  17.024 3.77e-05 ***
+Residuals   3798 945.76  0.2490                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+ Response Src_SubDiv :
+              Df Sum Sq Mean Sq F value    Pr(>F)    
+Mean_Dev       1 198034  198034  1284.1 < 2.2e-16 ***
+Residuals   3798 585716     154                      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+ Response Input_Reduction :
+              Df  Sum Sq Mean Sq F value    Pr(>F)    
+Mean_Dev       1  792413  792413  1462.7 < 2.2e-16 ***
+Residuals   3798 2057587     542                      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+> View(combined_Set)
+> aov_results <- aov(Mean_Dev~Algorithm+Src_SubDiv+Input_Reduction,data = combined_Set)
+> summary(aov_results)
+                  Df    Sum Sq   Mean Sq F value   Pr(>F)    
+Algorithm          1 0.0000052 0.0000052   36.44 1.72e-09 ***
+Src_SubDiv         1 0.0002926 0.0002926 2063.48  < 2e-16 ***
+Input_Reduction    1 0.0003220 0.0003220 2270.62  < 2e-16 ***
+Residuals       3796 0.0005383 0.0000001                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+> View(combined_Set)
+> TukeyHSD(aov_restults)
+Error: object 'aov_restults' not found
+> TukeyHSD(aov_results)
+Error in TukeyHSD.aov(aov_results) : no factors in the fitted model
+In addition: Warning messages:
+1: In replications(paste("~", xx), data = mf) :
+  non-factors ignored: Algorithm
+2: In replications(paste("~", xx), data = mf) :
+  non-factors ignored: Src_SubDiv
+3: In replications(paste("~", xx), data = mf) :
+  non-factors ignored: Input_Reduction
+> View(SUMMARY_SUB_Quadric_Simplification)
+> library(readr)
+> SUMMARY_SUB_Terrain_Generator <- read_csv("H:/GitFork/Comp-302-2202796/Data/Test-12/SUMMARY_SUB_Terrain_Generator.csv", 
++     col_types = cols(Seed = col_integer(), 
++         Tile_ID = col_integer(), Algorithm = col_factor(levels = c("0", 
++             "1")), Src_SubDiv = col_integer(), 
++         Input_Reduction = col_integer(), 
++         Vert_Count = col_integer(), Tri_Count = col_integer()))
+> View(SUMMARY_SUB_Terrain_Generator)                                                       
+> library(readr)
+> SUMMARY_SUB_Quadric_Simplification <- read_csv("H:/GitFork/Comp-302-2202796/Data/Test-12/SUMMARY_SUB_Quadric_Simplification.csv", 
++     col_types = cols(Seed = col_integer(), 
++         Tile_ID = col_integer(), Algorithm = col_factor(levels = c("0", 
++             "1")), Src_SubDiv = col_integer(), 
++         Input_Reduction = col_integer(), 
++         Vert_Count = col_integer(), Tri_Count = col_integer()))
+> View(SUMMARY_SUB_Quadric_Simplification)                                                  
+> combined_Set <- rbind(SUMMARY_SUB_Terrain_Generator, SUMMARY_SUB_Quadric_Simplification)
+> lm_results <- lm(Mean_Dev~Algorithm+Src_SubDiv+Input_Reduction,data = combined_Set)
+> summary(lm_results)
+
+Call:
+lm(formula = Mean_Dev ~ Algorithm + Src_SubDiv + Input_Reduction, 
+    data = combined_Set)
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-4.727e-04 -2.635e-04 -9.278e-05  1.522e-04  2.042e-03 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)    
+(Intercept)      1.467e-03  1.833e-05  80.059  < 2e-16 ***
+Algorithm1      -7.375e-05  1.222e-05  -6.037 1.72e-09 ***
+Src_SubDiv      -1.932e-05  4.254e-07 -45.426  < 2e-16 ***
+Input_Reduction -1.063e-05  2.231e-07 -47.651  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.0003766 on 3796 degrees of freedom
+Multiple R-squared:  0.5352,	Adjusted R-squared:  0.5348 
+F-statistic:  1457 on 3 and 3796 DF,  p-value: < 2.2e-16
+
+> install.packages("relaimpo")
+WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+Installing package into ‘C:/Users/wvh20/AppData/Local/R/win-library/4.4’
+(as ‘lib’ is unspecified)
+also installing the dependencies ‘minqa’, ‘numDeriv’, ‘RcppArmadillo’, ‘survey’, ‘mitools’, ‘corpcor’
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/minqa_1.2.8.zip'
+Content type 'application/zip' length 441888 bytes (431 KB)
+downloaded 431 KB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/numDeriv_2016.8-1.1.zip'
+Content type 'application/zip' length 117304 bytes (114 KB)
+downloaded 114 KB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/RcppArmadillo_14.2.3-1.zip'
+Content type 'application/zip' length 2058765 bytes (2.0 MB)
+downloaded 2.0 MB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/survey_4.4-2.zip'
+Content type 'application/zip' length 3791881 bytes (3.6 MB)
+downloaded 3.6 MB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/mitools_2.4.zip'
+Content type 'application/zip' length 300024 bytes (292 KB)
+downloaded 292 KB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/corpcor_1.6.10.zip'
+Content type 'application/zip' length 117327 bytes (114 KB)
+downloaded 114 KB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/relaimpo_2.2-7.zip'
+Content type 'application/zip' length 560582 bytes (547 KB)
+downloaded 547 KB
+
+package ‘minqa’ successfully unpacked and MD5 sums checked
+package ‘numDeriv’ successfully unpacked and MD5 sums checked
+package ‘RcppArmadillo’ successfully unpacked and MD5 sums checked
+package ‘survey’ successfully unpacked and MD5 sums checked
+package ‘mitools’ successfully unpacked and MD5 sums checked
+package ‘corpcor’ successfully unpacked and MD5 sums checked
+package ‘relaimpo’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\wvh20\AppData\Local\Temp\RtmpwJ3L2s\downloaded_packages
+> library(relaimpo)
+Loading required package: MASS
+Loading required package: boot
+Loading required package: survey
+Loading required package: grid
+Loading required package: Matrix
+Loading required package: survival
+
+Attaching package: ‘survival’
+
+The following object is masked from ‘package:boot’:
+
+    aml
+
+
+Attaching package: ‘survey’
+
+The following object is masked from ‘package:graphics’:
+
+    dotchart
+
+Loading required package: mitools
+This is the global version of package relaimpo.
+
+If you are a non-US user, a version with the interesting additional metric pmvd is available
+
+from Ulrike Groempings web site at prof.beuth-hochschule.de/groemping.
+
+Warning messages:
+1: package ‘relaimpo’ was built under R version 4.4.3 
+2: package ‘survey’ was built under R version 4.4.3 
+3: package ‘mitools’ was built under R version 4.4.3 
+> calc.relimp(lm_results,type=c("pratt"),rela=TRUE)
+Response variable: Mean_Dev 
+Total response variance: 3.048222e-07 
+Analysis based on 3800 observations 
+
+3 Regressors: 
+Algorithm Src_SubDiv Input_Reduction 
+Proportion of variance explained by model: 53.52%
+Metrics are normalized to sum to 100% (rela=TRUE). 
+
+Relative importance metrics: 
+
+                      pratt
+Algorithm       0.008338168
+Src_SubDiv      0.472133154
+Input_Reduction 0.519528678
