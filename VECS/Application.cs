@@ -48,7 +48,7 @@ namespace VECS
                 Presentation();
                 InputManager.Instance.LateUpdate();
             }
-            Vulkan.vkDeviceWaitIdle(_device.Device);
+            SwapChain.Instance.EndSubmissionThread();
             Destroy();
         }
 
@@ -120,6 +120,5 @@ namespace VECS
             _device.Dispose();
             _appWindow.Dispose();
         }
-
     }
 }
