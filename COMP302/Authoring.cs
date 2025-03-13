@@ -8,6 +8,7 @@ using COMP302.Decimator;
 using Planets;
 using Planets.Generator;
 using VECS;
+using VECS.DataStructures;
 using VECS.ECS;
 using VECS.ECS.Presentation;
 using VECS.ECS.Transforms;
@@ -74,17 +75,18 @@ namespace COMP302
         private static float _actualReductionRate;
         private static readonly bool _runAllReductionRates = true;
         private static readonly float[] _simplificationRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 0.70f, 0.65f, 0.60f, 0.55f, 0.50f, 0.45f, 0.40f, 0.35f, 0.30f, 0.25f, 0.20f, 0.15f, 0.10f, 0.05f];
-        //private static readonly float[] _simplificationRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f];
+        //private static readonly float[] _simplificationRates = [0.5f];
 
         private static (int, int, int) CurrentTestKey => (_seed, _subdivisionsA, (int)(_inputReductionRate * 100));
 
         // geometric devation settings
         private static Material _deviationHeatMap;
-        private static readonly bool _enableDevation = false;
+        private static readonly bool _enableDevation = true;
         private static readonly bool _normalDevation = false;
         private static readonly bool _parallelDevation = true;
-        private static readonly bool _logDeviations = false;
-        private static readonly bool _logExecutionTime = true;
+        private static readonly bool _logDeviations = true;
+        private static readonly bool _logExecutionTime = false;
+        private static readonly bool _testDeviation = false;
 
         private static int[] _seeds = [
             -238246973,
@@ -125,8 +127,13 @@ namespace COMP302
             //{
             //    _seeds[i] = Random.Shared.Next(int.MinValue, int.MaxValue);
             //}
-
             Init();
+            if (_testDeviation)
+            {
+                TestDevation(World.DefaultWorld.EntityManager);
+                return;
+            }
+
 
             CreateReferencePlanet();
 
@@ -324,6 +331,7 @@ namespace COMP302
 
         private static void RunOnce()
         {
+            CleanUp();
             _inputReductionRate = Math.Clamp(_inputReductionRate, 0, 1);
             GetBMeshSimplificationRate();
             DoGeneration(out DirectSubMesh[] aMeshes, out DirectSubMesh[] bMeshes, out DirectSubMesh[] cMeshes, out DirectSubMesh[] dMeshes);
@@ -366,7 +374,6 @@ namespace COMP302
             CalculateVertsAndTris(aMeshes, out uint Hverts, out uint Htris);
             Console.WriteLine(string.Format("Seed: {0}, Src Vert Count: {1} Src Tri Count: {2}", _seed, Hverts, Htris / 3));
 
-            CleanUp();
             GC.Collect();
         }
 
@@ -507,6 +514,8 @@ namespace COMP302
 
                 devation.Initialization(aMeshes[i], bMeshes[i]);
                 devation.Compute(_normalDevation, _parallelDevation);
+                
+                //devation.Deviation2Material();
 
                 uint bverts = bMeshes[i].VertexCount;
                 uint btris = bMeshes[i].IndexCount;
@@ -619,19 +628,22 @@ namespace COMP302
         private static void CleanUp()
         {
             var entityManager = World.DefaultWorld.EntityManager;
-            for (int i = 0; i < _rootEntities.Length; i++)
+            if (_rootEntities != null)
             {
-                DirectSubMeshIndex[] meshes = entityManager.GetComponentsInHierarchy<DirectSubMeshIndex>(_rootEntities[i]);
-
-                for (int j = 0; j < meshes.Length; j++)
+                for (int i = 0; i < _rootEntities.Length; i++)
                 {
-                    DirectMeshBuffer.GetMeshAtIndex(meshes[i].DirectMeshBuffer)?.Dispose();
+                    DirectSubMeshIndex[] meshes = entityManager.GetComponentsInHierarchy<DirectSubMeshIndex>(_rootEntities[i]);
+
+                    for (int j = 0; j < meshes.Length; j++)
+                    {
+                        DirectMeshBuffer.GetMeshAtIndex(meshes[i].DirectMeshBuffer)?.Dispose();
+                    }
+
+                    entityManager.DestroyEntityHierarchy(_rootEntities[i]);
                 }
 
-                entityManager.DestroyEntityHierarchy(_rootEntities[i]);
+                _rootEntities = null;
             }
-
-            _rootEntities = null;
         }
 
         private static void GetBMeshSimplificationRate()
@@ -753,6 +765,29 @@ namespace COMP302
             }
 
             return planet;
+        }
+
+        public static void TestDevation(EntityManager entityManager)
+        {
+            var sphere = MeshLoader.LoadModelFromFile(MeshLoader.GetMeshInDefaultPath("Sphere.obj"), null);
+            var cube = MeshLoader.LoadModelFromFile(MeshLoader.GetMeshInDefaultPath("cube-UV.obj"), null);
+
+            var sphereEntity = entityManager.CreateEntity();
+            var cubeEntity = entityManager.CreateEntity();
+
+
+            entityManager.AddComponent(sphereEntity, sphere[0].GetSubMeshIndex());
+            entityManager.AddComponent(sphereEntity, new Translation() { Value = new(0, 0f, 0) });
+            entityManager.AddComponent(sphereEntity, new Scale() { Value = new(3f, 3f, 3f) });
+            entityManager.AddComponent(sphereEntity, new MaterialIndex { Value = Material.GetIndexOfMaterial(_deviationHeatMap) });
+
+            entityManager.AddComponent(cubeEntity, cube[0].GetSubMeshIndex());
+            entityManager.AddComponent(cubeEntity, new Translation() { Value = new(0, 0f, 0) });
+            entityManager.AddComponent(cubeEntity, new Scale() { Value = new(3f, 3f, 3f) });
+            entityManager.AddComponent(cubeEntity, new MaterialIndex { Value = Material.GetIndexOfMaterial(_deviationHeatMap) });
+
+            DoDevation(0,sphere, cube);
+
         }
     }
 }

@@ -245,6 +245,11 @@ namespace COMP302
                 // Normalize deviation values
                 uvs[i].X = (dev[i] * 1) / dev_bound;
             }
+            uvs = mb.GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
+            for(int i = 0;i < uvs.Length; i++)
+            {
+                uvs[i].X = 0;
+            }
         }
 
     }
