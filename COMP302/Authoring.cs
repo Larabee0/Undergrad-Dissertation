@@ -18,7 +18,7 @@ namespace COMP302
     public static class Authoring
     {
         // data collection
-        private const string RESULTS_OUTPUT_PATH = "Results/Test-12";
+        private const string RESULTS_OUTPUT_PATH = "Results/Test-13";
         private static readonly string[] _csvHeaderDev = ["Seed, Tile_ID, Algorithm, Src_SubDiv, Input_Reduction, Vert_Count, Tri_Count, Vert_Reduction, Tri_Reduction, Min_Elev, Max_Elev, Mean_Elev, Min_Dev, Max_Dev, Mean_Dev"];
         private static readonly string[] _csvHeaderExeTime = ["Seed, Tile_ID, Algorithm, Src_SubDiv, Input_Reduction, Vert_Count, Tri_Count, Vert_Reduction, Tri_Reduction, Execution_Time"];
 
@@ -56,8 +56,8 @@ namespace COMP302
 
         // start mesh subdivisions.
         private static readonly bool _runAllSubdivisions = true;
-        private static readonly int[] _subdivisonLevels = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
-        //private static readonly int[] _subdivisonLevels = [20];
+        //private static readonly int[] _subdivisonLevels = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+        private static readonly int[] _subdivisonLevels = [20];
 
         // mesh a and mesh c are duplicates for displaying the geometric devation heatmap
         private static  int _subdivisionsA = 50; // high res
@@ -74,8 +74,8 @@ namespace COMP302
         private static float _inputReductionRate = 0.5f;
         private static float _actualReductionRate;
         private static readonly bool _runAllReductionRates = true;
-        private static readonly float[] _simplificationRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 0.70f, 0.65f, 0.60f, 0.55f, 0.50f, 0.45f, 0.40f, 0.35f, 0.30f, 0.25f, 0.20f, 0.15f, 0.10f, 0.05f];
-        //private static readonly float[] _simplificationRates = [0.5f];
+        //private static readonly float[] _simplificationRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 0.70f, 0.65f, 0.60f, 0.55f, 0.50f, 0.45f, 0.40f, 0.35f, 0.30f, 0.25f, 0.20f, 0.15f, 0.10f, 0.05f];
+        private static readonly float[] _simplificationRates = [0.5f];
 
         private static (int, int, int) CurrentTestKey => (_seed, _subdivisionsA, (int)(_inputReductionRate * 100));
 
@@ -236,7 +236,7 @@ namespace COMP302
                         var key = (_seeds[i], _subdivisonLevels[s], (int)(_simplificationRates[r] * 100));
 
                         var terrainGen = _testsTerrainGen[key];
-                        var quadSimp = _testsTerrainGen[key];
+                        var quadSimp = _testsQuadricSimplification[key];
                         var summaryTerrainGen = _summaryTestsTerrainGen[key];
                         var summaryQuadSimp = _summaryTestsQuadricSimplification[key];
 
@@ -247,7 +247,6 @@ namespace COMP302
                         _subQuadricSimplificationSummaryCSV = [.. _subQuadricSimplificationSummaryCSV, summaryQuadSimp];
                     }
                 }
-                
             }
         }
 
@@ -262,7 +261,7 @@ namespace COMP302
                         var key = (_seeds[i], _subdivisonLevels[s], (int)(_simplificationRates[r] * 100));
 
                         var terrainGen = _testsTerrainGen[key];
-                        var quadSimp = _testsTerrainGen[key];
+                        var quadSimp = _testsQuadricSimplification[key];
                         var summaryTerrainGen = _summaryTestsTerrainGen[key];
                         var summaryQuadSimp = _summaryTestsQuadricSimplification[key];
 
