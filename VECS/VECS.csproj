@@ -43,7 +43,7 @@
   </Target>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="rd /s /q $(TargetDir)Assets" />
+    <Exec Command="rd /s /q $(TargetDir)Assets&#xD;&#xA;rd /s /q $(SolutionDir)Shaders" />
   </Target>
 
 </Project>
