@@ -1,0 +1,887 @@
+
+# how to batch run multiple T tests
+tTestResults <- vector("list",190)
+cohens_dResults <- vector("list",190)
+counter <- 1
+for(s in 1:10)
+{
+    for(i in 1:19){
+        
+        tTestResults[[counter]]<-t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == subDivisions[s] & combined_Set$Input_Reduction == inputReductions[i],], Paired=TRUE)
+		cohens_dResults[[counter]]<-combined_Set[combined_Set$Src_SubDiv == subDivisions[1] & combined_Set$Input_Reduction == inputReductions[10],] %>% cohens_d(Mean_Dev~Algorithm, paired=TRUE)
+        counter <- counter + 1
+    }
+}
+
+# a code logs
+
+
+R version 4.4.2 (2024-10-31 ucrt) -- "Pile of Leaves"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Workspace loaded from ~/.RData]
+
+> t.test(Mean_Deviation~Algorithm, data = combined_Set, Paired=TRUE)
+Error in eval(predvars, data, env) : object 'Mean_Deviation' not found
+> t.test(Mean_Dev~Algorithm, data = combined_Set, Paired=TRUE)
+
+	Welch Two Sample t-test
+
+data:  Mean_Dev by Algorithm
+t = 4.126, df = 3746.6, p-value = 3.771e-05
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ 3.870725e-05 1.087988e-04
+sample estimates:
+mean in group 0 mean in group 1 
+   0.0004043668    0.0003306138 
+
+> cohens_d(Mean_Dev~Algorithm, data = combined_Set, Paired=TRUE)
+Error in cohens_d(Mean_Dev ~ Algorithm, data = combined_Set, Paired = TRUE) : 
+  could not find function "cohens_d"
+> combined_Set %>% cohens_d(Mean_Dev~Algorithm, Paired=TRUE)
+Error in combined_Set %>% cohens_d(Mean_Dev ~ Algorithm, Paired = TRUE) : 
+  could not find function "%>%"
+> library(rstatix)
+Error in library(rstatix) : there is no package called ‘rstatix’
+> install.packages("rstatix")
+WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+Installing package into ‘C:/Users/wvh20/AppData/Local/R/win-library/4.4’
+(as ‘lib’ is unspecified)
+also installing the dependencies ‘rbibutils’, ‘cowplot’, ‘Deriv’, ‘modelr’, ‘microbenchmark’, ‘Rdpack’, ‘doBy’, ‘nloptr’, ‘reformulas’, ‘RcppEigen’, ‘carData’, ‘abind’, ‘pbkrtest’, ‘lme4’, ‘tidyr’, ‘purrr’, ‘broom’, ‘corrplot’, ‘car’
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/rbibutils_2.3.zip'
+Content type 'application/zip' length 1032466 bytes (1008 KB)
+downloaded 1008 KB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/cowplot_1.1.3.zip'
+Content type 'application/zip' length 1381051 bytes (1.3 MB)
+downloaded 1.3 MB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/Deriv_4.1.6.zip'
+Content type 'application/zip' length 152048 bytes (148 KB)
+downloaded 148 KB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/modelr_0.1.11.zip'
+Content type 'application/zip' length 203872 bytes (199 KB)
+downloaded 199 KB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/microbenchmark_1.5.0.zip'
+Content type 'application/zip' length 73565 bytes (71 KB)
+downloaded 71 KB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/Rdpack_2.6.2.zip'
+Content type 'application/zip' length 763182 bytes (745 KB)
+downloaded 745 KB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/doBy_4.6.25.zip'
+Content type 'application/zip' length 4848394 bytes (4.6 MB)
+downloaded 4.6 MB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/nloptr_2.2.0.zip'
+Content type 'application/zip' length 886503 bytes (865 KB)
+downloaded 865 KB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/reformulas_0.4.0.zip'
+Content type 'application/zip' length 94851 bytes (92 KB)
+downloaded 92 KB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/RcppEigen_0.3.4.0.2.zip'
+Content type 'application/zip' length 2592450 bytes (2.5 MB)
+downloaded 2.5 MB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/carData_3.0-5.zip'
+Content type 'application/zip' length 1707787 bytes (1.6 MB)
+downloaded 1.6 MB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/abind_1.4-8.zip'
+Content type 'application/zip' length 67211 bytes (65 KB)
+downloaded 65 KB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/pbkrtest_0.5.3.zip'
+Content type 'application/zip' length 186166 bytes (181 KB)
+downloaded 181 KB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/lme4_1.1-36.zip'
+Content type 'application/zip' length 4547136 bytes (4.3 MB)
+downloaded 4.3 MB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/tidyr_1.3.1.zip'
+Content type 'application/zip' length 1273208 bytes (1.2 MB)
+downloaded 1.2 MB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/purrr_1.0.4.zip'
+Content type 'application/zip' length 550951 bytes (538 KB)
+downloaded 538 KB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/broom_1.0.7.zip'
+Content type 'application/zip' length 1934573 bytes (1.8 MB)
+downloaded 1.8 MB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/corrplot_0.95.zip'
+Content type 'application/zip' length 3826063 bytes (3.6 MB)
+downloaded 3.6 MB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/car_3.1-3.zip'
+Content type 'application/zip' length 1542744 bytes (1.5 MB)
+downloaded 1.5 MB
+
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/rstatix_0.7.2.zip'
+Content type 'application/zip' length 621132 bytes (606 KB)
+downloaded 606 KB
+
+package ‘rbibutils’ successfully unpacked and MD5 sums checked
+package ‘cowplot’ successfully unpacked and MD5 sums checked
+package ‘Deriv’ successfully unpacked and MD5 sums checked
+package ‘modelr’ successfully unpacked and MD5 sums checked
+package ‘microbenchmark’ successfully unpacked and MD5 sums checked
+package ‘Rdpack’ successfully unpacked and MD5 sums checked
+package ‘doBy’ successfully unpacked and MD5 sums checked
+package ‘nloptr’ successfully unpacked and MD5 sums checked
+package ‘reformulas’ successfully unpacked and MD5 sums checked
+package ‘RcppEigen’ successfully unpacked and MD5 sums checked
+package ‘carData’ successfully unpacked and MD5 sums checked
+package ‘abind’ successfully unpacked and MD5 sums checked
+package ‘pbkrtest’ successfully unpacked and MD5 sums checked
+package ‘lme4’ successfully unpacked and MD5 sums checked
+package ‘tidyr’ successfully unpacked and MD5 sums checked
+package ‘purrr’ successfully unpacked and MD5 sums checked
+package ‘broom’ successfully unpacked and MD5 sums checked
+package ‘corrplot’ successfully unpacked and MD5 sums checked
+package ‘car’ successfully unpacked and MD5 sums checked
+package ‘rstatix’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\wvh20\AppData\Local\Temp\RtmpAzrsr9\downloaded_packages
+> library(rstatix)
+
+Attaching package: ‘rstatix’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+Warning message:
+package ‘rstatix’ was built under R version 4.4.3 
+> combined_Set %>% cohens_d(Mean_Dev~Algorithm, Paired=TRUE)
+Error in cohens_d(., Mean_Dev ~ Algorithm, Paired = TRUE) : 
+  unused argument (Paired = TRUE)
+> combined_Set %>% cohens_d(Mean_Dev ~ Algorithm, paired = TRUE)
+# A tibble: 1 × 7
+  .y.      group1 group2 effsize    n1    n2 magnitude
+* <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
+1 Mean_Dev 0      1        0.233  1900  1900 small    
+> 05_95 <- df[combined_Set$Src_SubDiv == '5' & combined_Set$Input_Reduction > 95,]
+Error: unexpected input in "05_"
+> five_NinetyFive <- df[combined_Set$Src_SubDiv == '5' & combined_Set$Input_Reduction > 95,]
+Error in df[combined_Set$Src_SubDiv == "5" & combined_Set$Input_Reduction >  : 
+  object of type 'closure' is not subsettable
+> df[combined_Set$Src_SubDiv == '5' & combined_Set$Input_Reduction > 95,]
+Error in df[combined_Set$Src_SubDiv == "5" & combined_Set$Input_Reduction >  : 
+  object of type 'closure' is not subsettable
+> combined_Set
+# A tibble: 3,800 × 15
+       Seed Tile_ID Algorithm Src_SubDiv Input_Reduction Vert_Count Tri_Count Vert_Reduction Tri_Reduction
+      <int>   <int> <fct>          <int>           <int>      <int>     <int>          <dbl>         <dbl>
+ 1  -2.38e8       0 0                  5              95      26880    103680              1             1
+ 2  -1.98e9       0 0                  5              95      26880    103680              1             1
+ 3  -7.29e8       0 0                  5              95      26880    103680              1             1
+ 4   1.88e9       0 0                  5              95      26880    103680              1             1
+ 5  -7.72e8       0 0                  5              95      26880    103680              1             1
+ 6  -2.09e9       0 0                  5              95      26880    103680              1             1
+ 7   1.17e9       0 0                  5              95      26880    103680              1             1
+ 8   9.62e8       0 0                  5              95      26880    103680              1             1
+ 9   1.36e9       0 0                  5              95      26880    103680              1             1
+10   1.29e9       0 0                  5              95      26880    103680              1             1
+# ℹ 3,790 more rows
+# ℹ 6 more variables: Min_Elev <dbl>, Max_Elev <dbl>, Mean_Elev <dbl>, Min_Dev <dbl>, Max_Dev <dbl>,
+#   Mean_Dev <dbl>
+# ℹ Use `print(n = ...)` to see more rows
+> df[combined_Set$Src_SubDiv == 5 & combined_Set$Input_Reduction == 95,]
+Error in df[combined_Set$Src_SubDiv == 5 & combined_Set$Input_Reduction ==  : 
+  object of type 'closure' is not subsettable
+> df[combined_Set$Src_SubDiv == 5 & combined_Set$Input_Reduction > 95,]
+Error in df[combined_Set$Src_SubDiv == 5 & combined_Set$Input_Reduction >  : 
+  object of type 'closure' is not subsettable
+> df[combined_Set$Src_SubDiv == 5 & combined_Set$Input_Reduction > 95]
+Error in df[combined_Set$Src_SubDiv == 5 & combined_Set$Input_Reduction >  : 
+  object of type 'closure' is not subsettable
+> df[combined_Set$Src_SubDiv == 5]
+Error in df[combined_Set$Src_SubDiv == 5] : 
+  object of type 'closure' is not subsettable
+> df[combined_Set$Src_SubDiv == '5']
+Error in df[combined_Set$Src_SubDiv == "5"] : 
+  object of type 'closure' is not subsettable
+> View(SUMMARY_SUB_Terrain_Generator)
+> View(combined_Set)
+> five_NinetyFive <- combined_Set[combined_Set$Src_SubDiv == '5' & combined_Set$Input_Reduction > 95,]
+> five_NinetyFive <- combined_Set[combined_Set$Src_SubDiv == '5',]
+> five_NinetyFive <- combined_Set[combined_Set$Src_SubDiv == '5' & combined_Set$Input_Reduction == 95,]
+> t.test(Mean_Dev~Algorithm, data = five_NinetyFive, Paired=TRUE)
+
+	Welch Two Sample t-test
+
+data:  Mean_Dev by Algorithm
+t = NaN, df = NaN, p-value = NA
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ NaN NaN
+sample estimates:
+mean in group 0 mean in group 1 
+              0               0 
+
+> View(five_NinetyFive)
+> five_Fifty <- combined_Set[combined_Set$Src_SubDiv == '5' & combined_Set$Input_Reduction == 50,]
+> t.test(Mean_Dev~Algorithm, data = five_Fifty, Paired=TRUE)
+
+	Welch Two Sample t-test
+
+data:  Mean_Dev by Algorithm
+t = 17.362, df = 15.838, p-value = 9.925e-12
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ 0.0002952583 0.0003774672
+sample estimates:
+mean in group 0 mean in group 1 
+   0.0012883818    0.0009520191 
+
+> five_Fifty %>% cohens_d(Mean_Dev~Algorithm, Paired=TRUE)
+Error in cohens_d(., Mean_Dev ~ Algorithm, Paired = TRUE) : 
+  unused argument (Paired = TRUE)
+> five_Fifty %>% cohens_d(Mean_Dev~Algorithm, paired=TRUE)
+# A tibble: 1 × 7
+  .y.      group1 group2 effsize    n1    n2 magnitude
+* <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
+1 Mean_Dev 0      1         15.6    10    10 large    
+> combined_Set[combined_Set$Src_SubDiv == '5' & combined_Set$Input_Reduction == 95,]
+# A tibble: 20 × 15
+       Seed Tile_ID Algorithm Src_SubDiv Input_Reduction Vert_Count Tri_Count Vert_Reduction Tri_Reduction
+      <int>   <int> <fct>          <int>           <int>      <int>     <int>          <dbl>         <dbl>
+ 1  -2.38e8       0 0                  5              95      26880    103680          1                 1
+ 2  -1.98e9       0 0                  5              95      26880    103680          1                 1
+ 3  -7.29e8       0 0                  5              95      26880    103680          1                 1
+ 4   1.88e9       0 0                  5              95      26880    103680          1                 1
+ 5  -7.72e8       0 0                  5              95      26880    103680          1                 1
+ 6  -2.09e9       0 0                  5              95      26880    103680          1                 1
+ 7   1.17e9       0 0                  5              95      26880    103680          1                 1
+ 8   9.62e8       0 0                  5              95      26880    103680          1                 1
+ 9   1.36e9       0 0                  5              95      26880    103680          1                 1
+10   1.29e9       0 0                  5              95      26880    103680          1                 1
+11  -2.38e8       0 1                  5              95      26823    103680          0.998             1
+12  -1.98e9       0 1                  5              95      26853    103680          0.999             1
+13  -7.29e8       0 1                  5              95      26841    103680          0.999             1
+14   1.88e9       0 1                  5              95      26841    103680          0.999             1
+15  -7.72e8       0 1                  5              95      26837    103680          0.998             1
+16  -2.09e9       0 1                  5              95      26828    103680          0.998             1
+17   1.17e9       0 1                  5              95      26863    103680          0.999             1
+18   9.62e8       0 1                  5              95      26827    103680          0.998             1
+19   1.36e9       0 1                  5              95      26853    103680          0.999             1
+20   1.29e9       0 1                  5              95      26797    103680          0.997             1
+# ℹ 6 more variables: Min_Elev <dbl>, Max_Elev <dbl>, Mean_Elev <dbl>, Min_Dev <dbl>, Max_Dev <dbl>,
+#   Mean_Dev <dbl>
+> t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == '5' & combined_Set$Input_Reduction == 95,], Paired=TRUE)
+
+	Welch Two Sample t-test
+
+data:  Mean_Dev by Algorithm
+t = NaN, df = NaN, p-value = NA
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ NaN NaN
+sample estimates:
+mean in group 0 mean in group 1 
+              0               0 
+
+> t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == '5' & combined_Set$Input_Reduction == 50,], Paired=TRUE)
+
+	Welch Two Sample t-test
+
+data:  Mean_Dev by Algorithm
+t = 17.362, df = 15.838, p-value = 9.925e-12
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ 0.0002952583 0.0003774672
+sample estimates:
+mean in group 0 mean in group 1 
+   0.0012883818    0.0009520191 
+
+> t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == '50' & combined_Set$Input_Reduction == 95,], Paired=TRUE)
+
+	Welch Two Sample t-test
+
+data:  Mean_Dev by Algorithm
+t = 60.287, df = 9.0046, p-value = 4.735e-13
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ 4.217866e-05 4.546714e-05
+sample estimates:
+mean in group 0 mean in group 1 
+   4.431965e-05    4.967449e-07 
+
+> combined_Set[combined_Set$Src_SubDiv == '50' & combined_Set$Input_Reduction == 95,]
+# A tibble: 20 × 15
+       Seed Tile_ID Algorithm Src_SubDiv Input_Reduction Vert_Count Tri_Count Vert_Reduction Tri_Reduction
+      <int>   <int> <fct>          <int>           <int>      <int>     <int>          <dbl>         <dbl>
+ 1  -2.38e8       0 0                 50              95    1272960   7200000          0.962         0.961
+ 2  -1.98e9       0 0                 50              95    1272960   7200000          0.962         0.961
+ 3  -7.29e8       0 0                 50              95    1272960   7200000          0.962         0.961
+ 4   1.88e9       0 0                 50              95    1272960   7200000          0.962         0.961
+ 5  -7.72e8       0 0                 50              95    1272960   7200000          0.962         0.961
+ 6  -2.09e9       0 0                 50              95    1272960   7200000          0.962         0.961
+ 7   1.17e9       0 0                 50              95    1272960   7200000          0.962         0.961
+ 8   9.62e8       0 0                 50              95    1272960   7200000          0.962         0.961
+ 9   1.36e9       0 0                 50              95    1272960   7200000          0.962         0.961
+10   1.29e9       0 0                 50              95    1272960   7200000          0.962         0.961
+11  -2.38e8       0 1                 50              95    1274923   7199964          0.964         0.961
+12  -1.98e9       0 1                 50              95    1275019   7199964          0.964         0.961
+13  -7.29e8       0 1                 50              95    1275148   7199964          0.964         0.961
+14   1.88e9       0 1                 50              95    1274792   7199964          0.964         0.961
+15  -7.72e8       0 1                 50              95    1275150   7199964          0.964         0.961
+16  -2.09e9       0 1                 50              95    1275168   7199964          0.964         0.961
+17   1.17e9       0 1                 50              95    1275076   7199964          0.964         0.961
+18   9.62e8       0 1                 50              95    1275041   7199964          0.964         0.961
+19   1.36e9       0 1                 50              95    1275230   7199964          0.964         0.961
+20   1.29e9       0 1                 50              95    1274915   7199964          0.964         0.961
+# ℹ 6 more variables: Min_Elev <dbl>, Max_Elev <dbl>, Mean_Elev <dbl>, Min_Dev <dbl>, Max_Dev <dbl>,
+#   Mean_Dev <dbl>
+> subDivisions <- c(5, 10, 15, 20, 25, 30, 35, 40, 45, 50)
+> inputReductions <- c(95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5)
+> for(s in 1:subDivisions){print(s)}
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+Warning message:
+In 1:subDivisions :
+  numerical expression has 10 elements: only the first used
+> for(s in 1:10){print(subDivisions[s])}
+[1] 5
+[1] 10
+[1] 15
+[1] 20
+[1] 25
+[1] 30
+[1] 35
+[1] 40
+[1] 45
+[1] 50
+> t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == 50 & combined_Set$Input_Reduction == 95,], Paired=TRUE)
+
+	Welch Two Sample t-test
+
+data:  Mean_Dev by Algorithm
+t = 60.287, df = 9.0046, p-value = 4.735e-13
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ 4.217866e-05 4.546714e-05
+sample estimates:
+mean in group 0 mean in group 1 
+   4.431965e-05    4.967449e-07 
+
+> combined_Set[combined_Set$Src_SubDiv == 50 & combined_Set$Input_Reduction == 95,]
+# A tibble: 20 × 15
+       Seed Tile_ID Algorithm Src_SubDiv Input_Reduction Vert_Count Tri_Count Vert_Reduction Tri_Reduction
+      <int>   <int> <fct>          <int>           <int>      <int>     <int>          <dbl>         <dbl>
+ 1  -2.38e8       0 0                 50              95    1272960   7200000          0.962         0.961
+ 2  -1.98e9       0 0                 50              95    1272960   7200000          0.962         0.961
+ 3  -7.29e8       0 0                 50              95    1272960   7200000          0.962         0.961
+ 4   1.88e9       0 0                 50              95    1272960   7200000          0.962         0.961
+ 5  -7.72e8       0 0                 50              95    1272960   7200000          0.962         0.961
+ 6  -2.09e9       0 0                 50              95    1272960   7200000          0.962         0.961
+ 7   1.17e9       0 0                 50              95    1272960   7200000          0.962         0.961
+ 8   9.62e8       0 0                 50              95    1272960   7200000          0.962         0.961
+ 9   1.36e9       0 0                 50              95    1272960   7200000          0.962         0.961
+10   1.29e9       0 0                 50              95    1272960   7200000          0.962         0.961
+11  -2.38e8       0 1                 50              95    1274923   7199964          0.964         0.961
+12  -1.98e9       0 1                 50              95    1275019   7199964          0.964         0.961
+13  -7.29e8       0 1                 50              95    1275148   7199964          0.964         0.961
+14   1.88e9       0 1                 50              95    1274792   7199964          0.964         0.961
+15  -7.72e8       0 1                 50              95    1275150   7199964          0.964         0.961
+16  -2.09e9       0 1                 50              95    1275168   7199964          0.964         0.961
+17   1.17e9       0 1                 50              95    1275076   7199964          0.964         0.961
+18   9.62e8       0 1                 50              95    1275041   7199964          0.964         0.961
+19   1.36e9       0 1                 50              95    1275230   7199964          0.964         0.961
+20   1.29e9       0 1                 50              95    1274915   7199964          0.964         0.961
+# ℹ 6 more variables: Min_Elev <dbl>, Max_Elev <dbl>, Mean_Elev <dbl>, Min_Dev <dbl>, Max_Dev <dbl>,
+#   Mean_Dev <dbl>
+> tTestResults <- vector("list",190)
+> counter <- 0
+> View(tTestResults)
+> for(s in 1:10)
++ {
++     for(i in 1:19){
++         
++         tTestResults[counter]<-t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == subDivisions[s] & combined_Set$Input_Reduction == inputReductions[i],], Paired=TRUE)
++         increment(counter)
++     }
++ }
+Error in increment(counter) : could not find function "increment"
+> counter <- 1
+> for(s in 1:10)
++ {
++     for(i in 1:19){
++         
++         tTestResults[counter]<-t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == subDivisions[s] & combined_Set$Input_Reduction == inputReductions[i],], Paired=TRUE)
++         counter <- counter + 1
++     }
++ }
+There were 50 or more warnings (use warnings() to see the first 50)
+> warnings()
+Warning messages:
+1: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+2: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+3: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+4: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+5: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+6: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+7: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+8: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+9: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+10: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+11: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+12: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+13: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+14: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+15: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+16: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+17: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+18: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+19: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+20: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+21: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+22: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+23: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+24: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+25: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+26: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+27: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+28: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+29: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+30: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+31: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+32: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+33: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+34: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+35: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+36: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+37: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+38: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+39: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+40: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+41: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+42: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+43: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+44: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+45: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+46: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+47: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+48: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+49: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+50: In tTestResults[counter] <- t.test(Mean_Dev ~ Algorithm,  ... :
+  number of items to replace is not a multiple of replacement length
+> for(s in 1:10)
++ {
++     for(i in 1:19){
++         
++         tTestResults[[counter]]<-t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == subDivisions[s] & combined_Set$Input_Reduction == inputReductions[i],], Paired=TRUE)
++         counter <- counter + 1
++     }
++ }
+> counter <-1
+> tTestResults <- vector("list",190)
+> for(s in 1:10)
++ {
++     for(i in 1:19){
++         
++         tTestResults[[counter]]<-t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == subDivisions[s] & combined_Set$Input_Reduction == inputReductions[i],], Paired=TRUE)
++         counter <- counter + 1
++     }
++ }
+> print(tTestResults[1])
+[[1]]
+
+	Welch Two Sample t-test
+
+data:  Mean_Dev by Algorithm
+t = NaN, df = NaN, p-value = NA
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ NaN NaN
+sample estimates:
+mean in group 0 mean in group 1 
+              0               0 
+
+
+> summary(tTestResults)
+       Length Class Mode
+  [1,] 10     htest list
+  [2,] 10     htest list
+  [3,] 10     htest list
+  [4,] 10     htest list
+  [5,] 10     htest list
+  [6,] 10     htest list
+  [7,] 10     htest list
+  [8,] 10     htest list
+  [9,] 10     htest list
+ [10,] 10     htest list
+ [11,] 10     htest list
+ [12,] 10     htest list
+ [13,] 10     htest list
+ [14,] 10     htest list
+ [15,] 10     htest list
+ [16,] 10     htest list
+ [17,] 10     htest list
+ [18,] 10     htest list
+ [19,] 10     htest list
+ [20,] 10     htest list
+ [21,] 10     htest list
+ [22,] 10     htest list
+ [23,] 10     htest list
+ [24,] 10     htest list
+ [25,] 10     htest list
+ [26,] 10     htest list
+ [27,] 10     htest list
+ [28,] 10     htest list
+ [29,] 10     htest list
+ [30,] 10     htest list
+ [31,] 10     htest list
+ [32,] 10     htest list
+ [33,] 10     htest list
+ [34,] 10     htest list
+ [35,] 10     htest list
+ [36,] 10     htest list
+ [37,] 10     htest list
+ [38,] 10     htest list
+ [39,] 10     htest list
+ [40,] 10     htest list
+ [41,] 10     htest list
+ [42,] 10     htest list
+ [43,] 10     htest list
+ [44,] 10     htest list
+ [45,] 10     htest list
+ [46,] 10     htest list
+ [47,] 10     htest list
+ [48,] 10     htest list
+ [49,] 10     htest list
+ [50,] 10     htest list
+ [51,] 10     htest list
+ [52,] 10     htest list
+ [53,] 10     htest list
+ [54,] 10     htest list
+ [55,] 10     htest list
+ [56,] 10     htest list
+ [57,] 10     htest list
+ [58,] 10     htest list
+ [59,] 10     htest list
+ [60,] 10     htest list
+ [61,] 10     htest list
+ [62,] 10     htest list
+ [63,] 10     htest list
+ [64,] 10     htest list
+ [65,] 10     htest list
+ [66,] 10     htest list
+ [67,] 10     htest list
+ [68,] 10     htest list
+ [69,] 10     htest list
+ [70,] 10     htest list
+ [71,] 10     htest list
+ [72,] 10     htest list
+ [73,] 10     htest list
+ [74,] 10     htest list
+ [75,] 10     htest list
+ [76,] 10     htest list
+ [77,] 10     htest list
+ [78,] 10     htest list
+ [79,] 10     htest list
+ [80,] 10     htest list
+ [81,] 10     htest list
+ [82,] 10     htest list
+ [83,] 10     htest list
+ [84,] 10     htest list
+ [85,] 10     htest list
+ [86,] 10     htest list
+ [87,] 10     htest list
+ [88,] 10     htest list
+ [89,] 10     htest list
+ [90,] 10     htest list
+ [91,] 10     htest list
+ [92,] 10     htest list
+ [93,] 10     htest list
+ [94,] 10     htest list
+ [95,] 10     htest list
+ [96,] 10     htest list
+ [97,] 10     htest list
+ [98,] 10     htest list
+ [99,] 10     htest list
+[100,] 10     htest list
+[101,] 10     htest list
+[102,] 10     htest list
+[103,] 10     htest list
+[104,] 10     htest list
+[105,] 10     htest list
+[106,] 10     htest list
+[107,] 10     htest list
+[108,] 10     htest list
+[109,] 10     htest list
+[110,] 10     htest list
+[111,] 10     htest list
+[112,] 10     htest list
+[113,] 10     htest list
+[114,] 10     htest list
+[115,] 10     htest list
+[116,] 10     htest list
+[117,] 10     htest list
+[118,] 10     htest list
+[119,] 10     htest list
+[120,] 10     htest list
+[121,] 10     htest list
+[122,] 10     htest list
+[123,] 10     htest list
+[124,] 10     htest list
+[125,] 10     htest list
+[126,] 10     htest list
+[127,] 10     htest list
+[128,] 10     htest list
+[129,] 10     htest list
+[130,] 10     htest list
+[131,] 10     htest list
+[132,] 10     htest list
+[133,] 10     htest list
+[134,] 10     htest list
+[135,] 10     htest list
+[136,] 10     htest list
+[137,] 10     htest list
+[138,] 10     htest list
+[139,] 10     htest list
+[140,] 10     htest list
+[141,] 10     htest list
+[142,] 10     htest list
+[143,] 10     htest list
+[144,] 10     htest list
+[145,] 10     htest list
+[146,] 10     htest list
+[147,] 10     htest list
+[148,] 10     htest list
+[149,] 10     htest list
+[150,] 10     htest list
+[151,] 10     htest list
+[152,] 10     htest list
+[153,] 10     htest list
+[154,] 10     htest list
+[155,] 10     htest list
+[156,] 10     htest list
+[157,] 10     htest list
+[158,] 10     htest list
+[159,] 10     htest list
+[160,] 10     htest list
+[161,] 10     htest list
+[162,] 10     htest list
+[163,] 10     htest list
+[164,] 10     htest list
+[165,] 10     htest list
+[166,] 10     htest list
+[167,] 10     htest list
+[168,] 10     htest list
+[169,] 10     htest list
+[170,] 10     htest list
+[171,] 10     htest list
+[172,] 10     htest list
+[173,] 10     htest list
+[174,] 10     htest list
+[175,] 10     htest list
+[176,] 10     htest list
+[177,] 10     htest list
+[178,] 10     htest list
+[179,] 10     htest list
+[180,] 10     htest list
+[181,] 10     htest list
+[182,] 10     htest list
+[183,] 10     htest list
+[184,] 10     htest list
+[185,] 10     htest list
+[186,] 10     htest list
+[187,] 10     htest list
+[188,] 10     htest list
+[189,] 10     htest list
+[190,] 10     htest list
+> summary(tTestResults[1])
+     Length Class Mode
+[1,] 10     htest list
+> tTestResults[1]
+[[1]]
+
+	Welch Two Sample t-test
+
+data:  Mean_Dev by Algorithm
+t = NaN, df = NaN, p-value = NA
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ NaN NaN
+sample estimates:
+mean in group 0 mean in group 1 
+              0               0 
+
+
+> tTestResults[0]
+list()
+> combined_Set[combined_Set$Src_SubDiv == subDivisions[1] & combined_Set$Input_Reduction == inputReductions[10],] %>% cohens_d(Mean_Dev~Algorithm, paired=TRUE)
+# A tibble: 1 × 7
+  .y.      group1 group2 effsize    n1    n2 magnitude
+* <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
+1 Mean_Dev 0      1         15.6    10    10 large    
+> tTestResults <- vector("list",190)
+> cohens_dResults <- vector("list",190)
+> counter <- 1
+> for(s in 1:10)
++ {
++     for(i in 1:19){
++         
++         tTestResults[[counter]]<-t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == subDivisions[s] & combined_Set$Input_Reduction == inputReductions[i],], Paired=TRUE)
++         cohens_dResults[[counter]]<-combined_Set[combined_Set$Src_SubDiv == subDivisions[1] & combined_Set$Input_Reduction == inputReductions[10],] %>% cohens_d(Mean_Dev~Algorithm, paired=TRUE)
++         counter <- counter + 1
++     }
++ }
+> library(readr)
+> SUB_Terrain_Generator <- read_csv("H:/GitFork/Comp-302-2202796/Data/Test-12/SUB_Terrain_Generator.csv", 
++     col_types = cols(Seed = col_integer(), 
++         Tile_ID = col_integer(), Algorithm = col_factor(levels = c("0", 
++             "1")), Src_SubDiv = col_integer(), 
++         Input_Reduction = col_integer(), 
++         Vert_Count = col_integer(), Tri_Count = col_integer()))
+> View(SUB_Terrain_Generator)                                                                             
+> library(readr)
+> SUB_Quadric_Simplification <- read_csv("H:/GitFork/Comp-302-2202796/Data/Test-12/SUB_Quadric_Simplification.csv", 
++     col_types = cols(Seed = col_integer(), 
++         Tile_ID = col_integer(), Algorithm = col_factor(levels = c("0", 
++             "1")), Src_SubDiv = col_integer(), 
++         Input_Reduction = col_integer(), 
++         Vert_Count = col_integer(), Tri_Count = col_integer()))
+> View(SUB_Quadric_Simplification)                                                                        
+> combined_Set <- rbind(SUB_Terrain_Generator,SUB_Quadric_Simplification)
+> tTestResults <- vector("list",190)
+> cohens_dResults <- vector("list",190)
+> counter <- 1
+> for(s in 1:10)
++ {
++     for(i in 1:19){
++         
++         tTestResults[[counter]]<-t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == subDivisions[s] & combined_Set$Input_Reduction == inputReductions[i],], Paired=TRUE)
++         cohens_dResults[[counter]]<-combined_Set[combined_Set$Src_SubDiv == subDivisions[1] & combined_Set$Input_Reduction == inputReductions[10],] %>% cohens_d(Mean_Dev~Algorithm, paired=TRUE)
++         counter <- counter + 1
++     }
++ }
+Error in t.test.formula(Mean_Dev ~ Algorithm, data = combined_Set[combined_Set$Src_SubDiv ==  : 
+  grouping factor must have exactly 2 levels
+> tTestResults <- vector("list",190)
+> cohens_dResults <- vector("list",190)
+> counter <- 1
+> for(s in 1:10)
++ {
++     for(i in 1:19){
++         
++         tTestResults[[counter]]<-t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == subDivisions[s] & combined_Set$Input_Reduction == inputReductions[i],], Paired=TRUE)
++         cohens_dResults[[counter]]<-combined_Set[combined_Set$Src_SubDiv == subDivisions[1] & combined_Set$Input_Reduction == inputReductions[10],] %>% cohens_d(Mean_Dev~Algorithm, paired=TRUE)
++         counter <- counter + 1
++     }
++ }
+Error in t.test.formula(Mean_Dev ~ Algorithm, data = combined_Set[combined_Set$Src_SubDiv ==  : 
+  grouping factor must have exactly 2 levels
+> combined_Set <- rbind(SUMMARY_SUB_Terrain_Generator,SUMMARY_SUB_Quadric_Simplification)
+> tTestResults <- vector("list",190)
+> cohens_dResults <- vector("list",190)
+> counter <- 1
+> for(s in 1:10)
++ {
++     for(i in 1:19){
++         
++         tTestResults[[counter]]<-t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == subDivisions[s] & combined_Set$Input_Reduction == inputReductions[i],], Paired=TRUE)
++         cohens_dResults[[counter]]<-combined_Set[combined_Set$Src_SubDiv == subDivisions[1] & combined_Set$Input_Reduction == inputReductions[10],] %>% cohens_d(Mean_Dev~Algorithm, paired=TRUE)
++         counter <- counter + 1
++     }
++ }
+> combined_Set <- rbind(SUB_Terrain_Generator,SUB_Quadric_Simplification)
+> t.test(Mean_Dev~Algorithm,data = combined_Set,paired=TRUE)
+Error in t.test.formula(Mean_Dev ~ Algorithm, data = combined_Set, paired = TRUE) : 
+  cannot use 'paired' in formula method
+> t.test(Mean_Dev~Algorithm,data = combined_Set,Paired=TRUE)
+Error in t.test.formula(Mean_Dev ~ Algorithm, data = combined_Set, Paired = TRUE) : 
+  grouping factor must have exactly 2 levels
+> t.test(Mean_Dev~Algorithm,data = SUB_Terrain_Generator,Paired=TRUE)
+Error in t.test.formula(Mean_Dev ~ Algorithm, data = SUB_Terrain_Generator,  : 
+  grouping factor must have exactly 2 levels
+> t.test(Mean_Dev~Algorithm,data = SUB_Quadric_Simplification,Paired=TRUE)
+Error in t.test.formula(Mean_Dev ~ Algorithm, data = SUB_Quadric_Simplification,  : 
+  grouping factor must have exactly 2 levels
+> t.test(Mean_Dev~Algorithm,data = SUMMARY_SUB_Terrain_Generator,Paired=TRUE)
+Error in t.test.formula(Mean_Dev ~ Algorithm, data = SUMMARY_SUB_Terrain_Generator,  : 
+  grouping factor must have exactly 2 levels
+> t.test(Mean_Dev~Algorithm,data = SUMMARY_SUB_Quadric_Simplification,Paired=TRUE)
+Error in t.test.formula(Mean_Dev ~ Algorithm, data = SUMMARY_SUB_Quadric_Simplification,  : 
+  grouping factor must have exactly 2 levels
+> View(SUB_Terrain_Generator)
+> View(SUB_Quadric_Simplification)

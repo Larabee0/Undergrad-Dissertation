@@ -56,8 +56,8 @@ namespace COMP302
 
         // start mesh subdivisions.
         private static readonly bool _runAllSubdivisions = true;
-        //private static readonly int[] _subdivisonLevels = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
-        private static readonly int[] _subdivisonLevels = [20];
+        private static readonly int[] _subdivisonLevels = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+        //private static readonly int[] _subdivisonLevels = [20];
 
         // mesh a and mesh c are duplicates for displaying the geometric devation heatmap
         private static  int _subdivisionsA = 50; // high res
@@ -74,8 +74,8 @@ namespace COMP302
         private static float _inputReductionRate = 0.5f;
         private static float _actualReductionRate;
         private static readonly bool _runAllReductionRates = true;
-        //private static readonly float[] _simplificationRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 0.70f, 0.65f, 0.60f, 0.55f, 0.50f, 0.45f, 0.40f, 0.35f, 0.30f, 0.25f, 0.20f, 0.15f, 0.10f, 0.05f];
-        private static readonly float[] _simplificationRates = [0.5f];
+        private static readonly float[] _simplificationRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 0.70f, 0.65f, 0.60f, 0.55f, 0.50f, 0.45f, 0.40f, 0.35f, 0.30f, 0.25f, 0.20f, 0.15f, 0.10f, 0.05f];
+        //private static readonly float[] _simplificationRates = [0.5f];
 
         private static (int, int, int) CurrentTestKey => (_seed, _subdivisionsA, (int)(_inputReductionRate * 100));
 
@@ -85,7 +85,7 @@ namespace COMP302
         private static readonly bool _normalDevation = false;
         private static readonly bool _parallelDevation = true;
         private static readonly bool _logDeviations = true;
-        private static readonly bool _logExecutionTime = false;
+        private static readonly bool _logExecutionTime = true;
         private static readonly bool _testDeviation = false;
 
         private static int[] _seeds = [
