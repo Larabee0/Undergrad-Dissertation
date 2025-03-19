@@ -1,0 +1,7897 @@
+{
+  "SubDivisions: , 5, InputReductions: , 95": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0
+      },
+      {
+        "name": "SE",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 90": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0
+      },
+      {
+        "name": "SE",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 85": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0
+      },
+      {
+        "name": "SE",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 80": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000677,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000651,
+        "upper": 0.000702
+      },
+      {
+        "name": "SE",
+        "value": 0.000013
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 52.12339
+      },
+      {
+        "name": "df",
+        "value": 2008.125489
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 75": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000677,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000651,
+        "upper": 0.000702
+      },
+      {
+        "name": "SE",
+        "value": 0.000013
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 52.12339
+      },
+      {
+        "name": "df",
+        "value": 2008.125489
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 70": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000677,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000651,
+        "upper": 0.000702
+      },
+      {
+        "name": "SE",
+        "value": 0.000013
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 52.12339
+      },
+      {
+        "name": "df",
+        "value": 2008.125489
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 65": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000677,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000651,
+        "upper": 0.000702
+      },
+      {
+        "name": "SE",
+        "value": 0.000013
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 52.12339
+      },
+      {
+        "name": "df",
+        "value": 2008.125489
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 60": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000677,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000651,
+        "upper": 0.000702
+      },
+      {
+        "name": "SE",
+        "value": 0.000013
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 52.12339
+      },
+      {
+        "name": "df",
+        "value": 2008.125489
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 55": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000336,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.0003,
+        "upper": 0.000372
+      },
+      {
+        "name": "SE",
+        "value": 0.000018
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 18.306686
+      },
+      {
+        "name": "df",
+        "value": 2858.02808
+      },
+      {
+        "name": "p",
+        "value": 7.055438e-71
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 50": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000336,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.0003,
+        "upper": 0.000372
+      },
+      {
+        "name": "SE",
+        "value": 0.000018
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 18.306686
+      },
+      {
+        "name": "df",
+        "value": 2858.02808
+      },
+      {
+        "name": "p",
+        "value": 7.055438e-71
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 45": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000336,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.0003,
+        "upper": 0.000372
+      },
+      {
+        "name": "SE",
+        "value": 0.000018
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 18.306686
+      },
+      {
+        "name": "df",
+        "value": 2858.02808
+      },
+      {
+        "name": "p",
+        "value": 7.055438e-71
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 40": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000336,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.0003,
+        "upper": 0.000372
+      },
+      {
+        "name": "SE",
+        "value": 0.000018
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 18.306686
+      },
+      {
+        "name": "df",
+        "value": 2858.02808
+      },
+      {
+        "name": "p",
+        "value": 7.055438e-71
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 35": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000336,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.0003,
+        "upper": 0.000372
+      },
+      {
+        "name": "SE",
+        "value": 0.000018
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 18.306686
+      },
+      {
+        "name": "df",
+        "value": 2858.02808
+      },
+      {
+        "name": "p",
+        "value": 7.055438e-71
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 30": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.000291,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.000354,
+        "upper": -0.000228
+      },
+      {
+        "name": "SE",
+        "value": 0.000032
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -9.106495
+      },
+      {
+        "name": "df",
+        "value": 2910.268065
+      },
+      {
+        "name": "p",
+        "value": 1.540705e-19
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 25": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.000291,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.000354,
+        "upper": -0.000228
+      },
+      {
+        "name": "SE",
+        "value": 0.000032
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -9.106495
+      },
+      {
+        "name": "df",
+        "value": 2910.268065
+      },
+      {
+        "name": "p",
+        "value": 1.540705e-19
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 20": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.000291,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.000354,
+        "upper": -0.000228
+      },
+      {
+        "name": "SE",
+        "value": 0.000032
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -9.106495
+      },
+      {
+        "name": "df",
+        "value": 2910.268065
+      },
+      {
+        "name": "p",
+        "value": 1.540705e-19
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 15": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000795,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000712,
+        "upper": 0.000878
+      },
+      {
+        "name": "SE",
+        "value": 0.000042
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 18.771872
+      },
+      {
+        "name": "df",
+        "value": 3128.57861
+      },
+      {
+        "name": "p",
+        "value": 1.387144e-74
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 10": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000795,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000712,
+        "upper": 0.000878
+      },
+      {
+        "name": "SE",
+        "value": 0.000042
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 18.771872
+      },
+      {
+        "name": "df",
+        "value": 3128.57861
+      },
+      {
+        "name": "p",
+        "value": 1.387144e-74
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 5, InputReductions: , 5": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000795,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000712,
+        "upper": 0.000878
+      },
+      {
+        "name": "SE",
+        "value": 0.000042
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 18.771872
+      },
+      {
+        "name": "df",
+        "value": 3128.57861
+      },
+      {
+        "name": "p",
+        "value": 1.387144e-74
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 95": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0
+      },
+      {
+        "name": "SE",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 90": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000392,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000381,
+        "upper": 0.000403
+      },
+      {
+        "name": "SE",
+        "value": 5.654104e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 69.400047
+      },
+      {
+        "name": "df",
+        "value": 1676.427228
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 85": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000392,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000381,
+        "upper": 0.000403
+      },
+      {
+        "name": "SE",
+        "value": 5.654104e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 69.400047
+      },
+      {
+        "name": "df",
+        "value": 1676.427228
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 80": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000392,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000381,
+        "upper": 0.000403
+      },
+      {
+        "name": "SE",
+        "value": 5.654104e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 69.400047
+      },
+      {
+        "name": "df",
+        "value": 1676.427228
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 75": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000392,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000381,
+        "upper": 0.000403
+      },
+      {
+        "name": "SE",
+        "value": 5.654104e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 69.400047
+      },
+      {
+        "name": "df",
+        "value": 1676.427228
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 70": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000367,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000354,
+        "upper": 0.00038
+      },
+      {
+        "name": "SE",
+        "value": 6.626391e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 55.404625
+      },
+      {
+        "name": "df",
+        "value": 1902.496182
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 65": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000367,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000354,
+        "upper": 0.00038
+      },
+      {
+        "name": "SE",
+        "value": 6.626391e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 55.404625
+      },
+      {
+        "name": "df",
+        "value": 1902.496182
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 60": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000367,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000354,
+        "upper": 0.00038
+      },
+      {
+        "name": "SE",
+        "value": 6.626391e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 55.404625
+      },
+      {
+        "name": "df",
+        "value": 1902.496182
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 55": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000322,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000306,
+        "upper": 0.000338
+      },
+      {
+        "name": "SE",
+        "value": 8.082068e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 39.849689
+      },
+      {
+        "name": "df",
+        "value": 2286.426993
+      },
+      {
+        "name": "p",
+        "value": 3.654239e-264
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 50": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000322,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000306,
+        "upper": 0.000338
+      },
+      {
+        "name": "SE",
+        "value": 8.082068e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 39.849689
+      },
+      {
+        "name": "df",
+        "value": 2286.426993
+      },
+      {
+        "name": "p",
+        "value": 3.654239e-264
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 45": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000276,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000257,
+        "upper": 0.000296
+      },
+      {
+        "name": "SE",
+        "value": 9.989417e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 27.661382
+      },
+      {
+        "name": "df",
+        "value": 2608.598794
+      },
+      {
+        "name": "p",
+        "value": 6.570706e-148
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 40": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000276,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000257,
+        "upper": 0.000296
+      },
+      {
+        "name": "SE",
+        "value": 9.989417e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 27.661382
+      },
+      {
+        "name": "df",
+        "value": 2608.598794
+      },
+      {
+        "name": "p",
+        "value": 6.570706e-148
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 35": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000199,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000173,
+        "upper": 0.000224
+      },
+      {
+        "name": "SE",
+        "value": 0.000013
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 15.467551
+      },
+      {
+        "name": "df",
+        "value": 2941.369277
+      },
+      {
+        "name": "p",
+        "value": 6.040235e-52
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 30": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000199,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000173,
+        "upper": 0.000224
+      },
+      {
+        "name": "SE",
+        "value": 0.000013
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 15.467551
+      },
+      {
+        "name": "df",
+        "value": 2941.369277
+      },
+      {
+        "name": "p",
+        "value": 6.040235e-52
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 25": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.000179,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.00022,
+        "upper": -0.000138
+      },
+      {
+        "name": "SE",
+        "value": 0.000021
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -8.563917
+      },
+      {
+        "name": "df",
+        "value": 3067.727833
+      },
+      {
+        "name": "p",
+        "value": 1.699406e-17
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 20": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.000179,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.00022,
+        "upper": -0.000138
+      },
+      {
+        "name": "SE",
+        "value": 0.000021
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -8.563917
+      },
+      {
+        "name": "df",
+        "value": 3067.727833
+      },
+      {
+        "name": "p",
+        "value": 1.699406e-17
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 15": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.000738,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.000804,
+        "upper": -0.000673
+      },
+      {
+        "name": "SE",
+        "value": 0.000033
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -22.139073
+      },
+      {
+        "name": "df",
+        "value": 2605.82863
+      },
+      {
+        "name": "p",
+        "value": 1.173541e-99
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 10": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.000216,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.000289,
+        "upper": -0.000143
+      },
+      {
+        "name": "SE",
+        "value": 0.000037
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -5.793559
+      },
+      {
+        "name": "df",
+        "value": 3064.215669
+      },
+      {
+        "name": "p",
+        "value": 7.590156e-09
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 10, InputReductions: , 5": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000824,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000732,
+        "upper": 0.000915
+      },
+      {
+        "name": "SE",
+        "value": 0.000047
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 17.650219
+      },
+      {
+        "name": "df",
+        "value": 3101.352897
+      },
+      {
+        "name": "p",
+        "value": 1.631475e-66
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 95": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0
+      },
+      {
+        "name": "SE",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 90": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000243,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000236,
+        "upper": 0.00025
+      },
+      {
+        "name": "SE",
+        "value": 3.474796e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 69.974082
+      },
+      {
+        "name": "df",
+        "value": 1637.113295
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 85": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000243,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000236,
+        "upper": 0.00025
+      },
+      {
+        "name": "SE",
+        "value": 3.474796e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 69.974082
+      },
+      {
+        "name": "df",
+        "value": 1637.113295
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 80": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.00024,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000232,
+        "upper": 0.000247
+      },
+      {
+        "name": "SE",
+        "value": 3.812955e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 62.900728
+      },
+      {
+        "name": "df",
+        "value": 1718.330651
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 75": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.00024,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000232,
+        "upper": 0.000247
+      },
+      {
+        "name": "SE",
+        "value": 3.812955e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 62.900728
+      },
+      {
+        "name": "df",
+        "value": 1718.330651
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 70": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000234,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000226,
+        "upper": 0.000243
+      },
+      {
+        "name": "SE",
+        "value": 4.281868e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 54.686243
+      },
+      {
+        "name": "df",
+        "value": 1864.968883
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 65": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000234,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000226,
+        "upper": 0.000243
+      },
+      {
+        "name": "SE",
+        "value": 4.281868e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 54.686243
+      },
+      {
+        "name": "df",
+        "value": 1864.968883
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 60": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000219,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000209,
+        "upper": 0.000228
+      },
+      {
+        "name": "SE",
+        "value": 4.776597e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 45.796088
+      },
+      {
+        "name": "df",
+        "value": 2081.484652
+      },
+      {
+        "name": "p",
+        "value": 2.430186e-317
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 55": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000219,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000209,
+        "upper": 0.000228
+      },
+      {
+        "name": "SE",
+        "value": 4.776597e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 45.796088
+      },
+      {
+        "name": "df",
+        "value": 2081.484652
+      },
+      {
+        "name": "p",
+        "value": 2.430186e-317
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 50": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000217,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000206,
+        "upper": 0.000228
+      },
+      {
+        "name": "SE",
+        "value": 5.576633e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 38.83799
+      },
+      {
+        "name": "df",
+        "value": 2294.097672
+      },
+      {
+        "name": "p",
+        "value": 4.960201e-254
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 45": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000217,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000206,
+        "upper": 0.000228
+      },
+      {
+        "name": "SE",
+        "value": 5.576633e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 38.83799
+      },
+      {
+        "name": "df",
+        "value": 2294.097672
+      },
+      {
+        "name": "p",
+        "value": 4.960201e-254
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 40": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000205,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000192,
+        "upper": 0.000217
+      },
+      {
+        "name": "SE",
+        "value": 6.472239e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 31.639611
+      },
+      {
+        "name": "df",
+        "value": 2505.812302
+      },
+      {
+        "name": "p",
+        "value": 3.845613e-185
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 35": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000196,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000181,
+        "upper": 0.00021
+      },
+      {
+        "name": "SE",
+        "value": 7.576471e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 25.805419
+      },
+      {
+        "name": "df",
+        "value": 2684.231823
+      },
+      {
+        "name": "p",
+        "value": 2.325364e-131
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 30": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000196,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000181,
+        "upper": 0.00021
+      },
+      {
+        "name": "SE",
+        "value": 7.576471e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 25.805419
+      },
+      {
+        "name": "df",
+        "value": 2684.231823
+      },
+      {
+        "name": "p",
+        "value": 2.325364e-131
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 25": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000087,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000071,
+        "upper": 0.000103
+      },
+      {
+        "name": "SE",
+        "value": 8.200184e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 10.649616
+      },
+      {
+        "name": "df",
+        "value": 3095.511591
+      },
+      {
+        "name": "p",
+        "value": 4.914336e-26
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 20": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000107,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000084,
+        "upper": 0.00013
+      },
+      {
+        "name": "SE",
+        "value": 0.000012
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 9.294569
+      },
+      {
+        "name": "df",
+        "value": 3153.08255
+      },
+      {
+        "name": "p",
+        "value": 2.678596e-20
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 15": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.000282,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.00032,
+        "upper": -0.000244
+      },
+      {
+        "name": "SE",
+        "value": 0.00002
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -14.392379
+      },
+      {
+        "name": "df",
+        "value": 2759.333278
+      },
+      {
+        "name": "p",
+        "value": 2.43059e-45
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 10": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.001037,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.001097,
+        "upper": -0.000976
+      },
+      {
+        "name": "SE",
+        "value": 0.000031
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -33.621951
+      },
+      {
+        "name": "df",
+        "value": 2305.581789
+      },
+      {
+        "name": "p",
+        "value": 5.150992e-202
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 15, InputReductions: , 5": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.000817,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.000883,
+        "upper": -0.000752
+      },
+      {
+        "name": "SE",
+        "value": 0.000033
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -24.518928
+      },
+      {
+        "name": "df",
+        "value": 2608.130312
+      },
+      {
+        "name": "p",
+        "value": 1.212689e-119
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 95": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000166,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000161,
+        "upper": 0.000171
+      },
+      {
+        "name": "SE",
+        "value": 2.425754e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 68.494418
+      },
+      {
+        "name": "df",
+        "value": 1627.150094
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 90": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000166,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000161,
+        "upper": 0.000171
+      },
+      {
+        "name": "SE",
+        "value": 2.425754e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 68.494418
+      },
+      {
+        "name": "df",
+        "value": 1627.150094
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 85": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000167,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000162,
+        "upper": 0.000173
+      },
+      {
+        "name": "SE",
+        "value": 2.603039e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 64.332866
+      },
+      {
+        "name": "df",
+        "value": 1665.943886
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 80": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000167,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000162,
+        "upper": 0.000173
+      },
+      {
+        "name": "SE",
+        "value": 2.603039e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 64.332866
+      },
+      {
+        "name": "df",
+        "value": 1665.943886
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 75": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000165,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.00016,
+        "upper": 0.000171
+      },
+      {
+        "name": "SE",
+        "value": 2.796945e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 58.998651
+      },
+      {
+        "name": "df",
+        "value": 1744.90015
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 70": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000165,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.00016,
+        "upper": 0.000171
+      },
+      {
+        "name": "SE",
+        "value": 2.796945e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 58.998651
+      },
+      {
+        "name": "df",
+        "value": 1744.90015
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 65": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000163,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000157,
+        "upper": 0.00017
+      },
+      {
+        "name": "SE",
+        "value": 3.078092e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 53.111101
+      },
+      {
+        "name": "df",
+        "value": 1855.603127
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 60": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.00016,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000154,
+        "upper": 0.000167
+      },
+      {
+        "name": "SE",
+        "value": 3.389358e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 47.266544
+      },
+      {
+        "name": "df",
+        "value": 1995.742755
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 55": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.00016,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000154,
+        "upper": 0.000167
+      },
+      {
+        "name": "SE",
+        "value": 3.389358e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 47.266544
+      },
+      {
+        "name": "df",
+        "value": 1995.742755
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 50": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000156,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000149,
+        "upper": 0.000164
+      },
+      {
+        "name": "SE",
+        "value": 3.753871e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 41.626697
+      },
+      {
+        "name": "df",
+        "value": 2157.249012
+      },
+      {
+        "name": "p",
+        "value": 1.680709e-278
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 45": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000141,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000133,
+        "upper": 0.000149
+      },
+      {
+        "name": "SE",
+        "value": 4.058116e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 34.740004
+      },
+      {
+        "name": "df",
+        "value": 2378.162277
+      },
+      {
+        "name": "p",
+        "value": 3.122757e-214
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 40": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000151,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000142,
+        "upper": 0.00016
+      },
+      {
+        "name": "SE",
+        "value": 4.717164e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 32.048121
+      },
+      {
+        "name": "df",
+        "value": 2476.51713
+      },
+      {
+        "name": "p",
+        "value": 7.920911e-189
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 35": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000147,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000137,
+        "upper": 0.000158
+      },
+      {
+        "name": "SE",
+        "value": 5.297339e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 27.788601
+      },
+      {
+        "name": "df",
+        "value": 2624.252199
+      },
+      {
+        "name": "p",
+        "value": 3.373911e-149
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 30": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000146,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000134,
+        "upper": 0.000157
+      },
+      {
+        "name": "SE",
+        "value": 6.032361e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 24.1443
+      },
+      {
+        "name": "df",
+        "value": 2740.974837
+      },
+      {
+        "name": "p",
+        "value": 6.133086e-117
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 25": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.00014,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000126,
+        "upper": 0.000153
+      },
+      {
+        "name": "SE",
+        "value": 6.975556e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 20.017163
+      },
+      {
+        "name": "df",
+        "value": 2869.409706
+      },
+      {
+        "name": "p",
+        "value": 1.522207e-83
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 20": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000115,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000099,
+        "upper": 0.000131
+      },
+      {
+        "name": "SE",
+        "value": 8.214339e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 14.045972
+      },
+      {
+        "name": "df",
+        "value": 3046.162942
+      },
+      {
+        "name": "p",
+        "value": 1.79955e-43
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 15": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000033,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000013,
+        "upper": 0.000054
+      },
+      {
+        "name": "SE",
+        "value": 0.000011
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 3.15057
+      },
+      {
+        "name": "df",
+        "value": 3236.925242
+      },
+      {
+        "name": "p",
+        "value": 0.001644
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 10": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.00038,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.000417,
+        "upper": -0.000343
+      },
+      {
+        "name": "SE",
+        "value": 0.000019
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -20.221779
+      },
+      {
+        "name": "df",
+        "value": 2400.014044
+      },
+      {
+        "name": "p",
+        "value": 4.318443e-84
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 20, InputReductions: , 5": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.001216,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.00128,
+        "upper": -0.001151
+      },
+      {
+        "name": "SE",
+        "value": 0.000033
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -36.877562
+      },
+      {
+        "name": "df",
+        "value": 2224.790261
+      },
+      {
+        "name": "p",
+        "value": 9.647411e-233
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 95": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000122,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000118,
+        "upper": 0.000125
+      },
+      {
+        "name": "SE",
+        "value": 1.818204e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 67.023065
+      },
+      {
+        "name": "df",
+        "value": 1623.359215
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 90": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000122,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000118,
+        "upper": 0.000125
+      },
+      {
+        "name": "SE",
+        "value": 1.818204e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 67.023065
+      },
+      {
+        "name": "df",
+        "value": 1623.359215
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 85": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000123,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.00012,
+        "upper": 0.000127
+      },
+      {
+        "name": "SE",
+        "value": 1.918286e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 64.264448
+      },
+      {
+        "name": "df",
+        "value": 1644.541897
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 80": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000123,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000119,
+        "upper": 0.000127
+      },
+      {
+        "name": "SE",
+        "value": 2.038263e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 60.572971
+      },
+      {
+        "name": "df",
+        "value": 1688.641475
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 75": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000123,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000119,
+        "upper": 0.000127
+      },
+      {
+        "name": "SE",
+        "value": 2.038263e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 60.572971
+      },
+      {
+        "name": "df",
+        "value": 1688.641475
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 70": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000123,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000119,
+        "upper": 0.000127
+      },
+      {
+        "name": "SE",
+        "value": 2.185349e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 56.304094
+      },
+      {
+        "name": "df",
+        "value": 1755.734253
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 65": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000122,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000117,
+        "upper": 0.000127
+      },
+      {
+        "name": "SE",
+        "value": 2.351079e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 51.897253
+      },
+      {
+        "name": "df",
+        "value": 1845.876775
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 60": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000121,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000116,
+        "upper": 0.000126
+      },
+      {
+        "name": "SE",
+        "value": 2.544075e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 47.460353
+      },
+      {
+        "name": "df",
+        "value": 1952.890394
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 55": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.00012,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000115,
+        "upper": 0.000126
+      },
+      {
+        "name": "SE",
+        "value": 2.771381e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 43.35225
+      },
+      {
+        "name": "df",
+        "value": 2069.842786
+      },
+      {
+        "name": "p",
+        "value": 1.067425e-292
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 50": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000119,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000113,
+        "upper": 0.000125
+      },
+      {
+        "name": "SE",
+        "value": 3.013409e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 39.463641
+      },
+      {
+        "name": "df",
+        "value": 2196.902273
+      },
+      {
+        "name": "p",
+        "value": 6.230893e-258
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 45": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000119,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000112,
+        "upper": 0.000125
+      },
+      {
+        "name": "SE",
+        "value": 3.304283e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 35.899
+      },
+      {
+        "name": "df",
+        "value": 2316.845176
+      },
+      {
+        "name": "p",
+        "value": 8.598246e-225
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 40": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000118,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000111,
+        "upper": 0.000125
+      },
+      {
+        "name": "SE",
+        "value": 3.630962e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 32.518403
+      },
+      {
+        "name": "df",
+        "value": 2430.837515
+      },
+      {
+        "name": "p",
+        "value": 6.639919e-193
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 35": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000119,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000111,
+        "upper": 0.000127
+      },
+      {
+        "name": "SE",
+        "value": 4.009317e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 29.691048
+      },
+      {
+        "name": "df",
+        "value": 2534.417664
+      },
+      {
+        "name": "p",
+        "value": 1.647873e-166
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 30": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000119,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000111,
+        "upper": 0.000128
+      },
+      {
+        "name": "SE",
+        "value": 4.436066e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 26.924413
+      },
+      {
+        "name": "df",
+        "value": 2633.75097
+      },
+      {
+        "name": "p",
+        "value": 2.956391e-141
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 25": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000075,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000066,
+        "upper": 0.000084
+      },
+      {
+        "name": "SE",
+        "value": 4.46345e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 16.760375
+      },
+      {
+        "name": "df",
+        "value": 2964.344925
+      },
+      {
+        "name": "p",
+        "value": 2.609575e-60
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 20": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.00012,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000109,
+        "upper": 0.000131
+      },
+      {
+        "name": "SE",
+        "value": 5.54873e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 21.582147
+      },
+      {
+        "name": "df",
+        "value": 2831.478036
+      },
+      {
+        "name": "p",
+        "value": 9.15486e-96
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 15": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000093,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000078,
+        "upper": 0.000107
+      },
+      {
+        "name": "SE",
+        "value": 7.411106e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 12.536267
+      },
+      {
+        "name": "df",
+        "value": 3094.972987
+      },
+      {
+        "name": "p",
+        "value": 3.338373e-35
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 10": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.000266,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.000297,
+        "upper": -0.000235
+      },
+      {
+        "name": "SE",
+        "value": 0.000016
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -16.603144
+      },
+      {
+        "name": "df",
+        "value": 2481.968756
+      },
+      {
+        "name": "p",
+        "value": 8.712975e-59
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 25, InputReductions: , 5": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.001383,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.001444,
+        "upper": -0.001321
+      },
+      {
+        "name": "SE",
+        "value": 0.000031
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -43.947469
+      },
+      {
+        "name": "df",
+        "value": 2042.574351
+      },
+      {
+        "name": "p",
+        "value": 1.604343e-297
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 95": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000094,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000091,
+        "upper": 0.000097
+      },
+      {
+        "name": "SE",
+        "value": 1.431092e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 65.64844
+      },
+      {
+        "name": "df",
+        "value": 1621.60358
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 90": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000095,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000092,
+        "upper": 0.000098
+      },
+      {
+        "name": "SE",
+        "value": 1.494697e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 63.731674
+      },
+      {
+        "name": "df",
+        "value": 1634.472357
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 85": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000095,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000092,
+        "upper": 0.000098
+      },
+      {
+        "name": "SE",
+        "value": 1.494697e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 63.731674
+      },
+      {
+        "name": "df",
+        "value": 1634.472357
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 80": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000096,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000093,
+        "upper": 0.000099
+      },
+      {
+        "name": "SE",
+        "value": 1.57204e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 60.925926
+      },
+      {
+        "name": "df",
+        "value": 1661.846241
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 75": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000096,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000093,
+        "upper": 0.000099
+      },
+      {
+        "name": "SE",
+        "value": 1.662846e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 57.699598
+      },
+      {
+        "name": "df",
+        "value": 1704.898812
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 70": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000096,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000092,
+        "upper": 0.000099
+      },
+      {
+        "name": "SE",
+        "value": 1.764091e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 54.260574
+      },
+      {
+        "name": "df",
+        "value": 1764.316659
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 65": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000095,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000092,
+        "upper": 0.000099
+      },
+      {
+        "name": "SE",
+        "value": 1.876163e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 50.790291
+      },
+      {
+        "name": "df",
+        "value": 1839.252771
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 60": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000095,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000091,
+        "upper": 0.000099
+      },
+      {
+        "name": "SE",
+        "value": 2.006396e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 47.298408
+      },
+      {
+        "name": "df",
+        "value": 1924.847572
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 55": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000094,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.00009,
+        "upper": 0.000099
+      },
+      {
+        "name": "SE",
+        "value": 2.148037e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 43.898421
+      },
+      {
+        "name": "df",
+        "value": 2019.356738
+      },
+      {
+        "name": "p",
+        "value": 3.955878e-296
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 50": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000094,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000089,
+        "upper": 0.000099
+      },
+      {
+        "name": "SE",
+        "value": 2.308363e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 40.713761
+      },
+      {
+        "name": "df",
+        "value": 2117.662822
+      },
+      {
+        "name": "p",
+        "value": 3.579281e-268
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 45": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000094,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000089,
+        "upper": 0.000099
+      },
+      {
+        "name": "SE",
+        "value": 2.490321e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 37.672828
+      },
+      {
+        "name": "df",
+        "value": 2215.274115
+      },
+      {
+        "name": "p",
+        "value": 1.861739e-240
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 40": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000094,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000089,
+        "upper": 0.000099
+      },
+      {
+        "name": "SE",
+        "value": 2.691193e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 34.980597
+      },
+      {
+        "name": "df",
+        "value": 2309.28333
+      },
+      {
+        "name": "p",
+        "value": 1.726152e-215
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 35": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000096,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.00009,
+        "upper": 0.000102
+      },
+      {
+        "name": "SE",
+        "value": 3.160099e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 30.295838
+      },
+      {
+        "name": "df",
+        "value": 2486.965466
+      },
+      {
+        "name": "p",
+        "value": 7.071549e-172
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 30": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000097,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000091,
+        "upper": 0.000104
+      },
+      {
+        "name": "SE",
+        "value": 3.444759e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 28.30374
+      },
+      {
+        "name": "df",
+        "value": 2564.07569
+      },
+      {
+        "name": "p",
+        "value": 1.346527e-153
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 25": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000101,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000093,
+        "upper": 0.000109
+      },
+      {
+        "name": "SE",
+        "value": 4.143341e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 24.459869
+      },
+      {
+        "name": "df",
+        "value": 2713.518394
+      },
+      {
+        "name": "p",
+        "value": 1.422883e-119
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 20": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000103,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000094,
+        "upper": 0.000112
+      },
+      {
+        "name": "SE",
+        "value": 4.582457e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 22.396618
+      },
+      {
+        "name": "df",
+        "value": 2794.500696
+      },
+      {
+        "name": "p",
+        "value": 2.555815e-102
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 15": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000095,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000084,
+        "upper": 0.000107
+      },
+      {
+        "name": "SE",
+        "value": 5.784805e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 16.475217
+      },
+      {
+        "name": "df",
+        "value": 3000.44661
+      },
+      {
+        "name": "p",
+        "value": 1.891563e-58
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 10": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000022,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 6.03006e-06,
+        "upper": 0.000038
+      },
+      {
+        "name": "SE",
+        "value": 8.200387e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 2.696035
+      },
+      {
+        "name": "df",
+        "value": 3237.973366
+      },
+      {
+        "name": "p",
+        "value": 0.007053
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 30, InputReductions: , 5": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.001529,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.001591,
+        "upper": -0.001467
+      },
+      {
+        "name": "SE",
+        "value": 0.000032
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -48.08976
+      },
+      {
+        "name": "df",
+        "value": 1896.962853
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 95": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000075,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000073,
+        "upper": 0.000077
+      },
+      {
+        "name": "SE",
+        "value": 1.162153e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 64.548016
+      },
+      {
+        "name": "df",
+        "value": 1620.692111
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 90": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000076,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000074,
+        "upper": 0.000078
+      },
+      {
+        "name": "SE",
+        "value": 1.204949e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 63.116617
+      },
+      {
+        "name": "df",
+        "value": 1629.167124
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 85": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000077,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000074,
+        "upper": 0.000079
+      },
+      {
+        "name": "SE",
+        "value": 1.257037e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 60.946016
+      },
+      {
+        "name": "df",
+        "value": 1647.507521
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 80": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000077,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000074,
+        "upper": 0.000079
+      },
+      {
+        "name": "SE",
+        "value": 1.315823e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 58.361855
+      },
+      {
+        "name": "df",
+        "value": 1676.951094
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 75": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000077,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000074,
+        "upper": 0.00008
+      },
+      {
+        "name": "SE",
+        "value": 1.383093e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 55.658093
+      },
+      {
+        "name": "df",
+        "value": 1718.341201
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 70": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000076,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000074,
+        "upper": 0.000079
+      },
+      {
+        "name": "SE",
+        "value": 1.453819e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 52.618066
+      },
+      {
+        "name": "df",
+        "value": 1772.206727
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 65": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000077,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000074,
+        "upper": 0.00008
+      },
+      {
+        "name": "SE",
+        "value": 1.543693e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 49.84039
+      },
+      {
+        "name": "df",
+        "value": 1833.86501
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 60": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000076,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000073,
+        "upper": 0.00008
+      },
+      {
+        "name": "SE",
+        "value": 1.629699e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 46.83993
+      },
+      {
+        "name": "df",
+        "value": 1907.710239
+      },
+      {
+        "name": "p",
+        "value": 1.940097e-319
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 55": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000074,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000071,
+        "upper": 0.000078
+      },
+      {
+        "name": "SE",
+        "value": 1.707657e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 43.555462
+      },
+      {
+        "name": "df",
+        "value": 1996.639385
+      },
+      {
+        "name": "p",
+        "value": 6.764218e-292
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 50": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000076,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000073,
+        "upper": 0.00008
+      },
+      {
+        "name": "SE",
+        "value": 1.967436e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 38.835746
+      },
+      {
+        "name": "df",
+        "value": 2145.704537
+      },
+      {
+        "name": "p",
+        "value": 2.49021e-250
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 45": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000071,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000067,
+        "upper": 0.000075
+      },
+      {
+        "name": "SE",
+        "value": 2.031312e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 34.907538
+      },
+      {
+        "name": "df",
+        "value": 2274.303756
+      },
+      {
+        "name": "p",
+        "value": 3.681486e-214
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 40": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000077,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000073,
+        "upper": 0.000081
+      },
+      {
+        "name": "SE",
+        "value": 2.245218e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 34.285048
+      },
+      {
+        "name": "df",
+        "value": 2306.408965
+      },
+      {
+        "name": "p",
+        "value": 1.494441e-208
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 35": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000079,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000074,
+        "upper": 0.000084
+      },
+      {
+        "name": "SE",
+        "value": 2.582428e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 30.5274
+      },
+      {
+        "name": "df",
+        "value": 2447.799611
+      },
+      {
+        "name": "p",
+        "value": 1.028494e-173
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 30": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.00008,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000075,
+        "upper": 0.000086
+      },
+      {
+        "name": "SE",
+        "value": 2.778062e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 28.883857
+      },
+      {
+        "name": "df",
+        "value": 2512.682327
+      },
+      {
+        "name": "p",
+        "value": 1.181205e-158
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 25": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000056,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000051,
+        "upper": 0.000062
+      },
+      {
+        "name": "SE",
+        "value": 2.921583e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 19.313884
+      },
+      {
+        "name": "df",
+        "value": 2863.670653
+      },
+      {
+        "name": "p",
+        "value": 3.147556e-78
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 20": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.00009,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000082,
+        "upper": 0.000097
+      },
+      {
+        "name": "SE",
+        "value": 3.846687e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 23.347307
+      },
+      {
+        "name": "df",
+        "value": 2746.819434
+      },
+      {
+        "name": "p",
+        "value": 3.949605e-110
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 15": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000091,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000082,
+        "upper": 0.0001
+      },
+      {
+        "name": "SE",
+        "value": 4.695789e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 19.430748
+      },
+      {
+        "name": "df",
+        "value": 2902.813801
+      },
+      {
+        "name": "p",
+        "value": 3.666412e-79
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 10": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000034,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.00002,
+        "upper": 0.000048
+      },
+      {
+        "name": "SE",
+        "value": 7.135992e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 4.792233
+      },
+      {
+        "name": "df",
+        "value": 3231.064994
+      },
+      {
+        "name": "p",
+        "value": 1.723715e-06
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 35, InputReductions: , 5": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.001128,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.001178,
+        "upper": -0.001079
+      },
+      {
+        "name": "SE",
+        "value": 0.000025
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -44.428053
+      },
+      {
+        "name": "df",
+        "value": 1936.824185
+      },
+      {
+        "name": "p",
+        "value": 7.662362e-298
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 95": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000062,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.00006,
+        "upper": 0.000063
+      },
+      {
+        "name": "SE",
+        "value": 9.66582e-07
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 63.674534
+      },
+      {
+        "name": "df",
+        "value": 1620.188534
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 90": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000062,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.00006,
+        "upper": 0.000064
+      },
+      {
+        "name": "SE",
+        "value": 9.967379e-07
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 62.581532
+      },
+      {
+        "name": "df",
+        "value": 1626.150462
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 85": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000063,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000061,
+        "upper": 0.000065
+      },
+      {
+        "name": "SE",
+        "value": 1.035568e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 60.799739
+      },
+      {
+        "name": "df",
+        "value": 1639.063412
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 80": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000063,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000061,
+        "upper": 0.000065
+      },
+      {
+        "name": "SE",
+        "value": 1.080688e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 58.620264
+      },
+      {
+        "name": "df",
+        "value": 1659.922568
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 75": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000063,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000061,
+        "upper": 0.000066
+      },
+      {
+        "name": "SE",
+        "value": 1.124939e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 56.39081
+      },
+      {
+        "name": "df",
+        "value": 1690.107673
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 70": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000064,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000061,
+        "upper": 0.000066
+      },
+      {
+        "name": "SE",
+        "value": 1.234428e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 51.531643
+      },
+      {
+        "name": "df",
+        "value": 1776.749728
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 65": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000063,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000061,
+        "upper": 0.000066
+      },
+      {
+        "name": "SE",
+        "value": 1.295065e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 48.98701
+      },
+      {
+        "name": "df",
+        "value": 1832.867964
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 60": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000063,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000061,
+        "upper": 0.000066
+      },
+      {
+        "name": "SE",
+        "value": 1.362687e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 46.477596
+      },
+      {
+        "name": "df",
+        "value": 1895.20771
+      },
+      {
+        "name": "p",
+        "value": 2.166685e-315
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 55": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000063,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.00006,
+        "upper": 0.000066
+      },
+      {
+        "name": "SE",
+        "value": 1.520823e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 41.604272
+      },
+      {
+        "name": "df",
+        "value": 2030.334711
+      },
+      {
+        "name": "p",
+        "value": 3.895153e-274
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 50": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000063,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.00006,
+        "upper": 0.000067
+      },
+      {
+        "name": "SE",
+        "value": 1.608733e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 39.402294
+      },
+      {
+        "name": "df",
+        "value": 2099.849142
+      },
+      {
+        "name": "p",
+        "value": 1.086242e-254
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 45": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000064,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.00006,
+        "upper": 0.000067
+      },
+      {
+        "name": "SE",
+        "value": 1.80626e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 35.345711
+      },
+      {
+        "name": "df",
+        "value": 2240.71498
+      },
+      {
+        "name": "p",
+        "value": 6.988575e-218
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 40": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000064,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000061,
+        "upper": 0.000068
+      },
+      {
+        "name": "SE",
+        "value": 1.918486e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 33.525853
+      },
+      {
+        "name": "df",
+        "value": 2307.572677
+      },
+      {
+        "name": "p",
+        "value": 4.205223e-201
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 35": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000066,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000062,
+        "upper": 0.00007
+      },
+      {
+        "name": "SE",
+        "value": 2.169493e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 30.443539
+      },
+      {
+        "name": "df",
+        "value": 2426.610651
+      },
+      {
+        "name": "p",
+        "value": 1.080355e-172
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 30": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000069,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000064,
+        "upper": 0.000074
+      },
+      {
+        "name": "SE",
+        "value": 2.466931e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 27.89007
+      },
+      {
+        "name": "df",
+        "value": 2531.523652
+      },
+      {
+        "name": "p",
+        "value": 1.675729e-149
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 25": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000073,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000068,
+        "upper": 0.000079
+      },
+      {
+        "name": "SE",
+        "value": 2.838465e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 25.806066
+      },
+      {
+        "name": "df",
+        "value": 2618.255861
+      },
+      {
+        "name": "p",
+        "value": 4.966884e-131
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 20": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000078,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000072,
+        "upper": 0.000085
+      },
+      {
+        "name": "SE",
+        "value": 3.299315e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 23.789505
+      },
+      {
+        "name": "df",
+        "value": 2717.457192
+      },
+      {
+        "name": "p",
+        "value": 8.543347e-114
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 15": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000082,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000075,
+        "upper": 0.00009
+      },
+      {
+        "name": "SE",
+        "value": 3.927835e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 20.945014
+      },
+      {
+        "name": "df",
+        "value": 2840.185654
+      },
+      {
+        "name": "p",
+        "value": 1.065334e-90
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 10": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000065,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000055,
+        "upper": 0.000076
+      },
+      {
+        "name": "SE",
+        "value": 5.473692e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 11.939721
+      },
+      {
+        "name": "df",
+        "value": 3125.220125
+      },
+      {
+        "name": "p",
+        "value": 3.63932e-32
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 40, InputReductions: , 5": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.000954,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.001004,
+        "upper": -0.000905
+      },
+      {
+        "name": "SE",
+        "value": 0.000025
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -37.813515
+      },
+      {
+        "name": "df",
+        "value": 1857.209343
+      },
+      {
+        "name": "p",
+        "value": 1.592181e-232
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 95": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000052,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.00005,
+        "upper": 0.000053
+      },
+      {
+        "name": "SE",
+        "value": 8.189925e-07
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 62.915814
+      },
+      {
+        "name": "df",
+        "value": 1619.867152
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 90": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000052,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000051,
+        "upper": 0.000054
+      },
+      {
+        "name": "SE",
+        "value": 8.418319e-07
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 62.019021
+      },
+      {
+        "name": "df",
+        "value": 1624.234706
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 85": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000053,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000051,
+        "upper": 0.000055
+      },
+      {
+        "name": "SE",
+        "value": 9.033935e-07
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 58.725648
+      },
+      {
+        "name": "df",
+        "value": 1649.369558
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 80": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000053,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000051,
+        "upper": 0.000055
+      },
+      {
+        "name": "SE",
+        "value": 9.365417e-07
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 56.836182
+      },
+      {
+        "name": "df",
+        "value": 1672.115444
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 75": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000053,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000051,
+        "upper": 0.000055
+      },
+      {
+        "name": "SE",
+        "value": 9.754722e-07
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 54.752442
+      },
+      {
+        "name": "df",
+        "value": 1701.611288
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 70": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000053,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000051,
+        "upper": 0.000056
+      },
+      {
+        "name": "SE",
+        "value": 1.059408e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 50.447579
+      },
+      {
+        "name": "df",
+        "value": 1782.391882
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 65": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000053,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000051,
+        "upper": 0.000056
+      },
+      {
+        "name": "SE",
+        "value": 1.108607e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 48.202073
+      },
+      {
+        "name": "df",
+        "value": 1831.61604
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 60": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000053,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000051,
+        "upper": 0.000056
+      },
+      {
+        "name": "SE",
+        "value": 1.160732e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 45.947709
+      },
+      {
+        "name": "df",
+        "value": 1886.684469
+      },
+      {
+        "name": "p",
+        "value": 5.625841e-310
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 55": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000053,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000051,
+        "upper": 0.000056
+      },
+      {
+        "name": "SE",
+        "value": 1.278808e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 41.724418
+      },
+      {
+        "name": "df",
+        "value": 2005.80447
+      },
+      {
+        "name": "p",
+        "value": 1.842402e-274
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 50": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000053,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000051,
+        "upper": 0.000056
+      },
+      {
+        "name": "SE",
+        "value": 1.342415e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 39.74395
+      },
+      {
+        "name": "df",
+        "value": 2069.768109
+      },
+      {
+        "name": "p",
+        "value": 3.467206e-257
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 45": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000054,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000051,
+        "upper": 0.000057
+      },
+      {
+        "name": "SE",
+        "value": 1.488752e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 36.041368
+      },
+      {
+        "name": "df",
+        "value": 2195.418279
+      },
+      {
+        "name": "p",
+        "value": 7.369486e-224
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 40": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000055,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000051,
+        "upper": 0.000058
+      },
+      {
+        "name": "SE",
+        "value": 1.660406e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 32.863124
+      },
+      {
+        "name": "df",
+        "value": 2309.702483
+      },
+      {
+        "name": "p",
+        "value": 1.163337e-194
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 35": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000056,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000052,
+        "upper": 0.00006
+      },
+      {
+        "name": "SE",
+        "value": 1.854234e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 30.185103
+      },
+      {
+        "name": "df",
+        "value": 2415.445533
+      },
+      {
+        "name": "p",
+        "value": 4.129009e-170
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 30": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000058,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000054,
+        "upper": 0.000063
+      },
+      {
+        "name": "SE",
+        "value": 2.082731e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 28.048605
+      },
+      {
+        "name": "df",
+        "value": 2502.39197
+      },
+      {
+        "name": "p",
+        "value": 9.246094e-151
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 25": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000042,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000038,
+        "upper": 0.000046
+      },
+      {
+        "name": "SE",
+        "value": 2.118018e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 19.78468
+      },
+      {
+        "name": "df",
+        "value": 2809.440676
+      },
+      {
+        "name": "p",
+        "value": 1.140647e-81
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 20": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000066,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000061,
+        "upper": 0.000072
+      },
+      {
+        "name": "SE",
+        "value": 2.680717e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 24.764243
+      },
+      {
+        "name": "df",
+        "value": 2649.56313
+      },
+      {
+        "name": "p",
+        "value": 5.827031e-122
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 15": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000074,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000067,
+        "upper": 0.00008
+      },
+      {
+        "name": "SE",
+        "value": 3.348328e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 21.976963
+      },
+      {
+        "name": "df",
+        "value": 2789.41586
+      },
+      {
+        "name": "p",
+        "value": 7.342776e-99
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 10": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000072,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000064,
+        "upper": 0.000081
+      },
+      {
+        "name": "SE",
+        "value": 4.431685e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 16.307316
+      },
+      {
+        "name": "df",
+        "value": 3008.095297
+      },
+      {
+        "name": "p",
+        "value": 2.355133e-57
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 45, InputReductions: , 5": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.000608,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.00065,
+        "upper": -0.000567
+      },
+      {
+        "name": "SE",
+        "value": 0.000021
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -28.753294
+      },
+      {
+        "name": "df",
+        "value": 1884.902207
+      },
+      {
+        "name": "p",
+        "value": 4.631949e-151
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 95": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000044,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000042,
+        "upper": 0.000045
+      },
+      {
+        "name": "SE",
+        "value": 7.021343e-07
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 62.413796
+      },
+      {
+        "name": "df",
+        "value": 1619.664933
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 90": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000045,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000043,
+        "upper": 0.000046
+      },
+      {
+        "name": "SE",
+        "value": 7.437816e-07
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 60.299502
+      },
+      {
+        "name": "df",
+        "value": 1630.303998
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 85": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000045,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000044,
+        "upper": 0.000047
+      },
+      {
+        "name": "SE",
+        "value": 7.688149e-07
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 58.768182
+      },
+      {
+        "name": "df",
+        "value": 1642.445449
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 80": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000045,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000044,
+        "upper": 0.000047
+      },
+      {
+        "name": "SE",
+        "value": 7.942861e-07
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 57.124714
+      },
+      {
+        "name": "df",
+        "value": 1660.115617
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 75": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000046,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000044,
+        "upper": 0.000047
+      },
+      {
+        "name": "SE",
+        "value": 8.540742e-07
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 53.460711
+      },
+      {
+        "name": "df",
+        "value": 1712.520814
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 70": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000046,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000044,
+        "upper": 0.000047
+      },
+      {
+        "name": "SE",
+        "value": 8.853407e-07
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 51.555819
+      },
+      {
+        "name": "df",
+        "value": 1748.037237
+      },
+      {
+        "name": "p",
+        "value": 0
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 65": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000046,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000044,
+        "upper": 0.000048
+      },
+      {
+        "name": "SE",
+        "value": 9.608922e-07
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 47.511915
+      },
+      {
+        "name": "df",
+        "value": 1833.174572
+      },
+      {
+        "name": "p",
+        "value": 7.90505e-322
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 60": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000046,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000044,
+        "upper": 0.000048
+      },
+      {
+        "name": "SE",
+        "value": 1.003043e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 45.535527
+      },
+      {
+        "name": "df",
+        "value": 1881.937282
+      },
+      {
+        "name": "p",
+        "value": 7.240591e-306
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 55": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000046,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000044,
+        "upper": 0.000048
+      },
+      {
+        "name": "SE",
+        "value": 1.094046e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 41.723132
+      },
+      {
+        "name": "df",
+        "value": 1989.588211
+      },
+      {
+        "name": "p",
+        "value": 7.011277e-274
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 50": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000046,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000043,
+        "upper": 0.000048
+      },
+      {
+        "name": "SE",
+        "value": 1.198804e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 38.15837
+      },
+      {
+        "name": "df",
+        "value": 2102.400018
+      },
+      {
+        "name": "p",
+        "value": 1.533855e-242
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 45": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000043,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.00004,
+        "upper": 0.000045
+      },
+      {
+        "name": "SE",
+        "value": 1.276606e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 33.561958
+      },
+      {
+        "name": "df",
+        "value": 2258.201402
+      },
+      {
+        "name": "p",
+        "value": 1.069468e-200
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 40": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000047,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000044,
+        "upper": 0.00005
+      },
+      {
+        "name": "SE",
+        "value": 1.453616e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 32.203614
+      },
+      {
+        "name": "df",
+        "value": 2319.293461
+      },
+      {
+        "name": "p",
+        "value": 2.161269e-188
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 35": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000048,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000045,
+        "upper": 0.000051
+      },
+      {
+        "name": "SE",
+        "value": 1.611332e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 29.839764
+      },
+      {
+        "name": "df",
+        "value": 2407.752544
+      },
+      {
+        "name": "p",
+        "value": 9.391252e-167
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 30": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.00005,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000046,
+        "upper": 0.000053
+      },
+      {
+        "name": "SE",
+        "value": 1.787538e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 27.873581
+      },
+      {
+        "name": "df",
+        "value": 2488.834015
+      },
+      {
+        "name": "p",
+        "value": 4.86089e-149
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 25": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000054,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.00005,
+        "upper": 0.000058
+      },
+      {
+        "name": "SE",
+        "value": 2.112638e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 25.685319
+      },
+      {
+        "name": "df",
+        "value": 2584.542513
+      },
+      {
+        "name": "p",
+        "value": 8.898094e-130
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 20": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000058,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000053,
+        "upper": 0.000063
+      },
+      {
+        "name": "SE",
+        "value": 2.379887e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 24.422005
+      },
+      {
+        "name": "df",
+        "value": 2646.521275
+      },
+      {
+        "name": "p",
+        "value": 5.74264e-119
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 15": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000065,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000059,
+        "upper": 0.000071
+      },
+      {
+        "name": "SE",
+        "value": 2.912085e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 22.345156
+      },
+      {
+        "name": "df",
+        "value": 2753.541224
+      },
+      {
+        "name": "p",
+        "value": 8.877389e-102
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 10": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": 0.000066,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": 0.000058,
+        "upper": 0.000074
+      },
+      {
+        "name": "SE",
+        "value": 4.090611e-06
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": 16.116158
+      },
+      {
+        "name": "df",
+        "value": 3008.808331
+      },
+      {
+        "name": "p",
+        "value": 4.110532e-56
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  },
+  "SubDivisions: , 50, InputReductions: , 5": {
+    "name": "Mean_Dev by Algorithm",
+    "method": "Welch Two Sample t-test",
+    "statistics": [
+      {
+        "name": "estimate",
+        "symbol": "M",
+        "subscript": "diff.",
+        "value": -0.000406,
+        "interval": "CI",
+        "level": 0.95,
+        "lower": -0.000439,
+        "upper": -0.000374
+      },
+      {
+        "name": "SE",
+        "value": 0.000017
+      },
+      {
+        "name": "statistic",
+        "symbol": "t",
+        "value": -24.424526
+      },
+      {
+        "name": "df",
+        "value": 1963.912574
+      },
+      {
+        "name": "p",
+        "value": 2.831218e-115
+      }
+    ],
+    "alternative": {
+      "direction": "two.sided",
+      "null_value": 0
+    },
+    "var_equal": false,
+    "package": {
+      "name": "stats",
+      "version": "4.4.2"
+    }
+  }
+}

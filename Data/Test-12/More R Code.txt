@@ -1,13 +1,18 @@
 
 # how to batch run multiple T tests
-tTestResults <- vector("list",190)
+library(tidystats)
+library(rstatix)
+statistics <- vector("list",190)
 cohens_dResults <- vector("list",190)
 counter <- 1
+tTestResults <- list()
 for(s in 1:10)
 {
     for(i in 1:19){
-        
-        tTestResults[[counter]]<-t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == subDivisions[s] & combined_Set$Input_Reduction == inputReductions[i],], Paired=TRUE)
+		statistic <- t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == subDivisions[s] & combined_Set$Input_Reduction == inputReductions[i],], Paired=TRUE)
+		statistics[[counter]] <- statistic
+		identifier <- toString(c("SubDivisions: ", subDivisions[s],"InputReductions: ", inputReductions[i]))
+        tTestResults <- add_stats(tTestResults,statistic, identifier = identifier)
 		cohens_dResults[[counter]]<-combined_Set[combined_Set$Src_SubDiv == subDivisions[1] & combined_Set$Input_Reduction == inputReductions[10],] %>% cohens_d(Mean_Dev~Algorithm, paired=TRUE)
         counter <- counter + 1
     }
