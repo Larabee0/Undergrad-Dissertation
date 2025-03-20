@@ -1,8 +1,39 @@
 
-# how to batch run multiple T tests
-library(tidystats)
-library(rstatix)
-statistics <- vector("list",190)
+# Multiple Statistical tests where run to analyse the data.
+# First a T-test comparing Algorithm to Mean_Dev on the whole data set is run to validate there is a difference between sets
+# Second cohen's d is calculated for Algorithm and Mean_Dev across the whole data set to calculate the overall effect size
+# Thirdly a linear model regression test is run to see how the three factors Algorithm, Src_SubDiv and Input_Reduction effect Mean_Dev
+# Fourth, a pratt analysis of the model is run to show the importance of each regressor.
+#
+# Finally, a t test is conducted for each expirmental test run. The only variable difference between the two data sets here is the algorithm being used.
+# This is done to test if the Algorithm difference is universally better and also to highlight anomalies in the data set.
+# Cohen's D is also calculated for each test run
+library(rstatix) 
+library(relaimpo)
+
+sink("Data Analysis.txt")
+print("Overall T Test")
+statistic <- t.test(Mean_Dev~Algorithm, data = combined_Set, Paired=TRUE)
+print(statistic)
+print("Overall Cohen's D")
+cohens_d <-combined_Set %>% cohens_d(Mean_Dev~Algorithm, paired=TRUE)
+print(cohens_d)
+print("")
+print("")
+
+
+print("Linear Model")
+lm_results <- lm(Mean_Dev~Algorithm+Src_SubDiv+Input_Reduction,data = combined_Set)
+summary(lm_results)
+print("Pratt analysis of Linear Model - product of the standardized coefficient and the correlation")
+lm_pratt <- calc.relimp(lm_results,type=c("pratt"),rela = TRUE)
+print(lm_pratt)
+
+print("")
+print("")
+print("Per expirment T tests")
+
+tTestResults <- vector("list",190)
 cohens_dResults <- vector("list",190)
 counter <- 1
 tTestResults <- list()
@@ -10,13 +41,28 @@ for(s in 1:10)
 {
     for(i in 1:19){
 		statistic <- t.test(Mean_Dev~Algorithm, data = combined_Set[combined_Set$Src_SubDiv == subDivisions[s] & combined_Set$Input_Reduction == inputReductions[i],], Paired=TRUE)
+		
+		cohens_d <-combined_Set[combined_Set$Src_SubDiv == subDivisions[1] & combined_Set$Input_Reduction == inputReductions[10],] %>% cohens_d(Mean_Dev~Algorithm, paired=TRUE)
+		
 		statistics[[counter]] <- statistic
-		identifier <- toString(c("SubDivisions: ", subDivisions[s],"InputReductions: ", inputReductions[i]))
-        tTestResults <- add_stats(tTestResults,statistic, identifier = identifier)
-		cohens_dResults[[counter]]<-combined_Set[combined_Set$Src_SubDiv == subDivisions[1] & combined_Set$Input_Reduction == inputReductions[10],] %>% cohens_d(Mean_Dev~Algorithm, paired=TRUE)
+		cohens_dResults[[counter]] <- cohens_d
+		
+		identifier <- toString(c("Expirment - SubDivisions: ", subDivisions[s],"InputReductions: ", inputReductions[i]))
+        
+		
+		print(identifier)
+		print("t-test")
+		print(statistic)
+		print("Cohen's D")
+		print(cohens_d)
+		print("")
+		print("")
+		
         counter <- counter + 1
     }
 }
+
+sink(NULL)
 
 # a code logs
 
