@@ -28,7 +28,7 @@ sns.set_theme(style="darkgrid")
 ## this is a good one
 dataToPlot = combined_Set[combined_Set[" Src_SubDiv"].isin([5,10,15,20,25,30,35, 40, 45, 50])]
 #dataToPlot = combined_Set[combined_Set[" Src_SubDiv"].isin([35, 40, 45, 50])]
-dataToPlot = dataToPlot[dataToPlot[" Input_Reduction"].isin([5, 10, 15, 20, 25, 30, 35])]#, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95])]
+dataToPlot = dataToPlot[dataToPlot[" Input_Reduction"].isin([60, 65, 70, 75, 80, 85, 90, 95])] # 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 
 print(dataToPlot)
 
 #sns.catplot(data=dataToPlot, kind="bar", x=" Input_Reduction", y=" Tri_Reduction", hue=" Algorithm")
@@ -37,13 +37,13 @@ print(dataToPlot)
 #    data=dataToPlot, x=" Input_Reduction", y=" Tri_Reduction", hue=" Algorithm",
 #    jitter=False, s=20, marker="D", linewidth=1, alpha=.1,
 #)
-#sns.catplot(data=dataToPlot, kind="bar", x=" Input_Reduction", y=" Tri_Reduction", hue=" Algorithm", col=" Src_SubDiv", col_wrap=5)
+sns.catplot(data=dataToPlot, kind="bar", x=" Input_Reduction", y=" Mean_Dev", hue=" Algorithm", col=" Src_SubDiv", col_wrap=5)
 #sns.catplot(data=dataToPlot, x=" Input_Reduction", y=" Tri_Reduction", hue=" Algorithm", col=" Src_SubDiv", aspect=.5)
 
 
-grid = sns.FacetGrid(dataToPlot, col=" Src_SubDiv",hue=" Algorithm",
-                     col_wrap=5, height=1.5,hue_order=[0, 1])
-grid.map_dataframe(sns.lineplot, " Input_Reduction", " Mean_Dev")
+#grid = sns.FacetGrid(dataToPlot, col=" Src_SubDiv",hue=" Algorithm",
+#                     col_wrap=5, height=1.5,hue_order=[0, 1])
+#grid.map_dataframe(sns.barplot, " Input_Reduction", " Mean_Dev")
 #grid.map_dataframe(sns.lineplot, " Input_Reduction", " Mean_Dev")
 
 
