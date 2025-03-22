@@ -33,6 +33,8 @@ namespace COMP302
         private float rmsdev;
         private float dev_bound;
 
+        public float DevBound => dev_bound;
+
         private Bounds bb;
 
         private UniformGrid ug;
@@ -243,7 +245,8 @@ namespace COMP302
             for (int i = 0; i < mavn; i++)
             {
                 // Normalize deviation values
-                uvs[i].X = (dev[i] * 1) / dev_bound;
+                //uvs[i].X = (dev[i] * 1) / dev_bound;
+                uvs[i].X = dev[i];
             }
             uvs = mb.GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
             for(int i = 0;i < uvs.Length; i++)

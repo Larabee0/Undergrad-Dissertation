@@ -56,8 +56,8 @@ namespace COMP302
 
         // start mesh subdivisions.
         private static readonly bool _runAllSubdivisions = true;
-        private static readonly int[] _subdivisonLevels = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
-        //private static readonly int[] _subdivisonLevels = [20];
+        //private static readonly int[] _subdivisonLevels = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+        private static readonly int[] _subdivisonLevels = [20];
 
         // mesh a and mesh c are duplicates for displaying the geometric devation heatmap
         private static  int _subdivisionsA = 50; // high res
@@ -74,8 +74,8 @@ namespace COMP302
         private static float _inputReductionRate = 0.5f;
         private static float _actualReductionRate;
         private static readonly bool _runAllReductionRates = true;
-        private static readonly float[] _simplificationRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 0.70f, 0.65f, 0.60f, 0.55f, 0.50f, 0.45f, 0.40f, 0.35f, 0.30f, 0.25f, 0.20f, 0.15f, 0.10f, 0.05f];
-        //private static readonly float[] _simplificationRates = [0.5f];
+        //private static readonly float[] _simplificationRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 0.70f, 0.65f, 0.60f, 0.55f, 0.50f, 0.45f, 0.40f, 0.35f, 0.30f, 0.25f, 0.20f, 0.15f, 0.10f, 0.05f];
+        private static readonly float[] _simplificationRates = [0.5f];
 
         private static (int, int, int) CurrentTestKey => (_seed, _subdivisionsA, (int)(_inputReductionRate * 100));
 
@@ -84,8 +84,8 @@ namespace COMP302
         private static readonly bool _enableDevation = true;
         private static readonly bool _normalDevation = false;
         private static readonly bool _parallelDevation = true;
-        private static readonly bool _logDeviations = true;
-        private static readonly bool _logExecutionTime = true;
+        private static readonly bool _logDeviations = false;
+        private static readonly bool _logExecutionTime = false;
         private static readonly bool _testDeviation = false;
 
         private static int[] _seeds = [
@@ -101,7 +101,7 @@ namespace COMP302
             1293553328
         ];
 
-        private static readonly int _planetCount = 10; // set this to 10
+        private static readonly int _planetCount = 1; // set this to 10
         // planet iteration settings (basically, do we look at each tile on a planet
         private static int _tileIterCount = 10;
         private static readonly bool _interAllTiles = true;
@@ -160,8 +160,8 @@ namespace COMP302
 
             Console.WriteLine(string.Format("Completed runs | Elapsed time: {0}", Time.TimeSinceStartUp));
             Console.WriteLine("Press enter key to close");
-            Console.ReadLine();
-            Application.Exit();
+            //Console.ReadLine();
+            //Application.Exit();
         }
 
         private static void ExportExecutionTimeCSV(string outputPath)
@@ -351,13 +351,15 @@ namespace COMP302
             {
                 Console.WriteLine();
                 Console.WriteLine("Calculating Meshes B Deviations (High Res vs Low Res Generation)");
-                DoDevation(0, aMeshes, bMeshes);
+                float maxDev = float.MinValue;
+                maxDev = MathF.Max(DoDevation(0, aMeshes, bMeshes),maxDev);
 
                 GC.Collect();
 
                 Console.WriteLine();
                 Console.WriteLine("Calculating Meshes D Deviations (High Res vs Quadric Simplified)");
-                DoDevation(1, cMeshes, dMeshes);
+                maxDev = MathF.Max(DoDevation(1, cMeshes, dMeshes), maxDev);
+                SetUV_Y(maxDev,aMeshes,bMeshes,cMeshes,dMeshes);
                 GC.Collect();
             }
 
@@ -468,7 +470,7 @@ namespace COMP302
             //return meshDecimation.EstimatedError;
         }
 
-        private static void DoDevation(int method, DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes)
+        private static float DoDevation(int method, DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes)
         {
             if (_interAllTiles)
             {
@@ -482,7 +484,7 @@ namespace COMP302
 
             aMeshes[0].DirectMeshBuffer.ForceCrunchFaceData();
             bMeshes[0].DirectMeshBuffer.ForceCrunchFaceData();
-
+            float maxDev = float.MinValue;
             for (int i = 0; i < _tileIterCount; i++)
             {
                 Span<Vector2> buvs = bMeshes[i].GetVertexDataSpan<Vector2>(VertexAttribute.TexCoord0);
@@ -540,23 +542,15 @@ namespace COMP302
                 meanDevStats.X = MathF.Min(devData.X, meanDevStats.X);
                 meanDevStats.Y = MathF.Max(devData.Y, meanDevStats.Y);
                 meanDevStats.Z += devData.Z;
+
+                maxDev = MathF.Max(devation.DevBound, maxDev);
             }
 
             elevationMeans.Z /= _tileIterCount;
             meanDevStats.Z /= _tileIterCount;
 
             _stopwatch.Stop();
-            //if (_logDeviations)
-            //{
-            //    for (int i = 0; i < _tileIterCount; i++)
-            //    {
-            //        Console.WriteLine(stats[i]);
-            //    }
-            //}
-            aMeshes[0].DirectMeshBuffer.FlushAll();
-            bMeshes[0].DirectMeshBuffer.FlushAll();
-            DirectMeshBuffer.RecalcualteAllNormals(aMeshes[0].DirectMeshBuffer);
-            DirectMeshBuffer.RecalcualteAllNormals(bMeshes[0].DirectMeshBuffer);
+
             Console.WriteLine(string.Format("Devation Calc: {0}ms", _stopwatch.Elapsed.TotalMilliseconds));
 
             if(method == 0)
@@ -574,6 +568,26 @@ namespace COMP302
                 _summaryTestsQuadricSimplification.Add(CurrentTestKey, CreateSummaryCSVRowDev(method, aMeshes, bMeshes, elevationMeans, meanDevStats));
             }
 
+            return maxDev;
+        }
+
+        private static void SetUV_Y(float maxDev,DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes, DirectSubMesh[] cMeshes, DirectSubMesh[] dMeshes)
+        {
+            SetUV_Ys(maxDev, aMeshes[0].DirectMeshBuffer);
+            SetUV_Ys(maxDev, bMeshes[0].DirectMeshBuffer);
+            SetUV_Ys(maxDev, cMeshes[0].DirectMeshBuffer);
+            SetUV_Ys(maxDev, dMeshes[0].DirectMeshBuffer);
+        }
+
+        private static void SetUV_Ys(float maxDev, DirectMeshBuffer directMesh)
+        {
+            var uvs = directMesh.GetFullVertexData<Vector2>(VertexAttribute.TexCoord0);
+            for (int i = 0; i < uvs.Length; i++)
+            {
+                uvs[i].Y = maxDev;
+            }
+            directMesh.FlushAll();
+            DirectMeshBuffer.RecalcualteAllNormals(directMesh);
         }
 
         private static string CreateCSVRowExeTime(int method, DirectSubMesh[] aMeshes, DirectSubMesh[] bMeshes, double executionTime)

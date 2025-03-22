@@ -42,14 +42,14 @@ void main()
 	fragNormalWorld = normalize(mat3(push.normalMatrix) * normal);
 	
 	float lightIntensity = AMBIENT + max(dot(fragNormalWorld, DIRECTION_TO_LIGHT), 0);
-	
+	float dev = (uv.x * 1) / uv.y;
 	fragPosWorld = positionWorld.xyz;
-	fragElevation = uv.x;
-	if (uv.x < 0) fragColour = vec3(0, 0, 0);
-    else if (uv.x < 0.25) fragColour =vec3(0, uv.x * 4.0, 1);
-    else if (uv.x < 0.50) fragColour =vec3(0, 1, 1 - (uv.x - 0.25) * 4.0);
-    else if (uv.x < 0.75) fragColour =vec3((uv.x - 0.5f) * 4.0, 1, 0);
-    else if (uv.x < 1) fragColour =vec3(1, 1.0 - (uv.x - 0.75) * 4.0f, 0);
+	fragElevation = dev;
+	if (dev < 0) fragColour = vec3(0, 0, 0);
+    else if (dev < 0.25) fragColour =vec3(0, dev * 4.0, 1);
+    else if (dev < 0.50) fragColour =vec3(0, 1, 1 - (dev - 0.25) * 4.0);
+    else if (dev < 0.75) fragColour =vec3((dev - 0.5f) * 4.0, 1, 0);
+    else if (dev < 1) fragColour =vec3(1, 1.0 - (dev - 0.75) * 4.0f, 0);
     else fragColour =vec3(1, 0, 0);
 
 	fragColour = fragColour * lightIntensity;
