@@ -1,25 +1,24 @@
-[1] "Overall T Test"
+[1] "Overall_T-Test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 44.686, df = 606423, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.051545e-05 7.698498e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0004043668    0.0003306166 
 
-[1] "Overall Cohen's D"
-# A tibble: 1 x 7
+[1] "Overall_Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize     n1     n2 magnitude 
 * <chr>    <chr>  <chr>    <dbl>  <int>  <int> <ord>     
 1 Mean_Dev 0      1        0.178 307800 307800 negligible
 [1] ""
 [1] ""
-[1] "Linear Model"
+[1] "Linear_Model"
 
 Call:
 lm(formula = Mean_Dev ~ Algorithm + Src_SubDiv + Input_Reduction, 
@@ -36,14 +35,13 @@ Algorithm1      -7.375e-05  1.293e-06  -57.02   <2e-16 ***
 Src_SubDiv      -1.932e-05  4.503e-08 -429.07   <2e-16 ***
 Input_Reduction -1.063e-05  2.361e-08 -450.10   <2e-16 ***
 ---
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 0.0005074 on 615596 degrees of freedom
 Multiple R-squared:  0.3878,	Adjusted R-squared:  0.3878 
 F-statistic: 1.3e+05 on 3 and 615596 DF,  p-value: < 2.2e-16
 
-[1] "Pratt analysis of Linear Model - product of the standardized coefficient
-	and the correlation"
+[1] "Pratt_analysis_of_Linear_Model\n-product_of_the_standardized_coefficient_and_the_correlation"
 Response variable: Mean_Dev 
 Total response variance: 4.205635e-07 
 Analysis based on 615600 observations 
@@ -61,4182 +59,3994 @@ Src_SubDiv      0.472128750
 Input_Reduction 0.519533776
 [1] ""
 [1] ""
-[1] "Per expirment T tests"
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 95"
+[1] "Per_expirment_T-tests"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 95"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = NaN, df = NaN, p-value = NA
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  NaN NaN
 sample estimates:
 mean in group 0 mean in group 1 
               0               0 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1          NaN  1620  1620 <NA>     
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 90"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 90"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = NaN, df = NaN, p-value = NA
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  NaN NaN
 sample estimates:
 mean in group 0 mean in group 1 
               0               0 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1          NaN  1620  1620 <NA>     
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 85"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 85"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = NaN, df = NaN, p-value = NA
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  NaN NaN
 sample estimates:
 mean in group 0 mean in group 1 
               0               0 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1          NaN  1620  1620 <NA>     
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 80"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 80"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 52.123, df = 2008.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0006513130 0.0007022406
 sample estimates:
 mean in group 0 mean in group 1 
    0.0010306709    0.0003538941 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.94  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 75"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 75"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 52.123, df = 2008.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0006513130 0.0007022406
 sample estimates:
 mean in group 0 mean in group 1 
    0.0010306709    0.0003538941 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.94  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 70"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 70"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 52.123, df = 2008.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0006513130 0.0007022406
 sample estimates:
 mean in group 0 mean in group 1 
    0.0010306709    0.0003538941 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.94  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 65"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 65"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 52.123, df = 2008.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0006513130 0.0007022406
 sample estimates:
 mean in group 0 mean in group 1 
    0.0010306709    0.0003538941 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.94  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 60"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 60"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 52.123, df = 2008.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0006513130 0.0007022406
 sample estimates:
 mean in group 0 mean in group 1 
    0.0010306709    0.0003538941 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.94  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 55"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 55"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 18.307, df = 2858, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0003003355 0.0003723899
 sample estimates:
 mean in group 0 mean in group 1 
    0.0012883818    0.0009520191 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
 1 Mean_Dev 0      1         1.17  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 50"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 50"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 18.307, df = 2858, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0003003355 0.0003723899
 sample estimates:
 mean in group 0 mean in group 1 
    0.0012883818    0.0009520191 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
 1 Mean_Dev 0      1         1.17  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 45"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 45"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 18.307, df = 2858, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0003003355 0.0003723899
 sample estimates:
 mean in group 0 mean in group 1 
    0.0012883818    0.0009520191 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
 1 Mean_Dev 0      1         1.17  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 40"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 40"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 18.307, df = 2858, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0003003355 0.0003723899
 sample estimates:
 mean in group 0 mean in group 1 
    0.0012883818    0.0009520191 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
 1 Mean_Dev 0      1         1.17  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 35"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 35"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 18.307, df = 2858, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0003003355 0.0003723899
 sample estimates:
 mean in group 0 mean in group 1 
    0.0012883818    0.0009520191 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
 1 Mean_Dev 0      1         1.17  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 30"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 30"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -9.1065, df = 2910.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0003536350 -0.0002283286
 sample estimates:
 mean in group 0 mean in group 1 
     0.001584331     0.001875312 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1       -0.433  1620  1620 small    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 25"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 25"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -9.1065, df = 2910.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0003536350 -0.0002283286
 sample estimates:
 mean in group 0 mean in group 1 
     0.001584331     0.001875312 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1       -0.433  1620  1620 small    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 20"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 20"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -9.1065, df = 2910.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0003536350 -0.0002283286
 sample estimates:
 mean in group 0 mean in group 1 
     0.001584331     0.001875312 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1       -0.433  1620  1620 small    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 15"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 15"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 18.772, df = 3128.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0007117270 0.0008777477
 sample estimates:
 mean in group 0 mean in group 1 
     0.002715084     0.001920347 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        0.921  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 10"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 10"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 18.772, df = 3128.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0007117270 0.0008777477
 sample estimates:
 mean in group 0 mean in group 1 
     0.002715084     0.001920347 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        0.921  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 5, InputReductions: , 5"
+[1] "Expirment-SubDivisions:_, 5, InputReductions:_, 5"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 18.772, df = 3128.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0007117270 0.0008777477
 sample estimates:
 mean in group 0 mean in group 1 
     0.002715084     0.001920347 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        0.921  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 95"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 95"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = NaN, df = NaN, p-value = NA
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  NaN NaN
 sample estimates:
 mean in group 0 mean in group 1 
               0               0 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1          NaN  1620  1620 <NA>     
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 90"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 90"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 69.4, df = 1676.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0003813052 0.0004034849
 sample estimates:
 mean in group 0 mean in group 1 
    4.453223e-04    5.292723e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.99  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 85"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 85"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 69.4, df = 1676.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0003813052 0.0004034849
 sample estimates:
 mean in group 0 mean in group 1 
    4.453223e-04    5.292723e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.99  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 80"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 80"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 69.4, df = 1676.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0003813052 0.0004034849
 sample estimates:
 mean in group 0 mean in group 1 
    4.453223e-04    5.292723e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.99  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 75"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 75"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 69.4, df = 1676.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0003813052 0.0004034849
 sample estimates:
 mean in group 0 mean in group 1 
    4.453223e-04    5.292723e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.99  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 70"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 70"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 55.405, df = 1902.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0003541370 0.0003801285
 sample estimates:
 mean in group 0 mean in group 1 
    0.0005132718    0.0001461391 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         2.00  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 65"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 65"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 55.405, df = 1902.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0003541370 0.0003801285
 sample estimates:
 mean in group 0 mean in group 1 
    0.0005132718    0.0001461391 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         2.00  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 60"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 60"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 55.405, df = 1902.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0003541370 0.0003801285
 sample estimates:
 mean in group 0 mean in group 1 
    0.0005132718    0.0001461391 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         2.00  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 55"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 55"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 39.85, df = 2286.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0003062190 0.0003379169
 sample estimates:
 mean in group 0 mean in group 1 
    0.0006002921    0.0002782242 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.93  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 50"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 50"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 39.85, df = 2286.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0003062190 0.0003379169
 sample estimates:
 mean in group 0 mean in group 1 
    0.0006002921    0.0002782242 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.93  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 45"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 45"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 27.661, df = 2608.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0002567331 0.0002959091
 sample estimates:
 mean in group 0 mean in group 1 
    0.0007167312    0.0004404101 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.73  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 40"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 40"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 27.661, df = 2608.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0002567331 0.0002959091
 sample estimates:
 mean in group 0 mean in group 1 
    0.0007167312    0.0004404101 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.73  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 35"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 35"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 15.468, df = 2941.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001734676 0.0002238320
 sample estimates:
 mean in group 0 mean in group 1 
    0.0008726275    0.0006739777 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.21  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 30"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 30"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 15.468, df = 2941.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001734676 0.0002238320
 sample estimates:
 mean in group 0 mean in group 1 
    0.0008726275    0.0006739777 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.21  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 25"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 25"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -8.5639, df = 3067.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0002196613 -0.0001378157
 sample estimates:
 mean in group 0 mean in group 1 
     0.001093595     0.001272333 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1       -0.475  1620  1620 small    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 20"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 20"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -8.5639, df = 3067.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0002196613 -0.0001378157
 sample estimates:
 mean in group 0 mean in group 1 
     0.001093595     0.001272333 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1       -0.475  1620  1620 small    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 15"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 15"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -22.139, df = 2605.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0008035827 -0.0006728169
 sample estimates:
 mean in group 0 mean in group 1 
     0.001435197     0.002173397 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        -1.02  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 10"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 10"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -5.7936, df = 3064.2, p-value = 7.59e-09
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0002890740 -0.0001428845
 sample estimates:
 mean in group 0 mean in group 1 
     0.001991953     0.002207933 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1       -0.315  1620  1620 small    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 10, InputReductions: , 5"
+[1] "Expirment-SubDivisions:_, 10, InputReductions:_, 5"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 17.65, df = 3101.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0007321872 0.0009151913
 sample estimates:
 mean in group 0 mean in group 1 
     0.003031622     0.002207933 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        0.957  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 95"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 95"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = NaN, df = NaN, p-value = NA
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  NaN NaN
 sample estimates:
 mean in group 0 mean in group 1 
               0               0 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1          NaN  1620  1620 <NA>     
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 90"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 90"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 69.974, df = 1637.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0002363301 0.0002499612
 sample estimates:
 mean in group 0 mean in group 1 
    2.593798e-04    1.623414e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.87  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 85"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 85"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 69.974, df = 1637.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0002363301 0.0002499612
 sample estimates:
 mean in group 0 mean in group 1 
    2.593798e-04    1.623414e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.87  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 80"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 80"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 62.901, df = 1718.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0002323591 0.0002473162
 sample estimates:
 mean in group 0 mean in group 1 
    2.851343e-04    4.529669e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.91  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 75"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 75"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 62.901, df = 1718.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0002323591 0.0002473162
 sample estimates:
 mean in group 0 mean in group 1 
    2.851343e-04    4.529669e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.91  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 70"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 70"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 54.686, df = 1865, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0002257615 0.0002425570
 sample estimates:
 mean in group 0 mean in group 1 
    3.173504e-04    8.319113e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.92  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 65"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 65"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 54.686, df = 1865, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0002257615 0.0002425570
 sample estimates:
 mean in group 0 mean in group 1 
    3.173504e-04    8.319113e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.92  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 60"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 60"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 45.796, df = 2081.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0002093820 0.0002281168
 sample estimates:
 mean in group 0 mean in group 1 
    0.0003469820    0.0001282325 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.93  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 55"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 55"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 45.796, df = 2081.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0002093820 0.0002281168
 sample estimates:
 mean in group 0 mean in group 1 
    0.0003469820    0.0001282325 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.93  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 50"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 50"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 38.838, df = 2294.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0002056494 0.0002275210
 sample estimates:
 mean in group 0 mean in group 1 
    0.0003988991    0.0001823139 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.94  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 45"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 45"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 38.838, df = 2294.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0002056494 0.0002275210
 sample estimates:
 mean in group 0 mean in group 1 
    0.0003988991    0.0001823139 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.94  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 40"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 40"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 31.64, df = 2505.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001920876 0.0002174706
 sample estimates:
 mean in group 0 mean in group 1 
    0.0004529968    0.0002482177 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.88  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 35"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 35"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 25.805, df = 2684.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001806577 0.0002103703
 sample estimates:
 mean in group 0 mean in group 1 
    0.0005232477    0.0003277337 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.81  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 30"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 30"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 25.805, df = 2684.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001806577 0.0002103703
 sample estimates:
 mean in group 0 mean in group 1 
    0.0005232477    0.0003277337 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.81  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 25"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 25"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 10.65, df = 3095.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.125046e-05 1.034072e-04
 sample estimates:
 mean in group 0 mean in group 1 
    0.0005219540    0.0004346252 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.20  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 20"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 20"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 9.2946, df = 3153.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0000844805 0.0001296525
 sample estimates:
 mean in group 0 mean in group 1 
    0.0007303249    0.0006232584 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        0.836  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 15"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 15"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -14.392, df = 2759.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0003204206 -0.0002435808
 sample estimates:
 mean in group 0 mean in group 1 
    0.0008868073    0.0011688080 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1       -0.658  1620  1620 moderate 
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 10"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 10"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -33.622, df = 2305.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0010972088 -0.0009762734
 sample estimates:
 mean in group 0 mean in group 1 
     0.001114472     0.002151213 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        -1.39  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 15, InputReductions: , 5"
+[1] "Expirment-SubDivisions:_, 15, InputReductions:_, 5"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -24.519, df = 2608.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0008828693 -0.0007521134
 sample estimates:
 mean in group 0 mean in group 1 
     0.001432011     0.002249502 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        -1.16  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 95"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 95"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 68.494, df = 1627.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001613927 0.0001709085
 sample estimates:
 mean in group 0 mean in group 1 
    1.732335e-04    7.082915e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.79  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 90"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 90"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 68.494, df = 1627.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001613927 0.0001709085
 sample estimates:
 mean in group 0 mean in group 1 
    1.732335e-04    7.082915e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.79  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 85"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 85"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 64.333, df = 1665.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001623554 0.0001725665
 sample estimates:
 mean in group 0 mean in group 1 
    1.870274e-04    1.956648e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.82  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 80"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 80"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 64.333, df = 1665.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001623554 0.0001725665
 sample estimates:
 mean in group 0 mean in group 1 
    1.870274e-04    1.956648e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.82  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 75"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 75"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 58.999, df = 1744.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001595303 0.0001705017
 sample estimates:
 mean in group 0 mean in group 1 
    2.010721e-04    3.605613e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.85  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 70"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 70"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 58.999, df = 1744.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001595303 0.0001705017
 sample estimates:
 mean in group 0 mean in group 1 
    2.010721e-04    3.605613e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.85  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 65"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 65"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 53.111, df = 1855.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001574440 0.0001695178
 sample estimates:
 mean in group 0 mean in group 1 
    2.193350e-04    5.585412e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.86  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 60"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 60"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 47.267, df = 1995.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001535562 0.0001668503
 sample estimates:
 mean in group 0 mean in group 1 
    2.387600e-04    7.855679e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.87  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 55"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 55"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 47.267, df = 1995.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001535562 0.0001668503
 sample estimates:
 mean in group 0 mean in group 1 
    2.387600e-04    7.855679e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.87  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 50"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 50"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 41.627, df = 2157.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001488997 0.0001636228
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002607849    0.0001045236 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.88  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 45"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 45"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 34.74, df = 2378.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001330211 0.0001489368
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002755079    0.0001345289 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.88  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 40"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 40"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 32.048, df = 2476.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001419263 0.0001604262
 sample estimates:
 mean in group 0 mean in group 1 
    0.0003201120    0.0001689357 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.89  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 35"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 35"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 27.789, df = 2624.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001368182 0.0001575930
 sample estimates:
 mean in group 0 mean in group 1 
    0.0003560960    0.0002088903 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.87  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 30"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 30"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 24.144, df = 2741, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001338187 0.0001574756
 sample estimates:
 mean in group 0 mean in group 1 
    0.0004025280    0.0002568809 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.83  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 25"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 25"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 20.017, df = 2869.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001259532 0.0001533084
 sample estimates:
 mean in group 0 mean in group 1 
    0.0004586753    0.0003190445 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.71  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 20"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 20"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 14.046, df = 3046.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  9.927217e-05 1.314846e-04
 sample estimates:
 mean in group 0 mean in group 1 
    0.0005259455    0.0004105671 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.37  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 15"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 15"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 3.1506, df = 3236.9, p-value = 0.001644
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  1.255542e-05 5.393358e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0006174299    0.0005841854 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        0.254  1620  1620 small    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 10"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 10"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -20.222, df = 2400, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0004167771 -0.0003430909
 sample estimates:
 mean in group 0 mean in group 1 
    0.0007042237    0.0010841577 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1       -0.776  1620  1620 moderate 
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 20, InputReductions: , 5"
+[1] "Expirment-SubDivisions:_, 20, InputReductions:_, 5"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -36.878, df = 2224.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.001280460 -0.001151155
 sample estimates:
 mean in group 0 mean in group 1 
     0.001125356     0.002341164 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        -1.47  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 95"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 95"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 67.023, df = 1623.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001182953 0.0001254279
 sample estimates:
 mean in group 0 mean in group 1 
    1.255642e-04    3.702640e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.72  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 90"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 90"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 67.023, df = 1623.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001182953 0.0001254279
 sample estimates:
 mean in group 0 mean in group 1 
    1.255642e-04    3.702640e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.72  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 85"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 85"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 64.264, df = 1644.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001195150 0.0001270401
 sample estimates:
 mean in group 0 mean in group 1 
    1.333826e-04    1.010504e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.75  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 80"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 80"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 60.573, df = 1688.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001194658 0.0001274614
 sample estimates:
 mean in group 0 mean in group 1 
    1.419445e-04    1.848088e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.77  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 75"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 75"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 60.573, df = 1688.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001194658 0.0001274614
 sample estimates:
 mean in group 0 mean in group 1 
    1.419445e-04    1.848088e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.77  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 70"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 70"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 56.304, df = 1755.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001187579 0.0001273303
 sample estimates:
 mean in group 0 mean in group 1 
    1.515825e-04    2.853841e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.78  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 65"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 65"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 51.897, df = 1845.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001174035 0.0001266256
 sample estimates:
 mean in group 0 mean in group 1 
    0.0001622036    0.0000401891 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.80  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 60"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 60"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 47.46, df = 1952.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001157533 0.0001257321
 sample estimates:
 mean in group 0 mean in group 1 
    1.740623e-04    5.331964e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.81  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 55"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 55"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 43.352, df = 2069.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001147106 0.0001255806
 sample estimates:
 mean in group 0 mean in group 1 
    1.880433e-04    6.789763e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.82  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 50"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 50"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 39.464, df = 2196.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001130106 0.0001248295
 sample estimates:
 mean in group 0 mean in group 1 
    2.028897e-04    8.396965e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.84  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 45"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 45"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 35.899, df = 2316.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001121408 0.0001251001
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002205601    0.0001019396 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.85  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 40"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 40"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 32.518, df = 2430.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001109530 0.0001251932
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002400398    0.0001219667 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.85  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 35"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 35"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 29.691, df = 2534.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001111790 0.0001269027
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002635663    0.0001445255 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.86  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 30"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 30"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 26.924, df = 2633.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001107399 0.0001281370
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002900068    0.0001705684 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.85  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 25"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 25"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 16.76, df = 2964.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.605732e-05 8.356086e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002761323    0.0002013232 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.74  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 20"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 20"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 21.582, df = 2831.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  0.0001088735 0.0001306335
 sample estimates:
 mean in group 0 mean in group 1 
    0.0003594467    0.0002396932 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.81  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 15"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 15"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 12.536, df = 3095, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.837642e-05 1.074388e-04
 sample estimates:
 mean in group 0 mean in group 1 
    0.0004609562    0.0003680486 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.29  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 10"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 10"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -16.603, df = 2482, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0002973226 -0.0002345103
 sample estimates:
 mean in group 0 mean in group 1 
    0.0006209423    0.0008868587 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1       -0.644  1620  1620 moderate 
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 25, InputReductions: , 5"
+[1] "Expirment-SubDivisions:_, 25, InputReductions:_, 5"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -43.947, df = 2042.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.001444195 -0.001320808
 sample estimates:
 mean in group 0 mean in group 1 
    0.0009028478    0.0022853492 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        -1.59  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 95"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 95"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 65.648, df = 1621.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  9.114196e-05 9.675593e-05
 sample estimates:
 mean in group 0 mean in group 1 
    9.612528e-05    2.176335e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.68  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 90"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 90"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 63.732, df = 1634.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  9.232781e-05 9.819125e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.011762e-04    5.916629e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.70  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 85"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 85"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 63.732, df = 1634.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  9.232781e-05 9.819125e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.011762e-04    5.916629e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.70  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 80"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 80"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 60.926, df = 1661.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  9.269463e-05 9.886141e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.065357e-04    1.075765e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.71  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 75"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 75"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 57.7, df = 1704.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  9.268410e-05 9.920697e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.125178e-04    1.657225e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.72  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 70"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 70"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 54.261, df = 1764.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  9.226065e-05 9.918051e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.189886e-04    2.326806e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.73  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 65"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 65"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 50.79, df = 1839.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  9.161122e-05 9.897049e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.261006e-04    3.080977e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.75  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 60"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 60"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 47.298, df = 1924.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  9.096440e-05 9.883428e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.340449e-04    3.914553e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.76  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 55"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 55"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 43.898, df = 2019.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  9.008283e-05 9.850803e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.425660e-04    4.827052e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.77  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 50"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 50"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 40.714, df = 2117.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  8.945523e-05 9.850902e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.522036e-04    5.822145e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.78  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 45"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 45"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 37.673, df = 2215.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  8.893382e-05 9.870104e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.628537e-04    6.903628e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.79  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 40"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 40"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 34.981, df = 2309.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  8.886214e-05 9.941696e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0001749659    0.0000808263 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.80  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 35"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 35"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 30.296, df = 2487, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  8.954116e-05 1.019345e-04
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002038215    0.0001080837 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.82  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 30"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 30"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 28.304, df = 2564.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  9.074477e-05 1.042544e-04
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002214947    0.0001239952 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.83  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 25"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 25"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 24.46, df = 2713.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  9.322116e-05 1.094700e-04
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002645309    0.0001631853 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.83  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 20"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 20"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 22.397, df = 2794.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  9.364619e-05 1.116169e-04
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002914321    0.0001888006 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.82  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 15"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 15"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 16.475, df = 3000.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  8.396333e-05 1.066485e-04
 sample estimates:
 mean in group 0 mean in group 1 
    0.0003611968    0.0002658909 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.66  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 10"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 10"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 2.696, df = 3238, p-value = 0.007053
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.030060e-06 3.818701e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0004632778    0.0004411693 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        0.234  1620  1620 small    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 30, InputReductions: , 5"
+[1] "Expirment-SubDivisions:_, 30, InputReductions:_, 5"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -48.09, df = 1897, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.001591215 -0.001466513
 sample estimates:
 mean in group 0 mean in group 1 
    0.0007449639    0.0022738279 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        -1.59  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 95"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 95"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 64.548, df = 1620.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.273522e-05 7.729418e-05
 sample estimates:
 mean in group 0 mean in group 1 
    7.640508e-05    1.390382e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.64  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 90"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 90"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 63.117, df = 1629.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.368889e-05 7.841572e-05
 sample estimates:
 mean in group 0 mean in group 1 
    7.981561e-05    3.763300e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.66  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 85"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 85"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 60.946, df = 1647.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.414583e-05 7.907695e-05
 sample estimates:
 mean in group 0 mean in group 1 
    8.343763e-05    6.826233e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.67  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 80"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 80"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 58.362, df = 1677, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.421306e-05 7.937472e-05
 sample estimates:
 mean in group 0 mean in group 1 
    8.726801e-05    1.047412e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.68  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 75"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 75"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 55.658, df = 1718.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.426757e-05 7.969302e-05
 sample estimates:
 mean in group 0 mean in group 1 
    9.163545e-05    1.465515e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.69  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 70"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 70"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 52.618, df = 1772.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.364578e-05 7.934855e-05
 sample estimates:
 mean in group 0 mean in group 1 
    9.585283e-05    1.935567e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.70  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 65"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 65"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 49.84, df = 1833.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.391066e-05 7.996582e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.014751e-04    2.453684e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.71  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 60"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 60"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 46.84, df = 1907.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.313882e-05 7.953118e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.065422e-04    3.020725e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.72  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 55"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 55"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 43.555, df = 1996.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.102881e-05 7.772676e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0001107274    0.0000363496 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.72  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 50"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 50"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 38.836, df = 2145.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.254855e-05 8.026511e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.264756e-04    5.006875e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.74  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 45"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 45"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 34.908, df = 2274.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.692469e-05 7.489153e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.285836e-04    5.767551e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.74  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 40"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 40"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 34.285, df = 2306.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.257454e-05 8.138025e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.428816e-04    6.590422e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.76  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 35"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 35"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 30.527, df = 2447.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.377085e-05 8.389879e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.631988e-04    8.436395e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.77  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 30"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 30"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 28.884, df = 2512.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.479361e-05 8.568866e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.750731e-04    9.483197e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.78  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 25"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 25"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 19.314, df = 2863.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.069850e-05 6.215574e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0001757588    0.0001193317 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.77  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 20"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 20"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 23.347, df = 2746.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  8.226710e-05 9.735248e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002415388    0.0001517290 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.82  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 15"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 15"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 19.431, df = 2902.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  8.203528e-05 1.004501e-04
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002921290    0.0002008863 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.79  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 10"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 10"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 4.7922, df = 3231.1, p-value = 1.724e-06
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  2.020581e-05 4.818886e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0004078398    0.0003736425 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        0.478  1620  1620 small    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 35, InputReductions: , 5"
+[1] "Expirment-SubDivisions:_, 35, InputReductions:_, 5"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -44.428, df = 1936.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.001178193 -0.001078572
 sample estimates:
 mean in group 0 mean in group 1 
    0.0006244596    0.0017528424 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        -1.46  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 95"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 95"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 63.675, df = 1620.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.965078e-05 6.344254e-05
 sample estimates:
 mean in group 0 mean in group 1 
    6.249341e-05    9.467506e-07 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.61  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 90"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 90"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 62.582, df = 1626.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.042236e-05 6.433241e-05
 sample estimates:
 mean in group 0 mean in group 1 
    6.493096e-05    2.553573e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.63  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 85"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 85"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 60.8, df = 1639.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.093108e-05 6.499343e-05
 sample estimates:
 mean in group 0 mean in group 1 
    6.757627e-05    4.614017e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.64  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 80"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 80"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 58.62, df = 1659.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.123057e-05 6.546988e-05
 sample estimates:
 mean in group 0 mean in group 1 
    7.040951e-05    7.059287e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.64  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 75"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 75"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 56.391, df = 1690.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.122981e-05 6.564265e-05
 sample estimates:
 mean in group 0 mean in group 1 
    7.330111e-05    9.864888e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.65  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 70"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 70"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 51.532, df = 1776.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.119100e-05 6.603317e-05
 sample estimates:
 mean in group 0 mean in group 1 
    8.007300e-05    1.646091e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.67  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 65"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 65"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 48.987, df = 1832.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.090143e-05 6.598135e-05
 sample estimates:
 mean in group 0 mean in group 1 
    8.367010e-05    2.022871e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.68  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 60"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 60"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 46.478, df = 1895.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.066188e-05 6.600693e-05
 sample estimates:
 mean in group 0 mean in group 1 
    8.763660e-05    2.430219e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.69  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 55"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 55"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 41.604, df = 2030.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.029020e-05 6.625527e-05
 sample estimates:
 mean in group 0 mean in group 1 
    9.662083e-05    3.334810e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.70  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 50"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 50"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 39.402, df = 2099.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.023289e-05 6.654265e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.017022e-04    3.831441e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.70  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 45"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 45"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 35.346, df = 2240.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.030143e-05 6.738566e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.131194e-04    4.927585e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.72  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 40"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 40"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 33.526, df = 2307.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.055674e-05 6.808101e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.196306e-04    5.531175e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.72  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 35"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 35"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 30.444, df = 2426.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.17928e-05 7.03013e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.347013e-04    6.865423e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.74  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 30"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 30"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 27.89, df = 2531.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.396546e-05 7.364027e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.529848e-04    8.418195e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.75  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 25"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 25"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 25.806, df = 2618.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.768375e-05 7.881547e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0001758771    0.0001026275 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.77  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 20"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 20"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 23.79, df = 2717.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.201966e-05 8.495850e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002049054    0.0001264163 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.80  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 15"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 15"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 20.945, df = 2840.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  7.456687e-05 8.997026e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002425204    0.0001602518 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.81  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 10"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 10"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 11.94, df = 3125.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.462197e-05 7.608676e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0003248965    0.0002595422 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.34  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 40, InputReductions: , 5"
+[1] "Expirment-SubDivisions:_, 40, InputReductions:_, 5"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -37.814, df = 1857.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0010038862 -0.0009048856
 sample estimates:
 mean in group 0 mean in group 1 
    0.0005361634    0.0014905493 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1        -1.14  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 95"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 95"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 62.916, df = 1619.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.992118e-05 5.313397e-05
 sample estimates:
 mean in group 0 mean in group 1 
    5.219999e-05    6.724107e-07 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.59  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 90"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 90"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 62.019, df = 1624.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.055840e-05 5.386078e-05
 sample estimates:
 mean in group 0 mean in group 1 
    5.402149e-05    1.811898e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.60  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 85"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 85"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 58.726, df = 1649.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.128045e-05 5.482429e-05
 sample estimates:
 mean in group 0 mean in group 1 
    5.804645e-05    4.994081e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.61  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 80"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 80"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 56.836, df = 1672.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.139253e-05 5.506637e-05
 sample estimates:
 mean in group 0 mean in group 1 
    6.019813e-05    6.968675e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.62  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 75"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 75"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 54.752, df = 1701.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.149623e-05 5.532273e-05
 sample estimates:
 mean in group 0 mean in group 1 
    6.257991e-05    9.170425e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.63  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 70"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 70"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 50.448, df = 1782.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.136676e-05 5.552239e-05
 sample estimates:
 mean in group 0 mean in group 1 
    6.765555e-05    1.421097e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.64  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 65"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 65"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 48.202, df = 1831.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.126289e-05 5.561142e-05
 sample estimates:
 mean in group 0 mean in group 1 
    7.048629e-05    1.704914e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.65  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 60"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 60"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 45.948, df = 1886.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.105653e-05 5.560944e-05
 sample estimates:
 mean in group 0 mean in group 1 
    7.343566e-05    2.010267e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.65  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 55"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 55"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 41.724, df = 2005.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.084960e-05 5.586546e-05
 sample estimates:
 mean in group 0 mean in group 1 
    8.014605e-05    2.678852e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.67  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 50"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 50"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 39.744, df = 2069.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.072025e-05 5.598550e-05
 sample estimates:
 mean in group 0 mean in group 1 
    8.379520e-05    3.044233e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.67  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 45"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 45"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 36.041, df = 2195.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.073714e-05 5.657616e-05
 sample estimates:
 mean in group 0 mean in group 1 
    9.203840e-05    3.838175e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.69  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 40"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 40"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 32.863, df = 2309.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.131009e-05 5.782217e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.018540e-04    4.728786e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.69  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 35"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 35"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 30.185, df = 2415.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.233420e-05 5.960631e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.132370e-04    5.726673e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.71  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 30"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 30"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 28.049, df = 2502.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.433364e-05 6.250175e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.269808e-04    6.856312e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.72  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 25"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 25"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 19.785, df = 2809.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  3.775128e-05 4.605734e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.235777e-04    8.167336e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.69  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 20"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 20"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 24.764, df = 2649.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.112942e-05 7.164243e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.640179e-04    9.763196e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.75  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 15"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 15"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 21.977, df = 2789.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.702063e-05 8.015153e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002052194    0.0001316333 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.80  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 10"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 10"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 16.307, df = 3008.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  6.357945e-05 8.095832e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002663678    0.0001940989 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.69  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 45, InputReductions: , 5"
+[1] "Expirment-SubDivisions:_, 45, InputReductions:_, 5"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -28.753, df = 1884.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0006497556 -0.0005667775
 sample estimates:
 mean in group 0 mean in group 1 
    0.0004662774    0.0010745439 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1       -0.865  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 95"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 95"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 62.414, df = 1619.7, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.244568e-05 4.520005e-05
 sample estimates:
 mean in group 0 mean in group 1 
    4.431964e-05    4.967724e-07 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.57  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 90"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 90"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 60.3, df = 1630.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.339079e-05 4.630853e-05
 sample estimates:
 mean in group 0 mean in group 1 
    4.725717e-05    2.407512e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.59  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 85"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 85"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 58.768, df = 1642.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.367389e-05 4.668982e-05
 sample estimates:
 mean in group 0 mean in group 1 
    4.885468e-05    3.672825e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.59  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 80"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 80"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 57.125, df = 1660.1, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.381546e-05 4.693128e-05
 sample estimates:
 mean in group 0 mean in group 1 
    5.048872e-05    5.115351e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.60  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 75"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 75"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 53.461, df = 1712.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.398427e-05 4.733455e-05
 sample estimates:
 mean in group 0 mean in group 1 
    5.414029e-05    8.480878e-06 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.61  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 70"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 70"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 51.556, df = 1748, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.390802e-05 4.738090e-05
 sample estimates:
 mean in group 0 mean in group 1 
    5.603709e-05    1.039263e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.62  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 65"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 65"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 47.512, df = 1833.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.376927e-05 4.753839e-05
 sample estimates:
 mean in group 0 mean in group 1 
    6.031207e-05    1.465824e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.63  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 60"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 60"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 45.536, df = 1881.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.370691e-05 4.764130e-05
 sample estimates:
 mean in group 0 mean in group 1 
    6.268117e-05    1.700706e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.63  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 55"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 55"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 41.723, df = 1989.6, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.350145e-05 4.779264e-05
 sample estimates:
 mean in group 0 mean in group 1 
    6.777240e-05    2.212536e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.64  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 50"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 50"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 38.158, df = 2102.4, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.339343e-05 4.809536e-05
 sample estimates:
 mean in group 0 mean in group 1 
    7.355940e-05    2.781501e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.65  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 45"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 45"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 33.562, df = 2258.2, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.034194e-05 4.534882e-05
 sample estimates:
 mean in group 0 mean in group 1 
    7.695886e-05    3.411348e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.65  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 40"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 40"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 32.204, df = 2319.3, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.396115e-05 4.966220e-05
 sample estimates:
 mean in group 0 mean in group 1 
    8.789193e-05    4.108026e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.67  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 35"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 35"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 29.84, df = 2407.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.492203e-05 5.124151e-05
 sample estimates:
 mean in group 0 mean in group 1 
    9.690040e-05    4.881863e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.68  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 30"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 30"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 27.874, df = 2488.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  4.631988e-05 5.333031e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.073370e-04    5.751194e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.69  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 25"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 25"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 25.685, df = 2584.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.012115e-05 5.840642e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.271459e-04    7.288215e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.70  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 20"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 20"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 24.422, df = 2646.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.345498e-05 6.278823e-05
 sample estimates:
 mean in group 0 mean in group 1 
    1.436807e-04    8.555912e-05 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.72  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 15"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 15"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 22.345, df = 2753.5, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.936091e-05 7.078109e-05
 sample estimates:
 mean in group 0 mean in group 1 
     0.000176386     0.000111315 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.76  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 10"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 10"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = 16.116, df = 3008.8, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  5.790426e-05 7.394561e-05
 sample estimates:
 mean in group 0 mean in group 1 
    0.0002432806    0.0001773557 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1         1.68  1620  1620 large    
 [1] ""
 [1] ""
-[1] "Expirment - SubDivisions: , 50, InputReductions: , 5"
+[1] "Expirment-SubDivisions:_, 50, InputReductions:_, 5"
 [1] "t-test"
 
 	Welch Two Sample t-test
 
 data:  Mean_Dev by Algorithm
 t = -24.425, df = 1963.9, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group 0 and group 1 
- is not equal to 0
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 95 percent confidence interval:
  -0.0004391330 -0.0003738541
 sample estimates:
 mean in group 0 mean in group 1 
    0.0004099881    0.0008164817 
 
-[1] "Cohen's D"
-# A tibble: 1 x 7
+[1] "Cohen's_D"
+# A tibble: 1 × 7
   .y.      group1 group2 effsize    n1    n2 magnitude
 * <chr>    <chr>  <chr>    <dbl> <int> <int> <ord>    
-1 Mean_Dev 0      1         1.17  1620  1620 large    
+1 Mean_Dev 0      1       -0.756  1620  1620 moderate 
+[1] ""
+[1] ""
