@@ -152,8 +152,8 @@ for(s in 1:10)
                             ], Paired=TRUE)
 		
 		cohens_d <-combined_Set[
-                            combined_Set$Src_SubDiv == subDivisions[1]
-                            & combined_Set$Input_Reduction == inputReductions[10],
+                            combined_Set$Src_SubDiv == subDivisions[s]
+                            & combined_Set$Input_Reduction == inputReductions[i],
                             ] %>% cohens_d(Mean_Dev~Algorithm, paired=TRUE)
 		
 		statistics[[counter]] <- statistic
