@@ -18,7 +18,7 @@ namespace COMP302
     public static class Authoring
     {
         // data collection
-        private const string RESULTS_OUTPUT_PATH = "Results/Test-13";
+        private static string _resultOutputPath = "Results/Test-13";
         private static readonly string[] _csvHeaderDev = ["Seed, Tile_ID, Algorithm, Src_SubDiv, Input_Reduction, Vert_Count, Tri_Count, Vert_Reduction, Tri_Reduction, Min_Elev, Max_Elev, Mean_Elev, Min_Dev, Max_Dev, Mean_Dev"];
         private static readonly string[] _csvHeaderExeTime = ["Seed, Tile_ID, Algorithm, Src_SubDiv, Input_Reduction, Vert_Count, Tri_Count, Vert_Reduction, Tri_Reduction, Execution_Time"];
 
@@ -56,8 +56,8 @@ namespace COMP302
 
         // start mesh subdivisions.
         private static readonly bool _runAllSubdivisions = true;
-        //private static readonly int[] _subdivisonLevels = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
-        private static readonly int[] _subdivisonLevels = [20];
+        private static int[] _subdivisonLevels = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+        //private static readonly int[] _subdivisonLevels = [20];
 
         // mesh a and mesh c are duplicates for displaying the geometric devation heatmap
         private static  int _subdivisionsA = 50; // high res
@@ -74,8 +74,8 @@ namespace COMP302
         private static float _inputReductionRate = 0.5f;
         private static float _actualReductionRate;
         private static readonly bool _runAllReductionRates = true;
-        //private static readonly float[] _simplificationRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 0.70f, 0.65f, 0.60f, 0.55f, 0.50f, 0.45f, 0.40f, 0.35f, 0.30f, 0.25f, 0.20f, 0.15f, 0.10f, 0.05f];
-        private static readonly float[] _simplificationRates = [0.5f];
+        private static float[] _simplificationRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 0.70f, 0.65f, 0.60f, 0.55f, 0.50f, 0.45f, 0.40f, 0.35f, 0.30f, 0.25f, 0.20f, 0.15f, 0.10f, 0.05f];
+        //private static readonly float[] _simplificationRates = [0.5f];
 
         private static (int, int, int) CurrentTestKey => (_seed, _subdivisionsA, (int)(_inputReductionRate * 100));
 
@@ -101,7 +101,7 @@ namespace COMP302
             1293553328
         ];
 
-        private static readonly int _planetCount = 1; // set this to 10
+        private static int _planetCount = 10; // set this to 10
         // planet iteration settings (basically, do we look at each tile on a planet
         private static int _tileIterCount = 10;
         private static readonly bool _interAllTiles = true;
@@ -120,13 +120,316 @@ namespace COMP302
         
         private static readonly Stopwatch _stopwatch = new();
 
+
+        public static void MainMenu()
+        {
+            Console.WriteLine("Select option");
+            Console.WriteLine("00. Exit");
+            Console.WriteLine("01. View current Seeds");
+            Console.WriteLine("02. Generate Seeds");
+            Console.WriteLine("03. Set Seeds");
+            Console.WriteLine("04. View Subdivision Steps");
+            Console.WriteLine("05. Set Subdivision Steps");
+            Console.WriteLine("06. View Input reduction levels");
+            Console.WriteLine("07. Set Input reduction levels");
+            Console.WriteLine("08. Visualise result");
+            Console.WriteLine("09. Run all tests as configured");
+            Console.WriteLine("10. View output directory");
+            Console.WriteLine("11. Set output directory");
+            string input = Console.ReadLine();
+            if(!int.TryParse(input,out int results))
+            {
+                InvalidInput(input, MainMenu);
+            }
+            switch(results)
+            {
+                case 0:
+                    Application.Exit();
+                    return;
+                case 1:
+                    for (int i = 0; i < _planetCount; i++)
+                    {
+                        Console.WriteLine(string.Format("Planet Seed {0}: {1}", i + 1, _seeds[i]));
+                    }
+                    break;
+                case 2:
+                    GenerateSeedsInput();
+                    break;
+                case 3:
+                    SetSeeds();
+                    break;
+                case 4:
+                    for (int i = 0; i < _subdivisonLevels.Length; i++)
+                    {
+                        Console.WriteLine(string.Format("Subdivision level {0}: {1} Divisions", i + 1, _subdivisonLevels[i]));
+                    }
+                    break;
+                case 5:
+                    SetSubdivisionLevels();
+                    break;
+                case 6:
+                    for (int i = 0; i < _simplificationRates.Length; i++)
+                    {
+                        Console.WriteLine(string.Format("Reduction level {0}: {1}% of original geometry", i + 1, (_simplificationRates[i]*100).ToString("00.00")));
+                    }
+                    break;
+                case 7:
+                    SetInputReductionRates();
+                    break;
+                case 8:
+                    VisualiseResult();
+                    return;
+                case 9:
+                    Run();
+                    return;
+                case 10:
+                    Console.WriteLine(_resultOutputPath);
+                    break;
+                case 11:
+                    SetOutputDirectory();
+                    break;
+                default:
+                    InvalidInput(results.ToString(), null);
+                    break;
+            }
+            Console.WriteLine("\n\n");
+            MainMenu();
+        }
+
+        private static void VisualiseResult()
+        {
+            Console.WriteLine("Choose test to visualise\n\nPick Planet number");
+
+            for (int i = 0; i < _planetCount; i++)
+            {
+                Console.WriteLine(string.Format("Planet Seed {0}: {1}", i + 1, _seeds[i]));
+            }
+            string planetIndexInput = Console.ReadLine();
+            int planetIndex;
+            while (!int.TryParse(planetIndexInput, out planetIndex)||( planetIndex -1 < 0 || planetIndex-1 >= _planetCount))
+            {
+                Console.WriteLine("Invalid input or index out of range: {0}", planetIndexInput);
+                for (int i = 0; i < _planetCount; i++)
+                {
+                    Console.WriteLine(string.Format("Planet Seed {0}: {1}", i + 1, _seeds[i]));
+                }
+                planetIndexInput = Console.ReadLine();
+            }
+            _seed = _seeds[planetIndex-1];
+
+
+            Console.WriteLine("Seed set to: {0}\n\nPick Subdivision Level", _seed);
+
+            for (int i = 0; i < _subdivisonLevels.Length; i++)
+            {
+                Console.WriteLine(string.Format("Subdivision level {0}: {1} Divisions", i + 1, _subdivisonLevels[i]));
+            }
+            string subdivisionIndexInput = Console.ReadLine();
+            int subdivisionIndex;
+            while (!int.TryParse(subdivisionIndexInput, out subdivisionIndex) || (subdivisionIndex - 1 < 0 || subdivisionIndex - 1>= _subdivisonLevels.Length))
+            {
+                Console.WriteLine("Invalid input or index out of range: {0}", subdivisionIndex);
+                for (int i = 0; i < _subdivisonLevels.Length; i++)
+                {
+                    Console.WriteLine(string.Format("Subdivision level {0}: {1} Divisions", i + 1, _subdivisonLevels[i]));
+                }
+                subdivisionIndexInput = Console.ReadLine();
+            }
+
+            _subdivisionsA = _subdivisonLevels[subdivisionIndex - 1];
+            _subdivisionsC = _subdivisonLevels[subdivisionIndex - 1];
+            _subdivisionsD = _subdivisonLevels[subdivisionIndex - 1];
+            Console.WriteLine("Subdivision level set to: {0}\n\nPick Reduction rate", _subdivisionsA);
+
+            for (int i = 0; i < _simplificationRates.Length; i++)
+            {
+                Console.WriteLine(string.Format("Reduction level {0}: {1}% of original geometry", i + 1, (_simplificationRates[i] * 100).ToString("00.00")));
+            }
+            string reductionRateIndexInput = Console.ReadLine();
+            int reductionRateIndex;
+            while (!int.TryParse(reductionRateIndexInput, out reductionRateIndex) || (reductionRateIndex - 1 < 0 || reductionRateIndex - 1 >= _simplificationRates.Length))
+            {
+                Console.WriteLine("Invalid input or index out of range: {0}", reductionRateIndex);
+                for (int i = 0; i < _simplificationRates.Length; i++)
+                {
+                    Console.WriteLine(string.Format("Reduction level {0}: {1}% of original geometry", i + 1, (_simplificationRates[i] * 100).ToString("00.00")));
+                }
+                reductionRateIndexInput = Console.ReadLine();
+            }
+
+            _inputReductionRate = _simplificationRates[reductionRateIndex-1];
+            Console.WriteLine("Reduction rate level set to: {0}%\n\nComputing Result", (_inputReductionRate*100).ToString("00.00"));
+
+            Init();
+            CreateReferencePlanet();
+            RunOnce();
+        }
+
+        private static void SetOutputDirectory()
+        {
+            Console.WriteLine("Set out local output directory");
+            string newDirectory = Console.ReadLine();
+            if (Uri.IsWellFormedUriString(newDirectory, UriKind.Relative))
+            {
+                _resultOutputPath = newDirectory;
+                Console.WriteLine("Directory set.\nFull output path: {0}", Path.Combine(Application.ExecutingDirectory, _resultOutputPath));
+            }
+            else
+            {
+                InvalidInput(newDirectory, SetOutputDirectory);
+            }
+        }
+
+        private static void SetInputReductionRates()
+        {
+            Console.WriteLine(string.Format("\n\nCurrent number of Reduction levels: {0}", _simplificationRates.Length));
+            Console.WriteLine(string.Format("Enter number of reduction levels\n"));
+            string reductionCountText = Console.ReadLine();
+            if (int.TryParse(reductionCountText, out int result))
+            {
+                if (result < 1)
+                {
+                    Console.WriteLine(string.Format("\n\nValue out of range Invalid \"{0}\"\nValue must be greater or equal to 1.", result));
+                    SetInputReductionRates();
+                }
+                _simplificationRates = new float[result];
+            }
+            else
+            {
+                InvalidInput(reductionCountText, SetInputReductionRates);
+                return;
+            }
+
+
+            for (int i = 0; i < _simplificationRates.Length; i++)
+            {
+                Console.WriteLine("Enter reduction rate for step: {0}, this should be a fractional value (0-1) where 0.5 => 50%", i + 1);
+                string simplificationRate = Console.ReadLine();
+                if (float.TryParse(simplificationRate, out float reductionRate) && reductionRate > 0)
+                {
+                    _simplificationRates[i] = reductionRate;
+                    Console.WriteLine("Reduction rate level: {0} Set to: {1}%\n\n", i + 1, (_simplificationRates[i] * 100).ToString("00.00"));
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input: {0}, must be >= 0 and <= 1", simplificationRate);
+                    i--;
+                }
+            }
+            Console.WriteLine("All Reduction rates Set\n\n");
+        }
+
+        private static void SetSubdivisionLevels()
+        {
+            Console.WriteLine(string.Format("\n\nCurrent number of subdivision steps: {0}", _subdivisonLevels.Length));
+            Console.WriteLine(string.Format("Enter subdivision count\n"));
+            string subdivisionCountText = Console.ReadLine();
+            if (int.TryParse(subdivisionCountText, out int result))
+            {
+                if (result < 1)
+                {
+                    Console.WriteLine(string.Format("\n\nValue out of range Invalid \"{0}\"\nValue must be greater or equal to 1.", result));
+                    SetSubdivisionLevels();
+                }
+                _subdivisonLevels = new int[result];
+            }
+            else
+            {
+                InvalidInput(subdivisionCountText, SetSubdivisionLevels);
+                return;
+            }
+
+            for (int i = 0; i < _subdivisonLevels.Length; i++)
+            {
+                Console.WriteLine("Enter subidivions for step: {0}", i + 1);
+                string subdivisionInput = Console.ReadLine();
+                if (int.TryParse(subdivisionInput, out int divisions) && divisions > 0)
+                {
+                    _subdivisonLevels[i] = divisions;
+                    Console.WriteLine("Subdivision Step: {0} Set to: {1}\n\n", i + 1, divisions);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input: {0}, must be greater than 0", subdivisionInput);
+                    i--;
+                }
+            }
+            Console.WriteLine("All subdivisions Set\n\n");
+            MainMenu();
+        }
+
+        private static void SetSeeds()
+        {
+            SetPlanetCount(EnterSeeds);
+        }
+
+        private static void EnterSeeds(int planetCount)
+        {
+            _planetCount = planetCount;
+            Console.WriteLine("Set planet count to: {0}", _planetCount);
+            _seeds = new int[_planetCount];
+            for (int i = 0; i < _planetCount; i++)
+            {
+                Console.WriteLine("Enter seed for planet: {0}", i + 1);
+                string seedInput = Console.ReadLine();
+                if(int.TryParse(seedInput,out int seed))
+                {
+                    _seeds[i] = seed;
+                    Console.WriteLine("Planet: {0} Seed Set to: {1}\n\n",i+1,seed);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input: {0}", seedInput);
+                    i--;
+                }
+            }
+            Console.WriteLine("All Seeds Set\n\n");
+            MainMenu();
+        }
+
+        private static void GenerateSeedsInput()
+        {
+            SetPlanetCount(SetAndGeneratePlanetSeeds);
+        }
+
+        private static void SetPlanetCount(Action<int> successCallback)
+        {
+            Console.WriteLine(string.Format("\n\nCurrent planet count: {0}", _planetCount));
+            Console.WriteLine(string.Format("Enter planet count\n"));
+            string plantCountText = Console.ReadLine();
+            if (int.TryParse(plantCountText, out int result))
+            {
+                if (result < 1)
+                {
+                    Console.WriteLine(string.Format("\n\nValue out of range Invalid \"{0}\"\nValue must be greater or equal to 1.", result));
+                    GenerateSeedsInput();
+                }
+                successCallback?.Invoke(result);
+            }
+            else
+            {
+                InvalidInput(plantCountText, GenerateSeedsInput);
+            }
+        }
+
+        private static void SetAndGeneratePlanetSeeds(int plants)
+        {
+            _planetCount = plants;
+            Console.WriteLine(string.Format("Set planet count to: {0}", _planetCount));
+            GenerateSeeds();
+            Console.WriteLine("Generated Seeds Set\n\n");
+            MainMenu();
+        }
+
+        private static void InvalidInput(string input, Action callback)
+        {
+            Console.WriteLine(string.Format("Invalid input: \"{0}\"", input));
+            callback?.Invoke();
+        }
+
+
         public static void Run()
         {
-            //_seeds = new int[_planetCount];
-            //for (int i = 0; i < _planetCount; i++)
-            //{
-            //    _seeds[i] = Random.Shared.Next(int.MinValue, int.MaxValue);
-            //}
             Init();
             if (_testDeviation)
             {
@@ -139,7 +442,7 @@ namespace COMP302
 
             RunTests();
 
-            string outputPath = Path.Combine(Application.ExecutingDirectory, RESULTS_OUTPUT_PATH);
+            string outputPath = Path.Combine(Application.ExecutingDirectory, _resultOutputPath);
             Directory.CreateDirectory(outputPath);
             if (_logDeviations)
             {
@@ -162,6 +465,15 @@ namespace COMP302
             Console.WriteLine("Press enter key to close");
             //Console.ReadLine();
             //Application.Exit();
+        }
+
+        private static void GenerateSeeds()
+        {
+            _seeds = new int[_planetCount];
+            for (int i = 0; i < _planetCount; i++)
+            {
+                _seeds[i] = Random.Shared.Next(int.MinValue, int.MaxValue);
+            }
         }
 
         private static void ExportExecutionTimeCSV(string outputPath)

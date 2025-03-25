@@ -33,7 +33,7 @@ namespace COMP302
         static void CreateArtifact()
         {
             artifactAuthoring = new();
-            Authoring.Run();
+            Authoring.MainMenu();
         }
 
         static void DestroyArtifact()
