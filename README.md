@@ -10,10 +10,12 @@ For Test 12 the hardware used to run the tests was
 - Nvidia RTX 2070 Super 8GB GDDR6
 - AMD Ryzen 7 5800X3D Caches L1: 512KB, L2: 4.0MB L3: 96MB
 - 32GB of Ram (DDR4 3600MHz)
+ 
 For Test 13 the hardware used to run the tests was
 - AMD RX 7700S 8GB GDDR6 (Laptop GPU)
 - AMD Ryzen 7 7840HS Caches L1: 512KB, L2: 8.0MB, L3 16MB (Laptop CPU)
 - 32GB of RAM (DDR5 5600MHz)
+ 
 In general the Compute shader ran faster on the AMD laptop GPU than the nvidia one and the mesh simplificaiton algorithim ran faster on the Desktop ryzen processor than the laptop one.
 If you wanted to compare running mesh simplification to only the terrain generator and seeing if mesh simplification is worth the increased exeuction time overhead, its not.
 Not only do you have to run the terrain generator at a high resolution, you then have to run an extremely slow algorithm ontop of it. Unit of time per Mean Devation is heavily in favour of the terrain generator.
