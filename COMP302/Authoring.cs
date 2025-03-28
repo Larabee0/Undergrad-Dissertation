@@ -463,8 +463,8 @@ namespace COMP302
 
             Console.WriteLine(string.Format("Completed runs | Elapsed time: {0}", Time.TimeSinceStartUp));
             Console.WriteLine("Press enter key to close");
-            //Console.ReadLine();
-            //Application.Exit();
+            Console.ReadLine();
+            Application.Exit();
         }
 
         private static void GenerateSeeds()
