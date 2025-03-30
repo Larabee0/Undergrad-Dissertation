@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace COMP302
+namespace COMP302.GeoDev
 {
     /// <summary>
     /// C++ Source: https://meshdev.sourceforge.net/

@@ -346,7 +346,7 @@ namespace VECS.LowLevel
                 },
                 new()
                 {
-                    depthStencil = new(0, 0)
+                    depthStencil = new(1, 0)
                 }
             };
 
