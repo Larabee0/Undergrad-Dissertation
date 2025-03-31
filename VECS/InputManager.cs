@@ -200,5 +200,9 @@ namespace VECS
             }
         }
 
+        public void Destroy()
+        {
+            Instance = null;
+        }
     }
 }

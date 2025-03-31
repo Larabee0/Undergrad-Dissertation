@@ -731,6 +731,7 @@ namespace VECS.LowLevel
                 Vulkan.vkDestroySemaphore(Device, _presentSemaphore[i]);
                 Vulkan.vkDestroyFence(Device, _inFlightFences[i]);
             }
+            Instance = null;
         }
 
         private static VkSurfaceFormatKHR ChooseSwapSurfaceFormat(VkSurfaceFormatKHR[] formats)

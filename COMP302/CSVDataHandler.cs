@@ -47,7 +47,7 @@ namespace COMP302
         public static void SetOutputDirectory()
         {
             Console.WriteLine("Set out local output directory");
-            string newDirectory = Console.ReadLine();
+            string newDirectory = Program.InputInterface.GetNextInput();
             if (Uri.IsWellFormedUriString(newDirectory, UriKind.Relative))
             {
                 _resultOutputPath = newDirectory;

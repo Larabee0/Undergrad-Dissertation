@@ -2,13 +2,25 @@
 using Planets;
 using System.Reflection;
 using System;
+using System.Threading;
 
 namespace COMP302
 {
     public class Program
     {
         private static ArtifactAuthoring artifactAuthoring;
-        
+        public static ArtifactAuthoring ArtifactAuthoring =>artifactAuthoring;
+        public static InputInterface InputInterface { get; set; }
+        static Program()
+        {
+            InputInterface = new InputInterface();
+        }
+
+        public static void InternalStart()
+        {
+            Main();
+        }
+
         static int Main()
         {
             try
@@ -21,6 +33,7 @@ namespace COMP302
                 app.PreOnCreate -= CreateArtifact;
                 app.OnDestroy -= DestroyArtifact;
                 app.Dispose();
+                Console.WriteLine("Shut down");
             }
             catch (Exception ex)
             {
@@ -39,6 +52,7 @@ namespace COMP302
         static void DestroyArtifact()
         {
             ArtifactAuthoring.Destroy();
+            artifactAuthoring = null;
         }
 
         public static void MainMenu()
@@ -58,7 +72,7 @@ namespace COMP302
             Console.WriteLine("11. Set output directory");
             Console.WriteLine("12. Test Geometric Deviation (Sphere/cube)");
             Console.WriteLine("13. Test QSlim (Stanford bunny, 69451 Tris to 999 Tris)");
-            string input = Console.ReadLine();
+            string input = Program.InputInterface.GetNextInput();
             if (!int.TryParse(input, out int results))
             {
                 InvalidInput(input, MainMenu);

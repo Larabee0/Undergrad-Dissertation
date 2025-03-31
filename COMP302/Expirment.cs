@@ -366,7 +366,7 @@ namespace COMP302
             {
                 Console.WriteLine(string.Format("Planet Seed {0}: {1}", i + 1, ExpirmentConfig.Seeds[i]));
             }
-            string planetIndexInput = Console.ReadLine();
+            string planetIndexInput = Program.InputInterface.GetNextInput(); ;
             int planetIndex;
             while (!int.TryParse(planetIndexInput, out planetIndex) || (planetIndex - 1 < 0 || planetIndex - 1 >= ExpirmentConfig.PlanetCount))
             {
@@ -375,7 +375,7 @@ namespace COMP302
                 {
                     Console.WriteLine(string.Format("Planet Seed {0}: {1}", i + 1, ExpirmentConfig.Seeds[i]));
                 }
-                planetIndexInput = Console.ReadLine();
+                planetIndexInput = Program.InputInterface.GetNextInput(); ;
             }
             _seed = ExpirmentConfig.Seeds[planetIndex - 1];
         }
@@ -388,7 +388,7 @@ namespace COMP302
             {
                 Console.WriteLine(string.Format("Subdivision level {0}: {1} Divisions", i + 1, ExpirmentConfig.SubdivisonLevels[i]));
             }
-            string subdivisionIndexInput = Console.ReadLine();
+            string subdivisionIndexInput = Program.InputInterface.GetNextInput(); ;
             int subdivisionIndex;
             while (!int.TryParse(subdivisionIndexInput, out subdivisionIndex) || (subdivisionIndex - 1 < 0 || subdivisionIndex - 1 >= ExpirmentConfig.SubdivisonLevels.Length))
             {
@@ -397,7 +397,7 @@ namespace COMP302
                 {
                     Console.WriteLine(string.Format("Subdivision level {0}: {1} Divisions", i + 1, ExpirmentConfig.SubdivisonLevels[i]));
                 }
-                subdivisionIndexInput = Console.ReadLine();
+                subdivisionIndexInput = Program.InputInterface.GetNextInput(); ;
             }
 
             _subdivisionsA = ExpirmentConfig.SubdivisonLevels[subdivisionIndex - 1];
@@ -412,7 +412,7 @@ namespace COMP302
             {
                 Console.WriteLine(string.Format("Reduction level {0}: {1}% of original geometry", i + 1, (ExpirmentConfig.SimplificationRates[i] * 100).ToString("00.00")));
             }
-            string reductionRateIndexInput = Console.ReadLine();
+            string reductionRateIndexInput = Program.InputInterface.GetNextInput();
             int reductionRateIndex;
             while (!int.TryParse(reductionRateIndexInput, out reductionRateIndex) || (reductionRateIndex - 1 < 0 || reductionRateIndex - 1 >= ExpirmentConfig.SimplificationRates.Length))
             {
@@ -421,7 +421,7 @@ namespace COMP302
                 {
                     Console.WriteLine(string.Format("Reduction level {0}: {1}% of original geometry", i + 1, (ExpirmentConfig.SimplificationRates[i] * 100).ToString("00.00")));
                 }
-                reductionRateIndexInput = Console.ReadLine();
+                reductionRateIndexInput = Program.InputInterface.GetNextInput();
             }
 
             _inputReductionRate = ExpirmentConfig.SimplificationRates[reductionRateIndex - 1];

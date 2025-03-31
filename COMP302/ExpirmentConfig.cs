@@ -76,7 +76,7 @@ namespace COMP302
         {
             Console.WriteLine(string.Format("\n\nCurrent planet count: {0}", _planetCount));
             Console.WriteLine(string.Format("Enter planet count\n"));
-            string plantCountText = Console.ReadLine();
+            string plantCountText = Program.InputInterface.GetNextInput();
             if (int.TryParse(plantCountText, out int result))
             {
                 if (result < 1)
@@ -100,7 +100,7 @@ namespace COMP302
             for (int i = 0; i < _planetCount; i++)
             {
                 Console.WriteLine("Enter seed for planet: {0}", i + 1);
-                string seedInput = Console.ReadLine();
+                string seedInput = Program.InputInterface.GetNextInput();
                 if (int.TryParse(seedInput, out int seed))
                 {
                     Seeds[i] = seed;
@@ -120,7 +120,7 @@ namespace COMP302
         {
             Console.WriteLine(string.Format("\n\nCurrent number of subdivision steps: {0}", SubdivisonLevels.Length));
             Console.WriteLine(string.Format("Enter subdivision count\n"));
-            string subdivisionCountText = Console.ReadLine();
+            string subdivisionCountText = Program.InputInterface.GetNextInput();
             if (int.TryParse(subdivisionCountText, out int result))
             {
                 if (result < 1)
@@ -139,7 +139,7 @@ namespace COMP302
             for (int i = 0; i < SubdivisonLevels.Length; i++)
             {
                 Console.WriteLine("Enter subidivions for step: {0}", i + 1);
-                string subdivisionInput = Console.ReadLine();
+                string subdivisionInput = Program.InputInterface.GetNextInput();
                 if (int.TryParse(subdivisionInput, out int divisions) && divisions > 0)
                 {
                     SubdivisonLevels[i] = divisions;
@@ -159,7 +159,7 @@ namespace COMP302
         {
             Console.WriteLine(string.Format("\n\nCurrent number of Reduction levels: {0}", SimplificationRates.Length));
             Console.WriteLine(string.Format("Enter number of reduction levels\n"));
-            string reductionCountText = Console.ReadLine();
+            string reductionCountText = Program.InputInterface.GetNextInput();
             if (int.TryParse(reductionCountText, out int result))
             {
                 if (result < 1)
@@ -179,7 +179,7 @@ namespace COMP302
             for (int i = 0; i < SimplificationRates.Length; i++)
             {
                 Console.WriteLine("Enter reduction rate for step: {0}, this should be a fractional value (0-1) where 0.5 => 50%", i + 1);
-                string simplificationRate = Console.ReadLine();
+                string simplificationRate = Program.InputInterface.GetNextInput();
                 if (float.TryParse(simplificationRate, out float reductionRate) && reductionRate > 0)
                 {
                     SimplificationRates[i] = reductionRate;
