@@ -6,11 +6,11 @@ using VECS;
 
 namespace COMP302
 {
-    public class CSVDataHandler
+    public static class CSVDataHandler
     {
         // algorithim = 0 = terrain generator
         // algorithim = 1 = Quadric Simplification
-        private static string _resultOutputPath = "Results/Test-13";
+        private static string _resultOutputPath = "Results/Test-14";
         public static string ResultOutputPath => _resultOutputPath;
         private static readonly string[] _csvHeaderDev = ["Seed, Tile_ID, Algorithm, Src_SubDiv, Input_Reduction, Vert_Count, Tri_Count, Vert_Reduction, Tri_Reduction, Min_Elev, Max_Elev, Mean_Elev, Min_Dev, Max_Dev, Mean_Dev"];
         private static readonly string[] _csvHeaderExeTime = ["Seed, Tile_ID, Algorithm, Src_SubDiv, Input_Reduction, Vert_Count, Tri_Count, Vert_Reduction, Tri_Reduction, Execution_Time"];
@@ -43,6 +43,19 @@ namespace COMP302
 
         public static readonly Dictionary<(int, int, int), string> _executionTimeTerrainGen = [];
         public static readonly Dictionary<(int, int, int), string> _executionTimeQuadricSimplification = [];
+
+        public static void Reset()
+        {
+            _testsTerrainGen.Clear();
+            _testsQuadricSimplification.Clear();
+
+            _summaryTestsTerrainGen.Clear();
+            _summaryTestsQuadricSimplification.Clear();
+
+            _executionTimeTerrainGen.Clear();
+            _executionTimeQuadricSimplification.Clear();
+            _resultOutputPath = "Results/Test-14";
+        }
 
         public static void SetOutputDirectory()
         {
@@ -94,11 +107,11 @@ namespace COMP302
         {
             for (int s = 0; s < ExpirmentConfig.SubdivisonLevels.Length; s++)
             {
-                for (int r = 0; r < ExpirmentConfig.SimplificationRates.Length; r++)
+                for (int r = 0; r < ExpirmentConfig.ReductionRates.Length; r++)
                 {
                     for (int i = 0; i < ExpirmentConfig.PlanetCount; i++)
                     {
-                        var key = (ExpirmentConfig.Seeds[i], ExpirmentConfig.SubdivisonLevels[s], (int)(ExpirmentConfig.SimplificationRates[r] * 100));
+                        var key = (ExpirmentConfig.Seeds[i], ExpirmentConfig.SubdivisonLevels[s], (int)(ExpirmentConfig.ReductionRates[r] * 100));
 
                         var terrainGen = _executionTimeTerrainGen[key];
                         var quadSimp = _executionTimeQuadricSimplification[key];
@@ -112,13 +125,13 @@ namespace COMP302
 
         private static void Created_EXE_TIME_CSVOrderedBySubdivisionsThenSimplification()
         {
-            for (int r = 0; r < ExpirmentConfig.SimplificationRates.Length; r++)
+            for (int r = 0; r < ExpirmentConfig.ReductionRates.Length; r++)
             {
                 for (int s = 0; s < ExpirmentConfig.SubdivisonLevels.Length; s++)
                 {
                     for (int i = 0; i < ExpirmentConfig.PlanetCount; i++)
                     {
-                        var key = (ExpirmentConfig.Seeds[i], ExpirmentConfig.SubdivisonLevels[s], (int)(ExpirmentConfig.SimplificationRates[r] * 100));
+                        var key = (ExpirmentConfig.Seeds[i], ExpirmentConfig.SubdivisonLevels[s], (int)(ExpirmentConfig.ReductionRates[r] * 100));
 
                         var terrainGen = _executionTimeTerrainGen[key];
                         var quadSimp = _executionTimeQuadricSimplification[key];
@@ -146,11 +159,11 @@ namespace COMP302
         {
             for (int s = 0; s < ExpirmentConfig.SubdivisonLevels.Length; s++)
             {
-                for (int r = 0; r < ExpirmentConfig.SimplificationRates.Length; r++)
+                for (int r = 0; r < ExpirmentConfig.ReductionRates.Length; r++)
                 {
                     for (int i = 0; i < ExpirmentConfig.PlanetCount; i++)
                     {
-                        var key = (ExpirmentConfig.Seeds[i], ExpirmentConfig.SubdivisonLevels[s], (int)(ExpirmentConfig.SimplificationRates[r] * 100));
+                        var key = (ExpirmentConfig.Seeds[i], ExpirmentConfig.SubdivisonLevels[s], (int)(ExpirmentConfig.ReductionRates[r] * 100));
 
                         var terrainGen = _testsTerrainGen[key];
                         var quadSimp = _testsQuadricSimplification[key];
@@ -169,13 +182,13 @@ namespace COMP302
 
         private static void CreatedCSVOrderedBySubdivisionsThenSimplification()
         {
-            for (int r = 0; r < ExpirmentConfig.SimplificationRates.Length; r++)
+            for (int r = 0; r < ExpirmentConfig.ReductionRates.Length; r++)
             {
                 for (int s = 0; s < ExpirmentConfig.SubdivisonLevels.Length; s++)
                 {
                     for (int i = 0; i < ExpirmentConfig.PlanetCount; i++)
                     {
-                        var key = (ExpirmentConfig.Seeds[i], ExpirmentConfig.SubdivisonLevels[s], (int)(ExpirmentConfig.SimplificationRates[r] * 100));
+                        var key = (ExpirmentConfig.Seeds[i], ExpirmentConfig.SubdivisonLevels[s], (int)(ExpirmentConfig.ReductionRates[r] * 100));
 
                         var terrainGen = _testsTerrainGen[key];
                         var quadSimp = _testsQuadricSimplification[key];

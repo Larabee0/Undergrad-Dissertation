@@ -46,6 +46,9 @@ namespace COMP302
         static void CreateArtifact()
         {
             artifactAuthoring = new();
+            CSVDataHandler.Reset();
+            ExpirmentConfig.Reset();
+            Expirment.Reset();
             MainMenu();
         }
 
@@ -104,9 +107,9 @@ namespace COMP302
                     ExpirmentConfig.SetSubdivisionLevels();
                     break;
                 case 6:
-                    for (int i = 0; i < ExpirmentConfig.SimplificationRates.Length; i++)
+                    for (int i = 0; i < ExpirmentConfig.ReductionRates.Length; i++)
                     {
-                        Console.WriteLine(string.Format("Reduction level {0}: {1}% of original geometry", i + 1, (ExpirmentConfig.SimplificationRates[i] * 100).ToString("00.00")));
+                        Console.WriteLine(string.Format("Reduction level {0}: {1}% of original geometry", i + 1, (ExpirmentConfig.ReductionRates[i] * 100).ToString("00.00")));
                     }
                     break;
                 case 7:

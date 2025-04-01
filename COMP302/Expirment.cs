@@ -49,6 +49,14 @@ namespace COMP302
         public static DirectMeshBuffer ReferenceMesh => _referenceMesh;
         private static readonly Stopwatch _stopwatch = new();
 
+        public static void Reset()
+        {
+            _referenceMesh?.Dispose();
+            _referenceMesh = null;
+            _deviationHeatMap?.Dispose();
+            _deviationHeatMap = null;
+            _rootEntities = null;
+        }
 
         public static void Run()
         {
@@ -73,7 +81,7 @@ namespace COMP302
 
             Console.WriteLine(string.Format("Completed runs | Elapsed time: {0}", Time.TimeSinceStartUp));
             Console.WriteLine("Press enter key to close");
-            Console.ReadLine();
+            Program.InputInterface.GetNextInput();
             Application.Exit();
         }
 
@@ -110,7 +118,7 @@ namespace COMP302
         private static void RunTests()
         {
             var subDivLevels = ExpirmentConfig.SubdivisonLevels;
-            var reductRates = ExpirmentConfig.SimplificationRates;
+            var reductRates = ExpirmentConfig.ReductionRates;
             for (int s = 0; s < subDivLevels.Length; s++)
             {
 
@@ -366,7 +374,7 @@ namespace COMP302
             {
                 Console.WriteLine(string.Format("Planet Seed {0}: {1}", i + 1, ExpirmentConfig.Seeds[i]));
             }
-            string planetIndexInput = Program.InputInterface.GetNextInput(); ;
+            string planetIndexInput = Program.InputInterface.GetNextInput();
             int planetIndex;
             while (!int.TryParse(planetIndexInput, out planetIndex) || (planetIndex - 1 < 0 || planetIndex - 1 >= ExpirmentConfig.PlanetCount))
             {
@@ -388,7 +396,7 @@ namespace COMP302
             {
                 Console.WriteLine(string.Format("Subdivision level {0}: {1} Divisions", i + 1, ExpirmentConfig.SubdivisonLevels[i]));
             }
-            string subdivisionIndexInput = Program.InputInterface.GetNextInput(); ;
+            string subdivisionIndexInput = Program.InputInterface.GetNextInput();
             int subdivisionIndex;
             while (!int.TryParse(subdivisionIndexInput, out subdivisionIndex) || (subdivisionIndex - 1 < 0 || subdivisionIndex - 1 >= ExpirmentConfig.SubdivisonLevels.Length))
             {
@@ -408,23 +416,23 @@ namespace COMP302
 
         private static void VisualiserSetReductionRate()
         {
-            for (int i = 0; i < ExpirmentConfig.SimplificationRates.Length; i++)
+            for (int i = 0; i < ExpirmentConfig.ReductionRates.Length; i++)
             {
-                Console.WriteLine(string.Format("Reduction level {0}: {1}% of original geometry", i + 1, (ExpirmentConfig.SimplificationRates[i] * 100).ToString("00.00")));
+                Console.WriteLine(string.Format("Reduction level {0}: {1}% of original geometry", i + 1, (ExpirmentConfig.ReductionRates[i] * 100).ToString("00.00")));
             }
             string reductionRateIndexInput = Program.InputInterface.GetNextInput();
             int reductionRateIndex;
-            while (!int.TryParse(reductionRateIndexInput, out reductionRateIndex) || (reductionRateIndex - 1 < 0 || reductionRateIndex - 1 >= ExpirmentConfig.SimplificationRates.Length))
+            while (!int.TryParse(reductionRateIndexInput, out reductionRateIndex) || (reductionRateIndex - 1 < 0 || reductionRateIndex - 1 >= ExpirmentConfig.ReductionRates.Length))
             {
                 Console.WriteLine("Invalid input or index out of range: {0}", reductionRateIndex);
-                for (int i = 0; i < ExpirmentConfig.SimplificationRates.Length; i++)
+                for (int i = 0; i < ExpirmentConfig.ReductionRates.Length; i++)
                 {
-                    Console.WriteLine(string.Format("Reduction level {0}: {1}% of original geometry", i + 1, (ExpirmentConfig.SimplificationRates[i] * 100).ToString("00.00")));
+                    Console.WriteLine(string.Format("Reduction level {0}: {1}% of original geometry", i + 1, (ExpirmentConfig.ReductionRates[i] * 100).ToString("00.00")));
                 }
                 reductionRateIndexInput = Program.InputInterface.GetNextInput();
             }
 
-            _inputReductionRate = ExpirmentConfig.SimplificationRates[reductionRateIndex - 1];
+            _inputReductionRate = ExpirmentConfig.ReductionRates[reductionRateIndex - 1];
             Console.WriteLine("Reduction rate level set to: {0}%\n\nComputing Result", (_inputReductionRate * 100).ToString("00.00"));
         }
 

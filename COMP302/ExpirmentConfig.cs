@@ -39,10 +39,32 @@ namespace COMP302
         public static int PlanetCount => _planetCount;
         public static int[] Seeds => _seeds;
         public static int[] SubdivisonLevels => _subdivisonLevels;
-        public static float[] SimplificationRates => _reductionRates;
+        public static float[] ReductionRates => _reductionRates;
         public static bool TestSimplification { get => _testSimplification; set => _testSimplification = value; }
 
         public static bool TestDeviation { get => _testDeviation; set => _testDeviation = value; }
+
+        public static void Reset()
+        {
+            _testDeviation = false;
+            _testSimplification = false;
+            _planetCount = 10;
+            _seeds = [
+               -238246973,
+            -1981713786,
+            -728742154,
+            1884866878,
+            -772070360,
+            -2085966360,
+            1172812092,
+            961934364,
+            1361839499,
+            1293553328
+           ];
+            _subdivisonLevels = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+            _reductionRates = [0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 0.70f, 0.65f, 0.60f, 0.55f, 0.50f, 0.45f, 0.40f, 0.35f, 0.30f, 0.25f, 0.20f, 0.15f, 0.10f, 0.05f];
+        }
+
 
         public static void GenerateSeedsInput()
         {
@@ -55,7 +77,6 @@ namespace COMP302
             Console.WriteLine(string.Format("Set planet count to: {0}", _planetCount));
             GenerateSeeds();
             Console.WriteLine("Generated Seeds Set\n\n");
-            Program.MainMenu();
         }
 
         private static void GenerateSeeds()
@@ -113,7 +134,6 @@ namespace COMP302
                 }
             }
             Console.WriteLine("All Seeds Set\n\n");
-            Program.MainMenu();
         }
 
         public static void SetSubdivisionLevels()
@@ -152,12 +172,11 @@ namespace COMP302
                 }
             }
             Console.WriteLine("All subdivisions Set\n\n");
-            Program.MainMenu();
         }
 
         public static void SetInputReductionRates()
         {
-            Console.WriteLine(string.Format("\n\nCurrent number of Reduction levels: {0}", SimplificationRates.Length));
+            Console.WriteLine(string.Format("\n\nCurrent number of Reduction levels: {0}", ReductionRates.Length));
             Console.WriteLine(string.Format("Enter number of reduction levels\n"));
             string reductionCountText = Program.InputInterface.GetNextInput();
             if (int.TryParse(reductionCountText, out int result))
@@ -176,14 +195,14 @@ namespace COMP302
             }
 
 
-            for (int i = 0; i < SimplificationRates.Length; i++)
+            for (int i = 0; i < ReductionRates.Length; i++)
             {
                 Console.WriteLine("Enter reduction rate for step: {0}, this should be a fractional value (0-1) where 0.5 => 50%", i + 1);
                 string simplificationRate = Program.InputInterface.GetNextInput();
                 if (float.TryParse(simplificationRate, out float reductionRate) && reductionRate > 0)
                 {
-                    SimplificationRates[i] = reductionRate;
-                    Console.WriteLine("Reduction rate level: {0} Set to: {1}%\n\n", i + 1, (SimplificationRates[i] * 100).ToString("00.00"));
+                    ReductionRates[i] = reductionRate;
+                    Console.WriteLine("Reduction rate level: {0} Set to: {1}%\n\n", i + 1, (ReductionRates[i] * 100).ToString("00.00"));
                 }
                 else
                 {
