@@ -45,10 +45,16 @@ Within this assembly contains the source code written for:
 - Running the experiment
 - Exporting the results
 
-# Instructions to run
+# Instructions to Build
 - Download and install the [Vulkan SDK 1.4.304.1](https://sdk.lunarg.com/sdk/download/1.4.304.1/windows/VulkanSDK-1.4.304.1-Installer.exe)
 - Download and install [.NET 9.0 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
 - Ensure Graphics drivers are up to date (Tested on Nvidia Game Ready 572.83 & AMD Adrenaline Edition 25.3.1) [RTX 2070 Super & RX 7700S]
 - Open the Visual Studio Solution VECS.sln in the root directory, change the active project to COMP302
 - Build and run. Set the compiler to release mode for better performance.
 - Test results can be found in the executing assemblies bin (COMP302/bin/Release[or Debug]/Results)
+# Instructions to Run
+- Download and install [.NET 9.0 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+- Download the build from the release tab,
+- Ensure Graphics drivers are up to date (Tested on Nvidia Game Ready 572.83 & AMD Adrenaline Edition 25.3.1) [RTX 2070 Super & RX 7700S]
+- Run the executable COMP302.exe
+- Results can be found in the results folder.
